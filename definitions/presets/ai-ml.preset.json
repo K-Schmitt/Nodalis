@@ -1,0 +1,30 @@
+{
+  "id": "ai-ml",
+  "label": "AI / ML Stack",
+  "description": "LLMs, vector databases, model serving, and orchestration for AI-powered apps.",
+  "include": ["general", "ai", "backend", "database", "storage", "monitoring"],
+  "rules": {
+    "forbiddenTypes": [
+      "tech:game:game-loop", "tech:game:physics",
+      "tech:devops:kubernetes", "tech:cloud:eks",
+      "tech:frontend:react", "tech:frontend:vue"
+    ],
+    "requiredTypes": ["ai"],
+    "requiredConnections": [
+      {
+        "from": "tech:ai:llm-agent",
+        "to": "ai",
+        "reason": "An LLM agent must connect to at least one AI service (OpenAI, Vector DB or ML model)"
+      }
+    ],
+    "maxNodesPerType": {
+      "tech:ai:openai": 1,
+      "tech:ai:vector-db": 2,
+      "tech:ai:llm-agent": 5,
+      "tech:ai:ml-model": 4
+    },
+    "noCycles": false,
+    "defaultMaxInputs": 10,
+    "defaultMaxOutputs": 10
+  }
+}

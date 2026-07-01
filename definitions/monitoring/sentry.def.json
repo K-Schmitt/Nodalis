@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:monitoring:sentry",
+  "label": "Sentry",
+  "description": "Error tracking and performance monitoring platform for application reliability",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#362D59",
+    "icon": "eye"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "dsn": {
+      "type": "string",
+      "description": "Sentry Data Source Name (DSN) for the project"
+    },
+    "environment": {
+      "type": "string",
+      "description": "Deployment environment tag (e.g. production, staging)"
+    },
+    "performanceMonitoring": {
+      "type": "boolean",
+      "description": "Enable distributed tracing and performance monitoring"
+    }
+  }
+}

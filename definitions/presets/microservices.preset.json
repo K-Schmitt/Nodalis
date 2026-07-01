@@ -1,0 +1,22 @@
+{
+  "id": "microservices",
+  "label": "Microservices",
+  "description": "Backend services, messaging, observability, and infrastructure for distributed systems.",
+  "include": ["general", "backend", "messaging", "monitoring", "devops", "database", "auth", "storage"],
+  "rules": {
+    "forbiddenTypes": [
+      "tech:game:game-loop", "tech:game:physics", "tech:game:entity",
+      "tech:frontend:react", "tech:frontend:vue", "tech:frontend:angular",
+      "tech:frontend:svelte"
+    ],
+    "requiredTypes": ["monitoring", "messaging"],
+    "maxNodesPerType": {
+      "tech:general:load-balancer": 3,
+      "tech:auth:auth0": 1,
+      "tech:auth:keycloak": 1
+    },
+    "noCycles": false,
+    "defaultMaxInputs": 15,
+    "defaultMaxOutputs": 15
+  }
+}

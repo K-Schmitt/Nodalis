@@ -1,0 +1,49 @@
+{
+  "typeId": "tech:api:rest",
+  "label": "REST API",
+  "description": "RESTful API endpoint for HTTP communication",
+  "category": "api",
+  "style": {
+    "shape": "hexagon",
+    "color": "#61DAFB",
+    "icon": "activity"
+  },
+  "constraints": {
+    "maxInputs": 10,
+    "maxOutputs": 8
+  },
+  "dataSchema": {
+    "basePath": {
+      "type": "string",
+      "description": "Base URL path (e.g., /api/v1)"
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE",
+          "PATCH"
+        ]
+      },
+      "description": "Supported HTTP methods"
+    },
+    "authentication": {
+      "type": "string",
+      "enum": [
+        "none",
+        "apiKey",
+        "jwt",
+        "oauth2"
+      ],
+      "default": "jwt"
+    },
+    "rateLimiting": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

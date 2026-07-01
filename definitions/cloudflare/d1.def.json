@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:cloudflare:d1",
+  "label": "Cloudflare D1",
+  "description": "Serverless SQLite database at the edge with Cloudflare Workers integration",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#F6821F",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "location": {
+      "type": "string",
+      "enum": ["auto", "weur", "eeur", "apac", "oc"],
+      "description": "Database location hint"
+    }
+  }
+}

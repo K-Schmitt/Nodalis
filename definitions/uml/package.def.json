@@ -1,0 +1,14 @@
+{
+  "typeId": "uml:container:package",
+  "label": "Package",
+  "description": "A UML package grouping related types",
+  "category": "container",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7C3AED",
+    "icon": "package"
+  },
+  "render": {
+    "archetype": "container"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:backend:nestjs",
+  "label": "NestJS",
+  "description": "Progressive Node.js framework for building efficient, scalable server-side apps",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#E0234E",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "NestJS version"
+    },
+    "transport": {
+      "type": "string",
+      "enum": ["http", "microservice", "hybrid"],
+      "description": "Application transport layer"
+    },
+    "orm": {
+      "type": "string",
+      "enum": ["typeorm", "prisma", "mongoose"],
+      "description": "ORM / ODM integration"
+    }
+  }
+}

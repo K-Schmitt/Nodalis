@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:backend:rails",
+  "label": "Ruby on Rails",
+  "description": "Convention-over-configuration web application framework written in Ruby",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#CC0000",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Rails version"
+    },
+    "apiOnly": {
+      "type": "boolean",
+      "description": "Run in API-only mode without views"
+    },
+    "hotwire": {
+      "type": "boolean",
+      "description": "Include Hotwire (Turbo + Stimulus) for live UI"
+    }
+  }
+}

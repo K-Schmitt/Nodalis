@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:database:redis",
+  "label": "Redis Cache",
+  "description": "In-memory key-value data store used for caching and queues",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#DC382D",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxInputs": 20
+  },
+  "dataSchema": {
+    "host": {
+      "type": "string",
+      "description": "Redis host address"
+    },
+    "port": {
+      "type": "number",
+      "default": 6379
+    },
+    "ttl": {
+      "type": "number",
+      "description": "Default key TTL in seconds"
+    }
+  }
+}

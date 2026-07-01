@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:frontend:remix",
+  "label": "Remix",
+  "description": "Full-stack web framework focused on web fundamentals and modern UX",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#121212",
+    "icon": "code"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Remix version"
+    },
+    "adapter": {
+      "type": "string",
+      "enum": [
+        "node",
+        "cloudflare",
+        "vercel"
+      ],
+      "description": "Deployment adapter"
+    }
+  }
+}

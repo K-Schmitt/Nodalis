@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__gitnexus__list_repos",
+      "Bash(ps -p 6129 -o pid,cmd --no-headers)",
+      "Bash(ps -p 59197 -o pid,cmd --no-headers)",
+      "Bash(rtk err *)",
+      "Bash(npx tsx *)"
+    ]
+  }
+}

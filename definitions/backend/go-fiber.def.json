@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:backend:go-fiber",
+  "label": "Go / Fiber",
+  "description": "Express-inspired web framework for Go with high performance",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#00ACD7",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "goVersion": {
+      "type": "string",
+      "description": "Go language version"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["web", "microservice"],
+      "description": "Application deployment mode"
+    }
+  }
+}

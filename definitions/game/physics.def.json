@@ -1,0 +1,18 @@
+{
+  "typeId": "game:system:physics",
+  "label": "Physics System",
+  "description": "Simulates physics and collisions for entities",
+  "category": "system",
+  "style": {
+    "shape": "hexagon",
+    "color": "#8B5CF6",
+    "icon": "activity"
+  },
+  "dataSchema": {
+    "gravity": {
+      "type": "number",
+      "default": 9.81,
+      "description": "Gravity in m/s\u00b2"
+    }
+  }
+}

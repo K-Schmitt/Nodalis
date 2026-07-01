@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:desktop:electron",
+  "label": "Electron App",
+  "description": "Build cross-platform desktop apps with web technologies",
+  "category": "desktop",
+  "style": {
+    "shape": "rectangle",
+    "color": "#47848F",
+    "icon": "monitor"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Electron version"
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "react",
+        "vue",
+        "vanilla"
+      ],
+      "description": "Frontend framework"
+    }
+  }
+}

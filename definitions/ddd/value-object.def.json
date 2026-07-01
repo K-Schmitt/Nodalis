@@ -1,0 +1,20 @@
+{
+  "typeId": "ddd:tactical:value-object",
+  "label": "Value Object",
+  "description": "Immutable object defined only by its attributes",
+  "category": "tactical",
+  "style": {
+    "shape": "rectangle",
+    "color": "#A855F7",
+    "icon": "component"
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Attributes",
+        "from": "attributes"
+      }
+    ]
+  }
+}

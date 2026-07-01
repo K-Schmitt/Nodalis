@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:auth:oauth",
+  "label": "OAuth 2.0 Server",
+  "description": "Authorization server implementing the OAuth 2.0 framework for secure delegated access",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6E40C9",
+    "icon": "shield"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "provider": {
+      "type": "string",
+      "enum": ["custom", "hydra", "okta"],
+      "description": "OAuth server implementation"
+    },
+    "flows": {
+      "type": "array",
+      "description": "Supported OAuth flows (e.g. authorization_code, client_credentials)"
+    }
+  }
+}

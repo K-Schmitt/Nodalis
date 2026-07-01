@@ -1,0 +1,26 @@
+{
+  "typeId": "erd:type:enum",
+  "label": "Enum Type",
+  "description": "An enumerated type used by columns",
+  "category": "type",
+  "style": {
+    "shape": "hexagon",
+    "color": "#0D9488",
+    "icon": "list"
+  },
+  "dataSchema": {
+    "values": {
+      "type": "array",
+      "description": "Allowed enum values"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Values",
+        "from": "values"
+      }
+    ]
+  }
+}

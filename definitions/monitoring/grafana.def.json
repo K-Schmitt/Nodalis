@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:monitoring:grafana",
+  "label": "Grafana",
+  "description": "Open-source analytics and monitoring platform for visualizing metrics",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F46800",
+    "icon": "bar-chart"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Grafana version"
+    },
+    "cloud": {
+      "type": "boolean",
+      "description": "Use Grafana Cloud managed service"
+    },
+    "alerting": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Grafana Alerting"
+    }
+  }
+}

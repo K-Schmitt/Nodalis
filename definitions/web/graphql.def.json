@@ -1,0 +1,31 @@
+{
+  "typeId": "tech:api:graphql",
+  "label": "GraphQL API",
+  "description": "GraphQL API endpoint for typed client-driven queries",
+  "category": "api",
+  "style": {
+    "shape": "hexagon",
+    "color": "#E10098",
+    "icon": "share-2"
+  },
+  "constraints": {
+    "maxInputs": 10,
+    "maxOutputs": 8
+  },
+  "dataSchema": {
+    "schemaPath": {
+      "type": "string",
+      "description": "Path to the GraphQL schema file"
+    },
+    "subscriptions": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable GraphQL subscriptions"
+    },
+    "federation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable Apollo Federation"
+    }
+  }
+}

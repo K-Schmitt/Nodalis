@@ -1,0 +1,22 @@
+{
+  "typeId": "erd:entity:junction",
+  "label": "Junction Table",
+  "description": "Associative table resolving a many-to-many relationship",
+  "category": "entity",
+  "style": {
+    "shape": "cylinder",
+    "color": "#0891B2",
+    "icon": "boxes"
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "from": "columns",
+        "badges": {
+          "fk": "foreignKeys"
+        }
+      }
+    ]
+  }
+}

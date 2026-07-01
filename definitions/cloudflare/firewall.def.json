@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloudflare:firewall",
+  "label": "Cloudflare WAF",
+  "description": "Web Application Firewall to protect against common web threats",
+  "category": "security",
+  "style": {
+    "shape": "diamond",
+    "color": "#F6821F",
+    "icon": "shield"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": ["simulate", "block", "challenge"],
+      "description": "WAF enforcement mode"
+    },
+    "rateLimit": {
+      "type": "number",
+      "description": "Maximum requests per second before rate limiting"
+    }
+  }
+}

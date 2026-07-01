@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:auth:ldap",
+  "label": "LDAP / Active Directory",
+  "description": "Directory service for centralized identity and access management",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0078D4",
+    "icon": "lock"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "host": {
+      "type": "string",
+      "description": "LDAP server hostname"
+    },
+    "baseDn": {
+      "type": "string",
+      "description": "Base Distinguished Name for directory searches"
+    },
+    "ssl": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable LDAPS (LDAP over SSL)"
+    }
+  }
+}

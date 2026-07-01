@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:mobile:react-native",
+  "label": "React Native",
+  "description": "Cross-platform mobile application framework using React",
+  "category": "mobile",
+  "style": {
+    "shape": "rectangle",
+    "color": "#61DAFB",
+    "icon": "smartphone"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "platform": {
+      "type": "string",
+      "enum": [
+        "ios",
+        "android",
+        "both"
+      ],
+      "description": "Target platform"
+    },
+    "expo": {
+      "type": "boolean",
+      "description": "Use Expo managed workflow"
+    }
+  }
+}

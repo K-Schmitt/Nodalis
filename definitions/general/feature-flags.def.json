@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:general:feature-flags",
+  "label": "Feature Flags Service",
+  "description": "Feature toggle service for gradual rollouts and A/B testing",
+  "category": "general",
+  "style": {
+    "shape": "rectangle",
+    "color": "#10B981",
+    "icon": "settings"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "provider": {
+      "type": "string",
+      "enum": ["unleash", "launchdarkly", "posthog", "custom"],
+      "description": "Feature flag provider"
+    },
+    "environments": {
+      "type": "number",
+      "default": 3,
+      "description": "Number of configured environments"
+    }
+  }
+}

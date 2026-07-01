@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:game:audio",
+  "label": "Audio Manager",
+  "description": "Game audio system for sound effects, music playback and spatial audio",
+  "category": "game",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EC4899",
+    "icon": "radio"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "spatialAudio": {
+      "type": "boolean",
+      "description": "Enable 3D positional / spatial audio"
+    },
+    "compression": {
+      "type": "string",
+      "enum": ["ogg", "mp3", "opus"],
+      "description": "Audio compression format"
+    }
+  }
+}

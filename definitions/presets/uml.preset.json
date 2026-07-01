@@ -1,0 +1,71 @@
+{
+  "id": "uml",
+  "label": "UML Class Diagram",
+  "description": "Object-oriented class modelling: classes, interfaces, enums with inheritance, composition and association.",
+  "include": [
+    "uml"
+  ],
+  "rules": {
+    "noCycles": false,
+    "defaultMaxInputs": 40,
+    "defaultMaxOutputs": 40
+  },
+  "edgeTypes": [
+    {
+      "id": "inheritance",
+      "label": "extends",
+      "description": "Generalization \u2014 subclass extends a superclass",
+      "style": {
+        "stroke": "#1E293B",
+        "markerEnd": "triangle-open"
+      }
+    },
+    {
+      "id": "realization",
+      "label": "implements",
+      "description": "A class realizes (implements) an interface",
+      "style": {
+        "stroke": "#0891B2",
+        "dashed": true,
+        "markerEnd": "triangle-open"
+      }
+    },
+    {
+      "id": "composition",
+      "label": "composes",
+      "description": "Whole-part where parts cannot exist without the whole",
+      "style": {
+        "stroke": "#1E293B",
+        "markerStart": "diamond"
+      }
+    },
+    {
+      "id": "aggregation",
+      "label": "aggregates",
+      "description": "Whole-part where parts can exist independently",
+      "style": {
+        "stroke": "#475569",
+        "markerStart": "diamond-open"
+      }
+    },
+    {
+      "id": "association",
+      "label": "associates",
+      "description": "A structural relationship between classes",
+      "style": {
+        "stroke": "#334155",
+        "markerEnd": "arrow"
+      }
+    },
+    {
+      "id": "dependency",
+      "label": "depends on",
+      "description": "A using/uses dependency",
+      "style": {
+        "stroke": "#94A3B8",
+        "dashed": true,
+        "markerEnd": "arrow"
+      }
+    }
+  ]
+}

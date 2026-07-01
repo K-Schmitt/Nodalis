@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:neo4j",
+  "label": "Neo4j Graph DB",
+  "description": "Native graph database for connected data at scale",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#018BFF",
+    "icon": "network"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Neo4j version"
+    },
+    "edition": {
+      "type": "string",
+      "enum": ["community", "enterprise"],
+      "description": "Neo4j edition"
+    }
+  }
+}

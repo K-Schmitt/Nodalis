@@ -1,0 +1,17 @@
+{
+  "typeId": "game:world:scene",
+  "label": "Scene",
+  "description": "A game scene / level containing entities",
+  "category": "world",
+  "style": {
+    "shape": "rectangle",
+    "color": "#10B981",
+    "icon": "layers"
+  },
+  "dataSchema": {
+    "name": {
+      "type": "string",
+      "description": "Scene name"
+    }
+  }
+}

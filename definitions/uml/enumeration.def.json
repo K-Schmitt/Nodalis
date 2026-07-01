@@ -1,0 +1,25 @@
+{
+  "typeId": "uml:type:enum",
+  "label": "Enumeration",
+  "description": "A fixed set of named values",
+  "category": "type",
+  "style": {
+    "shape": "hexagon",
+    "color": "#0D9488",
+    "icon": "list"
+  },
+  "dataSchema": {
+    "values": {
+      "type": "array"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Values",
+        "from": "values"
+      }
+    ]
+  }
+}

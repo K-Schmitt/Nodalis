@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:cognito",
+  "label": "AWS Cognito",
+  "description": "User authentication, authorization, and user management for web and mobile apps",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "shield"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "mfa": {
+      "type": "string",
+      "enum": ["OFF", "OPTIONAL", "REQUIRED"],
+      "description": "Multi-factor authentication setting"
+    },
+    "socialProviders": {
+      "type": "array",
+      "description": "List of enabled social identity providers (e.g. Google, Facebook)"
+    }
+  }
+}

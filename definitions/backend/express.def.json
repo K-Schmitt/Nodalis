@@ -1,0 +1,24 @@
+{
+  "typeId": "tech:backend:express",
+  "label": "Express.js",
+  "description": "Minimal and flexible Node.js web application framework",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#000000",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Express.js version"
+    },
+    "middleware": {
+      "type": "array",
+      "description": "List of middleware used (e.g. cors, helmet, morgan)"
+    }
+  }
+}

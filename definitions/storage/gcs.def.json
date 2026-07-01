@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:storage:gcs",
+  "label": "Google Cloud Storage",
+  "description": "Scalable object storage for any amount of data with global availability",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#4285F4",
+    "icon": "cloud"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "location": {
+      "type": "string",
+      "enum": ["US", "EU", "ASIA"],
+      "description": "Bucket location for data residency"
+    },
+    "storageClass": {
+      "type": "string",
+      "enum": ["STANDARD", "NEARLINE", "COLDLINE", "ARCHIVE"],
+      "description": "Storage class for cost and access optimization"
+    }
+  }
+}

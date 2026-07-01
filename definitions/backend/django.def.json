@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:backend:django",
+  "label": "Django",
+  "description": "High-level Python web framework that encourages rapid development",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#092E20",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Django version"
+    },
+    "restFramework": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include Django REST Framework"
+    },
+    "channels": {
+      "type": "boolean",
+      "description": "Enable Django Channels for WebSocket support"
+    }
+  }
+}

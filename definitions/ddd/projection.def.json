@@ -1,0 +1,11 @@
+{
+  "typeId": "ddd:read:projection",
+  "label": "Read Model",
+  "description": "A denormalized projection optimized for queries",
+  "category": "read",
+  "style": {
+    "shape": "cylinder",
+    "color": "#0891B2",
+    "icon": "eye"
+  }
+}

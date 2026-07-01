@@ -1,0 +1,36 @@
+{
+  "typeId": "tech:messaging:sqs",
+  "label": "AWS SQS Queue",
+  "description": "Fully managed message queuing service for decoupling microservices",
+  "category": "messaging",
+  "style": {
+    "shape": "diamond",
+    "color": "#FF4F8B",
+    "icon": "mail"
+  },
+  "constraints": {
+    "maxInputs": 5,
+    "maxOutputs": 3
+  },
+  "dataSchema": {
+    "queueName": {
+      "type": "string",
+      "description": "Queue name"
+    },
+    "fifo": {
+      "type": "boolean",
+      "default": false,
+      "description": "FIFO queue (exactly-once processing)"
+    },
+    "visibilityTimeout": {
+      "type": "number",
+      "default": 30,
+      "description": "Message visibility timeout in seconds"
+    },
+    "retentionPeriod": {
+      "type": "number",
+      "default": 345600,
+      "description": "Message retention period in seconds (default 4 days)"
+    }
+  }
+}

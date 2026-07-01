@@ -1,0 +1,14 @@
+{
+  "typeId": "tech:general:user",
+  "label": "User / Actor",
+  "description": "A human actor interacting with the system. Source-only (nothing connects into it).",
+  "category": "general",
+  "style": {
+    "shape": "circle",
+    "color": "#2563EB",
+    "icon": "user"
+  },
+  "constraints": {
+    "maxInputs": 0
+  }
+}

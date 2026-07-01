@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:frontend:vue",
+  "label": "Vue.js Application",
+  "description": "Progressive JavaScript framework for building user interfaces",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#42b883",
+    "icon": "monitor"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Vue.js version"
+    },
+    "composition": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use Composition API"
+    },
+    "router": {
+      "type": "boolean",
+      "description": "Include Vue Router"
+    }
+  }
+}

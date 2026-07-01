@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:frontend:nuxt",
+  "label": "Nuxt.js",
+  "description": "Intuitive Vue framework for building full-stack web applications",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#00DC82",
+    "icon": "monitor"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Nuxt.js version"
+    },
+    "renderMode": {
+      "type": "string",
+      "enum": [
+        "ssr",
+        "ssg",
+        "spa"
+      ],
+      "description": "Rendering mode"
+    }
+  }
+}

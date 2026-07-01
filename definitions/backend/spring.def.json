@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:backend:spring",
+  "label": "Spring Boot",
+  "description": "Java-based framework for building production-grade Spring applications",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6DB33F",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Spring Boot version"
+    },
+    "reactive": {
+      "type": "boolean",
+      "description": "Use reactive programming with WebFlux"
+    },
+    "security": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include Spring Security"
+    }
+  }
+}

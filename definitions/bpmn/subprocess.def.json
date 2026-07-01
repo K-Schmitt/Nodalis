@@ -1,0 +1,16 @@
+{
+  "typeId": "bpmn:activity:subprocess",
+  "label": "Sub-Process",
+  "description": "A compound activity containing its own flow",
+  "category": "activity",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7C3AED",
+    "icon": "boxes"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "subprocess",
+    "icon": "boxes"
+  }
+}

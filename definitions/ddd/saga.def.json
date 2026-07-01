@@ -1,0 +1,11 @@
+{
+  "typeId": "ddd:process:saga",
+  "label": "Saga / Process Manager",
+  "description": "Coordinates a long-running process across aggregates",
+  "category": "process",
+  "style": {
+    "shape": "rectangle",
+    "color": "#DB2777",
+    "icon": "workflow"
+  }
+}

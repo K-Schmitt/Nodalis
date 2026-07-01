@@ -1,0 +1,40 @@
+{
+  "typeId": "tech:compute:lambda",
+  "label": "AWS Lambda Function",
+  "description": "Serverless compute service that runs code in response to events",
+  "category": "compute",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 5
+  },
+  "dataSchema": {
+    "runtime": {
+      "type": "string",
+      "enum": [
+        "nodejs18.x",
+        "nodejs20.x",
+        "python3.11",
+        "python3.12"
+      ],
+      "description": "Lambda runtime environment"
+    },
+    "handler": {
+      "type": "string",
+      "description": "Function handler (e.g., index.handler)"
+    },
+    "memory": {
+      "type": "number",
+      "default": 128,
+      "description": "Memory allocation in MB"
+    },
+    "timeout": {
+      "type": "number",
+      "default": 3,
+      "description": "Timeout in seconds"
+    }
+  }
+}

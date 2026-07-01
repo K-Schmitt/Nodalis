@@ -1,0 +1,15 @@
+{
+  "typeId": "bpmn:gateway:exclusive",
+  "label": "Exclusive Gateway (XOR)",
+  "description": "Routes flow down exactly one branch based on conditions",
+  "category": "gateway",
+  "style": {
+    "shape": "diamond",
+    "color": "#D97706",
+    "icon": "split"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "gateway-x"
+  }
+}

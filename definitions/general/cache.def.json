@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:general:cache",
+  "label": "Cache Layer",
+  "description": "In-memory caching layer to reduce latency and backend load",
+  "category": "caching",
+  "style": {
+    "shape": "rectangle",
+    "color": "#8B5CF6",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "strategy": {
+      "type": "string",
+      "enum": ["lru", "lfu", "fifo"],
+      "description": "Cache eviction strategy"
+    },
+    "ttl": {
+      "type": "number",
+      "default": 3600,
+      "description": "Cache entry Time-To-Live in seconds"
+    },
+    "distributed": {
+      "type": "boolean",
+      "description": "Enable distributed caching across nodes"
+    }
+  }
+}

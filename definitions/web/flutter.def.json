@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:mobile:flutter",
+  "label": "Flutter",
+  "description": "Google's UI toolkit for building natively compiled applications",
+  "category": "mobile",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0553B1",
+    "icon": "smartphone"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "platform": {
+      "type": "string",
+      "enum": [
+        "ios",
+        "android",
+        "web",
+        "desktop"
+      ],
+      "description": "Target platform"
+    },
+    "dartVersion": {
+      "type": "string",
+      "description": "Dart SDK version"
+    }
+  }
+}

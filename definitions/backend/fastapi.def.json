@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:backend:fastapi",
+  "label": "FastAPI (Python)",
+  "description": "Modern, fast Python web framework for building APIs with async support",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#009688",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "FastAPI version"
+    },
+    "async": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use async/await endpoint handlers"
+    },
+    "workers": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of Uvicorn worker processes"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "typeId": "ddd:strategic:bounded-context",
+  "label": "Bounded Context",
+  "description": "An explicit boundary within which a domain model applies",
+  "category": "strategic",
+  "style": {
+    "shape": "rectangle",
+    "color": "#475569",
+    "icon": "layers"
+  },
+  "render": {
+    "archetype": "container"
+  }
+}

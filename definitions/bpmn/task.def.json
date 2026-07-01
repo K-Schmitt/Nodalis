@@ -1,0 +1,31 @@
+{
+  "typeId": "bpmn:activity:task",
+  "label": "Task",
+  "description": "An atomic unit of work in the process",
+  "category": "activity",
+  "style": {
+    "shape": "rectangle",
+    "color": "#2563EB",
+    "icon": "box"
+  },
+  "dataSchema": {
+    "assignee": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "user",
+        "service",
+        "script",
+        "manual"
+      ],
+      "default": "user"
+    }
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "task",
+    "icon": "box"
+  }
+}

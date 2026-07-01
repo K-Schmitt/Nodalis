@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:devops:kubernetes",
+  "label": "Kubernetes Cluster",
+  "description": "Container orchestration system for automating deployment and scaling",
+  "category": "orchestration",
+  "style": {
+    "shape": "hexagon",
+    "color": "#326CE5",
+    "icon": "layers"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Kubernetes version"
+    },
+    "provider": {
+      "type": "string",
+      "enum": ["eks", "gke", "aks", "self-hosted"],
+      "description": "Cloud provider for managed Kubernetes"
+    },
+    "namespaces": {
+      "type": "number",
+      "description": "Number of configured namespaces"
+    }
+  }
+}

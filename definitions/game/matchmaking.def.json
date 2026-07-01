@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:game:matchmaking",
+  "label": "Matchmaking Service",
+  "description": "Player matchmaking system for grouping players into balanced game sessions",
+  "category": "game",
+  "style": {
+    "shape": "rectangle",
+    "color": "#14B8A6",
+    "icon": "workflow"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "algorithm": {
+      "type": "string",
+      "enum": ["skill-based", "random", "custom"],
+      "description": "Matchmaking algorithm"
+    },
+    "maxWaitSeconds": {
+      "type": "number",
+      "default": 30,
+      "description": "Maximum wait time before relaxing match criteria"
+    }
+  }
+}

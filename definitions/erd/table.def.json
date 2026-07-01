@@ -1,0 +1,43 @@
+{
+  "typeId": "erd:entity:table",
+  "label": "Table",
+  "description": "A relational table (entity) with columns and a primary key",
+  "category": "entity",
+  "style": {
+    "shape": "cylinder",
+    "color": "#4F46E5",
+    "icon": "table"
+  },
+  "dataSchema": {
+    "columns": {
+      "type": "array",
+      "description": "Column definitions (name:type)"
+    },
+    "primaryKey": {
+      "type": "string",
+      "description": "Primary key column(s)"
+    },
+    "engine": {
+      "type": "string",
+      "enum": [
+        "innodb",
+        "postgres",
+        "generic"
+      ],
+      "default": "postgres"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "titleFrom": "label",
+    "compartments": [
+      {
+        "from": "columns",
+        "badges": {
+          "pk": "primaryKey",
+          "fk": "foreignKeys"
+        }
+      }
+    ]
+  }
+}

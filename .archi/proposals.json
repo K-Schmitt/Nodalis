@@ -1,0 +1,563 @@
+[
+  {
+    "id": "70d8659d-dd28-430e-b875-28a8473f70d6",
+    "author": "GitHub Copilot",
+    "operations": [
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e1000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e2000000-0000-0000-0000-000000000002"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e3000000-0000-0000-0000-000000000003"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e4000000-0000-0000-0000-000000000004"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e0000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e0000000-0000-0000-0000-000000000002"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e0000000-0000-0000-0000-000000000003"
+        }
+      },
+      {
+        "op": "delete_edge",
+        "payload": {
+          "id": "e0000000-0000-0000-0000-000000000004"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "f1000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "f2000000-0000-0000-0000-000000000002"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "a1000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "a2000000-0000-0000-0000-000000000002"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "d1000000-0000-0000-0000-000000000001"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "a0000000-0000-0000-0000-00000000000a"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "b0000000-0000-0000-0000-00000000000b"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "c0000000-0000-0000-0000-00000000000c"
+        }
+      },
+      {
+        "op": "delete_node",
+        "payload": {
+          "id": "d0000000-0000-0000-0000-00000000000d"
+        }
+      }
+    ],
+    "preview": {
+      "nodesToAdd": [],
+      "edgesToAdd": [],
+      "nodesToDelete": [
+        {
+          "id": "f1000000-0000-0000-0000-000000000001",
+          "label": "Front 1",
+          "typeId": "tech:frontend:react"
+        },
+        {
+          "id": "f2000000-0000-0000-0000-000000000002",
+          "label": "Front 2",
+          "typeId": "tech:frontend:react"
+        },
+        {
+          "id": "a1000000-0000-0000-0000-000000000001",
+          "label": "API 1",
+          "typeId": "tech:api:rest"
+        },
+        {
+          "id": "a2000000-0000-0000-0000-000000000002",
+          "label": "API 2",
+          "typeId": "tech:api:rest"
+        },
+        {
+          "id": "d1000000-0000-0000-0000-000000000001",
+          "label": "Database Postgres",
+          "typeId": "tech:database:postgres"
+        },
+        {
+          "id": "a0000000-0000-0000-0000-00000000000a",
+          "label": "REST API (A)",
+          "typeId": "tech:api:rest"
+        },
+        {
+          "id": "b0000000-0000-0000-0000-00000000000b",
+          "label": "Lambda (B)",
+          "typeId": "tech:compute:lambda"
+        },
+        {
+          "id": "c0000000-0000-0000-0000-00000000000c",
+          "label": "EC2 (C)",
+          "typeId": "tech:compute:ec2"
+        },
+        {
+          "id": "d0000000-0000-0000-0000-00000000000d",
+          "label": "SQS (D)",
+          "typeId": "tech:messaging:sqs"
+        }
+      ],
+      "edgesToDelete": [
+        {
+          "id": "e1000000-0000-0000-0000-000000000001"
+        },
+        {
+          "id": "e2000000-0000-0000-0000-000000000002"
+        },
+        {
+          "id": "e3000000-0000-0000-0000-000000000003"
+        },
+        {
+          "id": "e4000000-0000-0000-0000-000000000004"
+        },
+        {
+          "id": "e0000000-0000-0000-0000-000000000001"
+        },
+        {
+          "id": "e0000000-0000-0000-0000-000000000002"
+        },
+        {
+          "id": "e0000000-0000-0000-0000-000000000003"
+        },
+        {
+          "id": "e0000000-0000-0000-0000-000000000004"
+        }
+      ],
+      "nodesToUpdate": []
+    },
+    "status": "accepted",
+    "createdAt": "2026-04-23T10:38:41.937Z",
+    "resolvedAt": "2026-06-19T15:53:20.588Z",
+    "applySummary": {
+      "applied": 17,
+      "failed": [],
+      "finalCounts": {
+        "nodes": 0,
+        "edges": 0
+      }
+    }
+  },
+  {
+    "id": "a60d3d3e-cd01-4dfb-bdf6-5f2835c0b2cc",
+    "author": "GitHub Copilot",
+    "operations": [
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "10000000-1000-4000-8000-000000000001",
+          "typeId": "tech:frontend:react",
+          "label": "Front-end React",
+          "data": {
+            "version": "18.2.0",
+            "framework": "vite"
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "20000000-2000-4000-8000-000000000002",
+          "typeId": "tech:api:rest",
+          "label": "API REST Backend",
+          "data": {
+            "basePath": "/api/v1",
+            "methods": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ]
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "30000000-3000-4000-8000-000000000003",
+          "typeId": "tech:database:postgres",
+          "label": "Base PostgreSQL",
+          "data": {
+            "host": "localhost",
+            "port": 5432,
+            "database": "app_db"
+          }
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "12000000-1200-4000-8000-000000000012",
+          "sourceId": "10000000-1000-4000-8000-000000000001",
+          "targetId": "20000000-2000-4000-8000-000000000002"
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "23000000-2300-4000-8000-000000000023",
+          "sourceId": "20000000-2000-4000-8000-000000000002",
+          "targetId": "30000000-3000-4000-8000-000000000003"
+        }
+      }
+    ],
+    "preview": {
+      "nodesToAdd": [
+        {
+          "id": "10000000-1000-4000-8000-000000000001",
+          "typeId": "tech:frontend:react",
+          "label": "Front-end React",
+          "style": {
+            "shape": "rectangle",
+            "color": "#61DAFB",
+            "icon": "monitor"
+          }
+        },
+        {
+          "id": "20000000-2000-4000-8000-000000000002",
+          "typeId": "tech:api:rest",
+          "label": "API REST Backend",
+          "style": {
+            "shape": "hexagon",
+            "color": "#61DAFB",
+            "icon": "activity"
+          }
+        },
+        {
+          "id": "30000000-3000-4000-8000-000000000003",
+          "typeId": "tech:database:postgres",
+          "label": "Base PostgreSQL",
+          "style": {
+            "shape": "cylinder",
+            "color": "#336791",
+            "icon": "database"
+          }
+        }
+      ],
+      "edgesToAdd": [
+        {
+          "id": "12000000-1200-4000-8000-000000000012",
+          "sourceId": "10000000-1000-4000-8000-000000000001",
+          "targetId": "20000000-2000-4000-8000-000000000002"
+        },
+        {
+          "id": "23000000-2300-4000-8000-000000000023",
+          "sourceId": "20000000-2000-4000-8000-000000000002",
+          "targetId": "30000000-3000-4000-8000-000000000003"
+        }
+      ],
+      "nodesToDelete": [],
+      "edgesToDelete": [],
+      "nodesToUpdate": []
+    },
+    "status": "accepted",
+    "createdAt": "2026-05-21T11:50:46.904Z",
+    "resolvedAt": "2026-06-19T15:53:23.071Z",
+    "applySummary": {
+      "applied": 5,
+      "failed": [],
+      "finalCounts": {
+        "nodes": 3,
+        "edges": 2
+      }
+    }
+  },
+  {
+    "id": "4e220a5b-3d62-40dc-a5c6-edaea838a98b",
+    "author": "GitHub Copilot",
+    "operations": [
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "typeId": "tech:frontend:react",
+          "label": "Web Client",
+          "data": {
+            "version": "18.2.0",
+            "framework": "vite"
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "22222222-2222-4222-8222-222222222222",
+          "typeId": "tech:api:rest",
+          "label": "API Backend",
+          "data": {
+            "basePath": "/api",
+            "methods": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ]
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "33333333-3333-4333-8333-333333333333",
+          "typeId": "tech:database:postgres",
+          "label": "Database Main",
+          "data": {
+            "host": "db.local",
+            "port": 5432,
+            "database": "production"
+          }
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "sourceId": "11111111-1111-4111-8111-111111111111",
+          "targetId": "22222222-2222-4222-8222-222222222222"
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "55555555-5555-4555-8555-555555555555",
+          "sourceId": "22222222-2222-4222-8222-222222222222",
+          "targetId": "33333333-3333-4333-8333-333333333333"
+        }
+      }
+    ],
+    "preview": {
+      "nodesToAdd": [
+        {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "typeId": "tech:frontend:react",
+          "label": "Web Client",
+          "style": {
+            "shape": "rectangle",
+            "color": "#61DAFB",
+            "icon": "monitor"
+          }
+        },
+        {
+          "id": "22222222-2222-4222-8222-222222222222",
+          "typeId": "tech:api:rest",
+          "label": "API Backend",
+          "style": {
+            "shape": "hexagon",
+            "color": "#61DAFB",
+            "icon": "activity"
+          }
+        },
+        {
+          "id": "33333333-3333-4333-8333-333333333333",
+          "typeId": "tech:database:postgres",
+          "label": "Database Main",
+          "style": {
+            "shape": "cylinder",
+            "color": "#336791",
+            "icon": "database"
+          }
+        }
+      ],
+      "edgesToAdd": [
+        {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "sourceId": "11111111-1111-4111-8111-111111111111",
+          "targetId": "22222222-2222-4222-8222-222222222222"
+        },
+        {
+          "id": "55555555-5555-4555-8555-555555555555",
+          "sourceId": "22222222-2222-4222-8222-222222222222",
+          "targetId": "33333333-3333-4333-8333-333333333333"
+        }
+      ],
+      "nodesToDelete": [],
+      "edgesToDelete": [],
+      "nodesToUpdate": []
+    },
+    "status": "rejected",
+    "createdAt": "2026-05-21T11:55:32.517Z",
+    "resolvedAt": "2026-05-21T12:05:33.199Z"
+  },
+  {
+    "id": "37b72fc9-e323-46a1-8058-66f4db2b6138",
+    "author": "GitHub Copilot",
+    "operations": [
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:frontend:react",
+          "label": "Front-end React",
+          "data": {
+            "version": "18.2.0",
+            "framework": "vite"
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:api:rest",
+          "label": "API REST Backend",
+          "data": {
+            "basePath": "/api/v1",
+            "methods": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ]
+          }
+        }
+      },
+      {
+        "op": "add_node",
+        "payload": {
+          "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:database:postgres",
+          "label": "Base PostgreSQL",
+          "data": {
+            "host": "localhost",
+            "port": 5432,
+            "database": "app_db"
+          }
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+          "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+          "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+        }
+      },
+      {
+        "op": "add_edge",
+        "payload": {
+          "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+          "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+          "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+        }
+      }
+    ],
+    "preview": {
+      "nodesToAdd": [
+        {
+          "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:frontend:react",
+          "label": "Front-end React",
+          "style": {
+            "shape": "rectangle",
+            "color": "#61DAFB",
+            "icon": "monitor"
+          }
+        },
+        {
+          "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:api:rest",
+          "label": "API REST Backend",
+          "style": {
+            "shape": "hexagon",
+            "color": "#61DAFB",
+            "icon": "activity"
+          }
+        },
+        {
+          "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+          "typeId": "tech:database:postgres",
+          "label": "Base PostgreSQL",
+          "style": {
+            "shape": "cylinder",
+            "color": "#336791",
+            "icon": "database"
+          }
+        }
+      ],
+      "edgesToAdd": [
+        {
+          "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+          "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+          "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+        },
+        {
+          "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+          "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+          "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+        }
+      ],
+      "nodesToDelete": [],
+      "edgesToDelete": [],
+      "nodesToUpdate": []
+    },
+    "status": "accepted",
+    "createdAt": "2026-05-21T12:06:55.160Z",
+    "resolvedAt": "2026-06-19T15:53:24.506Z",
+    "applySummary": {
+      "applied": 5,
+      "failed": [],
+      "finalCounts": {
+        "nodes": 6,
+        "edges": 4
+      }
+    }
+  }
+]

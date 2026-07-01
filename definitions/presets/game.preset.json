@@ -1,0 +1,31 @@
+{
+  "id": "game",
+  "label": "Game Development",
+  "description": "Game engine nodes — loop, physics, audio, matchmaking, networking, leaderboard.",
+  "include": ["general", "game", "database", "messaging", "monitoring"],
+  "rules": {
+    "forbiddenTypes": [
+      "tech:frontend:react", "tech:frontend:vue", "tech:frontend:angular",
+      "tech:frontend:svelte", "tech:frontend:remix", "tech:frontend:nuxt",
+      "tech:frontend:astro", "tech:frontend:pwa",
+      "tech:cloud:cloudfront", "tech:cloud:api-gateway",
+      "tech:devops:terraform", "tech:devops:kubernetes",
+      "tech:auth:ldap"
+    ],
+    "requiredTypes": ["tech:game:game-loop"],
+    "requiredConnections": [
+      {
+        "from": "tech:game:entity",
+        "to": "tech:game:game-loop",
+        "reason": "Entities must be driven by the game loop"
+      }
+    ],
+    "maxNodesPerType": {
+      "tech:game:game-loop": 1,
+      "tech:game:physics": 1
+    },
+    "noCycles": false,
+    "defaultMaxInputs": 10,
+    "defaultMaxOutputs": 10
+  }
+}

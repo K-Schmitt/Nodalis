@@ -1,0 +1,30 @@
+{
+  "typeId": "net:device:router",
+  "label": "Router",
+  "description": "Routes traffic between networks",
+  "category": "device",
+  "style": {
+    "shape": "diamond",
+    "color": "#0F766E",
+    "icon": "router"
+  },
+  "dataSchema": {
+    "model": {
+      "type": "string"
+    },
+    "routingProtocol": {
+      "type": "string",
+      "enum": [
+        "static",
+        "ospf",
+        "bgp",
+        "rip"
+      ],
+      "default": "static"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "router"
+  }
+}

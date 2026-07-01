@@ -1,0 +1,22 @@
+{
+  "typeId": "game:system:input",
+  "label": "Input System",
+  "description": "Handles player input (keyboard, gamepad, touch)",
+  "category": "system",
+  "style": {
+    "shape": "hexagon",
+    "color": "#6366F1",
+    "icon": "gamepad-2"
+  },
+  "dataSchema": {
+    "scheme": {
+      "type": "string",
+      "enum": [
+        "keyboard",
+        "gamepad",
+        "touch"
+      ],
+      "default": "keyboard"
+    }
+  }
+}

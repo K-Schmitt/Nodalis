@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:influxdb",
+  "label": "InfluxDB",
+  "description": "Time series database for metrics, events and real-time analytics",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#22ADF6",
+    "icon": "activity"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "InfluxDB version"
+    },
+    "retention": {
+      "type": "string",
+      "default": "30d",
+      "description": "Data retention period"
+    }
+  }
+}

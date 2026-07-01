@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:route53",
+  "label": "AWS Route 53",
+  "description": "Highly available and scalable cloud DNS web service",
+  "category": "dns",
+  "style": {
+    "shape": "circle",
+    "color": "#FF9900",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "hostedZone": {
+      "type": "string",
+      "description": "Hosted zone domain name"
+    },
+    "routingPolicy": {
+      "type": "string",
+      "enum": ["simple", "failover", "latency", "weighted"],
+      "description": "DNS routing policy"
+    }
+  }
+}

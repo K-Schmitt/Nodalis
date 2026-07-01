@@ -1,0 +1,66 @@
+{
+  "id": "network",
+  "label": "Network Topology",
+  "description": "Model network infrastructure: routers, switches, firewalls, servers, VLANs and their links.",
+  "include": [
+    "network"
+  ],
+  "rules": {
+    "noCycles": false,
+    "forbiddenConnections": [
+      {
+        "from": "net:zone:internet",
+        "to": "net:endpoint:client",
+        "reason": "The internet must not reach an endpoint without passing a firewall"
+      },
+      {
+        "from": "net:zone:internet",
+        "to": "net:compute:server",
+        "reason": "Expose servers through a firewall/load balancer, not directly from the internet"
+      }
+    ],
+    "defaultMaxInputs": 50,
+    "defaultMaxOutputs": 50
+  },
+  "edgeTypes": [
+    {
+      "id": "ethernet",
+      "label": "ethernet",
+      "description": "Copper Ethernet link",
+      "style": {
+        "stroke": "#334155",
+        "width": 2
+      }
+    },
+    {
+      "id": "fiber",
+      "label": "fiber",
+      "description": "Fiber-optic link",
+      "style": {
+        "stroke": "#7C3AED",
+        "width": 3
+      }
+    },
+    {
+      "id": "wireless",
+      "label": "wireless",
+      "description": "Wireless link",
+      "style": {
+        "stroke": "#0891B2",
+        "dashed": true,
+        "animated": true
+      }
+    },
+    {
+      "id": "vpn",
+      "label": "VPN tunnel",
+      "description": "Encrypted VPN tunnel",
+      "style": {
+        "stroke": "#DC2626",
+        "dashed": true,
+        "animated": true,
+        "markerEnd": "arrow"
+      }
+    }
+  ]
+}

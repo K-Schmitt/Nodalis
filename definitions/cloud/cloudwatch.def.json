@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:cloudwatch",
+  "label": "AWS CloudWatch",
+  "description": "Monitoring and observability service for AWS cloud resources and applications",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "activity"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "retentionDays": {
+      "type": "number",
+      "default": 30,
+      "description": "Log retention period in days"
+    },
+    "alarms": {
+      "type": "boolean",
+      "description": "Enable CloudWatch Alarms"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "typeId": "net:zone:internet",
+  "label": "Internet / WAN",
+  "description": "The public network outside your perimeter",
+  "category": "zone",
+  "style": {
+    "shape": "hexagon",
+    "color": "#64748B",
+    "icon": "cloud"
+  },
+  "constraints": {
+    "maxInputs": 0
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "cloud"
+  }
+}

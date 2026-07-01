@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:monitoring:prometheus",
+  "label": "Prometheus",
+  "description": "Open-source monitoring and alerting toolkit for time series metrics",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#E6522C",
+    "icon": "activity"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "retentionTime": {
+      "type": "string",
+      "default": "15d",
+      "description": "Metrics retention duration"
+    },
+    "remoteWrite": {
+      "type": "boolean",
+      "description": "Enable remote write to long-term storage"
+    }
+  }
+}

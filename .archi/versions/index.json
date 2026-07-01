@@ -1,0 +1,3278 @@
+[
+  {
+    "id": "271ba283-262d-4fd1-aa00-529649813b5c",
+    "label": "auto-2026-04-20T15:41:01.140Z",
+    "createdAt": "2026-04-20T15:41:01.140Z",
+    "nodeCount": 5,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "11111111-1111-4111-1111-111111111111",
+        "typeId": "tech:frontend:react",
+        "label": "Mon unique Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333332",
+        "typeId": "tech:database:postgres",
+        "label": "Database Products",
+        "data": {
+          "database": "db_products",
+          "host": "db2.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333333",
+        "typeId": "tech:database:postgres",
+        "label": "Database Orders",
+        "data": {
+          "database": "db_orders",
+          "host": "db3.local",
+          "port": 5432
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444440",
+        "sourceId": "11111111-1111-4111-1111-111111111111",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444442",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333332",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444443",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333333",
+        "label": "connects to"
+      }
+    ]
+  },
+  {
+    "id": "c38b234b-07ea-479d-b491-f3013ec9b11d",
+    "label": "auto-2026-04-20T16:27:36.575Z",
+    "createdAt": "2026-04-20T16:27:36.575Z",
+    "nodeCount": 3,
+    "edgeCount": 2,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333332",
+        "typeId": "tech:database:postgres",
+        "label": "Database Products",
+        "data": {
+          "database": "db_products",
+          "host": "db2.local",
+          "port": 5432
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444442",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333332",
+        "label": "connects to"
+      }
+    ]
+  },
+  {
+    "id": "3a7159c1-59ce-4ead-a310-329e30d693f0",
+    "label": "auto-2026-04-20T16:28:36.202Z",
+    "createdAt": "2026-04-20T16:28:36.202Z",
+    "nodeCount": 4,
+    "edgeCount": 3,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333332",
+        "typeId": "tech:database:postgres",
+        "label": "Database Products",
+        "data": {
+          "database": "db_products",
+          "host": "db2.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111113",
+        "typeId": "tech:frontend:react",
+        "label": "Nouveau Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444442",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333332",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444446",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      }
+    ]
+  },
+  {
+    "id": "c09dd991-c2c3-4ff9-9975-e61ba590e322",
+    "label": "auto-2026-04-20T23:04:49.026Z",
+    "createdAt": "2026-04-20T23:04:49.026Z",
+    "nodeCount": 4,
+    "edgeCount": 3,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111113",
+        "typeId": "tech:frontend:react",
+        "label": "Nouveau Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111114",
+        "typeId": "tech:frontend:react",
+        "label": "Autre Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444446",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444447",
+        "sourceId": "11111111-1111-4111-1111-111111111114",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      }
+    ]
+  },
+  {
+    "id": "15773b58-5d0f-454a-a963-de883dcdac7c",
+    "label": "auto-2026-04-20T23:24:43.764Z",
+    "createdAt": "2026-04-20T23:24:43.764Z",
+    "nodeCount": 6,
+    "edgeCount": 6,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111113",
+        "typeId": "tech:frontend:react",
+        "label": "Nouveau Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111114",
+        "typeId": "tech:frontend:react",
+        "label": "Autre Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "typeId": "tech:api:rest",
+        "label": "Nouvelle API",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "b0efcb3d-41a4-4bd5-bed4-436be86b1626",
+        "typeId": "tech:database:postgres",
+        "label": "Nouvelle Database",
+        "data": {
+          "database": "db_new",
+          "host": "db_new.local",
+          "port": 5432
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444446",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444447",
+        "sourceId": "11111111-1111-4111-1111-111111111114",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "db637be5-46fd-419b-b035-c32fe244aeb7",
+        "sourceId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "targetId": "b0efcb3d-41a4-4bd5-bed4-436be86b1626",
+        "label": "connects to"
+      },
+      {
+        "id": "dff47d84-a131-4ec9-86ab-bfdafc510d90",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "label": "calls"
+      },
+      {
+        "id": "dff47d84-a131-4ec9-86ab-bfdafc510d91",
+        "sourceId": "11111111-1111-4111-1111-111111111114",
+        "targetId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "label": "calls"
+      }
+    ]
+  },
+  {
+    "id": "afd8db5d-bc65-4022-a8a4-eb94aede404e",
+    "label": "auto-2026-04-23T00:12:02.663Z",
+    "createdAt": "2026-04-23T00:12:02.663Z",
+    "nodeCount": 11,
+    "edgeCount": 6,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:api:rest",
+        "label": "API Gateway",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333331",
+        "typeId": "tech:database:postgres",
+        "label": "Database Users",
+        "data": {
+          "database": "db_users",
+          "host": "db1.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111113",
+        "typeId": "tech:frontend:react",
+        "label": "Nouveau Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "11111111-1111-4111-1111-111111111114",
+        "typeId": "tech:frontend:react",
+        "label": "Autre Frontend",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "typeId": "tech:api:rest",
+        "label": "Nouvelle API",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "b0efcb3d-41a4-4bd5-bed4-436be86b1626",
+        "typeId": "tech:database:postgres",
+        "label": "Nouvelle Database",
+        "data": {
+          "database": "db_new",
+          "host": "db_new.local",
+          "port": 5432
+        }
+      },
+      {
+        "id": "55555555-5555-4555-5555-555555555551",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "55555555-5555-4555-5555-555555555552",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "66666666-6666-4666-6666-666666666661",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "66666666-6666-4666-6666-666666666662",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "77777777-7777-4777-7777-777777777771",
+        "typeId": "tech:database:postgres",
+        "label": "Database 1",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "44444444-4444-4444-4444-444444444441",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "33333333-3333-4333-3333-333333333331",
+        "label": "connects to"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444446",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444447",
+        "sourceId": "11111111-1111-4111-1111-111111111114",
+        "targetId": "22222222-2222-4222-2222-222222222222",
+        "label": "calls"
+      },
+      {
+        "id": "db637be5-46fd-419b-b035-c32fe244aeb7",
+        "sourceId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "targetId": "b0efcb3d-41a4-4bd5-bed4-436be86b1626",
+        "label": "connects to"
+      },
+      {
+        "id": "dff47d84-a131-4ec9-86ab-bfdafc510d90",
+        "sourceId": "11111111-1111-4111-1111-111111111113",
+        "targetId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "label": "calls"
+      },
+      {
+        "id": "dff47d84-a131-4ec9-86ab-bfdafc510d91",
+        "sourceId": "11111111-1111-4111-1111-111111111114",
+        "targetId": "f03de776-905d-45db-9ff3-aee3fc571121",
+        "label": "calls"
+      }
+    ]
+  },
+  {
+    "id": "104fab61-3031-4038-9fe3-9a5ebe6159df",
+    "label": "auto-2026-04-23T00:45:18.837Z",
+    "createdAt": "2026-04-23T00:45:18.837Z",
+    "nodeCount": 5,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "11111111-1111-4111-1111-111111111111",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333333",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444444",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "55555555-5555-4555-5555-555555555555",
+        "typeId": "tech:database:postgres",
+        "label": "Main DB",
+        "data": {
+          "host": "db.local",
+          "port": 5432,
+          "database": "main"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "66666666-6666-4666-6666-666666666666",
+        "sourceId": "11111111-1111-4111-1111-111111111111",
+        "targetId": "33333333-3333-4333-3333-333333333333",
+        "label": "calls"
+      },
+      {
+        "id": "77777777-7777-4777-7777-777777777777",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "44444444-4444-4444-4444-444444444444",
+        "label": "calls"
+      },
+      {
+        "id": "88888888-8888-4888-8888-888888888888",
+        "sourceId": "33333333-3333-4333-3333-333333333333",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      },
+      {
+        "id": "99999999-9999-4999-9999-999999999999",
+        "sourceId": "44444444-4444-4444-4444-444444444444",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      }
+    ]
+  },
+  {
+    "id": "a7d16599-2207-4767-96a8-b2a105c29a6c",
+    "label": "auto-2026-04-23T00:46:15.630Z",
+    "createdAt": "2026-04-23T00:46:15.630Z",
+    "nodeCount": 6,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "11111111-1111-4111-1111-111111111111",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333333",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444444",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "55555555-5555-4555-5555-555555555555",
+        "typeId": "tech:database:postgres",
+        "label": "Main DB",
+        "data": {
+          "host": "db.local",
+          "port": 5432,
+          "database": "main"
+        }
+      },
+      {
+        "id": "10101010-1010-4010-1010-101010101010",
+        "typeId": "tech:database:postgres",
+        "label": "Postgres DB",
+        "data": {
+          "host": "db.local",
+          "port": 5432,
+          "database": "mydb"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "66666666-6666-4666-6666-666666666666",
+        "sourceId": "11111111-1111-4111-1111-111111111111",
+        "targetId": "33333333-3333-4333-3333-333333333333",
+        "label": "calls"
+      },
+      {
+        "id": "77777777-7777-4777-7777-777777777777",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "44444444-4444-4444-4444-444444444444",
+        "label": "calls"
+      },
+      {
+        "id": "88888888-8888-4888-8888-888888888888",
+        "sourceId": "33333333-3333-4333-3333-333333333333",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      },
+      {
+        "id": "99999999-9999-4999-9999-999999999999",
+        "sourceId": "44444444-4444-4444-4444-444444444444",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      }
+    ]
+  },
+  {
+    "id": "0eb56891-f9e2-4cdb-b20e-188bc4dbb421",
+    "label": "auto-2026-04-23T01:31:45.051Z",
+    "createdAt": "2026-04-23T01:31:45.051Z",
+    "nodeCount": 11,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "11111111-1111-4111-1111-111111111111",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "22222222-2222-4222-2222-222222222222",
+        "typeId": "tech:frontend:react",
+        "label": "Frontend 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "33333333-3333-4333-3333-333333333333",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "44444444-4444-4444-4444-444444444444",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "55555555-5555-4555-5555-555555555555",
+        "typeId": "tech:database:postgres",
+        "label": "Main DB",
+        "data": {
+          "host": "db.local",
+          "port": 5432,
+          "database": "main"
+        }
+      },
+      {
+        "id": "10101010-1010-4010-1010-101010101010",
+        "typeId": "tech:database:postgres",
+        "label": "Postgres DB",
+        "data": {
+          "host": "db.local",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "DB Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "66666666-6666-4666-6666-666666666666",
+        "sourceId": "11111111-1111-4111-1111-111111111111",
+        "targetId": "33333333-3333-4333-3333-333333333333",
+        "label": "calls"
+      },
+      {
+        "id": "77777777-7777-4777-7777-777777777777",
+        "sourceId": "22222222-2222-4222-2222-222222222222",
+        "targetId": "44444444-4444-4444-4444-444444444444",
+        "label": "calls"
+      },
+      {
+        "id": "88888888-8888-4888-8888-888888888888",
+        "sourceId": "33333333-3333-4333-3333-333333333333",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      },
+      {
+        "id": "99999999-9999-4999-9999-999999999999",
+        "sourceId": "44444444-4444-4444-4444-444444444444",
+        "targetId": "55555555-5555-4555-5555-555555555555",
+        "label": "reads/writes"
+      }
+    ]
+  },
+  {
+    "id": "b7e07f0c-88ea-4c12-ada2-2671f0fb07c8",
+    "label": "auto-2026-04-23T01:32:45.997Z",
+    "createdAt": "2026-04-23T01:32:45.997Z",
+    "nodeCount": 5,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      }
+    ]
+  },
+  {
+    "id": "9b31b841-d585-40f3-82b6-279d5d4ee521",
+    "label": "auto-2026-04-23T01:35:24.222Z",
+    "createdAt": "2026-04-23T01:35:24.222Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "c8545ab9-6ae4-437c-a3a0-d8eb1ca49787",
+    "label": "auto-2026-06-19T15:53:13.609Z",
+    "createdAt": "2026-06-19T15:53:13.609Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "abb8b184-e78a-4f6e-af8d-3d8c5b07544a",
+    "label": "auto-2026-06-19T15:53:13.617Z",
+    "createdAt": "2026-06-19T15:53:13.617Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "e37bb694-5b8f-44aa-9e87-8b1bb21b4de9",
+    "label": "auto-2026-06-19T15:53:13.620Z",
+    "createdAt": "2026-06-19T15:53:13.620Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "0b88f04f-883b-4c11-90ac-8ba05942216a",
+    "label": "auto-2026-06-19T15:53:13.625Z",
+    "createdAt": "2026-06-19T15:53:13.625Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "d759f691-f7c4-4a2e-a86e-51ece3bd4df7",
+    "label": "auto-2026-06-19T15:53:13.629Z",
+    "createdAt": "2026-06-19T15:53:13.629Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        },
+        "position": {
+          "x": 232,
+          "y": 372
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "02e72397-a24b-4427-a1c3-199e5d348a07",
+    "label": "auto-2026-06-19T15:53:13.633Z",
+    "createdAt": "2026-06-19T15:53:13.633Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        },
+        "position": {
+          "x": 232,
+          "y": 372
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "6735fd78-393e-48ad-8005-536bfa5387ea",
+    "label": "auto-2026-06-19T15:53:13.637Z",
+    "createdAt": "2026-06-19T15:53:13.637Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        },
+        "position": {
+          "x": 232,
+          "y": 372
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        },
+        "position": {
+          "x": 12,
+          "y": 552
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "49003184-6b5f-4476-a389-394d3bb609db",
+    "label": "auto-2026-06-19T15:53:13.641Z",
+    "createdAt": "2026-06-19T15:53:13.641Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        },
+        "position": {
+          "x": 232,
+          "y": 372
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        },
+        "position": {
+          "x": 12,
+          "y": 552
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        },
+        "position": {
+          "x": 37,
+          "y": 192
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "783269e6-d4de-4493-b860-b1b0d2d3ac49",
+    "label": "auto-2026-06-19T15:53:13.645Z",
+    "createdAt": "2026-06-19T15:53:13.645Z",
+    "nodeCount": 9,
+    "edgeCount": 8,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "f1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front 1",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 437,
+          "y": 12
+        }
+      },
+      {
+        "id": "f2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:frontend:react",
+        "label": "Front 2",
+        "data": {
+          "version": "18.2.0"
+        },
+        "position": {
+          "x": 207,
+          "y": 12
+        }
+      },
+      {
+        "id": "a1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:api:rest",
+        "label": "API 1",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 437,
+          "y": 192
+        }
+      },
+      {
+        "id": "a2000000-0000-0000-0000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API 2",
+        "data": {
+          "basePath": "/api/v2",
+          "methods": [
+            "GET",
+            "POST"
+          ]
+        },
+        "position": {
+          "x": 207,
+          "y": 192
+        }
+      },
+      {
+        "id": "d1000000-0000-0000-0000-000000000001",
+        "typeId": "tech:database:postgres",
+        "label": "Database Postgres",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "mydb"
+        },
+        "position": {
+          "x": 232,
+          "y": 372
+        }
+      },
+      {
+        "id": "a0000000-0000-0000-0000-00000000000a",
+        "typeId": "tech:api:rest",
+        "label": "REST API (A)",
+        "data": {
+          "basePath": "/api",
+          "methods": [
+            "POST",
+            "GET"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "b0000000-0000-0000-0000-00000000000b",
+        "typeId": "tech:compute:lambda",
+        "label": "Lambda (B)",
+        "data": {
+          "runtime": "nodejs20.x",
+          "handler": "index.handler"
+        },
+        "position": {
+          "x": 12,
+          "y": 552
+        }
+      },
+      {
+        "id": "c0000000-0000-0000-0000-00000000000c",
+        "typeId": "tech:compute:ec2",
+        "label": "EC2 (C)",
+        "data": {
+          "instanceType": "t3.medium",
+          "ami": "ami-0abcdef1234567890"
+        },
+        "position": {
+          "x": 37,
+          "y": 192
+        }
+      },
+      {
+        "id": "d0000000-0000-0000-0000-00000000000d",
+        "typeId": "tech:messaging:sqs",
+        "label": "SQS (D)",
+        "data": {
+          "queueName": "my-queue"
+        },
+        "position": {
+          "x": 37,
+          "y": 372
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1000000-0000-0000-0000-000000000001",
+        "sourceId": "f1000000-0000-0000-0000-000000000001",
+        "targetId": "a1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e2000000-0000-0000-0000-000000000002",
+        "sourceId": "f2000000-0000-0000-0000-000000000002",
+        "targetId": "a2000000-0000-0000-0000-000000000002"
+      },
+      {
+        "id": "e3000000-0000-0000-0000-000000000003",
+        "sourceId": "a1000000-0000-0000-0000-000000000001",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e4000000-0000-0000-0000-000000000004",
+        "sourceId": "a2000000-0000-0000-0000-000000000002",
+        "targetId": "d1000000-0000-0000-0000-000000000001"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000001",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000002",
+        "sourceId": "a0000000-0000-0000-0000-00000000000a",
+        "targetId": "c0000000-0000-0000-0000-00000000000c"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000003",
+        "sourceId": "c0000000-0000-0000-0000-00000000000c",
+        "targetId": "d0000000-0000-0000-0000-00000000000d"
+      },
+      {
+        "id": "e0000000-0000-0000-0000-000000000004",
+        "sourceId": "d0000000-0000-0000-0000-00000000000d",
+        "targetId": "b0000000-0000-0000-0000-00000000000b"
+      }
+    ]
+  },
+  {
+    "id": "bcd29d70-328b-4603-a281-41f0e7c6e966",
+    "label": "auto-2026-06-19T15:53:20.586Z",
+    "createdAt": "2026-06-19T15:53:20.586Z",
+    "nodeCount": 0,
+    "edgeCount": 0,
+    "kind": "auto",
+    "nodes": [],
+    "edges": []
+  },
+  {
+    "id": "0a6637ab-d28f-4911-9097-f56742d35763",
+    "label": "auto-2026-06-19T15:53:23.069Z",
+    "createdAt": "2026-06-19T15:53:23.069Z",
+    "nodeCount": 3,
+    "edgeCount": 2,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      }
+    ]
+  },
+  {
+    "id": "ba84ca04-6feb-4ae7-bb3e-89aa36f9a1d7",
+    "label": "auto-2026-06-19T15:53:23.282Z",
+    "createdAt": "2026-06-19T15:53:23.282Z",
+    "nodeCount": 3,
+    "edgeCount": 2,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      }
+    ]
+  },
+  {
+    "id": "1deb8be5-d540-45f9-a75c-aa523b036528",
+    "label": "auto-2026-06-19T15:53:23.289Z",
+    "createdAt": "2026-06-19T15:53:23.289Z",
+    "nodeCount": 3,
+    "edgeCount": 2,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      }
+    ]
+  },
+  {
+    "id": "e30de043-95c7-4e48-9759-bd0209ebd30b",
+    "label": "auto-2026-06-19T15:53:23.293Z",
+    "createdAt": "2026-06-19T15:53:23.293Z",
+    "nodeCount": 3,
+    "edgeCount": 2,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 12,
+          "y": 372
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      }
+    ]
+  },
+  {
+    "id": "7749136c-6300-4e33-9e51-6670af8fef44",
+    "label": "auto-2026-06-19T15:53:24.504Z",
+    "createdAt": "2026-06-19T15:53:24.504Z",
+    "nodeCount": 6,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 12,
+          "y": 372
+        }
+      },
+      {
+        "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        }
+      },
+      {
+        "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      },
+      {
+        "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+      },
+      {
+        "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+      }
+    ]
+  },
+  {
+    "id": "c65eaad8-836d-4f5e-89ba-5616cb8a9ad5",
+    "label": "auto-2026-06-19T15:53:25.265Z",
+    "createdAt": "2026-06-19T15:53:25.265Z",
+    "nodeCount": 6,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 12,
+          "y": 372
+        }
+      },
+      {
+        "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 120,
+          "y": 532
+        }
+      },
+      {
+        "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      {
+        "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      },
+      {
+        "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+      },
+      {
+        "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+      }
+    ]
+  },
+  {
+    "id": "87e9fa1c-2225-4af7-a19d-5ba8919b1538",
+    "label": "auto-2026-06-19T15:53:25.272Z",
+    "createdAt": "2026-06-19T15:53:25.272Z",
+    "nodeCount": 6,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 12,
+          "y": 372
+        }
+      },
+      {
+        "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 120,
+          "y": 532
+        }
+      },
+      {
+        "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 340,
+          "y": 532
+        }
+      },
+      {
+        "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      },
+      {
+        "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+      },
+      {
+        "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+      }
+    ]
+  },
+  {
+    "id": "e88b7912-4819-4b60-af5b-504a02238f24",
+    "label": "auto-2026-06-19T15:53:25.275Z",
+    "createdAt": "2026-06-19T15:53:25.275Z",
+    "nodeCount": 6,
+    "edgeCount": 4,
+    "kind": "auto",
+    "nodes": [
+      {
+        "id": "10000000-1000-4000-8000-000000000001",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": "20000000-2000-4000-8000-000000000002",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 12,
+          "y": 192
+        }
+      },
+      {
+        "id": "30000000-3000-4000-8000-000000000003",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 12,
+          "y": 372
+        }
+      },
+      {
+        "id": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:frontend:react",
+        "label": "Front-end React",
+        "data": {
+          "version": "18.2.0",
+          "framework": "vite"
+        },
+        "position": {
+          "x": 120,
+          "y": 532
+        }
+      },
+      {
+        "id": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:api:rest",
+        "label": "API REST Backend",
+        "data": {
+          "basePath": "/api/v1",
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "position": {
+          "x": 340,
+          "y": 532
+        }
+      },
+      {
+        "id": "ccc33333-1cf4-4a5f-9f1e-123456789012",
+        "typeId": "tech:database:postgres",
+        "label": "Base PostgreSQL",
+        "data": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "app_db"
+        },
+        "position": {
+          "x": 560,
+          "y": 532
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "12000000-1200-4000-8000-000000000012",
+        "sourceId": "10000000-1000-4000-8000-000000000001",
+        "targetId": "20000000-2000-4000-8000-000000000002"
+      },
+      {
+        "id": "23000000-2300-4000-8000-000000000023",
+        "sourceId": "20000000-2000-4000-8000-000000000002",
+        "targetId": "30000000-3000-4000-8000-000000000003"
+      },
+      {
+        "id": "ddd44444-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "aaa11111-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "bbb22222-1cf4-4a5f-9f1e-123456789012"
+      },
+      {
+        "id": "eee55555-1cf4-4a5f-9f1e-123456789012",
+        "sourceId": "bbb22222-1cf4-4a5f-9f1e-123456789012",
+        "targetId": "ccc33333-1cf4-4a5f-9f1e-123456789012"
+      }
+    ]
+  },
+  {
+    "id": "2af1b75b-e14c-4837-8553-2f3f2b8d12aa",
+    "label": "auto-2026-06-19T15:53:32.194Z",
+    "createdAt": "2026-06-19T15:53:32.194Z",
+    "nodeCount": 0,
+    "edgeCount": 0,
+    "kind": "auto",
+    "nodes": [],
+    "edges": []
+  }
+]

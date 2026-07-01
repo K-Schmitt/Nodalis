@@ -1,0 +1,39 @@
+{
+  "typeId": "tech:messaging:sns",
+  "label": "AWS SNS Topic",
+  "description": "Pub/sub messaging service for event-driven architectures and notifications",
+  "category": "messaging",
+  "style": {
+    "shape": "diamond",
+    "color": "#D946EF",
+    "icon": "bell"
+  },
+  "constraints": {
+    "maxInputs": 10,
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "topicName": {
+      "type": "string",
+      "description": "SNS topic name"
+    },
+    "fifo": {
+      "type": "boolean",
+      "default": false,
+      "description": "FIFO topic (ordered, deduplicated)"
+    },
+    "protocol": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms",
+        "http",
+        "https",
+        "lambda",
+        "sqs"
+      ],
+      "default": "lambda",
+      "description": "Default subscription protocol"
+    }
+  }
+}

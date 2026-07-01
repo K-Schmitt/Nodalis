@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:auth:auth0",
+  "label": "Auth0",
+  "description": "Identity platform providing authentication and authorization as a service",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EB5424",
+    "icon": "shield"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "domain": {
+      "type": "string",
+      "description": "Auth0 tenant domain"
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["free", "developer", "enterprise"],
+      "description": "Auth0 pricing tier"
+    },
+    "mfa": {
+      "type": "boolean",
+      "description": "Enable multi-factor authentication"
+    }
+  }
+}

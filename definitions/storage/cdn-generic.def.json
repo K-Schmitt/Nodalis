@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:storage:cdn",
+  "label": "Generic CDN",
+  "description": "Content delivery network for accelerating static asset delivery globally",
+  "category": "cdn",
+  "style": {
+    "shape": "hexagon",
+    "color": "#888888",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "provider": {
+      "type": "string",
+      "description": "CDN provider name (e.g. Fastly, Akamai, BunnyCDN)"
+    },
+    "ttl": {
+      "type": "number",
+      "default": 86400,
+      "description": "Cache Time-To-Live in seconds"
+    },
+    "https": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enforce HTTPS delivery"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:cloudflare:workers",
+  "label": "Cloudflare Workers",
+  "description": "Serverless JavaScript execution at the network edge globally",
+  "category": "compute",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F6821F",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "runtime": {
+      "type": "string",
+      "enum": [
+        "v8",
+        "node"
+      ],
+      "description": "Worker runtime environment"
+    },
+    "kvBindings": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of KV namespace bindings"
+    }
+  }
+}

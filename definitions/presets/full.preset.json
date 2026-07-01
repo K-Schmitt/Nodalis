@@ -1,0 +1,11 @@
+{
+  "id": "full",
+  "label": "Full Stack (All Types)",
+  "description": "Every node type available — use for exploration or migration from a pre-workspace project.",
+  "include": ["general", "web", "backend", "database", "cloud", "cloudflare", "devops", "messaging", "auth", "monitoring", "storage", "ai", "game"],
+  "rules": {
+    "noCycles": false,
+    "defaultMaxInputs": 30,
+    "defaultMaxOutputs": 30
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:database:elasticsearch",
+  "label": "Elasticsearch",
+  "description": "Distributed search and analytics engine for full-text search",
+  "category": "search",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FEC514",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Elasticsearch version"
+    },
+    "nodes": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of nodes in the cluster"
+    },
+    "cloud": {
+      "type": "boolean",
+      "description": "Use Elastic Cloud managed service"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:database:supabase",
+  "label": "Supabase",
+  "description": "Open source Firebase alternative with Postgres, Auth, Storage and Realtime",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#3ECF8E",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "region": {
+      "type": "string",
+      "description": "Supabase deployment region"
+    },
+    "realtimeEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Realtime subscriptions"
+    },
+    "authEnabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Supabase Auth"
+    }
+  }
+}

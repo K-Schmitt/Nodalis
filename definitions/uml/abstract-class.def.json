@@ -1,0 +1,32 @@
+{
+  "typeId": "uml:type:abstract",
+  "label": "Abstract Class",
+  "description": "A class that cannot be instantiated directly",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7C3AED",
+    "icon": "component"
+  },
+  "dataSchema": {
+    "attributes": {
+      "type": "array"
+    },
+    "methods": {
+      "type": "array"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Attributes",
+        "from": "attributes"
+      },
+      {
+        "label": "Methods",
+        "from": "methods"
+      }
+    ]
+  }
+}

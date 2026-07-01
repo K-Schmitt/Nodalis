@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:frontend:astro",
+  "label": "Astro",
+  "description": "All-in-one web framework for building content-driven websites",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF5D01",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Astro version"
+    },
+    "output": {
+      "type": "string",
+      "enum": ["static", "server", "hybrid"],
+      "description": "Output mode"
+    }
+  }
+}

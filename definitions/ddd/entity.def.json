@@ -1,0 +1,20 @@
+{
+  "typeId": "ddd:tactical:entity",
+  "label": "Entity",
+  "description": "Object with a distinct identity within an aggregate",
+  "category": "tactical",
+  "style": {
+    "shape": "rectangle",
+    "color": "#8B5CF6",
+    "icon": "box"
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Attributes",
+        "from": "attributes"
+      }
+    ]
+  }
+}

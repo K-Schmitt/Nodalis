@@ -1,0 +1,21 @@
+{
+  "typeId": "game:asset:store",
+  "label": "Asset Store",
+  "description": "Loads and caches game assets (textures, audio, models)",
+  "category": "asset",
+  "style": {
+    "shape": "cylinder",
+    "color": "#EC4899",
+    "icon": "package"
+  },
+  "constraints": {
+    "maxOutputs": 0
+  },
+  "dataSchema": {
+    "basePath": {
+      "type": "string",
+      "default": "assets/",
+      "description": "Asset root path"
+    }
+  }
+}

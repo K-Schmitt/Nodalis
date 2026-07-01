@@ -1,0 +1,40 @@
+{
+  "typeId": "tech:compute:ec2",
+  "label": "AWS EC2 Instance",
+  "description": "Virtual server in the cloud for running applications and services",
+  "category": "compute",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "instanceType": {
+      "type": "string",
+      "enum": [
+        "t3.micro",
+        "t3.small",
+        "t3.medium",
+        "m5.large",
+        "c5.xlarge"
+      ],
+      "description": "EC2 instance type"
+    },
+    "ami": {
+      "type": "string",
+      "description": "Amazon Machine Image ID (e.g., ami-0abcdef1234567890)"
+    },
+    "vpcId": {
+      "type": "string",
+      "description": "VPC identifier"
+    },
+    "publicIp": {
+      "type": "boolean",
+      "default": false,
+      "description": "Assign a public IP address"
+    }
+  }
+}

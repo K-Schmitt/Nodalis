@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:cloud:rds",
+  "label": "AWS RDS",
+  "description": "Managed relational database service supporting multiple engines",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FF9900",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "engine": {
+      "type": "string",
+      "enum": ["postgres", "mysql", "aurora"],
+      "description": "Database engine"
+    },
+    "instanceClass": {
+      "type": "string",
+      "description": "RDS instance class (e.g. db.t3.medium)"
+    },
+    "multiAz": {
+      "type": "boolean",
+      "description": "Enable Multi-AZ deployment for high availability"
+    }
+  }
+}

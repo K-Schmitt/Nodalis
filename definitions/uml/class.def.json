@@ -1,0 +1,35 @@
+{
+  "typeId": "uml:type:class",
+  "label": "Class",
+  "description": "A concrete class with attributes and operations",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#2563EB",
+    "icon": "box"
+  },
+  "dataSchema": {
+    "attributes": {
+      "type": "array"
+    },
+    "methods": {
+      "type": "array"
+    },
+    "stereotype": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Attributes",
+        "from": "attributes"
+      },
+      {
+        "label": "Methods",
+        "from": "methods"
+      }
+    ]
+  }
+}

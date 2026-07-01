@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:ai:ml-model",
+  "label": "ML Model Service",
+  "description": "Deployed machine learning model service for inference and prediction",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F59E0B",
+    "icon": "brain"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "framework": {
+      "type": "string",
+      "enum": ["pytorch", "tensorflow", "sklearn", "huggingface"],
+      "description": "ML training framework"
+    },
+    "serving": {
+      "type": "string",
+      "enum": ["triton", "torchserve", "mlflow", "custom"],
+      "description": "Model serving platform"
+    }
+  }
+}

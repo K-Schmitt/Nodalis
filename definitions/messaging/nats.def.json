@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:messaging:nats",
+  "label": "NATS",
+  "description": "Lightweight, high-performance cloud native messaging system",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#27AAE1",
+    "icon": "radio"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "jetstream": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable JetStream for persistence and streaming"
+    },
+    "cluster": {
+      "type": "boolean",
+      "description": "Run as a NATS cluster"
+    }
+  }
+}

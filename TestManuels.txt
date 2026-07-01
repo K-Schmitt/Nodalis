@@ -1,0 +1,152 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ARCHI-OS — Tests manuels (via agent vscode / MCP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. SCHEMA VALIDATION  (+)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Ajoute un nœud postgres avec host='db.local', database='mydb' et port='abc'"
+
+Résultat attendu :
+  → propose_changes retourne une erreur ERR_DATA_SCHEMA_INVALID
+  → aucun nœud ne doit être ajouté au graphe
+  → le champ port doit indiquer qu'un number est attendu
+
+─────────────────────────────────────────────────────────
+2. RULE — CONNEXION INTERDITE  (++)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Connecte directement le nœud Frontend React vers le nœud Database Postgres
+   sans passer par une API"
+
+Résultat attendu :
+  → propose_changes retourne ERR_SOURCE_NOT_ALLOWED ou ERR_TARGET_NOT_ALLOWED
+  → l'arête ne doit pas être créée
+  → react ne peut cibler que : rest, graphql
+  → postgres n'accepte que : lambda, ec2, rest, graphql comme sources
+
+─────────────────────────────────────────────────────────
+3. RULE — DÉTECTION DE CYCLE  (++)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Crée une REST API 'Gateway', un Lambda 'Worker' et un EC2 'Service'.
+   Connecte-les : Gateway→Worker, Worker→Gateway (cycle direct)"
+
+  Alternative (cycle à 3 nœuds) :
+  "Crée une REST API 'A', un Lambda 'B' et un EC2 'C'.
+   Connecte A→B (rest→lambda ✓), B→C serait invalide (lambda→ec2 ✗).
+   Donc utilise : REST 'A' → EC2 'C' (rest→ec2 ✓), EC2 'C' → SQS 'D' (ec2→sqs ✓),
+   SQS 'D' → Lambda 'B' (sqs→lambda ✓), Lambda 'B' → REST 'A' (lambda→rest ✓ = CYCLE)"
+
+Résultat attendu :
+  → les premières arêtes passent la validation
+  → la dernière arête retourne ERR_CYCLE_DETECTED
+  → le graphe ne doit pas contenir de cycle
+
+─────────────────────────────────────────────────────────
+4. PARAMÉTRAGE DES NŒUDS — UPDATE  (+)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Mets à jour le nœud 'Database Users' : change le host en 'newhost.local'
+   et le port en 5433"
+
+Résultat attendu :
+  → propose_changes contient une opération update_node
+  → après acceptation, get_graph retourne le nœud avec les nouvelles valeurs
+  → une tentative avec port='wrong' doit échouer (ERR_DATA_SCHEMA_INVALID)
+
+─────────────────────────────────────────────────────────
+5. GET GRAPH  (+)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Donne-moi l'état actuel du graphe"
+
+Résultat attendu :
+  → get_graph retourne nodes[], edges[], meta { nodeCount, edgeCount, statsByType }
+  → si une proposal est en attente : champ pendingApproval présent avec l'id
+  → aucun nœud orphelin (toute edge a un source et target valide)
+
+─────────────────────────────────────────────────────────
+6. VERSIONNING  (+++)
+─────────────────────────────────────────────────────────
+6a. Auto-snapshot à chaque accept
+  → Accepte n'importe quelle proposal dans l'UI
+  → Ouvre .archi/versions/index.json
+  → Un nouvel objet avec "kind":"auto" doit apparaître
+
+6b. Snapshot manuel
+  Prompt agent :
+    "Crée un snapshot du graphe avec le label 'avant-migration'"
+  Résultat attendu :
+    → create_snapshot retourne { success: true, version: { id, label, ... } }
+    → l'entrée avec "kind":"manual" est visible dans index.json
+
+6c. Liste des versions
+  Prompt agent :
+    "Liste toutes les versions du graphe"
+  Résultat attendu :
+    → list_versions retourne { count: N, versions: [...] }
+    → les snapshots auto et manuels sont présents
+
+6d. Restauration
+  Prompt agent :
+    "Restaure la version <id-du-snapshot-avant-migration>"
+  Résultat attendu :
+    → restore_version retourne success:true avec nodeCount/edgeCount
+    → get_graph reflète l'état du snapshot restauré
+
+─────────────────────────────────────────────────────────
+7. MCP HOT-RELOAD  (+)
+─────────────────────────────────────────────────────────
+Procédure manuelle (sans agent) :
+  1. Demande à l'agent : "Liste les types disponibles" → noter le nombre (8)
+  2. Ouvre definitions/react.def.json, change le label en "React Modified", sauvegarde
+  3. Observe les logs MCP (sortie stderr) : "🔄 Definition changed" doit apparaître
+  4. Demande à l'agent : "Liste les types disponibles" → le type react doit avoir le nouveau label
+  5. Remets le fichier dans son état original
+
+─────────────────────────────────────────────────────────
+8. REFUS AVEC COMMENTAIRE (UX)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Ajoute un nœud postgres appelé 'Mauvaise DB'"
+
+Procédure :
+  1. La proposal apparaît dans le panneau latéral
+  2. Clique "✕ Rejeter" → une textarea apparaît
+  3. Écris "Nom non conforme à la convention" puis "Confirmer le refus"
+  4. L'agent doit recevoir dans sa réponse :
+     rejectionReason: "Nom non conforme à la convention"
+
+─────────────────────────────────────────────────────────
+9. SCAN RÉCURSIF DES DÉFINITIONS  (+)
+─────────────────────────────────────────────────────────
+Procédure :
+  1. Démarre le serveur (npm run dev)
+  2. Vérifie dans les logs stderr que 8 définitions sont chargées :
+     "📚 Loading 8 definitions from .../definitions"
+  3. Vérifie que les chemins relatifs apparaissent :
+     "✓ Loaded: tech:compute:ec2 (compute/ec2.def.json)"
+     "✓ Loaded: tech:messaging:sqs (messaging/sqs.def.json)"
+     "✓ Loaded: tech:storage:s3 (storage/s3.def.json)"
+  4. Demande à l'agent : "Liste les types disponibles"
+  5. Les 8 types doivent être listés, y compris ceux des sous-dossiers
+
+Résultat attendu :
+  → le chargement est récursif, les sous-dossiers compute/, messaging/, storage/ sont scannés
+  → le watcher détecte aussi les changements dans les sous-dossiers
+
+─────────────────────────────────────────────────────────
+10. CONNEXION INTER-API INTERDITE  (+)
+─────────────────────────────────────────────────────────
+Prompt agent :
+  "Crée trois REST API (A, B, C) et connecte-les A→B, B→C, C→A"
+
+Résultat attendu :
+  → Les 3 nœuds sont créés
+  → Chaque arête est rejetée avec ERR_SOURCE_NOT_ALLOWED ou ERR_TARGET_NOT_ALLOWED
+  → rest ne peut PAS cibler rest (allowedTargets : lambda, ec2, postgres)
+  → L'agent doit suggérer d'utiliser un compute (lambda/ec2) comme intermédiaire
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

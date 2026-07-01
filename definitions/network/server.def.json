@@ -1,0 +1,23 @@
+{
+  "typeId": "net:compute:server",
+  "label": "Server",
+  "description": "A host providing services on the network",
+  "category": "compute",
+  "style": {
+    "shape": "rectangle",
+    "color": "#2563EB",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "os": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "server"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:storage:minio",
+  "label": "MinIO",
+  "description": "High-performance, S3-compatible object storage for on-premises and cloud",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#C72C48",
+    "icon": "hard-drive"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "distributed": {
+      "type": "boolean",
+      "description": "Run in distributed mode across multiple nodes"
+    },
+    "erasureCoding": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable erasure coding for data protection"
+    },
+    "buckets": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of storage buckets"
+    }
+  }
+}

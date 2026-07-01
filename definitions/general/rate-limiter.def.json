@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:general:rate-limiter",
+  "label": "Rate Limiter",
+  "description": "Controls the rate of incoming requests to protect services from overload",
+  "category": "networking",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EF4444",
+    "icon": "shield"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "strategy": {
+      "type": "string",
+      "enum": ["fixed-window", "sliding-window", "token-bucket"],
+      "description": "Rate limiting algorithm"
+    },
+    "limit": {
+      "type": "number",
+      "description": "Maximum number of requests allowed"
+    },
+    "window": {
+      "type": "string",
+      "description": "Time window for rate limiting (e.g. 1m, 1h)"
+    }
+  }
+}

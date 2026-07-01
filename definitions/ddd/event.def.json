@@ -1,0 +1,11 @@
+{
+  "typeId": "ddd:messaging:event",
+  "label": "Domain Event",
+  "description": "A fact that happened in the domain",
+  "category": "messaging",
+  "style": {
+    "shape": "circle",
+    "color": "#F59E0B",
+    "icon": "bell"
+  }
+}

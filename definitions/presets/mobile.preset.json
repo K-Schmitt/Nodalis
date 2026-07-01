@@ -1,0 +1,30 @@
+{
+  "id": "mobile",
+  "label": "Mobile App",
+  "description": "React Native, Flutter, and backend APIs for mobile architectures.",
+  "include": ["general", "web", "backend", "database", "auth", "monitoring"],
+  "rules": {
+    "forbiddenConnections": [
+      {
+        "from": "mobile",
+        "to": "database",
+        "reason": "Mobile apps must access the database through a backend API layer"
+      }
+    ],
+    "forbiddenTypes": [
+      "tech:game:game-loop", "tech:game:physics",
+      "tech:devops:kubernetes", "tech:devops:terraform",
+      "tech:cloud:eks", "tech:cloud:ecs",
+      "tech:frontend:electron"
+    ],
+    "requiredTypes": ["auth"],
+    "maxNodesPerType": {
+      "tech:general:load-balancer": 1,
+      "tech:auth:auth0": 1,
+      "tech:auth:keycloak": 1
+    },
+    "noCycles": true,
+    "defaultMaxInputs": 10,
+    "defaultMaxOutputs": 10
+  }
+}

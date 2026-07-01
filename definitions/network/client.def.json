@@ -1,0 +1,15 @@
+{
+  "typeId": "net:endpoint:client",
+  "label": "Client / Endpoint",
+  "description": "An end-user device on the network",
+  "category": "endpoint",
+  "style": {
+    "shape": "circle",
+    "color": "#0891B2",
+    "icon": "monitor"
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "monitor"
+  }
+}

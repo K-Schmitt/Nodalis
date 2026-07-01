@@ -1,0 +1,11 @@
+{
+  "typeId": "ddd:messaging:command",
+  "label": "Command",
+  "description": "An intent to change state, handled by an aggregate",
+  "category": "messaging",
+  "style": {
+    "shape": "diamond",
+    "color": "#2563EB",
+    "icon": "zap"
+  }
+}

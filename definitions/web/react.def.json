@@ -1,0 +1,40 @@
+{
+  "typeId": "tech:frontend:react",
+  "label": "React Application",
+  "description": "Modern JavaScript library for building user interfaces",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#61DAFB",
+    "icon": "monitor"
+  },
+  "constraints": {
+    "maxOutputs": 3
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "React version (e.g., 18.2.0)"
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "vite",
+        "next",
+        "cra"
+      ],
+      "default": "vite",
+      "description": "Build framework"
+    },
+    "stateManagement": {
+      "type": "string",
+      "enum": [
+        "redux",
+        "zustand",
+        "jotai",
+        "none"
+      ],
+      "default": "zustand"
+    }
+  }
+}

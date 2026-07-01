@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:devops:terraform",
+  "label": "Terraform IaC",
+  "description": "Infrastructure as Code tool for provisioning cloud resources declaratively",
+  "category": "iac",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7B42BC",
+    "icon": "code"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "provider": {
+      "type": "string",
+      "description": "Primary cloud provider (e.g. aws, gcp, azure)"
+    },
+    "workspace": {
+      "type": "string",
+      "description": "Terraform workspace name"
+    },
+    "backend": {
+      "type": "string",
+      "enum": ["s3", "gcs", "azurerm", "local"],
+      "description": "Remote state backend"
+    }
+  }
+}

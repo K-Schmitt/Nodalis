@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:ai:llm-agent",
+  "label": "LLM Agent",
+  "description": "Autonomous AI agent leveraging large language models to accomplish complex tasks",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7C3AED",
+    "icon": "brain"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "framework": {
+      "type": "string",
+      "enum": ["langchain", "llamaindex", "autogen", "custom"],
+      "description": "Agent orchestration framework"
+    },
+    "model": {
+      "type": "string",
+      "description": "LLM model identifier (e.g. gpt-4o, claude-3-5-sonnet)"
+    }
+  }
+}

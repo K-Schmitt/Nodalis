@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:game:network",
+  "label": "Game Network Layer",
+  "description": "Low-latency networking layer for multiplayer game communication",
+  "category": "game",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6366F1",
+    "icon": "wifi"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "protocol": {
+      "type": "string",
+      "enum": ["udp", "tcp", "webrtc"],
+      "description": "Network transport protocol"
+    },
+    "maxPlayers": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum concurrent players per session"
+    },
+    "authoritative": {
+      "type": "boolean",
+      "description": "Run in server-authoritative mode"
+    }
+  }
+}

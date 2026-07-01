@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:auth:keycloak",
+  "label": "Keycloak",
+  "description": "Open-source Identity and Access Management solution with SSO support",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#4D6DB0",
+    "icon": "key"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "realm": {
+      "type": "string",
+      "description": "Keycloak realm name"
+    },
+    "sso": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Single Sign-On"
+    },
+    "ldapSync": {
+      "type": "boolean",
+      "description": "Synchronize users from LDAP/Active Directory"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:messaging:grpc",
+  "label": "gRPC Service",
+  "description": "High-performance RPC framework using Protocol Buffers for service communication",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#244C5A",
+    "icon": "network"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "protoVersion": {
+      "type": "string",
+      "description": "Protocol Buffers version (e.g. proto3)"
+    },
+    "streaming": {
+      "type": "string",
+      "enum": ["none", "server", "client", "bidirectional"],
+      "description": "gRPC streaming mode"
+    }
+  }
+}

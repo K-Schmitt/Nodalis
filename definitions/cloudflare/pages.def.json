@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloudflare:pages",
+  "label": "Cloudflare Pages",
+  "description": "JAMstack platform for deploying frontend apps globally on Cloudflare's network",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F6821F",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10,
+    "allowedTargets": ["tech:cloudflare:workers"]
+  },
+  "dataSchema": {
+    "framework": {
+      "type": "string",
+      "description": "Frontend framework used (e.g. react, vue, next)"
+    },
+    "buildCommand": {
+      "type": "string",
+      "description": "Build command (e.g. npm run build)"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "typeId": "net:device:switch",
+  "label": "Switch",
+  "description": "Layer-2 device connecting hosts within a segment",
+  "category": "device",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0E7490",
+    "icon": "network"
+  },
+  "dataSchema": {
+    "ports": {
+      "type": "number",
+      "default": 24
+    },
+    "managed": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "network"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "archi-os",
+  "version": "1.0.0",
+  "description": "ARCHI-OS - Meta-Modeler for Semantic Graphs",
+  "private": true,
+  "workspaces": [
+    "core",
+    "web"
+  ],
+  "scripts": {
+    "dev:mcp": "cd core && npm run dev",
+    "dev:http": "bash -c 'export WORKSPACE_ROOT=\"$(pwd)\" && cd core && RUN_HTTP_SERVER=true npm run dev'",
+    "dev:web": "cd web && npm run dev",
+    "dev": "concurrently \"npm run dev:http\" \"npm run dev:web\"",
+    "dev:full": "concurrently \"npm run dev:mcp\" \"npm run dev:http\" \"npm run dev:web\"",
+    "build:core": "cd core && npm run build",
+    "build:web": "cd web && npm run build",
+    "build": "npm run build:core && npm run build:web",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "install:all": "npm install && cd core && npm install && cd ../web && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

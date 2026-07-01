@@ -1,0 +1,31 @@
+{
+  "typeId": "tech:messaging:kafka",
+  "label": "Apache Kafka",
+  "description": "Distributed event streaming platform for high-throughput, fault-tolerant messaging",
+  "category": "messaging",
+  "style": {
+    "shape": "hexagon",
+    "color": "#231F20",
+    "icon": "radio"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "brokers": {
+      "type": "number",
+      "default": 3,
+      "description": "Number of Kafka broker nodes"
+    },
+    "replicationFactor": {
+      "type": "number",
+      "default": 2,
+      "description": "Topic replication factor"
+    },
+    "retention": {
+      "type": "string",
+      "default": "7d",
+      "description": "Log retention period"
+    }
+  }
+}

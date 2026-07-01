@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:mysql",
+  "label": "MySQL",
+  "description": "Open-source relational database management system",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#4479A1",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "MySQL version"
+    },
+    "engine": {
+      "type": "string",
+      "enum": ["innodb", "myisam"],
+      "description": "Storage engine"
+    }
+  }
+}

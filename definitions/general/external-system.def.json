@@ -1,0 +1,14 @@
+{
+  "typeId": "tech:general:external-system",
+  "label": "External System",
+  "description": "A third-party or external system boundary. Usable in any architecture.",
+  "category": "general",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6B7280",
+    "icon": "box"
+  },
+  "dataSchema": {
+    "provider": { "type": "string", "description": "Name of the external provider/service" }
+  }
+}

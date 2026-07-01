@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:storage:azure-blob",
+  "label": "Azure Blob Storage",
+  "description": "Microsoft's object storage solution for unstructured data in the cloud",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#0078D4",
+    "icon": "cloud"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "tier": {
+      "type": "string",
+      "enum": ["hot", "cool", "archive"],
+      "description": "Access tier for cost optimization"
+    },
+    "replication": {
+      "type": "string",
+      "enum": ["LRS", "GRS", "ZRS"],
+      "description": "Data replication strategy"
+    }
+  }
+}

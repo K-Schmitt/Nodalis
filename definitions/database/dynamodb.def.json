@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:dynamodb",
+  "label": "AWS DynamoDB",
+  "description": "Fully managed NoSQL key-value and document database by AWS",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FF9900",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "billingMode": {
+      "type": "string",
+      "enum": ["PAY_PER_REQUEST", "PROVISIONED"],
+      "description": "Billing and capacity mode"
+    },
+    "ttl": {
+      "type": "boolean",
+      "description": "Enable Time To Live for automatic item expiration"
+    }
+  }
+}

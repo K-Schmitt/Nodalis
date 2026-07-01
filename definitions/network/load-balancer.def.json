@@ -1,0 +1,15 @@
+{
+  "typeId": "net:edge:loadbalancer",
+  "label": "Load Balancer",
+  "description": "Distributes traffic across backend servers",
+  "category": "edge",
+  "style": {
+    "shape": "diamond",
+    "color": "#7C3AED",
+    "icon": "split"
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "split"
+  }
+}

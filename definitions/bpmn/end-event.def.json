@@ -1,0 +1,18 @@
+{
+  "typeId": "bpmn:event:end",
+  "label": "End Event",
+  "description": "Marks where a process ends",
+  "category": "event",
+  "style": {
+    "shape": "circle",
+    "color": "#DC2626",
+    "icon": "circle"
+  },
+  "constraints": {
+    "maxOutputs": 0
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "event-end"
+  }
+}

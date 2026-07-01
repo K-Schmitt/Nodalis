@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:cloud:alb",
+  "label": "AWS Application Load Balancer",
+  "description": "Layer 7 load balancer for distributing traffic across targets",
+  "category": "networking",
+  "style": {
+    "shape": "diamond",
+    "color": "#FF9900",
+    "icon": "network"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "scheme": {
+      "type": "string",
+      "enum": [
+        "internet-facing",
+        "internal"
+      ],
+      "description": "Load balancer scheme"
+    },
+    "crossZone": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable cross-zone load balancing"
+    }
+  }
+}

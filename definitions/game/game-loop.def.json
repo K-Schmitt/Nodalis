@@ -1,0 +1,21 @@
+{
+  "typeId": "game:core:game-loop",
+  "label": "Game Loop",
+  "description": "The main update/render loop driving the whole game",
+  "category": "core",
+  "style": {
+    "shape": "diamond",
+    "color": "#F59E0B",
+    "icon": "repeat"
+  },
+  "constraints": {
+    "maxInputs": 1
+  },
+  "dataSchema": {
+    "targetFps": {
+      "type": "number",
+      "default": 60,
+      "description": "Target frames per second"
+    }
+  }
+}

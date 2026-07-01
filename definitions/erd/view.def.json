@@ -1,0 +1,28 @@
+{
+  "typeId": "erd:entity:view",
+  "label": "View",
+  "description": "A database view or materialized view",
+  "category": "entity",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6366F1",
+    "icon": "eye"
+  },
+  "dataSchema": {
+    "materialized": {
+      "type": "boolean",
+      "default": false
+    },
+    "query": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "from": "columns"
+      }
+    ]
+  }
+}

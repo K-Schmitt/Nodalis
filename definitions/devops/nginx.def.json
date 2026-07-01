@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:devops:nginx",
+  "label": "Nginx",
+  "description": "High-performance web server, reverse proxy and load balancer",
+  "category": "gateway",
+  "style": {
+    "shape": "rectangle",
+    "color": "#009900",
+    "icon": "server"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": ["proxy", "load-balancer", "static"],
+      "description": "Nginx operating mode"
+    },
+    "ssl": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable SSL/TLS termination"
+    }
+  }
+}

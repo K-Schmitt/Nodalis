@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:frontend:svelte",
+  "label": "Svelte / SvelteKit",
+  "description": "Cybernetically enhanced web apps with compile-time reactivity",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF3E00",
+    "icon": "zap"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Svelte version"
+    },
+    "kit": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use SvelteKit framework"
+    }
+  }
+}

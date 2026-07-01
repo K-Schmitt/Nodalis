@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:ai:openai",
+  "label": "OpenAI API",
+  "description": "API access to OpenAI's large language models for AI-powered applications",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#00A67E",
+    "icon": "bot"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "model": {
+      "type": "string",
+      "enum": ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"],
+      "description": "OpenAI model to use"
+    },
+    "streaming": {
+      "type": "boolean",
+      "description": "Enable streaming responses"
+    },
+    "functions": {
+      "type": "boolean",
+      "description": "Enable function calling / tool use"
+    }
+  }
+}

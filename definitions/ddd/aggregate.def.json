@@ -1,0 +1,28 @@
+{
+  "typeId": "ddd:tactical:aggregate",
+  "label": "Aggregate Root",
+  "description": "Consistency boundary that owns entities and enforces invariants",
+  "category": "tactical",
+  "style": {
+    "shape": "hexagon",
+    "color": "#7C3AED",
+    "icon": "package"
+  },
+  "dataSchema": {
+    "invariants": {
+      "type": "array"
+    },
+    "boundedContext": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Invariants",
+        "from": "invariants"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "cloud-native",
+  "label": "Cloud Native",
+  "description": "AWS, Cloudflare, containers, orchestration, monitoring — cloud-first architecture.",
+  "include": ["general", "cloud", "cloudflare", "devops", "monitoring", "database", "messaging", "storage"],
+  "rules": {
+    "forbiddenTypes": [
+      "tech:game:game-loop", "tech:game:physics", "tech:game:entity",
+      "tech:game:scene", "tech:game:input", "tech:game:audio",
+      "tech:frontend:react", "tech:frontend:vue", "tech:frontend:angular",
+      "tech:frontend:svelte"
+    ],
+    "requiredTypes": ["monitoring"],
+    "requiredConnections": [
+      {
+        "from": "tech:cloud:alb",
+        "to": "compute",
+        "reason": "An ALB must route traffic to a compute layer (ECS, EKS or EC2)"
+      }
+    ],
+    "maxNodesPerType": {
+      "tech:cloud:eks": 1,
+      "tech:cloud:alb": 2,
+      "tech:devops:terraform": 1,
+      "tech:devops:kubernetes": 1,
+      "tech:cloud:route53": 1
+    },
+    "noCycles": true,
+    "defaultMaxInputs": 20,
+    "defaultMaxOutputs": 20
+  }
+}

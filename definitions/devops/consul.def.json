@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:devops:consul",
+  "label": "HashiCorp Consul",
+  "description": "Service mesh and service discovery solution for distributed systems",
+  "category": "service-mesh",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F24C53",
+    "icon": "network"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "datacenter": {
+      "type": "string",
+      "description": "Consul datacenter name"
+    },
+    "connect": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Consul Connect service mesh"
+    }
+  }
+}

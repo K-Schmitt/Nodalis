@@ -1,0 +1,20 @@
+{
+  "typeId": "tech:cloudflare:kv",
+  "label": "Cloudflare KV",
+  "description": "Global, low-latency key-value data store for Cloudflare Workers",
+  "category": "storage",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F6821F",
+    "icon": "box"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "namespaceId": {
+      "type": "string",
+      "description": "KV namespace identifier"
+    }
+  }
+}

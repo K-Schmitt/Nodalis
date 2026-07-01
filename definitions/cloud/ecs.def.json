@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:cloud:ecs",
+  "label": "AWS ECS",
+  "description": "Fully managed container orchestration service for Docker containers",
+  "category": "compute",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "box"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "launchType": {
+      "type": "string",
+      "enum": ["FARGATE", "EC2"],
+      "description": "Container launch type"
+    },
+    "cpu": {
+      "type": "string",
+      "description": "vCPU allocation (e.g. 256, 512, 1024)"
+    },
+    "memory": {
+      "type": "string",
+      "description": "Memory allocation in MiB (e.g. 512, 1024)"
+    }
+  }
+}

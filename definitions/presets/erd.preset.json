@@ -1,0 +1,46 @@
+{
+  "id": "erd",
+  "label": "Entity-Relationship (Database)",
+  "description": "Model a relational schema: tables, views, enums and their 1:1 / 1:N / N:M relationships.",
+  "include": [
+    "erd"
+  ],
+  "rules": {
+    "noCycles": false,
+    "defaultMaxInputs": 50,
+    "defaultMaxOutputs": 50
+  },
+  "edgeTypes": [
+    {
+      "id": "one-to-one",
+      "label": "1:1",
+      "description": "One-to-one relationship",
+      "style": {
+        "stroke": "#4F46E5",
+        "markerStart": "cf-one-mandatory",
+        "markerEnd": "cf-one-mandatory"
+      }
+    },
+    {
+      "id": "one-to-many",
+      "label": "1:N",
+      "description": "One-to-many relationship",
+      "style": {
+        "stroke": "#4F46E5",
+        "markerStart": "cf-one-mandatory",
+        "markerEnd": "cf-many"
+      }
+    },
+    {
+      "id": "many-to-many",
+      "label": "N:M",
+      "description": "Many-to-many relationship (usually via a junction table)",
+      "style": {
+        "stroke": "#0891B2",
+        "dashed": true,
+        "markerStart": "cf-many",
+        "markerEnd": "cf-many"
+      }
+    }
+  ]
+}

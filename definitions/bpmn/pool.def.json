@@ -1,0 +1,19 @@
+{
+  "typeId": "bpmn:container:pool",
+  "label": "Pool",
+  "description": "A participant/pool that groups a process' activities (swimlane container)",
+  "category": "container",
+  "style": {
+    "shape": "rectangle",
+    "color": "#475569",
+    "icon": "columns"
+  },
+  "dataSchema": {
+    "participant": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "container"
+  }
+}

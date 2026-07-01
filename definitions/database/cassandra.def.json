@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:cassandra",
+  "label": "Apache Cassandra",
+  "description": "Highly-scalable distributed NoSQL database for high-availability workloads",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#1287B1",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "replicationFactor": {
+      "type": "number",
+      "default": 3,
+      "description": "Number of data replicas"
+    },
+    "datacenter": {
+      "type": "string",
+      "description": "Datacenter name for topology awareness"
+    }
+  }
+}

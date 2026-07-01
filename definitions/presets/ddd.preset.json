@@ -1,0 +1,72 @@
+{
+  "id": "ddd",
+  "label": "Domain-Driven Design",
+  "description": "Tactical & strategic DDD: aggregates, commands, domain events, read models, sagas and bounded contexts.",
+  "include": [
+    "ddd"
+  ],
+  "rules": {
+    "noCycles": false,
+    "requiredTypes": [
+      "tactical"
+    ],
+    "forbiddenConnections": [
+      {
+        "from": "ddd:messaging:event",
+        "to": "ddd:messaging:command",
+        "reason": "Events are facts; they should trigger reactions (sagas), not commands directly"
+      }
+    ],
+    "defaultMaxInputs": 30,
+    "defaultMaxOutputs": 30
+  },
+  "edgeTypes": [
+    {
+      "id": "emits",
+      "label": "emits",
+      "description": "Aggregate emits a domain event",
+      "style": {
+        "stroke": "#F59E0B",
+        "markerEnd": "arrow"
+      }
+    },
+    {
+      "id": "handles",
+      "label": "handles",
+      "description": "Aggregate handles a command",
+      "style": {
+        "stroke": "#2563EB",
+        "markerEnd": "arrow-closed"
+      }
+    },
+    {
+      "id": "triggers",
+      "label": "triggers",
+      "description": "Event triggers a saga/command",
+      "style": {
+        "stroke": "#DB2777",
+        "dashed": true,
+        "markerEnd": "arrow"
+      }
+    },
+    {
+      "id": "projects",
+      "label": "projects to",
+      "description": "Event is projected into a read model",
+      "style": {
+        "stroke": "#0891B2",
+        "dashed": true,
+        "markerEnd": "triangle-open"
+      }
+    },
+    {
+      "id": "contains",
+      "label": "contains",
+      "description": "Aggregate/context contains an element",
+      "style": {
+        "stroke": "#7C3AED",
+        "markerStart": "diamond"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "typeId": "tech:database:postgres",
+  "label": "PostgreSQL Database SUPER",
+  "description": "Relational database management system emphasizing extensibility and SQL compliance",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#336791",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxInputs": 10
+  },
+  "dataSchema": {
+    "host": {
+      "type": "string",
+      "description": "Database host address"
+    },
+    "port": {
+      "type": "number",
+      "default": 5432
+    },
+    "database": {
+      "type": "string",
+      "description": "Database name"
+    },
+    "username": {
+      "type": "string",
+      "description": "Connection username"
+    },
+    "ssl": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

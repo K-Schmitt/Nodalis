@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloudflare:cdn",
+  "label": "Cloudflare CDN",
+  "description": "Global content delivery network with DDoS protection and performance optimization",
+  "category": "cdn",
+  "style": {
+    "shape": "hexagon",
+    "color": "#F6821F",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "cacheLevel": {
+      "type": "string",
+      "enum": ["aggressive", "basic", "simplified"],
+      "description": "Cache aggressiveness level"
+    },
+    "minify": {
+      "type": "boolean",
+      "description": "Enable automatic JS/CSS/HTML minification"
+    }
+  }
+}

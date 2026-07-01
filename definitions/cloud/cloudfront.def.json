@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:cloud:cloudfront",
+  "label": "AWS CloudFront",
+  "description": "Content delivery network for fast, secure delivery of websites and APIs",
+  "category": "cdn",
+  "style": {
+    "shape": "hexagon",
+    "color": "#FF9900",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "priceClass": {
+      "type": "string",
+      "enum": [
+        "PriceClass_100",
+        "PriceClass_200",
+        "PriceClass_All"
+      ],
+      "description": "CloudFront price class for edge location coverage"
+    },
+    "https": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enforce HTTPS"
+    }
+  }
+}

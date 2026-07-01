@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:cloud:api-gateway",
+  "label": "AWS API Gateway",
+  "description": "Fully managed service to create, publish, and secure APIs at scale",
+  "category": "gateway",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF4F8B",
+    "icon": "globe"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "REST",
+        "HTTP",
+        "WebSocket"
+      ],
+      "description": "API Gateway type"
+    },
+    "stage": {
+      "type": "string",
+      "description": "Deployment stage name (e.g. prod, dev)"
+    }
+  }
+}

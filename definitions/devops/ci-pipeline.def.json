@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:devops:ci-pipeline",
+  "label": "CI/CD Pipeline",
+  "description": "Automated build, test, and deployment pipeline for continuous integration",
+  "category": "ci-cd",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FC6D26",
+    "icon": "workflow"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "tool": {
+      "type": "string",
+      "enum": ["gitlab-ci", "jenkins", "circleci", "azure-devops"],
+      "description": "CI/CD tooling platform"
+    },
+    "stages": {
+      "type": "number",
+      "description": "Number of pipeline stages"
+    }
+  }
+}

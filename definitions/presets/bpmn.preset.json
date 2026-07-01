@@ -1,0 +1,60 @@
+{
+  "id": "bpmn",
+  "label": "Business Process (BPMN)",
+  "description": "Model business processes: start/end events, tasks, gateways and sequence/message flows.",
+  "include": [
+    "bpmn"
+  ],
+  "rules": {
+    "noCycles": false,
+    "requiredTypes": [
+      "bpmn:event:start",
+      "bpmn:event:end"
+    ],
+    "maxNodesPerType": {
+      "bpmn:event:start": 1
+    },
+    "defaultMaxInputs": 20,
+    "defaultMaxOutputs": 20
+  },
+  "edgeTypes": [
+    {
+      "id": "sequence-flow",
+      "label": "sequence",
+      "description": "Default control-flow ordering of activities",
+      "style": {
+        "stroke": "#334155",
+        "markerEnd": "arrow-closed"
+      }
+    },
+    {
+      "id": "conditional-flow",
+      "label": "conditional",
+      "description": "Sequence flow taken when a condition holds",
+      "style": {
+        "stroke": "#D97706",
+        "markerStart": "diamond-open",
+        "markerEnd": "arrow-closed"
+      }
+    },
+    {
+      "id": "default-flow",
+      "label": "default",
+      "description": "The default branch out of a gateway",
+      "style": {
+        "stroke": "#059669",
+        "markerEnd": "arrow-closed"
+      }
+    },
+    {
+      "id": "message-flow",
+      "label": "message",
+      "description": "Message exchanged across participants",
+      "style": {
+        "stroke": "#2563EB",
+        "dashed": true,
+        "markerEnd": "circle-open"
+      }
+    }
+  ]
+}

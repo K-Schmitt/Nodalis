@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:database:sqlite",
+  "label": "SQLite",
+  "description": "Self-contained, serverless, zero-configuration SQL database engine",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#003B57",
+    "icon": "hard-drive"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "walMode": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Write-Ahead Logging for better concurrency"
+    },
+    "inMemory": {
+      "type": "boolean",
+      "default": false,
+      "description": "Use in-memory database (no persistence)"
+    }
+  }
+}

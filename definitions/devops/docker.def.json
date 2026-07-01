@@ -1,0 +1,33 @@
+{
+  "typeId": "tech:devops:docker",
+  "label": "Docker Container",
+  "description": "Containerization platform for packaging and running applications",
+  "category": "container",
+  "style": {
+    "shape": "rectangle",
+    "color": "#2496ED",
+    "icon": "box"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "image": {
+      "type": "string",
+      "description": "Docker image name and tag"
+    },
+    "ports": {
+      "type": "string",
+      "description": "Port mappings (e.g. 8080:80)"
+    },
+    "volumes": {
+      "type": "string",
+      "description": "Volume mount paths"
+    },
+    "restart": {
+      "type": "string",
+      "enum": ["always", "unless-stopped", "no"],
+      "description": "Container restart policy"
+    }
+  }
+}

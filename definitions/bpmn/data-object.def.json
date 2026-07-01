@@ -1,0 +1,15 @@
+{
+  "typeId": "bpmn:data:object",
+  "label": "Data Object",
+  "description": "Information produced or consumed by activities",
+  "category": "data",
+  "style": {
+    "shape": "rectangle",
+    "color": "#64748B",
+    "icon": "file"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "data-object"
+  }
+}

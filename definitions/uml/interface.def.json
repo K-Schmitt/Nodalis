@@ -1,0 +1,25 @@
+{
+  "typeId": "uml:type:interface",
+  "label": "Interface",
+  "description": "A contract of operations a class can implement",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0891B2",
+    "icon": "puzzle"
+  },
+  "dataSchema": {
+    "methods": {
+      "type": "array"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Methods",
+        "from": "methods"
+      }
+    ]
+  }
+}

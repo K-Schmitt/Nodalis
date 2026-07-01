@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Backend Core
+  core:
+    build:
+      context: .
+      dockerfile: Dockerfile.core
+    container_name: archi-os-core
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./definitions:/app/definitions:ro
+      - ./architecture.json:/app/architecture.json
+      - ./.archi:/app/.archi
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - archi-network
+
+  # Frontend Web
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: archi-os-web
+    ports:
+      - "8080:80"
+    depends_on:
+      - core
+    restart: unless-stopped
+    networks:
+      - archi-network
+
+networks:
+  archi-network:
+    driver: bridge

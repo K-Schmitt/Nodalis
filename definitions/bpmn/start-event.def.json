@@ -1,0 +1,19 @@
+{
+  "typeId": "bpmn:event:start",
+  "label": "Start Event",
+  "description": "Marks where a process begins",
+  "category": "event",
+  "style": {
+    "shape": "circle",
+    "color": "#059669",
+    "icon": "play"
+  },
+  "constraints": {
+    "maxInputs": 0
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "event-start",
+    "icon": "play"
+  }
+}

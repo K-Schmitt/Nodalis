@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:database:mongodb",
+  "label": "MongoDB",
+  "description": "Document-oriented NoSQL database for flexible, scalable data storage",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#00ED64",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "MongoDB version"
+    },
+    "atlas": {
+      "type": "boolean",
+      "description": "Use MongoDB Atlas managed service"
+    },
+    "replicaSet": {
+      "type": "boolean",
+      "description": "Enable replica set for high availability"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "typeId": "bpmn:gateway:parallel",
+  "label": "Parallel Gateway (AND)",
+  "description": "Splits or joins concurrent branches",
+  "category": "gateway",
+  "style": {
+    "shape": "diamond",
+    "color": "#0891B2",
+    "icon": "merge"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "gateway-parallel"
+  }
+}

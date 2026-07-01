@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:game:leaderboard",
+  "label": "Leaderboard Service",
+  "description": "Ranking and scoring service for tracking player performance across sessions",
+  "category": "game",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F59E0B",
+    "icon": "bar-chart"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "global": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable global cross-server leaderboard"
+    },
+    "resetPeriod": {
+      "type": "string",
+      "enum": ["never", "daily", "weekly", "monthly"],
+      "description": "Leaderboard reset period"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:general:load-balancer",
+  "label": "Load Balancer",
+  "description": "Distributes incoming network traffic across multiple servers for high availability",
+  "category": "networking",
+  "style": {
+    "shape": "diamond",
+    "color": "#6B7280",
+    "icon": "network"
+  },
+  "constraints": {
+    "maxOutputs": 20
+  },
+  "dataSchema": {
+    "algorithm": {
+      "type": "string",
+      "enum": ["round-robin", "least-conn", "ip-hash"],
+      "description": "Load balancing algorithm"
+    },
+    "healthCheck": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable backend health checks"
+    }
+  }
+}

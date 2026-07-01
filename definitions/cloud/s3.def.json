@@ -1,0 +1,40 @@
+{
+  "typeId": "tech:storage:s3",
+  "label": "AWS S3 Bucket",
+  "description": "Object storage service for files, images, backups and static assets",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#569A31",
+    "icon": "archive"
+  },
+  "constraints": {
+    "maxInputs": 10
+  },
+  "dataSchema": {
+    "bucketName": {
+      "type": "string",
+      "description": "S3 bucket name (globally unique)"
+    },
+    "region": {
+      "type": "string",
+      "enum": [
+        "us-east-1",
+        "eu-west-1",
+        "eu-west-3",
+        "ap-southeast-1"
+      ],
+      "description": "AWS region"
+    },
+    "versioning": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable object versioning"
+    },
+    "publicAccess": {
+      "type": "boolean",
+      "default": false,
+      "description": "Allow public read access"
+    }
+  }
+}

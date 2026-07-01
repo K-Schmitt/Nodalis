@@ -1,0 +1,24 @@
+{
+  "typeId": "net:segment:vlan",
+  "label": "VLAN / Subnet",
+  "description": "A logical network segment",
+  "category": "segment",
+  "style": {
+    "shape": "hexagon",
+    "color": "#475569",
+    "icon": "layers"
+  },
+  "dataSchema": {
+    "cidr": {
+      "type": "string",
+      "description": "e.g. 10.0.1.0/24"
+    },
+    "vlanId": {
+      "type": "number"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "layers"
+  }
+}

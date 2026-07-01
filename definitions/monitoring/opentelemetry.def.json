@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:monitoring:otel",
+  "label": "OpenTelemetry Collector",
+  "description": "Vendor-agnostic observability framework for collecting traces, metrics and logs",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#425CC7",
+    "icon": "activity"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "exporters": {
+      "type": "array",
+      "description": "List of telemetry exporters (e.g. otlp, jaeger, prometheus)"
+    },
+    "processors": {
+      "type": "array",
+      "description": "List of data processors (e.g. batch, memory_limiter)"
+    },
+    "receivers": {
+      "type": "array",
+      "description": "List of telemetry receivers (e.g. otlp, jaeger, zipkin)"
+    }
+  }
+}

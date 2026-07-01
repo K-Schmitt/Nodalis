@@ -1,0 +1,26 @@
+{
+  "typeId": "net:security:firewall",
+  "label": "Firewall",
+  "description": "Filters traffic between zones according to policy",
+  "category": "security",
+  "style": {
+    "shape": "diamond",
+    "color": "#DC2626",
+    "icon": "shield"
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "stateful",
+        "stateless",
+        "ngfw"
+      ],
+      "default": "stateful"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "shield"
+  }
+}

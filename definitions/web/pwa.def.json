@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:frontend:pwa",
+  "label": "Progressive Web App",
+  "description": "Web application that uses modern web capabilities to deliver app-like experiences",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#5A0FC8",
+    "icon": "wifi"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "offlineSupport": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable offline support via service worker"
+    },
+    "pushNotifications": {
+      "type": "boolean",
+      "description": "Enable push notifications"
+    }
+  }
+}

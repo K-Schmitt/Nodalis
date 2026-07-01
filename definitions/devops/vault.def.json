@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:devops:vault",
+  "label": "HashiCorp Vault",
+  "description": "Secrets management tool for securely storing and accessing sensitive data",
+  "category": "security",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FFCF25",
+    "icon": "lock"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "backend": {
+      "type": "string",
+      "enum": ["file", "consul", "s3", "azure"],
+      "description": "Storage backend for Vault data"
+    },
+    "ha": {
+      "type": "boolean",
+      "description": "Enable high availability mode"
+    }
+  }
+}

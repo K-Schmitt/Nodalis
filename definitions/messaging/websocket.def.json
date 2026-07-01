@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:messaging:websocket",
+  "label": "WebSocket Server",
+  "description": "Full-duplex communication channel over TCP for real-time bidirectional data exchange",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#4A90D9",
+    "icon": "wifi"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "protocol": {
+      "type": "string",
+      "enum": ["ws", "wss"],
+      "description": "WebSocket protocol (ws for insecure, wss for secure)"
+    },
+    "maxConnections": {
+      "type": "number",
+      "default": 10000,
+      "description": "Maximum concurrent WebSocket connections"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:messaging:rabbitmq",
+  "label": "RabbitMQ",
+  "description": "Open-source message broker implementing AMQP for reliable message queuing",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF6600",
+    "icon": "radio"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "vhost": {
+      "type": "string",
+      "description": "Virtual host name"
+    },
+    "durable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable message durability"
+    },
+    "exchanges": {
+      "type": "string",
+      "description": "Exchange names (comma-separated)"
+    }
+  }
+}

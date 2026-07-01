@@ -1,0 +1,31 @@
+{
+  "typeId": "tech:monitoring:datadog",
+  "label": "Datadog",
+  "description": "Cloud monitoring and analytics platform for infrastructure and application performance",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#632CA6",
+    "icon": "eye"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "site": {
+      "type": "string",
+      "enum": ["us1", "eu1", "us3"],
+      "description": "Datadog site region"
+    },
+    "apm": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Application Performance Monitoring"
+    },
+    "logs": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable log management"
+    }
+  }
+}

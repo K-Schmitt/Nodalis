@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:eks",
+  "label": "AWS EKS",
+  "description": "Managed Kubernetes service for running containerized applications",
+  "category": "compute",
+  "style": {
+    "shape": "hexagon",
+    "color": "#FF9900",
+    "icon": "layers"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Kubernetes version"
+    },
+    "nodeGroupType": {
+      "type": "string",
+      "enum": ["managed", "self-managed"],
+      "description": "Worker node group type"
+    }
+  }
+}

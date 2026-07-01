@@ -1,0 +1,17 @@
+{
+  "typeId": "game:world:entity",
+  "label": "Entity",
+  "description": "A game object composed of components",
+  "category": "world",
+  "style": {
+    "shape": "rectangle",
+    "color": "#34D399",
+    "icon": "box"
+  },
+  "dataSchema": {
+    "tag": {
+      "type": "string",
+      "description": "Entity tag/archetype"
+    }
+  }
+}

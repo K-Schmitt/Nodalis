@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:auth:jwt",
+  "label": "JWT Auth Service",
+  "description": "Stateless authentication service using JSON Web Tokens",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#000000",
+    "icon": "key"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "algorithm": {
+      "type": "string",
+      "enum": ["RS256", "HS256", "ES256"],
+      "description": "JWT signing algorithm"
+    },
+    "expiry": {
+      "type": "string",
+      "default": "1h",
+      "description": "Token expiry duration (e.g. 1h, 24h, 7d)"
+    }
+  }
+}

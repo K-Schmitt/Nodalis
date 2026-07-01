@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:frontend:nextjs",
+  "label": "Next.js App",
+  "description": "React framework with server-side rendering and file-based routing",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0A0A0A",
+    "icon": "layout"
+  },
+  "constraints": {
+    "maxOutputs": 4
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Next.js version (e.g., 15.0.0)"
+    },
+    "rendering": {
+      "type": "string",
+      "enum": [
+        "ssr",
+        "ssg",
+        "isr"
+      ],
+      "default": "ssr",
+      "description": "Rendering strategy"
+    }
+  }
+}

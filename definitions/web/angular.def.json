@@ -1,0 +1,33 @@
+{
+  "typeId": "tech:frontend:angular",
+  "label": "Angular Application",
+  "description": "TypeScript-based web application framework by Google",
+  "category": "frontend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#DD0031",
+    "icon": "layers"
+  },
+  "constraints": {
+    "maxOutputs": 10
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "description": "Angular version"
+    },
+    "stateManagement": {
+      "type": "string",
+      "enum": [
+        "ngrx",
+        "ngxs",
+        "none"
+      ],
+      "description": "State management solution"
+    },
+    "ssr": {
+      "type": "boolean",
+      "description": "Enable server-side rendering"
+    }
+  }
+}

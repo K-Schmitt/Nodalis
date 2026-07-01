@@ -39,6 +39,8 @@ coverage/
 
 # ARCHI-OS specific
 .archi/pending/
+.archi/cli/
+.archi/cli.json
 architecture.json.backup
 *.def.json.backup
 

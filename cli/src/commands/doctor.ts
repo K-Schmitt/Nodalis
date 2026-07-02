@@ -1,6 +1,8 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { clientContext, resolveClient } from '../lib/paths.js';
+import { isPortFree } from '../lib/ports.js';
+import { isEntryAlive, readRunRegistry } from '../lib/process.js';
 import { readCliConfig } from './init.js';
 
 type Check = { label: string; ok: boolean; detail?: string };
@@ -20,6 +22,14 @@ export async function doctor(): Promise<void> {
   for (const id of cfg.clients) {
     const d = resolveClient(id, ctx);
     checks.push({ label: `MCP config present: ${id}`, ok: existsSync(d.file), detail: d.file });
+  }
+
+  const coreFree = await isPortFree(cfg.ports.core);
+  checks.push({ label: `preferred core port ${cfg.ports.core} free`, ok: coreFree, detail: coreFree ? undefined : 'in use (fallback will apply)' });
+
+  const reg = readRunRegistry(ctx.workspaceRoot);
+  if (reg?.core) {
+    checks.push({ label: `core process alive (pid ${reg.core.pid})`, ok: isEntryAlive(reg.core) });
   }
 
   let failures = 0;

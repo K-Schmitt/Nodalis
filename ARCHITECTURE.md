@@ -41,8 +41,20 @@ Archi-Os/
 │   │   └── stores/         # State management (Zustand)
 │   └── public/            # Assets statiques
 │
+├── cli/                    # CLI @archi-os/cli (install/launch/MCP)
+│   ├── src/
+│   │   ├── commands/      # init, doctor, up, down, uninstall
+│   │   ├── lib/           # modules purs (mcp-config, paths, ports, process, static-server)
+│   │   ├── config.ts      # schéma Zod de .archi/cli.json
+│   │   └── errors.ts      # CliError & dérivés
+│   └── tests/unit/        # tests vitest des modules purs
+│
 └── .archi/                # Données persistées
-    └── graph.json         # État du graphe
+    ├── graph.json         # État du graphe
+    ├── cli.json           # Config CLI : ports préférés + clients configurés
+    └── cli/               # Runtime CLI (gitignoré)
+        ├── run.json       # Registre PID/port/signature des process lancés
+        └── logs/          # core.log, web.log (process détachés)
 ```
 
 ---
@@ -357,6 +369,31 @@ Le descripteur `render` est optionnel, défini dans chaque `*.def.json`, validé
 - Fetch les données depuis `http://localhost:3000/api/graph`
 - Transforme les données pour React Flow
 - Gère les erreurs de fetch
+
+---
+
+## CLI (`/cli`)
+
+Package `@archi-os/cli` : **maison unique** de la logique « installer / lancer / configurer MCP ». L'extension VSCode (à venir) l'enveloppera sans dupliquer cette couche ; Docker est une cible runtime (`--docker`), pas un produit concurrent.
+
+### Commandes (`src/commands/`)
+- `init` : écrit/merge la config MCP du/des client(s), idempotent + réversible + backup. Écrit `.archi/cli.json`.
+- `doctor` : diagnostics (Node ≥ 20, core buildé, config MCP présente, port préféré libre, process vivants, tail des logs).
+- `up` : lance core (HTTP) détaché + serveur statique `web/dist`. Health-check en course avec la mort du child, registre incrémental. `--docker` délègue à `docker compose`.
+- `down` : stoppe selon `run.json` (`native` → kill signé ; `docker` → `docker compose down`).
+- `uninstall` : `down` puis retire chirurgicalement la clé `archi-os` des configs client (réversible).
+
+### Modules purs (`src/lib/`)
+- `mcp-config.ts` : merge/unmerge JSONC **chirurgical** (`jsonc-parser` `modify`/`applyEdits`) — préserve commentaires et serveurs voisins de l'utilisateur. Clé paramétrée (`mcpServers` pour Cursor/Claude, `servers` + `type:stdio` pour VSCode).
+- `paths.ts` : descripteurs clients OS-aware (`process.platform`) + détection des clients installés.
+- `ports.ts` : `findFreePort` (fallback), `waitForHealth` (poll `/health`, annulable via `signal`).
+- `process.ts` : spawn **bimodal** (`detached` pour la CLI / `attached` réservé à l'extension), registre `run.json` avec **signature** anti-PID-reuse, kill portable (`taskkill` Windows / `SIGTERM→SIGKILL`).
+- `static-server.ts` : serveur SPA zéro-dép, **confiné** (anti path-traversal), bind `127.0.0.1`, injection runtime `window.__ARCHI_OS__` (résout le port dynamique côté web sans rebuild).
+
+### Fichiers d'état (sous `.archi/`)
+- `.archi/cli.json` : config utilisateur (ports **préférés**, clients configurés). Validé Zod.
+- `.archi/cli/run.json` : ports/PID **réels** après fallback ; source de vérité de `down`. L'injection web lit ce fichier.
+- `.archi/cli/logs/{core,web}.log` : sorties des process détachés.
 
 ---
 

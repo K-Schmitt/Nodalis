@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import type { InjectOptions } from 'fastify';
 import cors from '@fastify/cors';
 import { Graph } from '../../domain/graph.js';
 import { Registry } from '../../domain/registry.js';
@@ -52,8 +53,12 @@ export class HTTPServer {
   private async setupMiddleware() {
     await this.app.register(cors, {
       origin: (origin, cb) => {
-        // Allow any localhost origin (any port) in dev
-        if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
+        // Allow localhost (any port) in dev, and the VSCode webview origin.
+        if (
+          !origin ||
+          /^http:\/\/localhost(:\d+)?$/.test(origin) ||
+          /^vscode-webview:\/\//.test(origin)
+        ) {
           cb(null, true);
         } else {
           cb(new Error('Not allowed by CORS'), false);
@@ -370,6 +375,34 @@ export class HTTPServer {
         },
       };
     });
+
+    // ─── Versioning ─────────────────────────────────────────────────────────
+    this.app.get('/api/versions', async () => {
+      this.syncContext();
+      return { versions: this.graphStorage.listVersions() };
+    });
+
+    this.app.post<{ Body: { label?: string } }>('/api/snapshot', async (request, reply) => {
+      this.syncContext();
+      const label = request.body?.label?.trim();
+      if (!label) return reply.code(400).send({ error: 'label is required' });
+      const version = this.graphStorage.createSnapshot(this.graph, label);
+      return reply.code(201).send({ version });
+    });
+
+    this.app.post<{ Params: { id: string } }>('/api/versions/:id/restore', async (request, reply) => {
+      this.syncContext();
+      const restored = this.graphStorage.restoreVersion(request.params.id, this.graph);
+      if (!restored) return reply.code(404).send({ error: 'version not found' });
+      // Meta-op (git-checkout-like): persist the restored graph to the on-disk SSOT
+      // so the webview poll AND the MCP process (reload-before-read) both see it.
+      this.graphStorage.save(this.graph);
+      return {
+        success: true,
+        nodeCount: this.graph.getAllNodes().length,
+        edgeCount: this.graph.getAllEdges().length,
+      };
+    });
   }
 
   /** Called after the active workspace changes — refreshes preset + graph. */
@@ -392,5 +425,11 @@ export class HTTPServer {
 
   async stop() {
     await this.app.close();
+  }
+
+  /** Test helper: wait for routes to register, then forward to Fastify inject. */
+  async inject(opts: InjectOptions) {
+    await this.app.ready();
+    return this.app.inject(opts);
   }
 }

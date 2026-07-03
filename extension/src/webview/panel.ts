@@ -1,14 +1,13 @@
 import * as vscode from 'vscode';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { randomBytes } from 'node:crypto';
 import type { ExtContext } from '../config';
 import type { ExtToWeb, Theme } from './bridge';
 
 function nonce(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let s = '';
-  for (let i = 0; i < 32; i++) s += chars[Math.floor(Math.random() * chars.length)];
-  return s;
+  // Cryptographically secure 128-bit nonce for the CSP script-src.
+  return randomBytes(16).toString('base64');
 }
 
 function currentTheme(): Theme {

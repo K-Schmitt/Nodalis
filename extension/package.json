@@ -1,0 +1,69 @@
+{
+  "name": "archi-os-vscode",
+  "displayName": "ARCHI-OS",
+  "description": "ARCHI-OS meta-modeler: graph, versioning, MCP.",
+  "version": "0.1.0",
+  "publisher": "archi-os",
+  "engines": { "vscode": "^1.85.0", "node": ">=20.0.0" },
+  "main": "./dist/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "categories": ["Other"],
+  "contributes": {
+    "commands": [
+      { "command": "archi-os.open", "title": "ARCHI-OS: Open" },
+      { "command": "archi-os.start", "title": "ARCHI-OS: Start Runtime" },
+      { "command": "archi-os.stop", "title": "ARCHI-OS: Stop Runtime" },
+      { "command": "archi-os.configureMcp", "title": "ARCHI-OS: Configure MCP" },
+      { "command": "archi-os.createSnapshot", "title": "ARCHI-OS: Create Snapshot" },
+      { "command": "archi-os.refreshVersions", "title": "ARCHI-OS: Refresh Versions", "icon": "$(refresh)" },
+      { "command": "archi-os.restoreVersion", "title": "ARCHI-OS: Restore Version" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "archi-os", "title": "ARCHI-OS", "icon": "media/icon.svg" }
+      ]
+    },
+    "views": {
+      "archi-os": [
+        { "id": "archi-os.versions", "name": "Versions" }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        { "command": "archi-os.createSnapshot", "when": "view == archi-os.versions", "group": "navigation" },
+        { "command": "archi-os.refreshVersions", "when": "view == archi-os.versions", "group": "navigation" }
+      ]
+    },
+    "configuration": {
+      "title": "ARCHI-OS",
+      "properties": {
+        "archiOs.autostart": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start the ARCHI-OS runtime when a workspace with .archi/ is opened."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "package": "vsce package --no-dependencies",
+    "test": "vitest run",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@archi-os/cli": "*",
+    "@archi-os/core": "*",
+    "jsonc-parser": "^3.2.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  }
+}

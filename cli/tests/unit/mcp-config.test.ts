@@ -3,18 +3,29 @@ import { parse } from 'jsonc-parser';
 import { buildEntry, mergeServer, unmergeServer } from '../../src/lib/mcp-config.js';
 import { McpConfigError } from '../../src/errors.js';
 
-const entry = buildEntry('/abs/core/dist/index.js', '/abs', 'plain');
-const vscodeEntry = buildEntry('/abs/core/dist/index.js', '/abs', 'stdio');
+const entry = buildEntry({ distPath: '/abs/core/dist/index.js', workspaceRoot: '/abs', browseRoot: '/home/u', entryShape: 'plain' });
+const vscodeEntry = buildEntry({
+  distPath: '${workspaceFolder}/core/dist/index.js',
+  workspaceRoot: '${workspaceFolder}',
+  browseRoot: '${userHome}',
+  entryShape: 'stdio',
+});
 
 describe('buildEntry', () => {
-  it('plain entry has no type', () => {
+  it('plain entry has no type and enriched env (abs paths)', () => {
     expect(entry.type).toBeUndefined();
     expect(entry.command).toBe('node');
     expect(entry.args).toEqual(['/abs/core/dist/index.js']);
     expect(entry.env.WORKSPACE_ROOT).toBe('/abs');
+    expect(entry.env.DEFINITIONS_PATH).toBe('/abs/definitions');
+    expect(entry.env.WORKSPACE_BROWSE_ROOT).toBe('/home/u');
   });
-  it('stdio entry adds type', () => {
+  it('stdio entry adds type and keeps VSCode variables', () => {
     expect(vscodeEntry.type).toBe('stdio');
+    expect(vscodeEntry.args).toEqual(['${workspaceFolder}/core/dist/index.js']);
+    expect(vscodeEntry.env.WORKSPACE_ROOT).toBe('${workspaceFolder}');
+    expect(vscodeEntry.env.DEFINITIONS_PATH).toBe('${workspaceFolder}/definitions');
+    expect(vscodeEntry.env.WORKSPACE_BROWSE_ROOT).toBe('${userHome}');
   });
 });
 

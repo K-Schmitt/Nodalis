@@ -5,6 +5,13 @@
   "type": "module",
   "bin": { "archi-os": "dist/index.js" },
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./lib/*": {
+      "types": "./dist/lib/*.d.ts",
+      "default": "./dist/lib/*.js"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsx src/index.ts",

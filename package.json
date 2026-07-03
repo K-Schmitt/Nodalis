@@ -6,7 +6,8 @@
   "workspaces": [
     "core",
     "web",
-    "cli"
+    "cli",
+    "extension"
   ],
   "scripts": {
     "dev:mcp": "cd core && npm run dev",

@@ -5,7 +5,7 @@ import { CliError, ProcessError } from '../errors.js';
 import { clientContext } from '../lib/paths.js';
 import { findFreePort, waitForHealth } from '../lib/ports.js';
 import {
-  isEntryAlive, readRunRegistry, spawnManaged, tailLog, writeRunRegistry, type RunRegistry,
+  clearRunRegistry, isEntryAlive, readRunRegistry, spawnManaged, stopEntry, tailLog, writeRunRegistry, type RunRegistry,
 } from '../lib/process.js';
 import { startStaticServer } from '../lib/static-server.js';
 import { readCliConfig } from './init.js';
@@ -15,6 +15,10 @@ export async function up(opts: { docker?: boolean; open?: boolean }): Promise<vo
   const ws = ctx.workspaceRoot;
 
   const existing = readRunRegistry(ws);
+  if (existing?.mode === 'docker') {
+    console.log('Already up via docker compose. Run `archi-os down` first to switch mode.');
+    return;
+  }
   if (existing?.core && isEntryAlive(existing.core)) {
     console.log(`Already up — core on :${existing.core.port}${existing.web ? `, web on :${existing.web.port}` : ''}.`);
     return;
@@ -63,13 +67,25 @@ export async function up(opts: { docker?: boolean; open?: boolean }): Promise<vo
   console.log(`\n✓ ARCHI-OS ready\n  core: http://localhost:${corePort}\n  web:  ${webUrl}`);
 
   if (opts.open !== false) {
-    const opener = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
-    spawnSync(opener, [webUrl], { stdio: 'ignore', shell: process.platform === 'win32' });
+    if (process.platform === 'win32') {
+      // `start` treats the first quoted token as a window title, hence the empty "".
+      spawnSync('cmd', ['/c', 'start', '', webUrl], { stdio: 'ignore', shell: false });
+    } else {
+      const opener = process.platform === 'darwin' ? 'open' : 'xdg-open';
+      spawnSync(opener, [webUrl], { stdio: 'ignore', shell: false });
+    }
   }
 
-  // Static server runs in THIS process; keep it alive until interrupted.
+  // Static server runs in THIS process; Ctrl-C tears down the whole stack
+  // (foreground session owns core too) and clears the registry.
   await new Promise<void>((res) => {
-    const shutdown = (): void => { web.close(); res(); };
+    let shuttingDown = false;
+    const shutdown = (): void => {
+      if (shuttingDown) return;
+      shuttingDown = true;
+      web.close();
+      void stopEntry(coreEntry).finally(() => { clearRunRegistry(ws); res(); });
+    };
     process.on('SIGINT', shutdown);
     process.on('SIGTERM', shutdown);
   });

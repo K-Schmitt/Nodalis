@@ -29,7 +29,13 @@ function configPath(workspaceRoot: string): string {
 export function readCliConfig(workspaceRoot: string): CliConfig {
   const text = readTextIfExists(configPath(workspaceRoot));
   if (!text) return { ...DEFAULT_CONFIG };
-  return parseCliConfig(JSON.parse(text));
+  let raw: unknown;
+  try {
+    raw = JSON.parse(text);
+  } catch {
+    throw new McpConfigError('.archi/cli.json is unreadable (invalid JSON) — fix or delete it, then retry.');
+  }
+  return parseCliConfig(raw);
 }
 
 function writeCliConfig(workspaceRoot: string, cfg: CliConfig): void {

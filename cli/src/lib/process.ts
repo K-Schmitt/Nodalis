@@ -2,6 +2,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, openSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { ProcessError } from '../errors.js';
+import { isPortFree } from './ports.js';
 
 export type ProcEntry = { pid: number; port: number; startedAt: number; cmd: string };
 export type RunRegistry = { mode: 'native' | 'docker'; startedAt: number; core?: ProcEntry; web?: ProcEntry };
@@ -57,8 +58,12 @@ export function isEntryAlive(entry: ProcEntry): boolean {
   try { process.kill(entry.pid, 0); return true; } catch { return false; }
 }
 
-export function stopEntry(entry: ProcEntry): void {
-  if (!isEntryAlive(entry)) return; // signature dead → already stopped, do not kill a reused PID
+export async function stopEntry(entry: ProcEntry): Promise<void> {
+  if (!isEntryAlive(entry)) return; // pid gone → already stopped
+  // Signature check: our server should still hold its recorded port. If the
+  // port is now free, this PID was recycled to an unrelated process — never
+  // kill it (anti-PID-reuse).
+  if (await isPortFree(entry.port)) return;
   if (process.platform === 'win32') {
     spawnSync('taskkill', ['/PID', String(entry.pid), '/T', '/F']);
     return;

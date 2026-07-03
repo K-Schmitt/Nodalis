@@ -22,6 +22,11 @@ export function onExtensionMessage(
   cb: (msg: { type: string; payload?: unknown }) => void,
 ): () => void {
   const handler = (e: MessageEvent): void => {
+    // Only accept messages from the VSCode extension host. Webviews receive
+    // host messages under the vscode-webview: scheme; in the plain browser
+    // build there is no host, so drop everything.
+    if (!isWebview()) return;
+    if (!e.origin.startsWith('vscode-webview:')) return;
     const data = e.data as { type?: unknown };
     if (data && typeof data.type === 'string') cb(data as { type: string; payload?: unknown });
   };

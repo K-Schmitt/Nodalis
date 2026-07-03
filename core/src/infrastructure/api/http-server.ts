@@ -52,8 +52,12 @@ export class HTTPServer {
   private async setupMiddleware() {
     await this.app.register(cors, {
       origin: (origin, cb) => {
-        // Allow any localhost origin (any port) in dev
-        if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
+        // Allow localhost (any port) in dev, and the VSCode webview origin.
+        if (
+          !origin ||
+          /^http:\/\/localhost(:\d+)?$/.test(origin) ||
+          /^vscode-webview:\/\//.test(origin)
+        ) {
           cb(null, true);
         } else {
           cb(new Error('Not allowed by CORS'), false);

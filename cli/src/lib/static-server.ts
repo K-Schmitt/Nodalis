@@ -50,11 +50,15 @@ export function startStaticServer(args: {
   return new Promise((res, rej) => {
     let attempt = args.port;
     const tryListen = (): void => {
-      server.once('error', (e: NodeJS.ErrnoException) => {
-        if (e.code === 'EADDRINUSE' && attempt < args.port + 50) { attempt++; server.listen(attempt, host); }
+      const onError = (e: NodeJS.ErrnoException): void => {
+        if (e.code === 'EADDRINUSE' && attempt < args.port + 50) { attempt++; tryListen(); }
         else rej(e);
+      };
+      server.once('error', onError);
+      server.listen(attempt, host, () => {
+        server.removeListener('error', onError);
+        res({ port: attempt, close: () => server.close() });
       });
-      server.listen(attempt, host, () => res({ port: attempt, close: () => server.close() }));
     };
     tryListen();
   });

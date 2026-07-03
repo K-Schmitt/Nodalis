@@ -14,8 +14,8 @@ export async function down(): Promise<void> {
     return;
   }
 
-  if (reg.web) stopEntry(reg.web);
-  if (reg.core) stopEntry(reg.core);
+  if (reg.web) await stopEntry(reg.web);
+  if (reg.core) await stopEntry(reg.core);
   clearRunRegistry(ws);
   console.log('Stopped ARCHI-OS.');
 }

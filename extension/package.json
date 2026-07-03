@@ -15,7 +15,8 @@
       { "command": "archi-os.stop", "title": "ARCHI-OS: Stop Runtime" },
       { "command": "archi-os.configureMcp", "title": "ARCHI-OS: Configure MCP" },
       { "command": "archi-os.createSnapshot", "title": "ARCHI-OS: Create Snapshot" },
-      { "command": "archi-os.refreshVersions", "title": "ARCHI-OS: Refresh Versions", "icon": "$(refresh)" }
+      { "command": "archi-os.refreshVersions", "title": "ARCHI-OS: Refresh Versions", "icon": "$(refresh)" },
+      { "command": "archi-os.restoreVersion", "title": "ARCHI-OS: Restore Version" }
     ],
     "viewsContainers": {
       "activitybar": [

@@ -18,20 +18,35 @@ export class Engine {
     return this.core ? `http://localhost:${this.core.port}` : null;
   }
 
-  /** Spawn core (attached → dies on deactivate) + serve web/dist in-process. */
-  async start(ctx: ExtContext): Promise<{ corePort: number; webUrl: string }> {
+  /**
+   * Spawn the bundled core (attached → dies on deactivate) + serve the bundled
+   * web frontend in-process. Everything ships inside the extension, so the
+   * runtime starts on any workspace without the repo being cloned/built.
+   *
+   * @param extensionPath absolute install dir of the extension (context.extensionUri.fsPath)
+   */
+  async start(ctx: ExtContext, extensionPath: string): Promise<{ corePort: number; webUrl: string }> {
     if (this.core) return { corePort: this.core.port, webUrl: `http://localhost:${this.web?.port}` };
 
-    const coreDist = resolve(ctx.workspaceRoot, 'core', 'dist', 'index.js');
-    if (!existsSync(coreDist)) throw new Error('core not built. Run: npm run build -w core');
+    const coreEntry = resolve(extensionPath, 'core-bundle', 'index.cjs');
+    if (!existsSync(coreEntry)) throw new Error('core bundle missing from the extension — rebuild the .vsix.');
+
+    // Prefer the workspace's own definitions; fall back to the bundled defaults.
+    const wsDefs = resolve(ctx.workspaceRoot, 'definitions');
+    const definitionsPath = existsSync(wsDefs) ? wsDefs : resolve(extensionPath, 'definitions');
 
     const corePort = await findFreePort(ctx.corePort);
     const core = spawnManaged({
       workspaceRoot: ctx.workspaceRoot,
       name: 'core',
       command: process.execPath,
-      commandArgs: [coreDist],
-      env: { RUN_HTTP_SERVER: 'true', PORT: String(corePort), WORKSPACE_ROOT: ctx.workspaceRoot },
+      commandArgs: [coreEntry],
+      env: {
+        RUN_HTTP_SERVER: 'true',
+        PORT: String(corePort),
+        WORKSPACE_ROOT: ctx.workspaceRoot,
+        DEFINITIONS_PATH: definitionsPath,
+      },
       mode: 'attached',
       port: corePort,
     });
@@ -42,8 +57,8 @@ export class Engine {
       signal: () => { try { process.kill(core.pid, 0); return false; } catch { return true; } },
     });
 
-    const distRoot = resolve(ctx.workspaceRoot, 'web', 'dist');
-    if (!existsSync(distRoot)) throw new Error('web not built. Run: npm run build -w web');
+    const distRoot = resolve(extensionPath, 'web-dist');
+    if (!existsSync(distRoot)) throw new Error('web bundle missing from the extension — rebuild the .vsix.');
     this.web = await startStaticServer({
       distRoot,
       apiBaseUrl: `http://localhost:${corePort}`,

@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext): void {
     const ctx = resolveContext();
     if (!ctx) { void vscode.window.showErrorMessage('ARCHI-OS: open a workspace folder first.'); return; }
     try {
-      const { webUrl } = await engine!.start(ctx);
+      const { webUrl } = await engine!.start(ctx, context.extensionUri.fsPath);
       statusBar!.setLive(webUrl);
       void vscode.window.showInformationMessage(`ARCHI-OS runtime live — ${webUrl}`);
     } catch (err) {

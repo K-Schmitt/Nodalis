@@ -49,6 +49,15 @@ Archi-Os/
 │   │   └── errors.ts      # CliError & dérivés
 │   └── tests/unit/        # tests vitest des modules purs
 │
+├── extension/              # Extension VSCode archi-os-vscode (esbuild → .vsix)
+│   ├── src/
+│   │   ├── engine.ts      # spawn core attaché + web statique (via cli/lib)
+│   │   ├── mcp.ts         # config MCP (compose cli/lib/mcp-config)
+│   │   ├── webview/       # panel (CSP+nonce) + bridge typé
+│   │   ├── diagnostics*.ts# onDidSave *.def.json → Problems (Zod)
+│   │   └── versioning/    # TreeView + client des routes versioning
+│   └── tests/             # bridge + diagnostics-core (vitest)
+│
 └── .archi/                # Données persistées
     ├── graph.json         # État du graphe
     ├── cli.json           # Config CLI : ports préférés + clients configurés
@@ -374,7 +383,9 @@ Le descripteur `render` est optionnel, défini dans chaque `*.def.json`, validé
 
 ## CLI (`/cli`)
 
-Package `@archi-os/cli` : **maison unique** de la logique « installer / lancer / configurer MCP ». L'extension VSCode (à venir) l'enveloppera sans dupliquer cette couche ; Docker est une cible runtime (`--docker`), pas un produit concurrent.
+Package `@archi-os/cli` : **maison unique** de la logique « installer / lancer / configurer MCP ». L'extension VSCode (`extension/`) l'enveloppe sans dupliquer cette couche ; Docker est une cible runtime (`--docker`), pas un produit concurrent.
+
+Pour être réutilisables hors du bin, les modules purs sont exposés via l'`exports` map du package : `@archi-os/cli/lib/*` (JS + `.d.ts`, **sans** shebang — seul `dist/index.js` porte le `#!/usr/bin/env node`). Le build `tsup` est scindé en deux (bin avec banner shebang / lib sans).
 
 ### Commandes (`src/commands/`)
 - `init` : écrit/merge la config MCP du/des client(s), idempotent + réversible + backup. Écrit `.archi/cli.json`.
@@ -394,6 +405,28 @@ Package `@archi-os/cli` : **maison unique** de la logique « installer / lancer 
 - `.archi/cli.json` : config utilisateur (ports **préférés**, clients configurés). Validé Zod.
 - `.archi/cli/run.json` : ports/PID **réels** après fallback ; source de vérité de `down`. L'injection web lit ce fichier.
 - `.archi/cli/logs/{core,web}.log` : sorties des process détachés.
+
+---
+
+## Extension VSCode (`/extension`)
+
+Package `archi-os-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@archi-os/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@archi-os/core/schema` (`DefinitionSchema`) — jamais la racine `@archi-os/core` (qui embarque Fastify + MCP).
+
+### Modules (`src/`)
+- `config.ts` : résout le workspace root actif + ports + lecture du setting `archiOs.autostart`.
+- `engine.ts` : `Engine.start()` spawn core (`attached`) via `spawnManaged`, health-check `waitForHealth` (annulable si le child meurt), puis sert `web/dist` in-process (`startStaticServer`) ; `coreBaseUrl()` expose le port réel ; `stop()` teardown.
+- `mcp.ts` : `configureMcp()` **compose** `buildEntry` + `mergeServer` + descripteur `resolveClient('vscode')` (`.vscode/mcp.json`, clé `servers`, `type:stdio`) — merge idempotent + backup `.bak`.
+- `statusbar.ts` : indicateur Live/Disconnected + flash « rules reloaded » + thème.
+- `webview/bridge.ts` : protocole `postMessage` typé (`ExtToWeb`/`WebToExt`) + guards (vscode-free, testé unitairement).
+- `webview/panel.ts` : panel webview, **CSP stricte + nonce** (CSPRNG `randomBytes`), réécriture `asWebviewUri` des assets, injection noncée de `window.__ARCHI_OS__` ; `connect-src` construit avec le port core réel.
+- `diagnostics-core.ts` : mapping pur issue Zod → position (offset→ligne via `jsonc-parser`), vscode-free, testé. `diagnostics.ts` : shell `onDidSave` sur `definitions/**/*.def.json` → Problems + callback si propre.
+- `versioning/api.ts` : client `fetch` typé des 3 routes core. `versioning/tree.ts` : `TreeDataProvider` du panneau Versions + commandes snapshot/restore.
+
+### Livrable #1 — Versioning
+TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`, `POST /api/versions/:id/restore` (le restore **persiste** le graphe sur le SSOT disque pour que le poll web ET le process MCP le voient). Diagnostics `onDidSave` des `*.def.json` validés via `@archi-os/core/schema`.
+
+### Packaging
+`esbuild.mjs` copie `web/dist` → `extension/web-dist` (nettoyé avant copie) puis bundle `src/extension.ts` (`external: ['vscode']`). `vsce package --no-dependencies` produit `archi-os-vscode-0.1.0.vsix` (contient `dist/extension.js`, `web-dist/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
 
 ---
 

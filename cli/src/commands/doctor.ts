@@ -24,10 +24,15 @@ export async function doctor(): Promise<void> {
     checks.push({ label: `MCP config present: ${id}`, ok: existsSync(d.file), detail: d.file });
   }
 
-  const coreFree = await isPortFree(cfg.ports.core);
-  checks.push({ label: `preferred core port ${cfg.ports.core} free`, ok: coreFree, detail: coreFree ? undefined : 'in use (fallback will apply)' });
-
   const reg = readRunRegistry(ctx.workspaceRoot);
+  const coreFree = await isPortFree(cfg.ports.core);
+  const ownsPort = !coreFree && reg?.core?.port === cfg.ports.core && isEntryAlive(reg.core);
+  checks.push({
+    label: `preferred core port ${cfg.ports.core}`,
+    ok: coreFree || ownsPort,
+    detail: coreFree ? 'free' : ownsPort ? 'in use by archi-os (running)' : 'in use by another process (fallback will apply)',
+  });
+
   if (reg?.core) {
     checks.push({ label: `core process alive (pid ${reg.core.pid})`, ok: isEntryAlive(reg.core) });
   }

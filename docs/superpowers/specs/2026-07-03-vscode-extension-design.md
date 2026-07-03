@@ -49,6 +49,24 @@ Décisions actées en brainstorming :
     `types.ts` n'importe que `zod` → esbuild ne bundle que zod, **pas** Fastify/MCP.
     L'import racine `@archi-os/core` traînerait tout le serveur : interdit dans l'extension.
   - +3 routes HTTP versioning (§5).
+  - **CORS webview origin (fold #5)** : la config CORS (`http-server.ts:53–63`) n'autorise que
+    `http://localhost(:port)`. L'origine d'un webview VSCode = `vscode-webview://<id>` → CORS
+    **rejette tous les `fetch`** du webview, indépendamment du CSP. CSP (client, `connect-src`)
+    et CORS (serveur, `Access-Control-Allow-Origin`) sont **deux couches distinctes** : le CSP
+    passe, la réponse est bloquée côté serveur → webview mort silencieux. Étendre la regex :
+    ```ts
+    origin: (origin, cb) => {
+      if (!origin
+          || /^http:\/\/localhost(:\d+)?$/.test(origin)
+          || /^vscode-webview:\/\//.test(origin)) {   // ← ajout
+        cb(null, true);
+      } else {
+        cb(new Error('Not allowed by CORS'), false);
+      }
+    },
+    ```
+    (`!origin` couvre déjà le cas « null origin » que certains webviews envoient.) ~2 lignes,
+    mais **bloquant** sans elle.
 - **`web/`** (Web M0, glue minimale)
   - `vite.config` → `base: './'` (chemins d'assets relatifs, obligatoire pour `asWebviewUri`).
   - Nouveau `web/src/lib/vscode.ts` : `acquireVsCodeApi()` si présent, sinon no-op
@@ -170,7 +188,7 @@ surprise à chaque `activate()`. **Interdit.**
 
 1. **Web M0** — `base:'./'` + `web/src/lib/vscode.ts` bridge no-op.
 2. **cli exports** — champ `exports` `./lib/*` + build lib.
-3. **core exports + routes** — subpath `@archi-os/core/schema` + 3 routes versioning HTTP.
+3. **core exports + routes + CORS** — subpath `@archi-os/core/schema` + 3 routes versioning HTTP + whitelist origine `vscode-webview://` (fold #5).
 4. **EXT-M0** — scaffold `extension/` (manifest, esbuild, tsconfig) + `extension.ts` activate/deactivate + commandes vides.
 5. **EXT-M1** — `webview/panel.ts` (CSP/nonce/asWebviewUri/injection nonced) + `webview/bridge.ts` chargeant `web/dist`.
 6. **EXT-M2** — `engine.ts` (spawn attached via cli) + `mcp.ts` (init) + `statusbar.ts` + thème + autostart gaté.
@@ -194,6 +212,8 @@ surprise à chaque `activate()`. **Interdit.**
 - Vite `base` défaut `/` casse `asWebviewUri` → `./`.
 - Injection `__ARCHI_OS__` **sans nonce** en webview → fetch morts (fold #1).
 - Import `@archi-os/core` racine → esbuild bundle Fastify+MCP → utiliser `/schema` (fold #2).
+- **CSP ≠ CORS** : CSP passe mais l'origine `vscode-webview://` non whitelistée côté serveur
+  → réponse bloquée par CORS → fetch morts. Whitelister l'origine webview (fold #5).
 - Restore qui ne persiste pas disque → webview/MCP stale (fold #3).
 - Autostart sur simple présence `.archi/` → spawn surprise (fold #4).
 - MCP stdio spawné par le client, pas par la CLI ; `init` écrit juste la config.

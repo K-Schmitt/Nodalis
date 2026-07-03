@@ -10,17 +10,28 @@ export type McpEntry = {
   type?: 'stdio';
 };
 
-export function buildEntry(
-  coreDistPath: string,
-  workspaceRoot: string,
-  entryShape: 'plain' | 'stdio',
-): McpEntry {
+/**
+ * Build the MCP server entry. `workspaceRoot`/`distPath`/`browseRoot` may be
+ * absolute paths (Cursor/Claude — no workspace context) or VSCode variables
+ * (`${workspaceFolder}`, `${userHome}`), which VSCode substitutes at load time.
+ * DEFINITIONS_PATH is derived from workspaceRoot so it follows the same form.
+ */
+export function buildEntry(params: {
+  distPath: string;
+  workspaceRoot: string;
+  browseRoot: string;
+  entryShape: 'plain' | 'stdio';
+}): McpEntry {
   const entry: McpEntry = {
     command: 'node',
-    args: [coreDistPath],
-    env: { WORKSPACE_ROOT: workspaceRoot },
+    args: [params.distPath],
+    env: {
+      WORKSPACE_ROOT: params.workspaceRoot,
+      DEFINITIONS_PATH: `${params.workspaceRoot}/definitions`,
+      WORKSPACE_BROWSE_ROOT: params.browseRoot,
+    },
   };
-  if (entryShape === 'stdio') entry.type = 'stdio';
+  if (params.entryShape === 'stdio') entry.type = 'stdio';
   return entry;
 }
 

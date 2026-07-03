@@ -74,7 +74,16 @@ export async function init(opts: { client?: string }): Promise<void> {
   for (const id of chosen) {
     const d = resolveClient(id, ctx);
     const before = readTextIfExists(d.file) ?? '';
-    const entry = buildEntry(coreDist, workspaceRoot, d.entry);
+    // VSCode resolves ${workspaceFolder}/${userHome} at load time — use portable
+    // variables there; Cursor/Claude configs have no workspace context, so bake
+    // absolute paths for them.
+    const useVar = d.id === 'vscode';
+    const entry = buildEntry({
+      distPath: useVar ? '${workspaceFolder}/core/dist/index.js' : coreDist,
+      workspaceRoot: useVar ? '${workspaceFolder}' : workspaceRoot,
+      browseRoot: useVar ? '${userHome}' : ctx.home,
+      entryShape: d.entry,
+    });
     const after = mergeServer(before, entry, d.key);
     if (after === before && before !== '') { log.info(`${id}: already configured (no change).`); continue; }
     backupIfAbsent(d.file);

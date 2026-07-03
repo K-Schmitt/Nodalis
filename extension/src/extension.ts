@@ -5,6 +5,8 @@ import { configureMcp } from './mcp';
 import { StatusBar } from './statusbar';
 import { openPanel } from './webview/panel';
 import { registerDiagnostics } from './diagnostics';
+import { VersionsProvider } from './versioning/tree';
+import { createSnapshot, restoreVersion, type Version } from './versioning/api';
 
 let engine: Engine | null = null;
 let statusBar: StatusBar | null = null;
@@ -26,6 +28,9 @@ export function activate(context: vscode.ExtensionContext): void {
     activePanels.add(panel);
     panel.onDidDispose(() => activePanels.delete(panel));
   });
+
+  const versions = new VersionsProvider(() => engine!.coreBaseUrl());
+  context.subscriptions.push(vscode.window.registerTreeDataProvider('archi-os.versions', versions));
 
   registerDiagnostics(context, () => {
     statusBar?.flashReload();
@@ -60,8 +65,29 @@ export function activate(context: vscode.ExtensionContext): void {
     }
   });
 
-  register('archi-os.createSnapshot', () => vscode.window.showInformationMessage('ARCHI-OS: snapshot (M4).'));
-  register('archi-os.refreshVersions', () => vscode.window.showInformationMessage('ARCHI-OS: versions (M4).'));
+  register('archi-os.refreshVersions', () => versions.refresh());
+
+  register('archi-os.createSnapshot', async () => {
+    const base = engine!.coreBaseUrl();
+    if (!base) { void vscode.window.showErrorMessage('ARCHI-OS: start the runtime first.'); return; }
+    const label = await vscode.window.showInputBox({ prompt: 'Snapshot label', placeHolder: 'e.g. before-refactor' });
+    if (!label) return;
+    try { await createSnapshot(base, label); versions.refresh(); void vscode.window.showInformationMessage(`Snapshot "${label}" created.`); }
+    catch (err) { void vscode.window.showErrorMessage(`Snapshot failed: ${(err as Error).message}`); }
+  });
+
+  register('archi-os.restoreVersion', async (arg: unknown) => {
+    const base = engine!.coreBaseUrl();
+    if (!base) { void vscode.window.showErrorMessage('ARCHI-OS: start the runtime first.'); return; }
+    const v = arg as Version;
+    const ok = await vscode.window.showWarningMessage(`Restore graph to "${v.label}"? This replaces the current graph.`, { modal: true }, 'Restore');
+    if (ok !== 'Restore') return;
+    try {
+      await restoreVersion(base, v.id);
+      for (const p of activePanels) p.webview.postMessage({ type: 'refresh' });
+      void vscode.window.showInformationMessage(`Restored to "${v.label}".`);
+    } catch (err) { void vscode.window.showErrorMessage(`Restore failed: ${(err as Error).message}`); }
+  });
 
   // Gated autostart: never spawn silently on mere .archi/ presence.
   const ctx = resolveContext();

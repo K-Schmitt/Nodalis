@@ -4,9 +4,11 @@ import { Engine } from './engine';
 import { configureMcp } from './mcp';
 import { StatusBar } from './statusbar';
 import { openPanel } from './webview/panel';
+import { registerDiagnostics } from './diagnostics';
 
 let engine: Engine | null = null;
 let statusBar: StatusBar | null = null;
+const activePanels = new Set<vscode.WebviewPanel>();
 
 export function activate(context: vscode.ExtensionContext): void {
   engine = new Engine();
@@ -20,7 +22,14 @@ export function activate(context: vscode.ExtensionContext): void {
   register('archi-os.open', () => {
     const ctx = resolveContext();
     if (!ctx) { void vscode.window.showErrorMessage('ARCHI-OS: open a workspace folder first.'); return; }
-    openPanel(ctx, context.extensionUri);
+    const panel = openPanel(ctx, context.extensionUri);
+    activePanels.add(panel);
+    panel.onDidDispose(() => activePanels.delete(panel));
+  });
+
+  registerDiagnostics(context, () => {
+    statusBar?.flashReload();
+    for (const p of activePanels) p.webview.postMessage({ type: 'refresh' });
   });
 
   register('archi-os.start', async () => {

@@ -39,6 +39,8 @@ coverage/
 
 # ARCHI-OS specific
 .archi/pending/
+.archi/cli/
+.archi/cli.json
 architecture.json.backup
 *.def.json.backup
 
@@ -47,3 +49,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+# Runtime pid files (should never have been tracked)
+.archi/*.pid

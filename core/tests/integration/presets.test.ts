@@ -51,6 +51,9 @@ describe('Presets + subset loading (real definitions)', () => {
 
   it('web preset carries a forbidden frontend→database rule', () => {
     const rules = presetLoader.get('web')!.rules;
-    expect(rules?.forbiddenConnections).toContainEqual({ from: 'frontend', to: 'database' });
+    // The preset entry also carries a human-readable `reason`; match the pair loosely.
+    expect(rules?.forbiddenConnections).toContainEqual(
+      expect.objectContaining({ from: 'frontend', to: 'database' }),
+    );
   });
 });

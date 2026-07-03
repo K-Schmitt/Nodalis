@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "core",
-    "web"
+    "web",
+    "cli"
   ],
   "scripts": {
     "dev:mcp": "cd core && npm run dev",

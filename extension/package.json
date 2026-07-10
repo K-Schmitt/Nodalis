@@ -11,9 +11,9 @@
   "activationEvents": ["onStartupFinished"],
   "categories": ["Visualization", "Other"],
   "keywords": ["graph", "meta-model", "architecture", "mcp", "versioning"],
-  "repository": { "type": "git", "url": "https://github.com/K-Schmitt/Archi-Os.git", "directory": "extension" },
-  "bugs": { "url": "https://github.com/K-Schmitt/Archi-Os/issues" },
-  "homepage": "https://github.com/K-Schmitt/Archi-Os#readme",
+  "repository": { "type": "git", "url": "https://github.com/K-Schmitt/Nodalis.git", "directory": "extension" },
+  "bugs": { "url": "https://github.com/K-Schmitt/Nodalis/issues" },
+  "homepage": "https://github.com/K-Schmitt/Nodalis#readme",
   "galleryBanner": { "color": "#1E1B4B", "theme": "dark" },
   "contributes": {
     "commands": [

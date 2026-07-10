@@ -14,7 +14,7 @@ Nodalis is an agnostic "meta-modeler": the rules live in `.def.json` definition 
 
 ## Getting started
 
-1. Install the extension (Marketplace, Open VSX, or a `.vsix` from the [releases](https://github.com/K-Schmitt/Archi-Os/releases)).
+1. Install the extension (Marketplace, Open VSX, or a `.vsix` from the [releases](https://github.com/K-Schmitt/Nodalis/releases)).
 2. Reload the window if prompted.
 3. Open any folder as a workspace.
 4. Command Palette (`Ctrl/Cmd+Shift+P`):
@@ -45,7 +45,7 @@ Definitions come from a `definitions/` folder in your workspace when present; ot
 
 ## Links
 
-- Repository & docs: https://github.com/K-Schmitt/Archi-Os
-- Issues: https://github.com/K-Schmitt/Archi-Os/issues
+- Repository & docs: https://github.com/K-Schmitt/Nodalis
+- Issues: https://github.com/K-Schmitt/Nodalis/issues
 
 Licensed under MIT.

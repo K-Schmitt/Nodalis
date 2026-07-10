@@ -24,7 +24,7 @@ export function registerDiagnostics(
       ));
       collection.set(doc.uri, diags);
       if (diags.length === 0) onValidSave(doc.uri);
-      else void vscode.window.showWarningMessage(`ARCHI-OS: ${doc.uri.path.split('/').pop()} has ${diags.length} rule error(s).`);
+      else void vscode.window.showWarningMessage(`Nodalis: ${doc.uri.path.split('/').pop()} has ${diags.length} rule error(s).`);
     }, 300);
   });
 

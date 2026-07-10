@@ -39,6 +39,10 @@ const ctx = await esbuild.context({
   target: 'node20',
   format: 'cjs',
   external: ['vscode'],
+  // Prefer ESM entry points: some deps (jsonc-parser) ship a UMD `main` whose
+  // dynamic requires don't survive bundling and throw at load. The ESM build
+  // bundles cleanly.
+  mainFields: ['module', 'main'],
   outfile: 'dist/extension.js',
   sourcemap: true,
   logLevel: 'info',

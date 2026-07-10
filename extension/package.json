@@ -4,10 +4,17 @@
   "description": "ARCHI-OS meta-modeler: graph, versioning, MCP.",
   "version": "0.1.1",
   "publisher": "archi-os",
+  "license": "MIT",
+  "icon": "media/icon.png",
   "engines": { "vscode": "^1.80.0" },
   "main": "./dist/extension.js",
   "activationEvents": ["onStartupFinished"],
-  "categories": ["Other"],
+  "categories": ["Visualization", "Other"],
+  "keywords": ["graph", "meta-model", "architecture", "mcp", "versioning"],
+  "repository": { "type": "git", "url": "https://github.com/K-Schmitt/Archi-Os.git", "directory": "extension" },
+  "bugs": { "url": "https://github.com/K-Schmitt/Archi-Os/issues" },
+  "homepage": "https://github.com/K-Schmitt/Archi-Os#readme",
+  "galleryBanner": { "color": "#1E1B4B", "theme": "dark" },
   "contributes": {
     "commands": [
       { "command": "archi-os.open", "title": "ARCHI-OS: Open" },

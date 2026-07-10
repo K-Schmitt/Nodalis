@@ -4,3 +4,4 @@ tsconfig.json
 esbuild.mjs
 vitest.config.ts
 **/*.map
+media/icon-source.svg

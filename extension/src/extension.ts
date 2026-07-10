@@ -13,13 +13,17 @@ let statusBar: StatusBar | null = null;
 const activePanels = new Set<vscode.WebviewPanel>();
 
 export function activate(context: vscode.ExtensionContext): void {
+  // Cheap, no-throw singletons the command handlers close over.
   engine = new Engine();
-  statusBar = new StatusBar();
-  context.subscriptions.push({ dispose: () => statusBar?.dispose() });
+  const versions = new VersionsProvider(() => engine!.coreBaseUrl());
 
   const register = (id: string, fn: (...a: unknown[]) => unknown): void => {
     context.subscriptions.push(vscode.commands.registerCommand(id, fn));
   };
+
+  // ── Register ALL commands FIRST ──────────────────────────────────────────
+  // Command registration must never depend on the optional UI wiring below;
+  // if a status bar / tree / diagnostics step throws, the commands still exist.
 
   register('archi-os.open', () => {
     const ctx = resolveContext();
@@ -27,14 +31,6 @@ export function activate(context: vscode.ExtensionContext): void {
     const panel = openPanel(ctx, context.extensionUri);
     activePanels.add(panel);
     panel.onDidDispose(() => activePanels.delete(panel));
-  });
-
-  const versions = new VersionsProvider(() => engine!.coreBaseUrl());
-  context.subscriptions.push(vscode.window.registerTreeDataProvider('archi-os.versions', versions));
-
-  registerDiagnostics(context, () => {
-    statusBar?.flashReload();
-    for (const p of activePanels) p.webview.postMessage({ type: 'refresh' });
   });
 
   register('archi-os.start', async () => {
@@ -88,6 +84,19 @@ export function activate(context: vscode.ExtensionContext): void {
       void vscode.window.showInformationMessage(`Restored to "${v.label}".`);
     } catch (err) { void vscode.window.showErrorMessage(`Restore failed: ${(err as Error).message}`); }
   });
+
+  // ── Best-effort UI wiring — must never break command registration above ───
+  try {
+    statusBar = new StatusBar();
+    context.subscriptions.push({ dispose: () => statusBar?.dispose() });
+    context.subscriptions.push(vscode.window.registerTreeDataProvider('archi-os.versions', versions));
+    registerDiagnostics(context, () => {
+      statusBar?.flashReload();
+      for (const p of activePanels) p.webview.postMessage({ type: 'refresh' });
+    });
+  } catch (err) {
+    void vscode.window.showErrorMessage(`ARCHI-OS partial init (commands still available): ${(err as Error).message}`);
+  }
 
   // Gated autostart: never spawn silently on mere .archi/ presence.
   const ctx = resolveContext();

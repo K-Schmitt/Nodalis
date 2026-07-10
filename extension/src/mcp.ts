@@ -1,27 +1,64 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { buildEntry, mergeServer } from '@archi-os/cli/lib/mcp-config';
-import { clientContext, resolveClient } from '@archi-os/cli/lib/paths';
 import type { ExtContext } from './config';
 
-/** Merge the archi-os MCP entry into the VSCode client config (idempotent, backed up). */
-export function configureMcp(ctx: ExtContext): string {
-  const clientCtx = { ...clientContext(), workspaceRoot: ctx.workspaceRoot };
-  const client = resolveClient('vscode', clientCtx);
+type McpTarget = {
+  label: string;
+  /** Config file path (workspace-scoped). */
+  file: string;
+  /** Top-level key holding the server map. */
+  key: 'mcpServers' | 'servers';
+  /** Entry shape: 'stdio' adds a `type` field (VSCode), 'plain' omits it. */
+  entry: 'plain' | 'stdio';
+};
 
-  const distPath = `${ctx.workspaceRoot}/core/dist/index.js`;
-  const entry = buildEntry({
-    distPath,
-    workspaceRoot: ctx.workspaceRoot,
-    browseRoot: ctx.workspaceRoot,
-    entryShape: client.entry,
-  });
+/** Workspace-scoped MCP config locations, one per supported client. */
+function targets(workspaceRoot: string): McpTarget[] {
+  return [
+    { label: 'VSCode', file: join(workspaceRoot, '.vscode', 'mcp.json'), key: 'servers', entry: 'stdio' },
+    { label: 'Cursor', file: join(workspaceRoot, '.cursor', 'mcp.json'), key: 'mcpServers', entry: 'plain' },
+    { label: 'Claude Code', file: join(workspaceRoot, '.mcp.json'), key: 'mcpServers', entry: 'plain' },
+  ];
+}
 
-  const existing = existsSync(client.file) ? readFileSync(client.file, 'utf8') : '{}';
-  if (existsSync(client.file)) copyFileSync(client.file, `${client.file}.bak`);
-  const merged = mergeServer(existing, entry, client.key);
+/**
+ * Merge the Nodalis MCP entry into every supported client's workspace config
+ * (VSCode, Cursor, Claude Code) — idempotent, each existing file backed up.
+ *
+ * Standalone: the MCP server is the core bundled inside the extension, launched
+ * through the editor's own Node (ELECTRON_RUN_AS_NODE) — no repo checkout and no
+ * external Node install. Definitions come from the workspace when present,
+ * otherwise from the bundled defaults.
+ *
+ * @param extensionPath absolute install dir of the extension (context.extensionUri.fsPath)
+ * @returns the list of config files written.
+ */
+export function configureMcp(ctx: ExtContext, extensionPath: string): string[] {
+  const coreEntry = resolve(extensionPath, 'core-bundle', 'index.cjs');
+  const wsDefs = resolve(ctx.workspaceRoot, 'definitions');
+  const definitionsPath = existsSync(wsDefs) ? wsDefs : resolve(extensionPath, 'definitions');
 
-  mkdirSync(dirname(client.file), { recursive: true });
-  writeFileSync(client.file, merged, 'utf8');
-  return client.file;
+  const written: string[] = [];
+  for (const t of targets(ctx.workspaceRoot)) {
+    const entry = buildEntry({
+      distPath: coreEntry,
+      workspaceRoot: ctx.workspaceRoot,
+      browseRoot: ctx.workspaceRoot,
+      entryShape: t.entry,
+    });
+    // Run the bundled core under the editor's Node; fall back to bundled definitions.
+    entry.command = process.execPath;
+    entry.args = [coreEntry];
+    entry.env = { ...entry.env, ELECTRON_RUN_AS_NODE: '1', DEFINITIONS_PATH: definitionsPath };
+
+    const existing = existsSync(t.file) ? readFileSync(t.file, 'utf8') : '{}';
+    if (existsSync(t.file)) copyFileSync(t.file, `${t.file}.bak`);
+    const merged = mergeServer(existing, entry, t.key);
+
+    mkdirSync(dirname(t.file), { recursive: true });
+    writeFileSync(t.file, merged, 'utf8');
+    written.push(t.file);
+  }
+  return written;
 }

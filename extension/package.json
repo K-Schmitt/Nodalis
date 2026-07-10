@@ -1,26 +1,33 @@
 {
-  "name": "archi-os-vscode",
-  "displayName": "ARCHI-OS",
-  "description": "ARCHI-OS meta-modeler: graph, versioning, MCP.",
-  "version": "0.1.0",
-  "publisher": "archi-os",
-  "engines": { "vscode": "^1.85.0", "node": ">=20.0.0" },
+  "name": "nodalis",
+  "displayName": "Nodalis",
+  "description": "Agnostic semantic-graph meta-modeler — graph, versioning, MCP.",
+  "version": "0.1.4",
+  "publisher": "Nodalis",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "engines": { "vscode": "^1.80.0" },
   "main": "./dist/extension.js",
   "activationEvents": ["onStartupFinished"],
-  "categories": ["Other"],
+  "categories": ["Visualization", "Other"],
+  "keywords": ["graph", "meta-model", "architecture", "mcp", "versioning"],
+  "repository": { "type": "git", "url": "https://github.com/K-Schmitt/Nodalis.git", "directory": "extension" },
+  "bugs": { "url": "https://github.com/K-Schmitt/Nodalis/issues" },
+  "homepage": "https://github.com/K-Schmitt/Nodalis#readme",
+  "galleryBanner": { "color": "#1E1B4B", "theme": "dark" },
   "contributes": {
     "commands": [
-      { "command": "archi-os.open", "title": "ARCHI-OS: Open" },
-      { "command": "archi-os.start", "title": "ARCHI-OS: Start Runtime" },
-      { "command": "archi-os.stop", "title": "ARCHI-OS: Stop Runtime" },
-      { "command": "archi-os.configureMcp", "title": "ARCHI-OS: Configure MCP" },
-      { "command": "archi-os.createSnapshot", "title": "ARCHI-OS: Create Snapshot" },
-      { "command": "archi-os.refreshVersions", "title": "ARCHI-OS: Refresh Versions", "icon": "$(refresh)" },
-      { "command": "archi-os.restoreVersion", "title": "ARCHI-OS: Restore Version" }
+      { "command": "archi-os.open", "title": "Nodalis: Open" },
+      { "command": "archi-os.start", "title": "Nodalis: Start Runtime" },
+      { "command": "archi-os.stop", "title": "Nodalis: Stop Runtime" },
+      { "command": "archi-os.configureMcp", "title": "Nodalis: Configure MCP" },
+      { "command": "archi-os.createSnapshot", "title": "Nodalis: Create Snapshot" },
+      { "command": "archi-os.refreshVersions", "title": "Nodalis: Refresh Versions", "icon": "$(refresh)" },
+      { "command": "archi-os.restoreVersion", "title": "Nodalis: Restore Version" }
     ],
     "viewsContainers": {
       "activitybar": [
-        { "id": "archi-os", "title": "ARCHI-OS", "icon": "media/icon.svg" }
+        { "id": "archi-os", "title": "Nodalis", "icon": "media/icon.svg" }
       ]
     },
     "views": {
@@ -35,12 +42,12 @@
       ]
     },
     "configuration": {
-      "title": "ARCHI-OS",
+      "title": "Nodalis",
       "properties": {
         "archiOs.autostart": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically start the ARCHI-OS runtime when a workspace with .archi/ is opened."
+          "description": "Automatically start the Nodalis runtime when a workspace with .archi/ is opened."
         }
       }
     }
@@ -60,7 +67,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.5",
-    "@types/vscode": "^1.85.0",
+    "@types/vscode": "^1.80.0",
     "@vscode/vsce": "^2.24.0",
     "esbuild": "^0.20.0",
     "typescript": "^5.3.3",

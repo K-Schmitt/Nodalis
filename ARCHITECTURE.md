@@ -425,8 +425,14 @@ Package `archi-os-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe
 ### Livrable #1 — Versioning
 TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`, `POST /api/versions/:id/restore` (le restore **persiste** le graphe sur le SSOT disque pour que le poll web ET le process MCP le voient). Diagnostics `onDidSave` des `*.def.json` validés via `@archi-os/core/schema`.
 
-### Packaging
-`esbuild.mjs` copie `web/dist` → `extension/web-dist` (nettoyé avant copie) puis bundle `src/extension.ts` (`external: ['vscode']`). `vsce package --no-dependencies` produit `archi-os-vscode-0.1.0.vsix` (contient `dist/extension.js`, `web-dist/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
+### Packaging (standalone)
+`esbuild.mjs` produit un `.vsix` **autonome** — aucun clone/build du repo requis côté user :
+1. `web/dist` → `extension/web-dist` (nettoyé avant copie) ;
+2. `core/dist/index.js` → `extension/core-bundle/index.cjs` : bundle esbuild **mono-fichier** (fastify/pino/chokidar/zod inlinés, sans `node_modules`) que l'`engine` spawn comme process enfant ;
+3. `definitions/` → `extension/definitions` : règles par défaut pour qu'un workspace vide ait des types ;
+4. bundle de `src/extension.ts` (`external: ['vscode']`).
+
+`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `archi-os-vscode-0.1.0.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
 
 ---
 

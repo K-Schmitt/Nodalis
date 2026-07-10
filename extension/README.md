@@ -10,7 +10,7 @@ Nodalis is an agnostic "meta-modeler": the rules live in `.def.json` definition 
 - **One-click runtime** — `Nodalis: Start Runtime` boots the bundled core (Fastify HTTP API) under the editor's own Node; a status-bar item shows **Live**.
 - **Versioning** — a **Versions** view in the activity bar: snapshot the current graph, browse versions, and restore any of them (restore is persisted to disk).
 - **Live definition diagnostics** — save a `definitions/**/*.def.json` and rule errors show up in the **Problems** panel, mapped to the exact line, validated against the Zod schema. A clean save refreshes the open graph instantly.
-- **MCP wiring** — `Nodalis: Configure MCP` writes `.vscode/mcp.json` so AI tools can drive the graph.
+- **MCP wiring** — `Nodalis: Configure MCP` registers the bundled MCP server for **VSCode** (`.vscode/mcp.json`), **Cursor** (`.cursor/mcp.json`) and **Claude Code** (`.mcp.json`) so AI tools can drive the graph.
 
 ## Getting started
 
@@ -29,7 +29,7 @@ Definitions come from a `definitions/` folder in your workspace when present; ot
 |---------|-------------|
 | `Nodalis: Open` | Open the graph webview |
 | `Nodalis: Start Runtime` / `Stop Runtime` | Boot / stop the bundled core |
-| `Nodalis: Configure MCP` | Write `.vscode/mcp.json` |
+| `Nodalis: Configure MCP` | Register the MCP server for VSCode, Cursor & Claude Code |
 | `Nodalis: Create Snapshot` | Snapshot the current graph |
 | `Nodalis: Refresh Versions` / `Restore Version` | Manage versions |
 

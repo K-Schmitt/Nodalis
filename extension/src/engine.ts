@@ -42,6 +42,10 @@ export class Engine {
       command: process.execPath,
       commandArgs: [coreEntry],
       env: {
+        // In the VSCode extension host, process.execPath is the editor binary
+        // (Code.exe / Electron), not node. This flag makes it run as a plain
+        // Node interpreter — so the bundled core runs without any external Node.
+        ELECTRON_RUN_AS_NODE: '1',
         RUN_HTTP_SERVER: 'true',
         PORT: String(corePort),
         WORKSPACE_ROOT: ctx.workspaceRoot,

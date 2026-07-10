@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 
 export class StatusBar {
   private item: vscode.StatusBarItem;
-  private steady = '$(circle-slash) ARCHI-OS';
+  private steady = '$(circle-slash) Nodalis';
 
   constructor() {
     this.item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
@@ -12,13 +12,13 @@ export class StatusBar {
   }
 
   setLive(url: string): void {
-    this.steady = '$(broadcast) ARCHI-OS Live';
+    this.steady = '$(broadcast) Nodalis Live';
     this.item.text = this.steady;
     this.item.tooltip = `Runtime live — ${url}`;
   }
 
   setStopped(): void {
-    this.steady = '$(circle-slash) ARCHI-OS';
+    this.steady = '$(circle-slash) Nodalis';
     this.item.text = this.steady;
     this.item.tooltip = 'Runtime stopped — click to open';
   }

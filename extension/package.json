@@ -3,7 +3,7 @@
   "displayName": "Nodalis",
   "description": "Agnostic semantic-graph meta-modeler — graph, versioning, MCP.",
   "version": "0.1.1",
-  "publisher": "kylian-schmitt",
+  "publisher": "Nodalis",
   "license": "MIT",
   "icon": "media/icon.png",
   "engines": { "vscode": "^1.80.0" },

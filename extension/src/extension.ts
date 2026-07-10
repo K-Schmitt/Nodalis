@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext): void {
     if (!ctx) { void vscode.window.showErrorMessage('Nodalis: open a workspace folder first.'); return; }
     try {
       const files = configureMcp(ctx, context.extensionUri.fsPath);
-      void vscode.window.showInformationMessage(`Nodalis MCP configured for VSCode, Cursor & Claude Code (${files.length} files).`);
+      void vscode.window.showInformationMessage(`Nodalis MCP configured globally for VSCode, Cursor & Claude Code (${files.length} files). Reload each client to pick it up.`);
     } catch (err) {
       void vscode.window.showErrorMessage(`Nodalis MCP config failed: ${(err as Error).message}`);
     }

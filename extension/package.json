@@ -1,9 +1,9 @@
 {
-  "name": "archi-os-vscode",
-  "displayName": "ARCHI-OS",
-  "description": "ARCHI-OS meta-modeler: graph, versioning, MCP.",
+  "name": "nodalis",
+  "displayName": "Nodalis",
+  "description": "Agnostic semantic-graph meta-modeler — graph, versioning, MCP.",
   "version": "0.1.1",
-  "publisher": "archi-os",
+  "publisher": "kylian-schmitt",
   "license": "MIT",
   "icon": "media/icon.png",
   "engines": { "vscode": "^1.80.0" },
@@ -17,17 +17,17 @@
   "galleryBanner": { "color": "#1E1B4B", "theme": "dark" },
   "contributes": {
     "commands": [
-      { "command": "archi-os.open", "title": "ARCHI-OS: Open" },
-      { "command": "archi-os.start", "title": "ARCHI-OS: Start Runtime" },
-      { "command": "archi-os.stop", "title": "ARCHI-OS: Stop Runtime" },
-      { "command": "archi-os.configureMcp", "title": "ARCHI-OS: Configure MCP" },
-      { "command": "archi-os.createSnapshot", "title": "ARCHI-OS: Create Snapshot" },
-      { "command": "archi-os.refreshVersions", "title": "ARCHI-OS: Refresh Versions", "icon": "$(refresh)" },
-      { "command": "archi-os.restoreVersion", "title": "ARCHI-OS: Restore Version" }
+      { "command": "archi-os.open", "title": "Nodalis: Open" },
+      { "command": "archi-os.start", "title": "Nodalis: Start Runtime" },
+      { "command": "archi-os.stop", "title": "Nodalis: Stop Runtime" },
+      { "command": "archi-os.configureMcp", "title": "Nodalis: Configure MCP" },
+      { "command": "archi-os.createSnapshot", "title": "Nodalis: Create Snapshot" },
+      { "command": "archi-os.refreshVersions", "title": "Nodalis: Refresh Versions", "icon": "$(refresh)" },
+      { "command": "archi-os.restoreVersion", "title": "Nodalis: Restore Version" }
     ],
     "viewsContainers": {
       "activitybar": [
-        { "id": "archi-os", "title": "ARCHI-OS", "icon": "media/icon.svg" }
+        { "id": "archi-os", "title": "Nodalis", "icon": "media/icon.svg" }
       ]
     },
     "views": {
@@ -42,12 +42,12 @@
       ]
     },
     "configuration": {
-      "title": "ARCHI-OS",
+      "title": "Nodalis",
       "properties": {
         "archiOs.autostart": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically start the ARCHI-OS runtime when a workspace with .archi/ is opened."
+          "description": "Automatically start the Nodalis runtime when a workspace with .archi/ is opened."
         }
       }
     }

@@ -52,7 +52,7 @@ export function openPanel(ctx: ExtContext, extensionUri: vscode.Uri): vscode.Web
   const distRoot = vscode.Uri.joinPath(extensionUri, 'web-dist');
   const panel = vscode.window.createWebviewPanel(
     'archiOs',
-    'ARCHI-OS',
+    'Nodalis',
     vscode.ViewColumn.Active,
     {
       enableScripts: true,

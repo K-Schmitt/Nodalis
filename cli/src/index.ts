@@ -5,7 +5,7 @@ export async function runCli(argv: string[]): Promise<void> {
   const program = new Command();
   program
     .name('archi-os')
-    .description('ARCHI-OS CLI — install, launch, configure MCP')
+    .description('Nodalis CLI — install, launch, configure MCP')
     .version('1.0.0');
 
   program.command('init').description('Configure MCP client(s)')

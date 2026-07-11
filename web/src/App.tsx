@@ -47,7 +47,7 @@ function App() {
         display: 'flex', alignItems: 'center', gap: 16, padding: '0 24px',
         boxShadow: T.shadow, position: 'relative', zIndex: 20,
       }}>
-        <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: T.text }}>🏗️ ARCHI-OS</h1>
+        <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: T.text }}>🏗️ Nodalis</h1>
         <WorkspaceSwitcher />
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12, fontSize: 13 }}>
@@ -95,7 +95,7 @@ function App() {
             <h2 style={{ color: T.text }}>No workspace open</h2>
             <p style={{ maxWidth: 420, textAlign: 'center' }}>
               Open or create a workspace folder from the <strong>📁 selector</strong> in the header.
-              ARCHI-OS will store the architecture, its type and notes inside that folder’s <code>.archi/</code> directory.
+              Nodalis will store the architecture, its type and notes inside that folder’s <code>.archi/</code> directory.
             </p>
           </div>
         )}

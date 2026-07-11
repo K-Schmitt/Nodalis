@@ -1,4 +1,4 @@
-# ARCHI-OS Web (Frontend)
+# Nodalis Web (Frontend)
 
 Interface utilisateur pour visualiser et manipuler les graphes.
 

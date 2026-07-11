@@ -41,7 +41,7 @@ function migrateLegacyWorkspace(workspaces: WorkspaceManager, workspaceRoot: str
 }
 
 async function main() {
-  log('🚀 Starting ARCHI-OS Core...');
+  log('🚀 Starting Nodalis Core...');
 
   const workspaceRoot = process.env.WORKSPACE_ROOT || process.cwd();
 
@@ -66,7 +66,7 @@ async function main() {
   presetRegistry.ensureForActiveWorkspace(workspaces);
 
   const active = workspaces.getActive();
-  log(`✅ ARCHI-OS ready — ${presetLoader.list().length} preset(s), ${registry.size()} types in scope`);
+  log(`✅ Nodalis ready — ${presetLoader.list().length} preset(s), ${registry.size()} types in scope`);
   log(active ? `📁 Active workspace: ${active.name} [${active.presetId}] (${active.path})` : '📁 No active workspace');
 
   if (runHttpServer) {

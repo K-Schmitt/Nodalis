@@ -1,8 +1,8 @@
-# Architecture d'ARCHI-OS
+# Architecture de Nodalis
 
 ## Vue d'ensemble
 
-ARCHI-OS est un système de gestion et de visualisation d'architecture logicielle qui permet de manipuler des graphes d'architecture via des IA et de les visualiser dans une interface web.
+Nodalis est un système de gestion et de visualisation d'architecture logicielle qui permet de manipuler des graphes d'architecture via des IA et de les visualiser dans une interface web.
 
 ### Architecture générale
 

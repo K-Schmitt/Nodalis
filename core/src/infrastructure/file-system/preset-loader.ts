@@ -6,21 +6,33 @@ import { PresetSchema, type Preset } from '../../domain/types.js';
  * Reads and validates architecture presets from `<definitions>/presets/*.preset.json`.
  * Presets are the "subset" mechanism — each declares which definition folders and
  * global rules an architecture type (web, game, …) uses.
+ *
+ * `definitionsPath` may carry several roots separated by the OS path delimiter
+ * (see {@link DefinitionLoader}); presets are merged across roots, and a later
+ * root (e.g. the workspace) overrides an earlier one (e.g. bundled) by preset id.
  */
 export class PresetLoader {
-  private readonly presetsDir: string;
+  private readonly presetsDirs: string[];
 
   constructor(definitionsPath: string) {
-    this.presetsDir = path.join(path.resolve(definitionsPath), 'presets');
+    this.presetsDirs = definitionsPath
+      .split(path.delimiter)
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((p) => path.join(path.resolve(p), 'presets'));
   }
 
   list(): Preset[] {
-    if (!fs.existsSync(this.presetsDir)) return [];
-    return fs.readdirSync(this.presetsDir)
-      .filter((f) => f.endsWith('.preset.json'))
-      .map((f) => this.read(path.join(this.presetsDir, f)))
-      .filter((p): p is Preset => p !== null)
-      .sort((a, b) => a.id.localeCompare(b.id));
+    // Merge presets across roots; later roots override earlier ones by id.
+    const byId = new Map<string, Preset>();
+    for (const dir of this.presetsDirs) {
+      if (!fs.existsSync(dir)) continue;
+      for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.preset.json'))) {
+        const preset = this.read(path.join(dir, f));
+        if (preset) byId.set(preset.id, preset);
+      }
+    }
+    return [...byId.values()].sort((a, b) => a.id.localeCompare(b.id));
   }
 
   get(id: string): Preset | undefined {

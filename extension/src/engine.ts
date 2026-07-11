@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+import { resolve, delimiter } from 'node:path';
 import { existsSync } from 'node:fs';
 import { spawnManaged, stopEntry, type ProcEntry } from '@nodalis/cli/lib/process';
 import { findFreePort, waitForHealth } from '@nodalis/cli/lib/ports';
@@ -44,9 +44,12 @@ export class Engine {
     const coreEntry = resolve(extensionPath, 'core-bundle', 'index.cjs');
     if (!existsSync(coreEntry)) throw new Error('core bundle missing from the extension — rebuild the .vsix.');
 
-    // Prefer the workspace's own definitions; fall back to the bundled defaults.
+    // Always load the bundled defaults; layer the workspace's own definitions on
+    // top when present (later root wins by typeId/preset id) so a workspace can
+    // extend AND override the base set instead of replacing it wholesale.
+    const bundledDefs = resolve(extensionPath, 'definitions');
     const wsDefs = resolve(ctx.workspaceRoot, 'definitions');
-    const definitionsPath = existsSync(wsDefs) ? wsDefs : resolve(extensionPath, 'definitions');
+    const definitionsPath = existsSync(wsDefs) ? `${bundledDefs}${delimiter}${wsDefs}` : bundledDefs;
 
     const corePort = await findFreePort(ctx.corePort);
     const core = spawnManaged({

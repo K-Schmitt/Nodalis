@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { resolveContext } from './config';
 import { Engine } from './engine';
 import { configureMcp } from './mcp';
@@ -102,6 +104,56 @@ export function activate(context: vscode.ExtensionContext): void {
   const ctx = resolveContext();
   if (ctx?.autostart) {
     void vscode.commands.executeCommand('archi-os.start');
+  }
+
+  // First-run bootstrap: configure MCP + start runtime + open the panel once
+  // per workspace, so a fresh install "just works" without the manual trio.
+  void bootstrapFirstRun(context, ctx);
+}
+
+/** A folder is a Nodalis project only if it carries definitions to model. */
+function isArchiWorkspace(root: string): boolean {
+  return existsSync(resolve(root, '.archi')) || existsSync(resolve(root, 'definitions'));
+}
+
+/**
+ * First-run setup. MCP config is global, so it runs once ever (own flag); the
+ * runtime start + panel open run once per Nodalis workspace. Nothing is spawned
+ * for non-Nodalis folders, and each flag is only set after its step succeeds,
+ * so a failure retries on the next launch instead of wedging a broken state.
+ */
+async function bootstrapFirstRun(
+  context: vscode.ExtensionContext,
+  ctx: ReturnType<typeof resolveContext>,
+): Promise<void> {
+  if (!ctx?.autoBootstrap) return;
+  // Never spawn a runtime or open a panel for a folder that isn't a Nodalis
+  // project — opening any random workspace must stay side-effect free.
+  if (!isArchiWorkspace(ctx.workspaceRoot)) return;
+  // globalState may be absent in test harnesses; bail out safely if so.
+  const state = context.globalState;
+  if (!state?.get || !state.update) return;
+
+  const MCP_KEY = 'archi-os.mcpConfigured';               // global — write once ever
+  const bootKey = `archi-os.bootstrapped:${ctx.workspaceRoot}`; // per-workspace
+
+  try {
+    // MCP config writes global client files pointing at the bundled core; doing
+    // it once avoids rewriting them on every launch while the runtime start fails.
+    if (!state.get<boolean>(MCP_KEY)) {
+      await vscode.commands.executeCommand('archi-os.configureMcp');
+      await state.update(MCP_KEY, true);
+    }
+
+    if (state.get<boolean>(bootKey)) return;
+    await vscode.commands.executeCommand('archi-os.start');
+    // start swallows its own errors; only open + mark done if the runtime is
+    // actually live (core AND web), else leave the flag unset so we retry.
+    if (!engine?.isLive()) return;
+    await vscode.commands.executeCommand('archi-os.open');
+    await state.update(bootKey, true);
+  } catch (err) {
+    void vscode.window.showErrorMessage(`Nodalis first-run setup failed (will retry next launch): ${(err as Error).message}`);
   }
 }
 

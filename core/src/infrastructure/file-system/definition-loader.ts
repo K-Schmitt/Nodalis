@@ -16,37 +16,57 @@ const NON_DEFINITION_DIRS = new Set(['presets']);
  * registry can be re-derived cheaply whenever the active workspace/preset changes.
  */
 export class DefinitionLoader {
-  private definitionsPath: string;
+  /**
+   * Ordered list of definition roots. `DEFINITIONS_PATH` may carry several roots
+   * separated by the OS path delimiter (`:` posix / `;` win) — e.g. the VSCode
+   * extension passes `<bundled>:<workspace>`. Later roots override earlier ones
+   * on a `typeId` clash (the registry is a Map), so a workspace can extend AND
+   * override the bundled default set instead of replacing it wholesale.
+   */
+  private definitionsPaths: string[];
   private watcher?: chokidar.FSWatcher;
 
   constructor(definitionsPath: string = './definitions') {
-    this.definitionsPath = path.resolve(definitionsPath);
+    this.definitionsPaths = DefinitionLoader.parsePaths(definitionsPath);
+  }
+
+  /** Split a (possibly multi-root) DEFINITIONS_PATH into resolved absolute roots. */
+  static parsePaths(spec: string): string[] {
+    const roots = spec.split(path.delimiter).map((s) => s.trim()).filter(Boolean).map((p) => path.resolve(p));
+    return roots.length ? roots : [path.resolve('./definitions')];
   }
 
   /**
    * Load every `*.def.json` under the given include folders into the registry.
-   * Pass `["*"]` to load the entire definitions tree.
+   * Pass `["*"]` to load the entire definitions tree. Each include folder is read
+   * from every root in order, so later roots (e.g. the workspace) override earlier
+   * ones (e.g. the bundled defaults) on a `typeId` clash.
    */
   loadIncludeSync(registry: Registry, includeDirs: string[]): void {
-    const roots = includeDirs.includes('*')
-      ? [this.definitionsPath]
-      : includeDirs.map((dir) => path.join(this.definitionsPath, dir));
+    const loadAll = includeDirs.includes('*');
+    // '.' means "the whole root tree" (used for the `*` include).
+    const dirs = loadAll ? ['.'] : includeDirs;
 
     let loaded = 0;
     let failed = 0;
-    for (const root of roots) {
-      if (!fs.existsSync(root)) {
-        console.error(`  ⚠️  Include folder not found: ${root}`);
-        continue;
-      }
-      for (const file of this.collectDefFilesSync(root)) {
-        try {
-          this.loadFileSync(file, registry);
-          loaded++;
-        } catch (err) {
-          console.error(`  ✗ Skipped ${file}:`, err instanceof Error ? err.message : err);
-          failed++;
+    for (const dir of dirs) {
+      let foundInAnyRoot = false;
+      for (const base of this.definitionsPaths) {
+        const root = dir === '.' ? base : path.join(base, dir);
+        if (!fs.existsSync(root)) continue;
+        foundInAnyRoot = true;
+        for (const file of this.collectDefFilesSync(root)) {
+          try {
+            this.loadFileSync(file, registry);
+            loaded++;
+          } catch (err) {
+            console.error(`  ✗ Skipped ${file}:`, err instanceof Error ? err.message : err);
+            failed++;
+          }
         }
+      }
+      if (!foundInAnyRoot && !loadAll) {
+        console.error(`  ⚠️  Include folder not found in any root: ${dir}`);
       }
     }
 
@@ -82,9 +102,10 @@ export class DefinitionLoader {
    * add/change/unlink — the caller decides how to reload (preset-aware).
    */
   watchChanges(onChange: () => void): void {
-    console.error(`👀 Watching for changes in ${this.definitionsPath} (recursive)`);
+    console.error(`👀 Watching for changes in [${this.definitionsPaths.join(', ')}] (recursive)`);
 
-    this.watcher = chokidar.watch(`${this.definitionsPath}/**/*.{def,preset}.json`, {
+    const globs = this.definitionsPaths.map((base) => `${base}/**/*.{def,preset}.json`);
+    this.watcher = chokidar.watch(globs, {
       persistent: true,
       ignoreInitial: true,
     });

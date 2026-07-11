@@ -23,7 +23,7 @@ Nodalis est un système de gestion et de visualisation d'architecture logicielle
 ## Structure du projet
 
 ```
-Archi-Os/
+nodalis/
 ├── core/                    # Backend (TypeScript/Node.js)
 │   ├── src/
 │   │   ├── application/     # Use cases (logique métier)
@@ -49,7 +49,7 @@ Archi-Os/
 │   │   └── errors.ts      # CliError & dérivés
 │   └── tests/unit/        # tests vitest des modules purs
 │
-├── extension/              # Extension VSCode nodalis-vscode (esbuild → .vsix)
+├── extension/              # Extension VSCode « nodalis » (esbuild → .vsix)
 │   ├── src/
 │   │   ├── engine.ts      # spawn core attaché + web statique (via cli/lib)
 │   │   ├── mcp.ts         # config MCP (compose cli/lib/mcp-config)
@@ -412,7 +412,7 @@ Pour être réutilisables hors du bin, les modules purs sont exposés via l'`exp
 
 ## Extension VSCode (`/extension`)
 
-Package `nodalis-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@nodalis/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@nodalis/core/schema` (`DefinitionSchema`) — jamais la racine `@nodalis/core` (qui embarque Fastify + MCP).
+Package `nodalis` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@nodalis/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@nodalis/core/schema` (`DefinitionSchema`) — jamais la racine `@nodalis/core` (qui embarque Fastify + MCP).
 
 ### Modules (`src/`)
 - `extension.ts` : `activate()` enregistre **toutes** les commandes d'abord (registration jamais dépendante du wiring UI optionnel), puis câble statusbar/tree/diagnostics en best-effort, puis `bootstrapFirstRun()`.
@@ -439,7 +439,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 3. `definitions/` → `extension/definitions` : règles par défaut pour qu'un workspace vide ait des types ;
 4. bundle de `src/extension.ts` (`external: ['vscode']`).
 
-`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `nodalis-vscode-0.1.0.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
+`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `nodalis-<version>.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
 
 ---
 
@@ -478,6 +478,14 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 - `WORKSPACE_ROOT` : Racine du projet (obligatoire)
 - `DEFINITIONS_PATH` : Chemin vers les définitions (défaut: `./definitions`)
 - `RUN_HTTP_SERVER` : Lance le HTTP server au lieu du MCP (`true` | `false`)
+- `WORKSPACE_BROWSE_ROOT` : Racine autorisée pour ouvrir/créer des workspaces (défaut: home) — borne le browser de fichiers et la création de workspace
+- `HTTP_HOST` : Interface d'écoute du serveur HTTP (défaut: **`127.0.0.1`**)
+
+> **Sécurité — bind loopback.** L'API HTTP est **non authentifiée** et expose le
+> browser de fichiers (`/api/fs/list`) et la création de workspace. Elle écoute donc
+> `127.0.0.1` par défaut (jamais le LAN). Seul le conteneur Docker met
+> `HTTP_HOST=0.0.0.0` (le port est publié explicitement). Les ids de sous-graphe
+> passés dans les chemins sont validés comme UUID (anti-traversal).
 
 #### MCP Configuration (`~/.config/Code/User/mcp.json`)
 ```json
@@ -488,7 +496,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
       "args": ["/path/to/core/dist/index.js"],
       "env": {
         "NODE_ENV": "development",
-        "WORKSPACE_ROOT": "/path/to/Archi-Os",
+        "WORKSPACE_ROOT": "/path/to/nodalis",
         "DEFINITIONS_PATH": "/path/to/definitions"
       }
     }

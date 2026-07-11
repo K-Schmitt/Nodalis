@@ -18,7 +18,7 @@ describe('configureMcp (global, multi-client)', () => {
     const extPath = join(tmpdir(), 'nodalis-ext');
 
     const files = configureMcp(
-      { workspaceRoot: ws, corePort: 3000, webPort: 5173, autostart: false },
+      { workspaceRoot: ws, corePort: 3000, webPort: 5173, autostart: false, autoBootstrap: true },
       extPath,
       { home, platform: 'linux' },
     );

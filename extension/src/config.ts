@@ -5,6 +5,7 @@ export type ExtContext = {
   corePort: number;
   webPort: number;
   autostart: boolean;
+  autoBootstrap: boolean;
 };
 
 /** Resolve the active workspace root and configured ports. */
@@ -17,5 +18,6 @@ export function resolveContext(): ExtContext | null {
     corePort: 3000,
     webPort: 5173,
     autostart: cfg.get<boolean>('autostart', false),
+    autoBootstrap: cfg.get<boolean>('autoBootstrap', true),
   };
 }

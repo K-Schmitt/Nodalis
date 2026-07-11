@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import * as pathWin32 from 'node:path/win32';
-import { buildEntry, mergeServer } from '@archi-os/cli/lib/mcp-config';
+import { buildEntry, mergeServer } from '@nodalis/cli/lib/mcp-config';
 import type { ExtContext } from './config';
 
 /** Minimal host description (injectable for tests). */

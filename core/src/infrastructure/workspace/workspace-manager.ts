@@ -7,7 +7,7 @@ import { NoActiveWorkspaceError } from '../../errors/no-active-workspace-error.j
 import { WorkspaceNotFoundError } from '../../errors/workspace-not-found-error.js';
 import { WorkspacePathError } from '../../errors/workspace-path-error.js';
 
-/** Absolute paths to every artifact inside a workspace's `.archi/` folder. */
+/** Absolute paths to every artifact inside a workspace's `.nodalis/` folder. */
 export interface WorkspacePaths {
   root: string;
   archiDir: string;
@@ -53,7 +53,7 @@ const NOTES_TEMPLATE = (name: string) =>
 
 /**
  * Owns the "open folder" workspace model (VSCode-style). A workspace is any OS
- * folder; Nodalis stores its data in `<folder>/.archi/`. The active workspace
+ * folder; Nodalis stores its data in `<folder>/.nodalis/`. The active workspace
  * is persisted globally (see {@link AppStateStore}) so it is remembered across
  * restarts and shared between the MCP and HTTP processes.
  *
@@ -75,7 +75,7 @@ export class WorkspaceManager {
 
   resolvePaths(workspacePath: string): WorkspacePaths {
     const root = path.resolve(workspacePath);
-    const archiDir = path.join(root, '.archi');
+    const archiDir = path.join(root, '.nodalis');
     return {
       root,
       archiDir,
@@ -90,8 +90,19 @@ export class WorkspaceManager {
 
   /** Absolute path of a node's sub-graph file within a workspace. */
   resolveSubgraphPath(workspacePath: string, nodeId: string): string {
-    // nodeId is a UUID (validated upstream) → safe as a filename.
+    // nodeId becomes a filename — reject anything that isn't a UUID so it can
+    // never contain path separators / `..` and escape the sub-graphs folder.
+    WorkspaceManager.assertValidNodeId(nodeId);
     return path.join(this.resolvePaths(workspacePath).subgraphsDir, `${nodeId}.graph.json`);
+  }
+
+  private static readonly NODE_ID_RE =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+  private static assertValidNodeId(nodeId: string): void {
+    if (!WorkspaceManager.NODE_ID_RE.test(nodeId)) {
+      throw new WorkspacePathError(`Invalid node id "${nodeId}" (expected a UUID).`, { nodeId });
+    }
   }
 
   isInitialized(workspacePath: string): boolean {
@@ -137,11 +148,19 @@ export class WorkspaceManager {
     }
 
     const leaf = stack[stack.length - 1];
-    const subPath = this.resolveSubgraphPath(active.path, leaf.id);
-    const subPreset = this.readSubgraphPreset(subPath);
+    // A malformed (non-UUID) or vanished sub-graph id must never wedge reads or
+    // reach a file path — fall back to the root graph and clear the broken trail.
+    let subPath: string | null = null;
+    let subPreset: string | null = null;
+    try {
+      subPath = this.resolveSubgraphPath(active.path, leaf.id);
+      subPreset = this.readSubgraphPreset(subPath);
+    } catch {
+      subPath = null;
+      subPreset = null;
+    }
 
-    if (!subPreset) {
-      // Sub-graph file vanished → fall back to root and clear the broken trail.
+    if (!subPath || !subPreset) {
       this.appState.setGraphStack([]);
       return { workspacePath: active.path, subgraphId: null, graphPath: paths.graphPath, presetId: active.presetId, breadcrumb: [] };
     }
@@ -199,6 +218,9 @@ export class WorkspaceManager {
   /** Replace the drill-down trail wholesale (breadcrumb jump / exit to root with []). */
   setGraphStack(stack: GraphStackEntry[]): GraphContext {
     this.requireActive();
+    // Validate every id BEFORE persisting so a malformed trail can never be
+    // written (and later fed into a file path by getActiveGraphContext).
+    for (const entry of stack) WorkspaceManager.assertValidNodeId(entry.id);
     this.appState.setGraphStack(stack);
     return this.requireActiveGraphContext();
   }
@@ -239,7 +261,7 @@ export class WorkspaceManager {
       updatedAt: now,
     };
     this.writeMeta(paths, meta);
-    // Never clobber an existing graph (e.g. when migrating a legacy `.archi/graph.json`).
+    // Never clobber an existing graph (e.g. when migrating a legacy `.nodalis/graph.json`).
     if (!fs.existsSync(paths.graphPath)) this.writeJson(paths.graphPath, { nodes: [], edges: [], savedAt: now });
     if (!fs.existsSync(paths.notesPath)) fs.writeFileSync(paths.notesPath, NOTES_TEMPLATE(opts.name), 'utf-8');
 

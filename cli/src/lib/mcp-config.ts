@@ -1,7 +1,7 @@
 import { applyEdits, modify, parse, type ParseError } from 'jsonc-parser';
 import { McpConfigError } from '../errors.js';
 
-export const SERVER_KEY = 'archi-os';
+export const SERVER_KEY = 'nodalis';
 
 export type McpEntry = {
   command: string;

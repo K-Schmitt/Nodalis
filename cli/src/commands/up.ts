@@ -16,7 +16,7 @@ export async function up(opts: { docker?: boolean; open?: boolean }): Promise<vo
 
   const existing = readRunRegistry(ws);
   if (existing?.mode === 'docker') {
-    console.log('Already up via docker compose. Run `archi-os down` first to switch mode.');
+    console.log('Already up via docker compose. Run `nodalis down` first to switch mode.');
     return;
   }
   if (existing?.core && isEntryAlive(existing.core)) {
@@ -60,7 +60,7 @@ export async function up(opts: { docker?: boolean; open?: boolean }): Promise<vo
   if (!existsSync(distRoot)) throw new CliError('web not built. Run: npm run build:web');
 
   const web = await startStaticServer({ distRoot, apiBaseUrl: `http://localhost:${corePort}`, port: cfg.ports.web });
-  const webEntry = { pid: process.pid, port: web.port, startedAt: Date.now(), cmd: 'archi-os static-server' };
+  const webEntry = { pid: process.pid, port: web.port, startedAt: Date.now(), cmd: 'nodalis static-server' };
   writeRunRegistry(ws, { ...reg, web: webEntry });
 
   const webUrl = `http://localhost:${web.port}`;

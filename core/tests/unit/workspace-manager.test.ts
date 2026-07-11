@@ -27,15 +27,15 @@ describe('WorkspaceManager', () => {
     expect(() => workspaces.requireActive()).toThrow(NoActiveWorkspaceError);
   });
 
-  it('creates a workspace, makes it active and writes the .archi memory folder', () => {
+  it('creates a workspace, makes it active and writes the .nodalis memory folder', () => {
     const wsPath = path.join(root, 'proj1');
     const info = workspaces.create(wsPath, { name: 'Proj 1', presetId: 'web' });
 
     expect(info.name).toBe('Proj 1');
     expect(info.presetId).toBe('web');
     expect(workspaces.isInitialized(wsPath)).toBe(true);
-    expect(fs.existsSync(path.join(wsPath, '.archi', 'workspace.json'))).toBe(true);
-    expect(fs.existsSync(path.join(wsPath, '.archi', 'notes.md'))).toBe(true);
+    expect(fs.existsSync(path.join(wsPath, '.nodalis', 'workspace.json'))).toBe(true);
+    expect(fs.existsSync(path.join(wsPath, '.nodalis', 'notes.md'))).toBe(true);
     expect(workspaces.getActive()?.path).toBe(path.resolve(wsPath));
   });
 
@@ -47,14 +47,14 @@ describe('WorkspaceManager', () => {
 
   it('does not clobber an existing graph.json on create (migration safety)', () => {
     const wsPath = path.join(root, 'legacy');
-    fs.mkdirSync(path.join(wsPath, '.archi'), { recursive: true });
+    fs.mkdirSync(path.join(wsPath, '.nodalis'), { recursive: true });
     fs.writeFileSync(
-      path.join(wsPath, '.archi', 'graph.json'),
+      path.join(wsPath, '.nodalis', 'graph.json'),
       JSON.stringify({ nodes: [{ id: 'keep' }], edges: [], savedAt: 'x' })
     );
 
     workspaces.create(wsPath, { name: 'Legacy', presetId: 'full' });
-    const graph = JSON.parse(fs.readFileSync(path.join(wsPath, '.archi', 'graph.json'), 'utf-8'));
+    const graph = JSON.parse(fs.readFileSync(path.join(wsPath, '.nodalis', 'graph.json'), 'utf-8'));
     expect(graph.nodes).toHaveLength(1);
   });
 
@@ -132,6 +132,13 @@ describe('WorkspaceManager', () => {
       const ctx = workspaces.getActiveGraphContext()!;
       expect(ctx.subgraphId).toBeNull();
       expect(ctx.presetId).toBe('web');
+    });
+
+    it('rejects a non-UUID node id in the drill-down stack (path traversal guard)', () => {
+      expect(() => workspaces.setGraphStack([{ id: '../../etc/passwd', label: 'x' }]))
+        .toThrow(WorkspacePathError);
+      expect(() => workspaces.resolveSubgraphPath(path.join(root, 'proj'), '../secret'))
+        .toThrow(WorkspacePathError);
     });
   });
 });

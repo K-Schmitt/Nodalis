@@ -6,16 +6,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.core
-    container_name: archi-os-core
+    container_name: nodalis-core
     ports:
       - "3000:3000"
     volumes:
       - ./definitions:/app/definitions:ro
-      - ./architecture.json:/app/architecture.json
-      - ./.archi:/app/.archi
+      - ./.nodalis:/app/.nodalis
     environment:
       - NODE_ENV=production
       - PORT=3000
+      # Reachable via the published port mapping; loopback-only would hide it.
+      - HTTP_HOST=0.0.0.0
+      - RUN_HTTP_SERVER=true
     restart: unless-stopped
     networks:
       - archi-network
@@ -25,7 +27,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
-    container_name: archi-os-web
+    container_name: nodalis-web
     ports:
       - "8080:80"
     depends_on:

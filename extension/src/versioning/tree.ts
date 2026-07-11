@@ -14,8 +14,8 @@ export class VersionsProvider implements vscode.TreeDataProvider<Version> {
     item.description = `${new Date(v.createdAt).toLocaleString()} · ${v.nodeCount}n/${v.edgeCount}e`;
     item.tooltip = `${v.kind} · ${v.id}`;
     item.iconPath = new vscode.ThemeIcon(v.kind === 'manual' ? 'bookmark' : 'history');
-    item.contextValue = 'archi-os.version';
-    item.command = { command: 'archi-os.restoreVersion', title: 'Restore', arguments: [v] };
+    item.contextValue = 'nodalis.version';
+    item.command = { command: 'nodalis.restoreVersion', title: 'Restore', arguments: [v] };
     return item;
   }
 

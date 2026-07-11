@@ -9,7 +9,7 @@ const MIME: Record<string, string> = {
 };
 
 export function injectRuntimeConfig(html: string, apiBaseUrl: string): string {
-  const script = `<script>window.__ARCHI_OS__=${JSON.stringify({ apiBaseUrl })};</script>`;
+  const script = `<script>window.__NODALIS__=${JSON.stringify({ apiBaseUrl })};</script>`;
   return html.includes('</head>') ? html.replace('</head>', `${script}</head>`) : script + html;
 }
 

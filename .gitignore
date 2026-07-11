@@ -38,9 +38,9 @@ coverage/
 .temp/
 
 # Nodalis specific
-.archi/pending/
-.archi/cli/
-.archi/cli.json
+.nodalis/pending/
+.nodalis/cli/
+.nodalis/cli.json
 architecture.json.backup
 *.def.json.backup
 
@@ -62,7 +62,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 # Runtime pid files (should never have been tracked)
-.archi/*.pid
+.nodalis/*.pid
 copilote-instructions.md
 .cursorrules
 .cursor/

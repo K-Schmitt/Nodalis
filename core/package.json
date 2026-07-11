@@ -1,5 +1,5 @@
 {
-  "name": "@archi-os/core",
+  "name": "@nodalis/core",
   "version": "1.0.0",
   "description": "Nodalis Core - Backend Logic Engine",
   "type": "module",

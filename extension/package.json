@@ -17,48 +17,48 @@
   "galleryBanner": { "color": "#1E1B4B", "theme": "dark" },
   "contributes": {
     "commands": [
-      { "command": "archi-os.open", "title": "Nodalis: Open", "icon": "$(link-external)" },
-      { "command": "archi-os.start", "title": "Nodalis: Start Runtime", "icon": "$(play)" },
-      { "command": "archi-os.stop", "title": "Nodalis: Stop Runtime", "icon": "$(debug-stop)" },
-      { "command": "archi-os.configureMcp", "title": "Nodalis: Configure MCP" },
-      { "command": "archi-os.createSnapshot", "title": "Nodalis: Create Snapshot" },
-      { "command": "archi-os.refreshVersions", "title": "Nodalis: Refresh Versions", "icon": "$(refresh)" },
-      { "command": "archi-os.restoreVersion", "title": "Nodalis: Restore Version" }
+      { "command": "nodalis.open", "title": "Nodalis: Open", "icon": "$(link-external)" },
+      { "command": "nodalis.start", "title": "Nodalis: Start Runtime", "icon": "$(play)" },
+      { "command": "nodalis.stop", "title": "Nodalis: Stop Runtime", "icon": "$(debug-stop)" },
+      { "command": "nodalis.configureMcp", "title": "Nodalis: Configure MCP" },
+      { "command": "nodalis.createSnapshot", "title": "Nodalis: Create Snapshot" },
+      { "command": "nodalis.refreshVersions", "title": "Nodalis: Refresh Versions", "icon": "$(refresh)" },
+      { "command": "nodalis.restoreVersion", "title": "Nodalis: Restore Version" }
     ],
     "viewsContainers": {
       "activitybar": [
-        { "id": "archi-os", "title": "Nodalis", "icon": "media/icon.svg" }
+        { "id": "nodalis", "title": "Nodalis", "icon": "media/icon.svg" }
       ]
     },
     "views": {
-      "archi-os": [
-        { "id": "archi-os.versions", "name": "Versions" }
+      "nodalis": [
+        { "id": "nodalis.versions", "name": "Versions" }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "archi-os.versions",
-        "contents": "Nodalis runtime is stopped.\n[$(play) Start Runtime](command:archi-os.start)\n[$(link-external) Open Panel](command:archi-os.open)\nStart the runtime, then open the graph panel."
+        "view": "nodalis.versions",
+        "contents": "Nodalis runtime is stopped.\n[$(play) Start Runtime](command:nodalis.start)\n[$(link-external) Open Panel](command:nodalis.open)\nStart the runtime, then open the graph panel."
       }
     ],
     "menus": {
       "view/title": [
-        { "command": "archi-os.start", "when": "view == archi-os.versions", "group": "navigation@1" },
-        { "command": "archi-os.open", "when": "view == archi-os.versions", "group": "navigation@2" },
-        { "command": "archi-os.stop", "when": "view == archi-os.versions", "group": "navigation@3" },
-        { "command": "archi-os.createSnapshot", "when": "view == archi-os.versions", "group": "navigation@4" },
-        { "command": "archi-os.refreshVersions", "when": "view == archi-os.versions", "group": "navigation@5" }
+        { "command": "nodalis.start", "when": "view == nodalis.versions", "group": "navigation@1" },
+        { "command": "nodalis.open", "when": "view == nodalis.versions", "group": "navigation@2" },
+        { "command": "nodalis.stop", "when": "view == nodalis.versions", "group": "navigation@3" },
+        { "command": "nodalis.createSnapshot", "when": "view == nodalis.versions", "group": "navigation@4" },
+        { "command": "nodalis.refreshVersions", "when": "view == nodalis.versions", "group": "navigation@5" }
       ]
     },
     "configuration": {
       "title": "Nodalis",
       "properties": {
-        "archiOs.autostart": {
+        "nodalis.autostart": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically start the Nodalis runtime when a workspace with .archi/ is opened."
+          "description": "Automatically start the Nodalis runtime when a workspace with .nodalis/ is opened."
         },
-        "archiOs.autoBootstrap": {
+        "nodalis.autoBootstrap": {
           "type": "boolean",
           "default": true,
           "description": "On first open of a workspace, automatically configure MCP, start the runtime, and open the panel (runs once per workspace)."
@@ -74,8 +74,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@archi-os/cli": "*",
-    "@archi-os/core": "*",
+    "@nodalis/cli": "*",
+    "@nodalis/core": "*",
     "jsonc-parser": "^3.2.1",
     "zod": "^3.22.4"
   },

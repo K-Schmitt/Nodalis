@@ -7,7 +7,7 @@ import { isPortFree } from './ports.js';
 export type ProcEntry = { pid: number; port: number; startedAt: number; cmd: string };
 export type RunRegistry = { mode: 'native' | 'docker'; startedAt: number; core?: ProcEntry; web?: ProcEntry };
 
-const runDir = (ws: string): string => join(ws, '.archi', 'cli');
+const runDir = (ws: string): string => join(ws, '.nodalis', 'cli');
 export const runPath = (ws: string): string => join(runDir(ws), 'run.json');
 export const logPath = (ws: string, name: string): string => join(runDir(ws), 'logs', `${name}.log`);
 

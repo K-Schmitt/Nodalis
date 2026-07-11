@@ -7,7 +7,7 @@ import { NoActiveWorkspaceError } from '../../errors/no-active-workspace-error.j
 import { WorkspaceNotFoundError } from '../../errors/workspace-not-found-error.js';
 import { WorkspacePathError } from '../../errors/workspace-path-error.js';
 
-/** Absolute paths to every artifact inside a workspace's `.archi/` folder. */
+/** Absolute paths to every artifact inside a workspace's `.nodalis/` folder. */
 export interface WorkspacePaths {
   root: string;
   archiDir: string;
@@ -53,7 +53,7 @@ const NOTES_TEMPLATE = (name: string) =>
 
 /**
  * Owns the "open folder" workspace model (VSCode-style). A workspace is any OS
- * folder; Nodalis stores its data in `<folder>/.archi/`. The active workspace
+ * folder; Nodalis stores its data in `<folder>/.nodalis/`. The active workspace
  * is persisted globally (see {@link AppStateStore}) so it is remembered across
  * restarts and shared between the MCP and HTTP processes.
  *
@@ -75,7 +75,7 @@ export class WorkspaceManager {
 
   resolvePaths(workspacePath: string): WorkspacePaths {
     const root = path.resolve(workspacePath);
-    const archiDir = path.join(root, '.archi');
+    const archiDir = path.join(root, '.nodalis');
     return {
       root,
       archiDir,
@@ -239,7 +239,7 @@ export class WorkspaceManager {
       updatedAt: now,
     };
     this.writeMeta(paths, meta);
-    // Never clobber an existing graph (e.g. when migrating a legacy `.archi/graph.json`).
+    // Never clobber an existing graph (e.g. when migrating a legacy `.nodalis/graph.json`).
     if (!fs.existsSync(paths.graphPath)) this.writeJson(paths.graphPath, { nodes: [], edges: [], savedAt: now });
     if (!fs.existsSync(paths.notesPath)) fs.writeFileSync(paths.notesPath, NOTES_TEMPLATE(opts.name), 'utf-8');
 

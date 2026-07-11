@@ -23,7 +23,7 @@ function backupIfAbsent(file: string): void {
 }
 
 function configPath(workspaceRoot: string): string {
-  return join(workspaceRoot, '.archi', 'cli.json');
+  return join(workspaceRoot, '.nodalis', 'cli.json');
 }
 
 export function readCliConfig(workspaceRoot: string): CliConfig {
@@ -33,7 +33,7 @@ export function readCliConfig(workspaceRoot: string): CliConfig {
   try {
     raw = JSON.parse(text);
   } catch {
-    throw new McpConfigError('.archi/cli.json is unreadable (invalid JSON) — fix or delete it, then retry.');
+    throw new McpConfigError('.nodalis/cli.json is unreadable (invalid JSON) — fix or delete it, then retry.');
   }
   return parseCliConfig(raw);
 }
@@ -60,7 +60,7 @@ async function chooseClients(opts: { client?: string }, detected: ClientId[]): P
 }
 
 export async function init(opts: { client?: string }): Promise<void> {
-  intro('archi-os init');
+  intro('nodalis init');
   const ctx = clientContext();
   const workspaceRoot = ctx.workspaceRoot;
   const coreDist = resolve(workspaceRoot, 'core', 'dist', 'index.js');
@@ -94,5 +94,5 @@ export async function init(opts: { client?: string }): Promise<void> {
   const cfg = readCliConfig(workspaceRoot);
   const clients = Array.from(new Set([...cfg.clients, ...chosen]));
   writeCliConfig(workspaceRoot, { ...cfg, clients });
-  outro('MCP configured. Restart your MCP client to load archi-os.');
+  outro('MCP configured. Restart your MCP client to load nodalis.');
 }

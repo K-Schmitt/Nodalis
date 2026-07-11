@@ -8,7 +8,7 @@ type Entry = { command: string; args: string[]; env: Record<string, string>; typ
 
 function readServer(file: string, key: 'mcpServers' | 'servers'): Entry {
   const cfg = JSON.parse(readFileSync(file, 'utf8')) as Record<string, Record<string, Entry>>;
-  return cfg[key]['archi-os'];
+  return cfg[key]['nodalis'];
 }
 
 describe('configureMcp (global, multi-client)', () => {

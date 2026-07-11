@@ -11,7 +11,7 @@ Nodalis is an agnostic "meta-modeler": the rules live in `.def.json` definition 
 - **Versioning** — a **Versions** view in the activity bar: snapshot the current graph, browse versions, and restore any of them (restore is persisted to disk).
 - **Live definition diagnostics** — save a `definitions/**/*.def.json` and rule errors show up in the **Problems** panel, mapped to the exact line, validated against the Zod schema. A clean save refreshes the open graph instantly.
 - **MCP wiring** — `Nodalis: Configure MCP` registers the bundled MCP server **globally** for **VSCode**, **Cursor** and **Claude Code** (user-level config), so AI tools can drive the graph in every project — configure once.
-- **Zero-config first run** — the **Nodalis** activity-bar view has **Start** and **Open** buttons in its header (and a welcome panel while stopped). On a Nodalis workspace (one with `.archi/` or `definitions/`), first open also auto-configures MCP, starts the runtime, and opens the panel once — toggle with `archiOs.autoBootstrap`.
+- **Zero-config first run** — the **Nodalis** activity-bar view has **Start** and **Open** buttons in its header (and a welcome panel while stopped). On a Nodalis workspace (one with `.nodalis/` or `definitions/`), first open also auto-configures MCP, starts the runtime, and opens the panel once — toggle with `nodalis.autoBootstrap`.
 
 ## Getting started
 
@@ -38,8 +38,8 @@ Definitions come from a `definitions/` folder in your workspace when present; ot
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `archiOs.autostart` | `false` | Start the runtime automatically when a workspace opens |
-| `archiOs.autoBootstrap` | `true` | On first open of a Nodalis workspace, auto-configure MCP, start the runtime, and open the panel (once per workspace) |
+| `nodalis.autostart` | `false` | Start the runtime automatically when a workspace opens |
+| `nodalis.autoBootstrap` | `true` | On first open of a Nodalis workspace, auto-configure MCP, start the runtime, and open the panel (once per workspace) |
 
 ## Requirements
 

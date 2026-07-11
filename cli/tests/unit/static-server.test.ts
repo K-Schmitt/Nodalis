@@ -4,8 +4,8 @@ import { injectRuntimeConfig, resolveSafePath } from '../../src/lib/static-serve
 describe('injectRuntimeConfig', () => {
   it('injects before </head>', () => {
     const out = injectRuntimeConfig('<html><head><title>x</title></head><body></body></html>', 'http://localhost:3000');
-    expect(out).toContain('window.__ARCHI_OS__');
-    expect(out.indexOf('__ARCHI_OS__')).toBeLessThan(out.indexOf('</head>'));
+    expect(out).toContain('window.__NODALIS__');
+    expect(out.indexOf('__NODALIS__')).toBeLessThan(out.indexOf('</head>'));
   });
   it('escapes the url safely into JSON', () => {
     const out = injectRuntimeConfig('<head></head>', 'http://localhost:3000');

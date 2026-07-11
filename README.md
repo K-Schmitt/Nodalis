@@ -82,6 +82,23 @@ Ouvre `http://localhost:5173`. Utilise `npm run dev:full` pour lancer aussi le s
 
 **Prérequis** : Node ≥ 18 (20+ recommandé), npm ≥ 9.
 
+### Ajouter ses propres définitions
+
+Un utilisateur de l'extension (ou de la CLI) étend les types en déposant des fiches
+`*.def.json` dans un dossier `definitions/` à la racine de son workspace :
+
+1. Crée `definitions/<catégorie>/mon-type.def.json` (schéma : voir l'exemple plus bas).
+2. Range la fiche dans une catégorie que le **preset actif charge** — champ `include`
+   du `*.preset.json` (ex. le preset `web` charge `general, web, backend, database,
+   auth, monitoring, storage`). Sinon, ajoute la catégorie à `include` ou crée ton
+   propre preset dans `definitions/presets/`.
+3. Sauvegarde → le core **hot-reload** les définitions ; l'extension valide le fichier
+   (Zod) dans le panneau **Problems**, mappé à la ligne exacte, et rafraîchit le graphe.
+
+> ⚠️ **Soit/soit** : dès qu'un dossier `definitions/` existe dans le workspace, il
+> **remplace entièrement** le jeu par défaut bundlé (pas de fusion). Pour garder les
+> types de base, pars d'une copie du `definitions/` du dépôt.
+
 ---
 
 ## 🔌 Configuration MCP & Workspaces
@@ -251,14 +268,6 @@ nodalis/
 ├── ARCHITECTURE.md    # Référence technique détaillée
 └── README.md
 ```
-
----
-
-## 📖 Gouvernance
-
-1. **Garder le cap** — toute modif de code s'aligne sur [ARCHITECTURE.md](ARCHITECTURE.md), maintenu à jour à chaque évolution de structure.
-2. **GitNexus** — utiliser le serveur MCP GitNexus pour cartographier le code et faire les analyses d'impact avant commit / refactoring.
-3. **Doc en continu** — ne jamais laisser [README.md](README.md) et [ARCHITECTURE.md](ARCHITECTURE.md) dériver du code réel.
 
 ---
 

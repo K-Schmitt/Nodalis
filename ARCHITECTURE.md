@@ -272,31 +272,33 @@ Erreur lancée quand les données ne respectent pas le schéma attendu.
 
 ## Definitions (`/definitions`)
 
-Fichiers JSON définissant les types de nodes disponibles :
+Fichiers `*.def.json` définissant les types de nodes, **organisés par catégorie** :
+`ai/`, `auth/`, `backend/`, `bpmn/`, `cloud/`, `cloudflare/`, `database/`, `ddd/`,
+`devops/`, `erd/`, `game/`, `general/`, `messaging/`, `monitoring/`, `network/`,
+`storage/`, `uml/`, `web/`. Le Core reste agnostique : il charge ce que le **preset**
+actif désigne.
 
-### `lambda.def.json`
-Définition pour les fonctions AWS Lambda.
+### Presets (`/definitions/presets/*.preset.json`)
 
-### `postgres.def.json`
-Définition pour les bases de données PostgreSQL.
-
-### `react.def.json`
-Définition pour les applications React.
-
-### `rest-api.def.json`
-Définition pour les APIs REST.
+Un preset décide *quels* dossiers charger + les **règles** + les **`edgeTypes`** actifs.
+Presets livrés :
+- **Techniques** : `web`, `mobile`, `cloud-native`, `microservices`, `ai-ml`, `game`, `full`.
+- **Modélisation** : `erd`, `ddd`, `bpmn`, `uml`, `network`.
 
 **Structure d'une définition** :
 ```json
 {
-  "id": "tech:frontend:react",
-  "name": "React Application",
-  "description": "A React frontend application",
-  "category": "frontend",
-  "style": {
-    "shape": "rectangle",
-    "color": "#61dafb"
-  }
+  "typeId": "tech:database:postgres",
+  "version": "1.0.0",
+  "metadata": { "label": "PostgreSQL", "category": "Storage" },
+  "behavior": {
+    "maxIncomingEdges": null,
+    "maxOutgoingEdges": 0,
+    "allowConnectionFrom": ["tech:service:*"]
+  },
+  "style": { "shape": "cylinder", "backgroundColor": "#336791", "icon": "database" },
+  "dataSchema": { "type": "object", "required": ["port"], "properties": { "port": { "type": "number", "default": 5432 } } },
+  "render": { "archetype": "record" }
 }
 ```
 
@@ -413,9 +415,10 @@ Pour être réutilisables hors du bin, les modules purs sont exposés via l'`exp
 Package `archi-os-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@archi-os/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@archi-os/core/schema` (`DefinitionSchema`) — jamais la racine `@archi-os/core` (qui embarque Fastify + MCP).
 
 ### Modules (`src/`)
-- `config.ts` : résout le workspace root actif + ports + lecture du setting `archiOs.autostart`.
-- `engine.ts` : `Engine.start()` spawn core (`attached`) via `spawnManaged`, health-check `waitForHealth` (annulable si le child meurt), puis sert `web/dist` in-process (`startStaticServer`) ; `coreBaseUrl()` expose le port réel ; `stop()` teardown.
-- `mcp.ts` : `configureMcp()` **compose** `buildEntry` + `mergeServer` + descripteur `resolveClient('vscode')` (`.vscode/mcp.json`, clé `servers`, `type:stdio`) — merge idempotent + backup `.bak`.
+- `extension.ts` : `activate()` enregistre **toutes** les commandes d'abord (registration jamais dépendante du wiring UI optionnel), puis câble statusbar/tree/diagnostics en best-effort, puis `bootstrapFirstRun()`.
+- `config.ts` : résout le workspace root actif + ports + settings `archiOs.autostart` et `archiOs.autoBootstrap`.
+- `engine.ts` : `Engine.start()` collapse les appels concurrents sur un seul `launch()` (memo `startPromise`) ; `launch()` spawn core (`attached`) via `spawnManaged`, health-check `waitForHealth` (annulable si le child meurt), puis sert `web/dist` in-process (`startStaticServer`). **Start atomique** : si le health-check ou le web échoue, le core est rollback (`stopEntry` + `this.core=null`) pour que `isLive()`/`coreBaseUrl()` restent honnêtes. `stop()` teardown.
+- `mcp.ts` : `configureMcp()` **compose** `buildEntry` + `mergeServer` et écrit la config **globale** (user-level) pour **VSCode**, **Cursor** et **Claude Code** — merge idempotent + backup `.bak`.
 - `statusbar.ts` : indicateur Live/Disconnected + flash « rules reloaded » + thème.
 - `webview/bridge.ts` : protocole `postMessage` typé (`ExtToWeb`/`WebToExt`) + guards (vscode-free, testé unitairement).
 - `webview/panel.ts` : panel webview, **CSP stricte + nonce** (CSPRNG `randomBytes`), réécriture `asWebviewUri` des assets, injection noncée de `window.__ARCHI_OS__` ; `connect-src` construit avec le port core réel.
@@ -424,6 +427,10 @@ Package `archi-os-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe
 
 ### Livrable #1 — Versioning
 TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`, `POST /api/versions/:id/restore` (le restore **persiste** le graphe sur le SSOT disque pour que le poll web ET le process MCP le voient). Diagnostics `onDidSave` des `*.def.json` validés via `@archi-os/core/schema`.
+
+### First-run bootstrap & UI (barre d'activité)
+- **Vue `archi-os.versions`** (activity bar « Nodalis ») : boutons de header **Start / Open / Stop** (+ snapshot/refresh) via `menus.view/title`, et un `viewsWelcome` affichant des boutons **Start Runtime** / **Open Panel** quand le runtime est arrêté.
+- **`bootstrapFirstRun()`** : sur un workspace Nodalis (présence `.archi/` **ou** `definitions/`) et si `archiOs.autoBootstrap` (défaut `true`), enchaîne `configureMcp` → `start` → `open`. Flags `globalState` séparés : `mcpConfigured` (global, écrit une fois) et `bootstrapped:<workspaceRoot>` (par workspace, posé **après** succès pour retry au prochain lancement). N'agit jamais sur un dossier non-Nodalis (side-effect free).
 
 ### Packaging (standalone)
 `esbuild.mjs` produit un `.vsix` **autonome** — aucun clone/build du repo requis côté user :
@@ -549,9 +556,9 @@ npm run preview      # Preview du build
 - **tsx** : Exécution TypeScript en dev
 
 ### Frontend
-- **React 18** : Framework UI
+- **React 19** : Framework UI
 - **Vite** : Build tool et dev server
-- **React Flow** : Librairie de graphes
+- **@xyflow/react** (React Flow) : Librairie de graphes
 - **ELK.js** : Algorithme d'auto-layout
 - **Zustand** : State management
 - **TailwindCSS** : Framework CSS
@@ -560,9 +567,8 @@ npm run preview      # Preview du build
 
 ## Paradigmes, Edge Types & Sous-graphes (drill-down)
 
-> Section ajoutée lors de la release "paradigmes & sous-graphes". Le reste de ce
-> document décrit l'état antérieur (mono-graphe) et reste à rafraîchir ; cette
-> section fait foi pour les capacités décrites ci-dessous.
+> Cette section détaille le modèle multi-paradigmes / multi-graphes (presets,
+> `edgeTypes`, sous-graphes) qui étend le socle décrit plus haut.
 
 ### Paradigmes = presets (mécanisme de "subset" étendu)
 Un workspace (ou un sous-graphe) porte un **preset** qui décide *quels* dossiers de
@@ -624,4 +630,3 @@ désormais `activeGraph` (scope, preset, breadcrumb) et `nodesWithSubgraphs`.
 3. **Undo/Redo** : Historique des changements (s'appuyer sur les snapshots existants)
 4. **Exports** : Export du graphe en différents formats (PNG, SVG, JSON)
 5. **Liens inter-graphes** : référencer un nœud d'un autre sous-graphe
-6. **Rafraîchir** les sections "Definitions" et "Frontend Web" de ce document (état mono-graphe obsolète)

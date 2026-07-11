@@ -133,5 +133,12 @@ describe('WorkspaceManager', () => {
       expect(ctx.subgraphId).toBeNull();
       expect(ctx.presetId).toBe('web');
     });
+
+    it('rejects a non-UUID node id in the drill-down stack (path traversal guard)', () => {
+      expect(() => workspaces.setGraphStack([{ id: '../../etc/passwd', label: 'x' }]))
+        .toThrow(WorkspacePathError);
+      expect(() => workspaces.resolveSubgraphPath(path.join(root, 'proj'), '../secret'))
+        .toThrow(WorkspacePathError);
+    });
   });
 });

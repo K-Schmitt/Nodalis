@@ -128,6 +128,11 @@ automatiquement. En manuel, le serveur MCP compilé est `core/dist/index.js`
 | `WORKSPACE_BROWSE_ROOT` | Racine autorisée pour ouvrir/créer des workspaces | home utilisateur |
 | `NODALIS_STATE_DIR` | Où mémoriser le workspace actif | `~/.nodalis` |
 | `RUN_HTTP_SERVER` | Lance le serveur HTTP au lieu du MCP | `false` |
+| `HTTP_HOST` | Interface d'écoute du serveur HTTP | `127.0.0.1` (loopback) |
+
+> **Sécurité** : l'API HTTP est non authentifiée et expose le browser de fichiers +
+> la création de workspace. Elle écoute `127.0.0.1` par défaut — ne l'expose sur le
+> réseau (`HTTP_HOST=0.0.0.0`) que derrière une barrière de confiance.
 
 ### Outils MCP exposés
 

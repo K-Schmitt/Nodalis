@@ -412,7 +412,11 @@ export class HTTPServer {
 
   async start(port = 3000) {
     try {
-      await this.app.listen({ port, host: '0.0.0.0' });
+      // Bind loopback by default: the API is unauthenticated and exposes the
+      // filesystem browser + workspace creation, so it must NOT be reachable on
+      // the LAN. Containers set HTTP_HOST=0.0.0.0 explicitly (port is published).
+      const host = process.env.HTTP_HOST ?? '127.0.0.1';
+      await this.app.listen({ port, host });
       console.log(`\n🌐 HTTP API on http://localhost:${port}`);
       console.log('   GET  /api/graph · /api/definitions · /api/presets · /api/workspaces · /api/fs/list');
       console.log('   POST /api/workspaces   PUT /api/workspaces/active');

@@ -1,5 +1,5 @@
 /**
- * Base class for all ARCHI-OS errors
+ * Base class for all Nodalis errors
  * Provides structured error handling with codes and context
  */
 export abstract class ArchiOSError extends Error {

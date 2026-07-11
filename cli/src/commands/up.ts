@@ -64,7 +64,7 @@ export async function up(opts: { docker?: boolean; open?: boolean }): Promise<vo
   writeRunRegistry(ws, { ...reg, web: webEntry });
 
   const webUrl = `http://localhost:${web.port}`;
-  console.log(`\n✓ ARCHI-OS ready\n  core: http://localhost:${corePort}\n  web:  ${webUrl}`);
+  console.log(`\n✓ Nodalis ready\n  core: http://localhost:${corePort}\n  web:  ${webUrl}`);
 
   if (opts.open !== false) {
     if (process.platform === 'win32') {

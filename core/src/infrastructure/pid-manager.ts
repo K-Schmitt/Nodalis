@@ -81,7 +81,7 @@ export class PidManager {
     try {
       // SIGTERM first (graceful)
       process.kill(pid, 'SIGTERM');
-      console.log(`⚠️  Killed stale ARCHI-OS process (PID ${pid}) on port ${this.port}`);
+      console.log(`⚠️  Killed stale Nodalis process (PID ${pid}) on port ${this.port}`);
       await sleep(300);
 
       // If still alive, force kill

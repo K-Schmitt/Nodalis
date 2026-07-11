@@ -37,7 +37,7 @@ coverage/
 *.temp
 .temp/
 
-# ARCHI-OS specific
+# Nodalis specific
 .archi/pending/
 .archi/cli/
 .archi/cli.json

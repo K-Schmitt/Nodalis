@@ -1,4 +1,4 @@
-# 📘 ARCHI-OS
+# 📘 Nodalis
 
 **Moteur de graphe sémantique agnostique — un "meta-modeler" piloté par des fiches de règles.**
 
@@ -12,7 +12,7 @@ extension VSCode **Nodalis**, comme CLI `@archi-os/cli`, ou lancé depuis les so
 
 ## 🎯 Concept
 
-ARCHI-OS est comme un moteur de jeu, mais pour l'architecture logicielle : **vide au
+Nodalis est comme un moteur de jeu, mais pour l'architecture logicielle : **vide au
 départ**, il apprend à modéliser n'importe quel domaine dès qu'on lui donne des
 **fiches de définition** (`*.def.json`), et il empêche l'IA de faire des erreurs.
 
@@ -98,7 +98,7 @@ Ouvre `http://localhost:5173`. Utilise `npm run dev:full` pour lancer aussi le s
 ### Workspaces (modèle « dossier ouvert »)
 
 Un **workspace = n'importe quel dossier** ouvert depuis le frontend (sélecteur 📁) ou
-via l'agent. ARCHI-OS y crée un dossier mémoire `.archi/` (graphe, preset, snapshots,
+via l'agent. Nodalis y crée un dossier mémoire `.archi/` (graphe, preset, snapshots,
 sous-graphes, `notes.md`). Le workspace actif est mémorisé (`~/.archi-os/state.json`) et
 **partagé entre l'agent et l'UI**.
 

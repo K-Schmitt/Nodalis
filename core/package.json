@@ -1,7 +1,7 @@
 {
   "name": "@archi-os/core",
   "version": "1.0.0",
-  "description": "ARCHI-OS Core - Backend Logic Engine",
+  "description": "Nodalis Core - Backend Logic Engine",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

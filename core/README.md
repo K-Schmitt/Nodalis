@@ -1,4 +1,4 @@
-# ARCHI-OS Core (Backend)
+# Nodalis Core (Backend)
 
 Moteur de validation et Registry pour le graphe sémantique.
 

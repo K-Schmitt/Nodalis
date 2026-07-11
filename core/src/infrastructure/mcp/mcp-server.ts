@@ -71,7 +71,7 @@ export class MCPServer {
     private presetRegistry: PresetRegistry
   ) {
     this.server = new Server(
-      { name: 'archi-os-mcp', version: '1.0.0' },
+      { name: 'nodalis-mcp', version: '1.0.0' },
       { capabilities: { tools: {} } }
     );
     this.setupHandlers();

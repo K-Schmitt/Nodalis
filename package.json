@@ -1,7 +1,7 @@
 {
   "name": "archi-os",
   "version": "1.0.0",
-  "description": "ARCHI-OS - Meta-Modeler for Semantic Graphs",
+  "description": "Nodalis - Meta-Modeler for Semantic Graphs",
   "private": true,
   "workspaces": [
     "core",

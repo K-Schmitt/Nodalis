@@ -17,5 +17,5 @@ export async function down(): Promise<void> {
   if (reg.web) await stopEntry(reg.web);
   if (reg.core) await stopEntry(reg.core);
   clearRunRegistry(ws);
-  console.log('Stopped ARCHI-OS.');
+  console.log('Stopped Nodalis.');
 }

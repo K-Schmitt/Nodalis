@@ -38,7 +38,7 @@ const EMPTY_STATE: AppState = { activeWorkspacePath: null, recentWorkspaces: [],
  * at the user level (`$XDG_CONFIG_HOME/archi-os/state.json`, or `~/.archi-os/`).
  *
  * Shared by the MCP and HTTP processes: switching workspace in the frontend is
- * visible to the agent on its next tool call. This is what lets ARCHI-OS "remember
+ * visible to the agent on its next tool call. This is what lets Nodalis "remember
  * where we work" and never re-ask on restart.
  */
 export class AppStateStore {

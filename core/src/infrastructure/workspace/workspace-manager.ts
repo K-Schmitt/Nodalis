@@ -53,7 +53,7 @@ const NOTES_TEMPLATE = (name: string) =>
 
 /**
  * Owns the "open folder" workspace model (VSCode-style). A workspace is any OS
- * folder; ARCHI-OS stores its data in `<folder>/.archi/`. The active workspace
+ * folder; Nodalis stores its data in `<folder>/.archi/`. The active workspace
  * is persisted globally (see {@link AppStateStore}) so it is remembered across
  * restarts and shared between the MCP and HTTP processes.
  *

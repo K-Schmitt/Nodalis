@@ -95,9 +95,11 @@ Un utilisateur de l'extension (ou de la CLI) étend les types en déposant des f
 3. Sauvegarde → le core **hot-reload** les définitions ; l'extension valide le fichier
    (Zod) dans le panneau **Problems**, mappé à la ligne exacte, et rafraîchit le graphe.
 
-> ⚠️ **Soit/soit** : dès qu'un dossier `definitions/` existe dans le workspace, il
-> **remplace entièrement** le jeu par défaut bundlé (pas de fusion). Pour garder les
-> types de base, pars d'une copie du `definitions/` du dépôt.
+> ℹ️ **Fusion** : le `definitions/` du workspace est **superposé** au jeu par défaut
+> bundlé — tu ne déposes donc que tes ajouts, les types de base restent disponibles.
+> En cas de même `typeId` (ou id de preset), **ta version workspace l'emporte**.
+> (Techniquement : `DEFINITIONS_PATH` accepte plusieurs racines ; l'extension passe
+> `<bundlé>` puis `<workspace>`, la racine la plus à droite gagne.)
 
 ---
 

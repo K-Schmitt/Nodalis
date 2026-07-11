@@ -82,6 +82,25 @@ Ouvre `http://localhost:5173`. Utilise `npm run dev:full` pour lancer aussi le s
 
 **Prérequis** : Node ≥ 18 (20+ recommandé), npm ≥ 9.
 
+### Ajouter ses propres définitions
+
+Un utilisateur de l'extension (ou de la CLI) étend les types en déposant des fiches
+`*.def.json` dans un dossier `definitions/` à la racine de son workspace :
+
+1. Crée `definitions/<catégorie>/mon-type.def.json` (schéma : voir l'exemple plus bas).
+2. Range la fiche dans une catégorie que le **preset actif charge** — champ `include`
+   du `*.preset.json` (ex. le preset `web` charge `general, web, backend, database,
+   auth, monitoring, storage`). Sinon, ajoute la catégorie à `include` ou crée ton
+   propre preset dans `definitions/presets/`.
+3. Sauvegarde → le core **hot-reload** les définitions ; l'extension valide le fichier
+   (Zod) dans le panneau **Problems**, mappé à la ligne exacte, et rafraîchit le graphe.
+
+> ℹ️ **Fusion** : le `definitions/` du workspace est **superposé** au jeu par défaut
+> bundlé — tu ne déposes donc que tes ajouts, les types de base restent disponibles.
+> En cas de même `typeId` (ou id de preset), **ta version workspace l'emporte**.
+> (Techniquement : `DEFINITIONS_PATH` accepte plusieurs racines ; l'extension passe
+> `<bundlé>` puis `<workspace>`, la racine la plus à droite gagne.)
+
 ---
 
 ## 🔌 Configuration MCP & Workspaces
@@ -251,14 +270,6 @@ nodalis/
 ├── ARCHITECTURE.md    # Référence technique détaillée
 └── README.md
 ```
-
----
-
-## 📖 Gouvernance
-
-1. **Garder le cap** — toute modif de code s'aligne sur [ARCHITECTURE.md](ARCHITECTURE.md), maintenu à jour à chaque évolution de structure.
-2. **GitNexus** — utiliser le serveur MCP GitNexus pour cartographier le code et faire les analyses d'impact avant commit / refactoring.
-3. **Doc en continu** — ne jamais laisser [README.md](README.md) et [ARCHITECTURE.md](ARCHITECTURE.md) dériver du code réel.
 
 ---
 

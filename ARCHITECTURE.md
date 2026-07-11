@@ -439,7 +439,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 3. `definitions/` → `extension/definitions` : règles par défaut pour qu'un workspace vide ait des types ;
 4. bundle de `src/extension.ts` (`external: ['vscode']`).
 
-`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `nodalis-<version>.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
+`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<bundlé>` puis, si présent, `<workspace>/definitions` — **liste multi-racines** séparée par `path.delimiter`, la racine workspace se superposant au bundlé (override par `typeId`/id de preset)) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `nodalis-<version>.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
 
 ---
 
@@ -476,7 +476,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 #### Core Backend
 - `NODE_ENV` : Mode d'exécution (`development` | `production`)
 - `WORKSPACE_ROOT` : Racine du projet (obligatoire)
-- `DEFINITIONS_PATH` : Chemin vers les définitions (défaut: `./definitions`)
+- `DEFINITIONS_PATH` : Chemin(s) vers les définitions (défaut: `./definitions`). Accepte **plusieurs racines** séparées par `path.delimiter` (`:`/`;`) ; les racines suivantes se superposent aux précédentes (override par `typeId`/id de preset)
 - `RUN_HTTP_SERVER` : Lance le HTTP server au lieu du MCP (`true` | `false`)
 - `WORKSPACE_BROWSE_ROOT` : Racine autorisée pour ouvrir/créer des workspaces (défaut: home) — borne le browser de fichiers et la création de workspace
 - `HTTP_HOST` : Interface d'écoute du serveur HTTP (défaut: **`127.0.0.1`**)

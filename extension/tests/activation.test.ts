@@ -68,7 +68,12 @@ describe('built bundle activation', () => {
       delete require.cache[require.resolve(BUNDLE)];
       const ext = require(BUNDLE) as { activate: (ctx: unknown) => void };
       // Must not throw at load or during activate().
-      ext.activate({ subscriptions: [], extensionUri: { fsPath: '/tmp/ext' } });
+      const store = new Map<string, unknown>();
+      ext.activate({
+        subscriptions: [],
+        extensionUri: { fsPath: '/tmp/ext' },
+        globalState: { get: (k: string) => store.get(k), update: (k: string, v: unknown) => { store.set(k, v); return Promise.resolve(); } },
+      });
     } finally {
       (Module as unknown as { _load: unknown })._load = load;
     }

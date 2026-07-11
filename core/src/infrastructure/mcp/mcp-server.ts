@@ -1,4 +1,4 @@
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
@@ -59,7 +59,7 @@ const OpenGraphArgsSchema = z.object({
 // ─── MCPServer ────────────────────────────────────────────────────────────────
 
 export class MCPServer {
-  private server: Server;
+  private mcp: McpServer;
 
   constructor(
     private registry: Registry,
@@ -70,7 +70,7 @@ export class MCPServer {
     private workspaces: WorkspaceManager,
     private presetRegistry: PresetRegistry
   ) {
-    this.server = new Server(
+    this.mcp = new McpServer(
       { name: 'nodalis-mcp', version: '1.0.0' },
       { capabilities: { tools: {} } }
     );
@@ -79,14 +79,14 @@ export class MCPServer {
 
   async notifyToolsChanged(): Promise<void> {
     try {
-      await this.server.notification({ method: 'notifications/tools/list_changed', params: {} });
+      await this.mcp.server.notification({ method: 'notifications/tools/list_changed', params: {} });
     } catch {
       // client may not be connected yet — safe to ignore
     }
   }
 
   private setupHandlers(): void {
-    this.server.setRequestHandler(ListToolsRequestSchema, async () => {
+    this.mcp.server.setRequestHandler(ListToolsRequestSchema, async () => {
 
       const tools: Tool[] = [
         {
@@ -267,7 +267,7 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
       return { tools };
     });
 
-    this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    this.mcp.server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const { name, arguments: args } = request.params;
       try {
         switch (name) {
@@ -762,12 +762,12 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
 
   async start(): Promise<void> {
     const transport = new StdioServerTransport();
-    await this.server.connect(transport);
+    await this.mcp.server.connect(transport);
     console.error('MCP Server started');
   }
 
   async stop(): Promise<void> {
-    await this.server.close();
+    await this.mcp.server.close();
     console.error('MCP Server stopped');
   }
 }

@@ -4,7 +4,7 @@ import { CliError } from './errors.js';
 export async function runCli(argv: string[]): Promise<void> {
   const program = new Command();
   program
-    .name('archi-os')
+    .name('nodalis')
     .description('Nodalis CLI — install, launch, configure MCP')
     .version('1.0.0');
 

@@ -41,15 +41,15 @@ Archi-Os/
 │   │   └── stores/         # State management (Zustand)
 │   └── public/            # Assets statiques
 │
-├── cli/                    # CLI @archi-os/cli (install/launch/MCP)
+├── cli/                    # CLI @nodalis/cli (install/launch/MCP)
 │   ├── src/
 │   │   ├── commands/      # init, doctor, up, down, uninstall
 │   │   ├── lib/           # modules purs (mcp-config, paths, ports, process, static-server)
-│   │   ├── config.ts      # schéma Zod de .archi/cli.json
+│   │   ├── config.ts      # schéma Zod de .nodalis/cli.json
 │   │   └── errors.ts      # CliError & dérivés
 │   └── tests/unit/        # tests vitest des modules purs
 │
-├── extension/              # Extension VSCode archi-os-vscode (esbuild → .vsix)
+├── extension/              # Extension VSCode nodalis-vscode (esbuild → .vsix)
 │   ├── src/
 │   │   ├── engine.ts      # spawn core attaché + web statique (via cli/lib)
 │   │   ├── mcp.ts         # config MCP (compose cli/lib/mcp-config)
@@ -58,7 +58,7 @@ Archi-Os/
 │   │   └── versioning/    # TreeView + client des routes versioning
 │   └── tests/             # bridge + diagnostics-core (vitest)
 │
-└── .archi/                # Données persistées
+└── .nodalis/                # Données persistées
     ├── graph.json         # État du graphe
     ├── cli.json           # Config CLI : ports préférés + clients configurés
     └── cli/               # Runtime CLI (gitignoré)
@@ -78,7 +78,7 @@ Archi-Os/
 **Fonctionnement** :
 - Crée les instances du domaine (`Registry`, `Graph`)
 - Initialise le `GraphStorage` pour la persistance
-- Charge le graph depuis le fichier `.archi/graph.json`
+- Charge le graph depuis le fichier `.nodalis/graph.json`
 - Charge les définitions de types depuis `/definitions`
 - Lance soit :
   - **MCP Server** (par défaut) : pour la communication avec les IA
@@ -227,7 +227,7 @@ class Graph {
 #### `persistence/graph-storage.ts`
 **Rôle** : Gestion de la persistance du graphe sur disque.
 
-**Fichier** : `.archi/graph.json`
+**Fichier** : `.nodalis/graph.json`
 
 **Méthodes** :
 - `load(graph)` : Charge le graphe depuis le fichier
@@ -385,52 +385,52 @@ Le descripteur `render` est optionnel, défini dans chaque `*.def.json`, validé
 
 ## CLI (`/cli`)
 
-Package `@archi-os/cli` : **maison unique** de la logique « installer / lancer / configurer MCP ». L'extension VSCode (`extension/`) l'enveloppe sans dupliquer cette couche ; Docker est une cible runtime (`--docker`), pas un produit concurrent.
+Package `@nodalis/cli` : **maison unique** de la logique « installer / lancer / configurer MCP ». L'extension VSCode (`extension/`) l'enveloppe sans dupliquer cette couche ; Docker est une cible runtime (`--docker`), pas un produit concurrent.
 
-Pour être réutilisables hors du bin, les modules purs sont exposés via l'`exports` map du package : `@archi-os/cli/lib/*` (JS + `.d.ts`, **sans** shebang — seul `dist/index.js` porte le `#!/usr/bin/env node`). Le build `tsup` est scindé en deux (bin avec banner shebang / lib sans).
+Pour être réutilisables hors du bin, les modules purs sont exposés via l'`exports` map du package : `@nodalis/cli/lib/*` (JS + `.d.ts`, **sans** shebang — seul `dist/index.js` porte le `#!/usr/bin/env node`). Le build `tsup` est scindé en deux (bin avec banner shebang / lib sans).
 
 ### Commandes (`src/commands/`)
-- `init` : écrit/merge la config MCP du/des client(s), idempotent + réversible + backup. Écrit `.archi/cli.json`.
+- `init` : écrit/merge la config MCP du/des client(s), idempotent + réversible + backup. Écrit `.nodalis/cli.json`.
 - `doctor` : diagnostics (Node ≥ 20, core buildé, config MCP présente, port préféré libre, process vivants, tail des logs).
 - `up` : lance core (HTTP) détaché + serveur statique `web/dist`. Health-check en course avec la mort du child, registre incrémental. `--docker` délègue à `docker compose`.
 - `down` : stoppe selon `run.json` (`native` → kill signé ; `docker` → `docker compose down`).
-- `uninstall` : `down` puis retire chirurgicalement la clé `archi-os` des configs client (réversible).
+- `uninstall` : `down` puis retire chirurgicalement la clé `nodalis` des configs client (réversible).
 
 ### Modules purs (`src/lib/`)
 - `mcp-config.ts` : merge/unmerge JSONC **chirurgical** (`jsonc-parser` `modify`/`applyEdits`) — préserve commentaires et serveurs voisins de l'utilisateur. Clé paramétrée (`mcpServers` pour Cursor/Claude, `servers` + `type:stdio` pour VSCode).
 - `paths.ts` : descripteurs clients OS-aware (`process.platform`) + détection des clients installés.
 - `ports.ts` : `findFreePort` (fallback), `waitForHealth` (poll `/health`, annulable via `signal`).
 - `process.ts` : spawn **bimodal** (`detached` pour la CLI / `attached` réservé à l'extension), registre `run.json` avec **signature** anti-PID-reuse, kill portable (`taskkill` Windows / `SIGTERM→SIGKILL`).
-- `static-server.ts` : serveur SPA zéro-dép, **confiné** (anti path-traversal), bind `127.0.0.1`, injection runtime `window.__ARCHI_OS__` (résout le port dynamique côté web sans rebuild).
+- `static-server.ts` : serveur SPA zéro-dép, **confiné** (anti path-traversal), bind `127.0.0.1`, injection runtime `window.__NODALIS__` (résout le port dynamique côté web sans rebuild).
 
-### Fichiers d'état (sous `.archi/`)
-- `.archi/cli.json` : config utilisateur (ports **préférés**, clients configurés). Validé Zod.
-- `.archi/cli/run.json` : ports/PID **réels** après fallback ; source de vérité de `down`. L'injection web lit ce fichier.
-- `.archi/cli/logs/{core,web}.log` : sorties des process détachés.
+### Fichiers d'état (sous `.nodalis/`)
+- `.nodalis/cli.json` : config utilisateur (ports **préférés**, clients configurés). Validé Zod.
+- `.nodalis/cli/run.json` : ports/PID **réels** après fallback ; source de vérité de `down`. L'injection web lit ce fichier.
+- `.nodalis/cli/logs/{core,web}.log` : sorties des process détachés.
 
 ---
 
 ## Extension VSCode (`/extension`)
 
-Package `archi-os-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@archi-os/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@archi-os/core/schema` (`DefinitionSchema`) — jamais la racine `@archi-os/core` (qui embarque Fastify + MCP).
+Package `nodalis-vscode` (bundle esbuild → CommonJS → `.vsix`). **Enveloppe fine** de `@nodalis/cli` : importe `lib/process` (spawn `attached` — les enfants meurent au `deactivate`), `lib/static-server`, `lib/ports` et `lib/mcp-config`. Aucune logique install/launch/MCP dupliquée. Le schéma Zod est consommé uniquement via `@nodalis/core/schema` (`DefinitionSchema`) — jamais la racine `@nodalis/core` (qui embarque Fastify + MCP).
 
 ### Modules (`src/`)
 - `extension.ts` : `activate()` enregistre **toutes** les commandes d'abord (registration jamais dépendante du wiring UI optionnel), puis câble statusbar/tree/diagnostics en best-effort, puis `bootstrapFirstRun()`.
-- `config.ts` : résout le workspace root actif + ports + settings `archiOs.autostart` et `archiOs.autoBootstrap`.
+- `config.ts` : résout le workspace root actif + ports + settings `nodalis.autostart` et `nodalis.autoBootstrap`.
 - `engine.ts` : `Engine.start()` collapse les appels concurrents sur un seul `launch()` (memo `startPromise`) ; `launch()` spawn core (`attached`) via `spawnManaged`, health-check `waitForHealth` (annulable si le child meurt), puis sert `web/dist` in-process (`startStaticServer`). **Start atomique** : si le health-check ou le web échoue, le core est rollback (`stopEntry` + `this.core=null`) pour que `isLive()`/`coreBaseUrl()` restent honnêtes. `stop()` teardown.
 - `mcp.ts` : `configureMcp()` **compose** `buildEntry` + `mergeServer` et écrit la config **globale** (user-level) pour **VSCode**, **Cursor** et **Claude Code** — merge idempotent + backup `.bak`.
 - `statusbar.ts` : indicateur Live/Disconnected + flash « rules reloaded » + thème.
 - `webview/bridge.ts` : protocole `postMessage` typé (`ExtToWeb`/`WebToExt`) + guards (vscode-free, testé unitairement).
-- `webview/panel.ts` : panel webview, **CSP stricte + nonce** (CSPRNG `randomBytes`), réécriture `asWebviewUri` des assets, injection noncée de `window.__ARCHI_OS__` ; `connect-src` construit avec le port core réel.
+- `webview/panel.ts` : panel webview, **CSP stricte + nonce** (CSPRNG `randomBytes`), réécriture `asWebviewUri` des assets, injection noncée de `window.__NODALIS__` ; `connect-src` construit avec le port core réel.
 - `diagnostics-core.ts` : mapping pur issue Zod → position (offset→ligne via `jsonc-parser`), vscode-free, testé. `diagnostics.ts` : shell `onDidSave` sur `definitions/**/*.def.json` → Problems + callback si propre.
 - `versioning/api.ts` : client `fetch` typé des 3 routes core. `versioning/tree.ts` : `TreeDataProvider` du panneau Versions + commandes snapshot/restore.
 
 ### Livrable #1 — Versioning
-TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`, `POST /api/versions/:id/restore` (le restore **persiste** le graphe sur le SSOT disque pour que le poll web ET le process MCP le voient). Diagnostics `onDidSave` des `*.def.json` validés via `@archi-os/core/schema`.
+TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`, `POST /api/versions/:id/restore` (le restore **persiste** le graphe sur le SSOT disque pour que le poll web ET le process MCP le voient). Diagnostics `onDidSave` des `*.def.json` validés via `@nodalis/core/schema`.
 
 ### First-run bootstrap & UI (barre d'activité)
-- **Vue `archi-os.versions`** (activity bar « Nodalis ») : boutons de header **Start / Open / Stop** (+ snapshot/refresh) via `menus.view/title`, et un `viewsWelcome` affichant des boutons **Start Runtime** / **Open Panel** quand le runtime est arrêté.
-- **`bootstrapFirstRun()`** : sur un workspace Nodalis (présence `.archi/` **ou** `definitions/`) et si `archiOs.autoBootstrap` (défaut `true`), enchaîne `configureMcp` → `start` → `open`. Flags `globalState` séparés : `mcpConfigured` (global, écrit une fois) et `bootstrapped:<workspaceRoot>` (par workspace, posé **après** succès pour retry au prochain lancement). N'agit jamais sur un dossier non-Nodalis (side-effect free).
+- **Vue `nodalis.versions`** (activity bar « Nodalis ») : boutons de header **Start / Open / Stop** (+ snapshot/refresh) via `menus.view/title`, et un `viewsWelcome` affichant des boutons **Start Runtime** / **Open Panel** quand le runtime est arrêté.
+- **`bootstrapFirstRun()`** : sur un workspace Nodalis (présence `.nodalis/` **ou** `definitions/`) et si `nodalis.autoBootstrap` (défaut `true`), enchaîne `configureMcp` → `start` → `open`. Flags `globalState` séparés : `mcpConfigured` (global, écrit une fois) et `bootstrapped:<workspaceRoot>` (par workspace, posé **après** succès pour retry au prochain lancement). N'agit jamais sur un dossier non-Nodalis (side-effect free).
 
 ### Packaging (standalone)
 `esbuild.mjs` produit un `.vsix` **autonome** — aucun clone/build du repo requis côté user :
@@ -439,7 +439,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 3. `definitions/` → `extension/definitions` : règles par défaut pour qu'un workspace vide ait des types ;
 4. bundle de `src/extension.ts` (`external: ['vscode']`).
 
-`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `archi-os-vscode-0.1.0.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
+`engine.start(ctx, extensionPath)` lance le core bundlé (`core-bundle/index.cjs`, env `WORKSPACE_ROOT` = dossier ouvert, `DEFINITIONS_PATH` = `<workspace>/definitions` si présent sinon les définitions bundlées) et sert `web-dist` in-process. `vsce package --no-dependencies` produit `nodalis-vscode-0.1.0.vsix` (`dist/extension.js`, `core-bundle/`, `web-dist/`, `definitions/`, `media/icon.svg`). CORS core élargi à l'origine `vscode-webview://`.
 
 ---
 
@@ -483,7 +483,7 @@ TreeView branché sur les routes core `GET /api/versions`, `POST /api/snapshot`,
 ```json
 {
   "mcpServers": {
-    "archi-os": {
+    "nodalis": {
       "command": "node",
       "args": ["/path/to/core/dist/index.js"],
       "env": {
@@ -601,7 +601,7 @@ qui héritent de la couleur via `context-stroke`.
 ### Sous-graphes (drill-down)
 Un nœud peut posséder un **sous-graphe imbriqué** avec son **propre preset** (ex. un
 nœud "Database" d'un graphe `web` ouvre un sous-graphe `erd`).
-- **Stockage** : `<workspace>/.archi/subgraphs/<nodeId>.graph.json` (contient
+- **Stockage** : `<workspace>/.nodalis/subgraphs/<nodeId>.graph.json` (contient
   `presetId`, `nodes`, `edges`). Le nœud parent porte `subgraph: { presetId }`.
   Historique de versions séparé par graphe (`versions/sub-<nodeId>.index.json`).
 - **Pointeur de graphe actif** : `AppStateStore.activeGraphStack` (pile partagée

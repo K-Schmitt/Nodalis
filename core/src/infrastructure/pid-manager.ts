@@ -15,7 +15,7 @@ export class PidManager {
   private readonly pidPath: string;
 
   constructor(private readonly port: number, workspaceRoot: string) {
-    const archiDir = path.resolve(workspaceRoot, '.archi');
+    const archiDir = path.resolve(workspaceRoot, '.nodalis');
     if (!fs.existsSync(archiDir)) fs.mkdirSync(archiDir, { recursive: true });
     this.pidPath = path.join(archiDir, 'http-server.pid');
   }

@@ -1,5 +1,5 @@
 {
-  "name": "@archi-os/web",
+  "name": "@nodalis/web",
   "version": "1.0.0",
   "description": "Nodalis Web UI - React Flow Graph Visualizer",
   "type": "module",

@@ -21,18 +21,18 @@ const log = runHttpServer
   : (...args: unknown[]) => console.error(...args);
 
 /**
- * One-time migration: if a legacy repo-level `.archi/graph.json` exists and no
+ * One-time migration: if a legacy repo-level `.nodalis/graph.json` exists and no
  * workspace is active, adopt that folder as a workspace so existing graphs keep
  * working under the new "open folder" model (without re-asking the user).
  */
 function migrateLegacyWorkspace(workspaces: WorkspaceManager, workspaceRoot: string): void {
   if (workspaces.getActive() || workspaces.isInitialized(workspaceRoot)) return;
-  if (!existsSync(resolve(workspaceRoot, '.archi/graph.json'))) return;
+  if (!existsSync(resolve(workspaceRoot, '.nodalis/graph.json'))) return;
   try {
     workspaces.create(workspaceRoot, {
       name: basename(workspaceRoot) || 'Default',
       presetId: 'full',
-      description: 'Migrated from legacy .archi/graph.json',
+      description: 'Migrated from legacy .nodalis/graph.json',
     });
     log(`🧭 Adopted existing graph as a workspace at ${workspaceRoot}`);
   } catch (err) {

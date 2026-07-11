@@ -1,4 +1,4 @@
-import { DefinitionSchema } from '@archi-os/core/schema';
+import { DefinitionSchema } from '@nodalis/core/schema';
 import { parseTree, findNodeAtLocation, type Node, type Segment } from 'jsonc-parser';
 
 export type PlainDiagnostic = {

@@ -95,7 +95,7 @@ export const NodeSchema = z.object({
   /**
    * When present, this node owns a nested sub-graph (drill-down). The sub-graph
    * has its OWN architecture preset, so e.g. a "Database" node in a web graph can
-   * link to an ERD sub-graph. Stored at `.archi/subgraphs/<node.id>.graph.json`.
+   * link to an ERD sub-graph. Stored at `.nodalis/subgraphs/<node.id>.graph.json`.
    */
   subgraph: z.object({
     presetId: z.string().min(1),
@@ -236,7 +236,7 @@ export interface ValidationError {
 }
 
 /**
- * Schema for a workspace's metadata file (`.archi/workspace.json`).
+ * Schema for a workspace's metadata file (`.nodalis/workspace.json`).
  * `presetId` ties the workspace to an architecture type (web, game, …) that
  * determines which node definitions and rules are loaded.
  */

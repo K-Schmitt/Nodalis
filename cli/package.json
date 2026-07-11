@@ -1,9 +1,9 @@
 {
-  "name": "@archi-os/cli",
+  "name": "@nodalis/cli",
   "version": "1.0.0",
   "description": "Nodalis CLI — install, launch, configure MCP",
   "type": "module",
-  "bin": { "archi-os": "dist/index.js" },
+  "bin": { "nodalis": "dist/index.js" },
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",

@@ -39,7 +39,7 @@ function buildHtml(webview: vscode.Webview, distRoot: vscode.Uri, ctx: ExtContex
     `font-src ${webview.cspSource}`,
   ].join('; ');
 
-  const injection = `<script nonce="${n}">window.__ARCHI_OS__=${JSON.stringify({ apiBaseUrl })};</script>`;
+  const injection = `<script nonce="${n}">window.__NODALIS__=${JSON.stringify({ apiBaseUrl })};</script>`;
   const cspMeta = `<meta http-equiv="Content-Security-Policy" content="${csp}">`;
 
   // Add nonce to every bundle <script>; inject CSP + runtime config into <head>.
@@ -51,7 +51,7 @@ function buildHtml(webview: vscode.Webview, distRoot: vscode.Uri, ctx: ExtContex
 export function openPanel(ctx: ExtContext, extensionUri: vscode.Uri): vscode.WebviewPanel {
   const distRoot = vscode.Uri.joinPath(extensionUri, 'web-dist');
   const panel = vscode.window.createWebviewPanel(
-    'archiOs',
+    'nodalis',
     'Nodalis',
     vscode.ViewColumn.Active,
     {

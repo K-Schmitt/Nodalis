@@ -42,7 +42,7 @@ const DEFAULT_TIMEOUT = 10 * 60 * 1_000;
 
 /**
  * File-backed proposal store shared between the MCP process and the HTTP process.
- * Both read/write the active workspace's `.archi/proposals.json`. The store path
+ * Both read/write the active workspace's `.nodalis/proposals.json`. The store path
  * is resolved on every access via the injected provider, so it always targets
  * the currently-active workspace (the provider returns null when none is open).
  */

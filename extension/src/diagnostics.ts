@@ -8,7 +8,7 @@ export function registerDiagnostics(
   context: vscode.ExtensionContext,
   onValidSave: (uri: vscode.Uri) => void,
 ): vscode.Disposable {
-  const collection = vscode.languages.createDiagnosticCollection('archi-os');
+  const collection = vscode.languages.createDiagnosticCollection('nodalis');
   context.subscriptions.push(collection);
 
   let timer: ReturnType<typeof setTimeout> | undefined;

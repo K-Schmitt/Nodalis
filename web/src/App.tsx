@@ -95,7 +95,7 @@ function App() {
             <h2 style={{ color: T.text }}>No workspace open</h2>
             <p style={{ maxWidth: 420, textAlign: 'center' }}>
               Open or create a workspace folder from the <strong>📁 selector</strong> in the header.
-              Nodalis will store the architecture, its type and notes inside that folder’s <code>.archi/</code> directory.
+              Nodalis will store the architecture, its type and notes inside that folder’s <code>.nodalis/</code> directory.
             </p>
           </div>
         )}

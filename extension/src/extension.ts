@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext): void {
   // Command registration must never depend on the optional UI wiring below;
   // if a status bar / tree / diagnostics step throws, the commands still exist.
 
-  register('archi-os.open', () => {
+  register('nodalis.open', () => {
     const ctx = resolveContext();
     if (!ctx) { void vscode.window.showErrorMessage('Nodalis: open a workspace folder first.'); return; }
     const panel = openPanel(ctx, context.extensionUri);
@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext): void {
     panel.onDidDispose(() => activePanels.delete(panel));
   });
 
-  register('archi-os.start', async () => {
+  register('nodalis.start', async () => {
     const ctx = resolveContext();
     if (!ctx) { void vscode.window.showErrorMessage('Nodalis: open a workspace folder first.'); return; }
     try {
@@ -47,12 +47,12 @@ export function activate(context: vscode.ExtensionContext): void {
     }
   });
 
-  register('archi-os.stop', async () => {
+  register('nodalis.stop', async () => {
     await engine?.stop();
     statusBar?.setStopped();
   });
 
-  register('archi-os.configureMcp', () => {
+  register('nodalis.configureMcp', () => {
     const ctx = resolveContext();
     if (!ctx) { void vscode.window.showErrorMessage('Nodalis: open a workspace folder first.'); return; }
     try {
@@ -63,9 +63,9 @@ export function activate(context: vscode.ExtensionContext): void {
     }
   });
 
-  register('archi-os.refreshVersions', () => versions.refresh());
+  register('nodalis.refreshVersions', () => versions.refresh());
 
-  register('archi-os.createSnapshot', async () => {
+  register('nodalis.createSnapshot', async () => {
     const base = engine!.coreBaseUrl();
     if (!base) { void vscode.window.showErrorMessage('Nodalis: start the runtime first.'); return; }
     const label = await vscode.window.showInputBox({ prompt: 'Snapshot label', placeHolder: 'e.g. before-refactor' });
@@ -74,7 +74,7 @@ export function activate(context: vscode.ExtensionContext): void {
     catch (err) { void vscode.window.showErrorMessage(`Snapshot failed: ${(err as Error).message}`); }
   });
 
-  register('archi-os.restoreVersion', async (arg: unknown) => {
+  register('nodalis.restoreVersion', async (arg: unknown) => {
     const base = engine!.coreBaseUrl();
     if (!base) { void vscode.window.showErrorMessage('Nodalis: start the runtime first.'); return; }
     const v = arg as Version;
@@ -91,7 +91,7 @@ export function activate(context: vscode.ExtensionContext): void {
   try {
     statusBar = new StatusBar();
     context.subscriptions.push({ dispose: () => statusBar?.dispose() });
-    context.subscriptions.push(vscode.window.registerTreeDataProvider('archi-os.versions', versions));
+    context.subscriptions.push(vscode.window.registerTreeDataProvider('nodalis.versions', versions));
     registerDiagnostics(context, () => {
       statusBar?.flashReload();
       for (const p of activePanels) p.webview.postMessage({ type: 'refresh' });
@@ -100,10 +100,10 @@ export function activate(context: vscode.ExtensionContext): void {
     void vscode.window.showErrorMessage(`Nodalis partial init (commands still available): ${(err as Error).message}`);
   }
 
-  // Gated autostart: never spawn silently on mere .archi/ presence.
+  // Gated autostart: never spawn silently on mere .nodalis/ presence.
   const ctx = resolveContext();
   if (ctx?.autostart) {
-    void vscode.commands.executeCommand('archi-os.start');
+    void vscode.commands.executeCommand('nodalis.start');
   }
 
   // First-run bootstrap: configure MCP + start runtime + open the panel once
@@ -113,7 +113,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 /** A folder is a Nodalis project only if it carries definitions to model. */
 function isArchiWorkspace(root: string): boolean {
-  return existsSync(resolve(root, '.archi')) || existsSync(resolve(root, 'definitions'));
+  return existsSync(resolve(root, '.nodalis')) || existsSync(resolve(root, 'definitions'));
 }
 
 /**
@@ -134,23 +134,23 @@ async function bootstrapFirstRun(
   const state = context.globalState;
   if (!state?.get || !state.update) return;
 
-  const MCP_KEY = 'archi-os.mcpConfigured';               // global — write once ever
-  const bootKey = `archi-os.bootstrapped:${ctx.workspaceRoot}`; // per-workspace
+  const MCP_KEY = 'nodalis.mcpConfigured';               // global — write once ever
+  const bootKey = `nodalis.bootstrapped:${ctx.workspaceRoot}`; // per-workspace
 
   try {
     // MCP config writes global client files pointing at the bundled core; doing
     // it once avoids rewriting them on every launch while the runtime start fails.
     if (!state.get<boolean>(MCP_KEY)) {
-      await vscode.commands.executeCommand('archi-os.configureMcp');
+      await vscode.commands.executeCommand('nodalis.configureMcp');
       await state.update(MCP_KEY, true);
     }
 
     if (state.get<boolean>(bootKey)) return;
-    await vscode.commands.executeCommand('archi-os.start');
+    await vscode.commands.executeCommand('nodalis.start');
     // start swallows its own errors; only open + mark done if the runtime is
     // actually live (core AND web), else leave the flag unset so we retry.
     if (!engine?.isLive()) return;
-    await vscode.commands.executeCommand('archi-os.open');
+    await vscode.commands.executeCommand('nodalis.open');
     await state.update(bootKey, true);
   } catch (err) {
     void vscode.window.showErrorMessage(`Nodalis first-run setup failed (will retry next launch): ${(err as Error).message}`);

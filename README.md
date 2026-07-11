@@ -3,7 +3,7 @@
 **Moteur de graphe sémantique agnostique — un "meta-modeler" piloté par des fiches de règles.**
 
 Stack : Node.js + Fastify · React 19 + React Flow · MCP · Zod. Distribué comme
-extension VSCode **Nodalis**, comme CLI `@archi-os/cli`, ou lancé depuis les sources.
+extension VSCode **Nodalis**, comme CLI `@nodalis/cli`, ou lancé depuis les sources.
 
 > Dépôt : [K-Schmitt/Nodalis](https://github.com/K-Schmitt/Nodalis). Pour la
 > référence technique fichier-par-fichier, voir [ARCHITECTURE.md](ARCHITECTURE.md).
@@ -54,25 +54,25 @@ Installe l'extension (Marketplace, Open VSX, ou un `.vsix` des
 [releases](https://github.com/K-Schmitt/Nodalis/releases)). **Tout est bundlé** : ni
 clone, ni build, ni Node externe requis.
 
-- Ouvre un dossier de travail. Sur un workspace Nodalis (présence de `.archi/` ou
+- Ouvre un dossier de travail. Sur un workspace Nodalis (présence de `.nodalis/` ou
   `definitions/`), le **premier lancement** configure le MCP, démarre le runtime et
-  ouvre le panneau automatiquement (réglable via `archiOs.autoBootstrap`).
+  ouvre le panneau automatiquement (réglable via `nodalis.autoBootstrap`).
 - La vue **Nodalis** (barre d'activité) fournit des boutons **Start** / **Open** et la
   gestion des **versions** (snapshot / restore).
 
-### 2. CLI — `@archi-os/cli`
+### 2. CLI — `@nodalis/cli`
 
 ```bash
-npx @archi-os/cli init      # configure le MCP du/des client(s) IA (idempotent, réversible)
-npx @archi-os/cli up        # lance core (HTTP) + serveur web statique
-npx @archi-os/cli doctor    # diagnostics (Node, build, config MCP, ports, process)
-npx @archi-os/cli down      # stoppe les process lancés
+npx @nodalis/cli init      # configure le MCP du/des client(s) IA (idempotent, réversible)
+npx @nodalis/cli up        # lance core (HTTP) + serveur web statique
+npx @nodalis/cli doctor    # diagnostics (Node, build, config MCP, ports, process)
+npx @nodalis/cli down      # stoppe les process lancés
 ```
 
 ### 3. Depuis les sources (développement)
 
 ```bash
-git clone https://github.com/K-Schmitt/Nodalis.git archi-os && cd archi-os
+git clone https://github.com/K-Schmitt/Nodalis.git nodalis && cd nodalis
 npm run install:all         # dépendances root + workspaces
 npm run build               # compile core/dist + web/dist
 npm run dev                 # HTTP :3000 + Web :5173 (UI d'approbation + édition)
@@ -93,18 +93,18 @@ Ouvre `http://localhost:5173`. Utilise `npm run dev:full` pour lancer aussi le s
 | **Serveur MCP** (stdio) | Le client IA (Cursor / VSCode / Claude Code) via sa config MCP | Expose les outils à l'agent (voir ci-dessous) |
 | **Serveur HTTP + Web** | Toi (`npm run dev`, CLI `up`, ou l'extension) → :5173 | Voir le graphe, **approuver les propositions**, éditer à la souris |
 
-> Les deux communiquent via les fichiers `.archi/` du workspace.
+> Les deux communiquent via les fichiers `.nodalis/` du workspace.
 
 ### Workspaces (modèle « dossier ouvert »)
 
 Un **workspace = n'importe quel dossier** ouvert depuis le frontend (sélecteur 📁) ou
-via l'agent. Nodalis y crée un dossier mémoire `.archi/` (graphe, preset, snapshots,
-sous-graphes, `notes.md`). Le workspace actif est mémorisé (`~/.archi-os/state.json`) et
+via l'agent. Nodalis y crée un dossier mémoire `.nodalis/` (graphe, preset, snapshots,
+sous-graphes, `notes.md`). Le workspace actif est mémorisé (`~/.nodalis/state.json`) et
 **partagé entre l'agent et l'UI**.
 
 ### Déclarer le serveur MCP à la main
 
-`archi-os init` (CLI) ou `Nodalis: Configure MCP` (extension) écrivent la config
+`nodalis init` (CLI) ou `Nodalis: Configure MCP` (extension) écrivent la config
 automatiquement. En manuel, le serveur MCP compilé est `core/dist/index.js`
 (**rebuild après tout changement du Core** : `npm run build:core`).
 
@@ -112,11 +112,11 @@ automatiquement. En manuel, le serveur MCP compilé est `core/dist/index.js`
 
 **Cursor / Claude Code** (`~/.cursor/mcp.json`, chemins absolus) :
 ```json
-{ "mcpServers": { "archi-os": {
+{ "mcpServers": { "nodalis": {
   "command": "node",
-  "args": ["/CHEMIN/ABSOLU/archi-os/core/dist/index.js"],
+  "args": ["/CHEMIN/ABSOLU/nodalis/core/dist/index.js"],
   "env": {
-    "DEFINITIONS_PATH": "/CHEMIN/ABSOLU/archi-os/definitions",
+    "DEFINITIONS_PATH": "/CHEMIN/ABSOLU/nodalis/definitions",
     "WORKSPACE_BROWSE_ROOT": "/home/<user>"
   }
 } } }
@@ -126,8 +126,13 @@ automatiquement. En manuel, le serveur MCP compilé est `core/dist/index.js`
 |---|---|---|
 | `DEFINITIONS_PATH` | Dossier des `*.def.json` / presets | `./definitions` (requis hors du repo) |
 | `WORKSPACE_BROWSE_ROOT` | Racine autorisée pour ouvrir/créer des workspaces | home utilisateur |
-| `ARCHI_OS_STATE_DIR` | Où mémoriser le workspace actif | `~/.archi-os` |
+| `NODALIS_STATE_DIR` | Où mémoriser le workspace actif | `~/.nodalis` |
 | `RUN_HTTP_SERVER` | Lance le serveur HTTP au lieu du MCP | `false` |
+| `HTTP_HOST` | Interface d'écoute du serveur HTTP | `127.0.0.1` (loopback) |
+
+> **Sécurité** : l'API HTTP est non authentifiée et expose le browser de fichiers +
+> la création de workspace. Elle écoute `127.0.0.1` par défaut — ne l'expose sur le
+> réseau (`HTTP_HOST=0.0.0.0`) que derrière une barrière de confiance.
 
 ### Outils MCP exposés
 
@@ -152,13 +157,13 @@ Détail complet dans [ARCHITECTURE.md](ARCHITECTURE.md).
 - **Core (`/core`)** — Fastify + MCP. Registry en mémoire (source de vérité des types),
   pipeline de validation 3 niveaux (Zod → sémantique → **Rule Engine** : connexions
   interdites, détection de cycles, `dataSchema`, presets), Proposal System
-  transactionnel, persistance disque `.archi/graph.json`.
+  transactionnel, persistance disque `.nodalis/graph.json`.
 - **Web (`/web`)** — React 19 + React Flow, auto-layout **ELK.js** paradigme-aware,
   rendu de nœuds par archétype (record/shape/device/box), sous-graphes imbriqués,
   Zustand, TailwindCSS.
-- **CLI (`/cli`)** — `@archi-os/cli` : maison unique de la logique install / launch /
+- **CLI (`/cli`)** — `@nodalis/cli` : maison unique de la logique install / launch /
   config MCP (`init`, `up`, `down`, `doctor`, `uninstall`). Modules purs réutilisables
-  via `@archi-os/cli/lib/*`.
+  via `@nodalis/cli/lib/*`.
 - **Extension (`/extension`)** — *Nodalis* : enveloppe fine de la CLI, bundlée en `.vsix`
   autonome (core + web + définitions embarqués). Versioning, diagnostics `*.def.json`,
   first-run bootstrap.
@@ -196,9 +201,9 @@ Pas de SQL : structures JSON strictes (validées Zod), persistées en fichiers.
 |---|---|---|
 | **Definition** (le type) | `/definitions/**/*.def.json` | `typeId`, `version`, `metadata`, `behavior`, `style`, `dataSchema`, `render` |
 | **Preset** (paradigme) | `/definitions/presets/*.preset.json` | dossiers chargés, règles, `edgeTypes` |
-| **Node** (instance) | `.archi/graph.json` | `id` (UUID v4), `typeId`, `position`, `data`, `parentId?`, `subgraph?` |
-| **Edge** (relation) | `.archi/graph.json` | `id`, `source`, `target`, `type` (⊂ `edgeTypes` du preset), `metadata` |
-| **Sous-graphe** | `.archi/subgraphs/<nodeId>.graph.json` | `presetId`, `nodes`, `edges` |
+| **Node** (instance) | `.nodalis/graph.json` | `id` (UUID v4), `typeId`, `position`, `data`, `parentId?`, `subgraph?` |
+| **Edge** (relation) | `.nodalis/graph.json` | `id`, `source`, `target`, `type` (⊂ `edgeTypes` du preset), `metadata` |
+| **Sous-graphe** | `.nodalis/subgraphs/<nodeId>.graph.json` | `presetId`, `nodes`, `edges` |
 
 ---
 
@@ -235,13 +240,13 @@ Erreurs custom côté Core : `DefinitionNotFoundError`, `RuleViolationError`,
 ## 📂 Structure du projet
 
 ```
-archi-os/
+nodalis/
 ├── core/              # Backend Fastify + MCP (domain / application / infrastructure)
 ├── web/               # Frontend React 19 + React Flow + ELK
-├── cli/               # @archi-os/cli — install / launch / config MCP
+├── cli/               # @nodalis/cli — install / launch / config MCP
 ├── extension/         # Extension VSCode « Nodalis » (bundle .vsix autonome)
 ├── definitions/       # Fiches *.def.json (par catégorie) + presets/
-├── .archi/            # Données persistées du workspace (graph.json, snapshots, …)
+├── .nodalis/            # Données persistées du workspace (graph.json, snapshots, …)
 ├── docker-compose.yml # + Dockerfile.core / Dockerfile.web
 ├── ARCHITECTURE.md    # Référence technique détaillée
 └── README.md

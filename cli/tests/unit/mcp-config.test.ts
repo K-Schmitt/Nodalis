@@ -30,9 +30,9 @@ describe('buildEntry', () => {
 });
 
 describe('mergeServer', () => {
-  it('adds archi-os under mcpServers to empty text', () => {
+  it('adds nodalis under mcpServers to empty text', () => {
     const out = mergeServer('', entry, 'mcpServers');
-    expect(parse(out).mcpServers['archi-os'].command).toBe('node');
+    expect(parse(out).mcpServers['nodalis'].command).toBe('node');
   });
 
   it('preserves sibling servers', () => {
@@ -40,7 +40,7 @@ describe('mergeServer', () => {
     const out = mergeServer(input, entry, 'mcpServers');
     const j = parse(out);
     expect(j.mcpServers.other.command).toBe('x');
-    expect(j.mcpServers['archi-os'].command).toBe('node');
+    expect(j.mcpServers['nodalis'].command).toBe('node');
   });
 
   it('preserves user comments (surgical edit)', () => {
@@ -58,7 +58,7 @@ describe('mergeServer', () => {
   it('uses the servers key for vscode', () => {
     const out = mergeServer('', vscodeEntry, 'servers');
     const j = parse(out);
-    expect(j.servers['archi-os'].type).toBe('stdio');
+    expect(j.servers['nodalis'].type).toBe('stdio');
     expect(j.mcpServers).toBeUndefined();
   });
 
@@ -68,11 +68,11 @@ describe('mergeServer', () => {
 });
 
 describe('unmergeServer', () => {
-  it('removes only archi-os', () => {
+  it('removes only nodalis', () => {
     const input = mergeServer('{ "mcpServers": { "other": { "command": "x" } } }', entry, 'mcpServers');
     const out = unmergeServer(input, 'mcpServers');
     const j = parse(out);
-    expect(j.mcpServers['archi-os']).toBeUndefined();
+    expect(j.mcpServers['nodalis']).toBeUndefined();
     expect(j.mcpServers.other.command).toBe('x');
   });
 });

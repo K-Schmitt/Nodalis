@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
 import { existsSync } from 'node:fs';
-import { spawnManaged, stopEntry, type ProcEntry } from '@archi-os/cli/lib/process';
-import { findFreePort, waitForHealth } from '@archi-os/cli/lib/ports';
-import { startStaticServer } from '@archi-os/cli/lib/static-server';
+import { spawnManaged, stopEntry, type ProcEntry } from '@nodalis/cli/lib/process';
+import { findFreePort, waitForHealth } from '@nodalis/cli/lib/ports';
+import { startStaticServer } from '@nodalis/cli/lib/static-server';
 import type { ExtContext } from './config';
 
 export class Engine {

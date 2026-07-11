@@ -14,13 +14,13 @@ const require = Module.createRequire(import.meta.url);
 const BUNDLE = resolve(__dirname, '../dist/extension.js');
 
 const COMMANDS = [
-  'archi-os.open',
-  'archi-os.start',
-  'archi-os.stop',
-  'archi-os.configureMcp',
-  'archi-os.createSnapshot',
-  'archi-os.refreshVersions',
-  'archi-os.restoreVersion',
+  'nodalis.open',
+  'nodalis.start',
+  'nodalis.stop',
+  'nodalis.configureMcp',
+  'nodalis.createSnapshot',
+  'nodalis.refreshVersions',
+  'nodalis.restoreVersion',
 ];
 
 function stubVscode(registered: string[]): Record<string, unknown> {

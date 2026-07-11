@@ -12,7 +12,7 @@ export type ExtContext = {
 export function resolveContext(): ExtContext | null {
   const folder = vscode.workspace.workspaceFolders?.[0];
   if (!folder) return null;
-  const cfg = vscode.workspace.getConfiguration('archiOs');
+  const cfg = vscode.workspace.getConfiguration('nodalis');
   return {
     workspaceRoot: folder.uri.fsPath,
     corePort: 3000,

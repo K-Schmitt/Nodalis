@@ -101,7 +101,7 @@ export class MCPServer {
         },
         {
           name: 'create_workspace',
-          description: 'Create a NEW workspace at an absolute folder path and make it active. Use when the user wants to start a new architecture in a new folder. Pick presetId by the architecture type (e.g. "web", "game", "full") — call list_presets to see options. Initializes a .archi/ memory folder so the work persists across sessions.',
+          description: 'Create a NEW workspace at an absolute folder path and make it active. Use when the user wants to start a new architecture in a new folder. Pick presetId by the architecture type (e.g. "web", "game", "full") — call list_presets to see options. Initializes a .nodalis/ memory folder so the work persists across sessions.',
           inputSchema: {
             type: 'object',
             required: ['path', 'name', 'presetId'],
@@ -115,7 +115,7 @@ export class MCPServer {
         },
         {
           name: 'open_workspace',
-          description: 'Open / switch to an EXISTING workspace folder (one that already has a .archi/ folder) and make it active.',
+          description: 'Open / switch to an EXISTING workspace folder (one that already has a .nodalis/ folder) and make it active.',
           inputSchema: {
             type: 'object',
             required: ['path'],
@@ -129,7 +129,7 @@ export class MCPServer {
         },
         {
           name: 'append_workspace_note',
-          description: 'Append a timestamped note to the active workspace memory (.archi/notes.md). Record architecture decisions and context so future sessions do not start from zero.',
+          description: 'Append a timestamped note to the active workspace memory (.nodalis/notes.md). Record architecture decisions and context so future sessions do not start from zero.',
           inputSchema: {
             type: 'object',
             required: ['note'],

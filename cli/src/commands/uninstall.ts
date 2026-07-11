@@ -19,10 +19,10 @@ export async function uninstall(): Promise<void> {
     const after = unmergeServer(before, d.key);
     if (after !== before) {
       atomicWrite(d.file, after.endsWith('\n') ? after : after + '\n');
-      console.log(`${id}: removed archi-os from ${d.file}`);
+      console.log(`${id}: removed nodalis from ${d.file}`);
     }
   }
 
   clearRunRegistry(ws);
-  console.log('Uninstalled. archi-os MCP entry removed (siblings and comments preserved).');
+  console.log('Uninstalled. nodalis MCP entry removed (siblings and comments preserved).');
 }

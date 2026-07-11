@@ -35,7 +35,7 @@ const EMPTY_STATE: AppState = { activeWorkspacePath: null, recentWorkspaces: [],
 
 /**
  * Persists which workspace is active and the list of recently-opened workspaces
- * at the user level (`$XDG_CONFIG_HOME/archi-os/state.json`, or `~/.archi-os/`).
+ * at the user level (`$XDG_CONFIG_HOME/nodalis/state.json`, or `~/.nodalis/`).
  *
  * Shared by the MCP and HTTP processes: switching workspace in the frontend is
  * visible to the agent on its next tool call. This is what lets Nodalis "remember
@@ -46,10 +46,10 @@ export class AppStateStore {
 
   constructor(stateDir?: string) {
     const dir = stateDir
-      ?? process.env.ARCHI_OS_STATE_DIR
+      ?? process.env.NODALIS_STATE_DIR
       ?? (process.env.XDG_CONFIG_HOME
-        ? path.join(process.env.XDG_CONFIG_HOME, 'archi-os')
-        : path.join(os.homedir(), '.archi-os'));
+        ? path.join(process.env.XDG_CONFIG_HOME, 'nodalis')
+        : path.join(os.homedir(), '.nodalis'));
 
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     this.statePath = path.join(dir, 'state.json');

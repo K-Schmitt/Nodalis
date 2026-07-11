@@ -22,7 +22,7 @@ export const DEFAULT_CONFIG: CliConfig = {
 export function parseCliConfig(raw: unknown): CliConfig {
   const result = CliConfigSchema.safeParse(raw);
   if (!result.success) {
-    throw new McpConfigError(`Invalid .archi/cli.json: ${result.error.issues[0]?.message ?? 'unknown'}`);
+    throw new McpConfigError(`Invalid .nodalis/cli.json: ${result.error.issues[0]?.message ?? 'unknown'}`);
   }
   return result.data;
 }

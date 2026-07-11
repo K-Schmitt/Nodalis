@@ -30,7 +30,7 @@ export async function doctor(): Promise<void> {
   checks.push({
     label: `preferred core port ${cfg.ports.core}`,
     ok: coreFree || ownsPort,
-    detail: coreFree ? 'free' : ownsPort ? 'in use by archi-os (running)' : 'in use by another process (fallback will apply)',
+    detail: coreFree ? 'free' : ownsPort ? 'in use by nodalis (running)' : 'in use by another process (fallback will apply)',
   });
 
   if (reg?.core) {

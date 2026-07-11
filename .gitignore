@@ -44,6 +44,18 @@ coverage/
 architecture.json.backup
 *.def.json.backup
 
+# AI config / context files
+.claude/
+.cursor/
+.gitnexus/
+.superpower/
+superpower/
+docs/
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.mcp.json
+
 # Debug logs
 npm-debug.log*
 yarn-debug.log*

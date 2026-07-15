@@ -71,7 +71,7 @@ export function NodeInspector() {
           {items.map((it, i) => (
             <div key={i} style={{ display: 'flex', gap: 4 }}>
               <input style={{ ...field, flex: 1 }} value={asText(it)} onChange={(e) => setItem(i, e.target.value)} placeholder="name : type" />
-              <button onClick={() => removeItem(i)} style={{ display: 'flex', border: '1px solid #fecaca', background: '#fef2f2', color: '#dc2626', borderRadius: 6, cursor: 'pointer', padding: '0 8px' }}><X size={13} /></button>
+              <button onClick={() => removeItem(i)} aria-label="Remove item" style={{ display: 'flex', border: '1px solid #fecaca', background: '#fef2f2', color: '#dc2626', borderRadius: 6, cursor: 'pointer', padding: '0 8px' }}><X size={13} /></button>
             </div>
           ))}
           <button onClick={() => setField(key, [...items, ''])} style={{ display: 'flex', alignItems: 'center', gap: 4, justifyContent: 'center', border: `1px dashed ${T.borderStrong}`, background: 'transparent', color: T.textMuted, borderRadius: 6, cursor: 'pointer', padding: '4px', fontSize: 12 }}><Plus size={12} /> add item</button>
@@ -101,7 +101,7 @@ export function NodeInspector() {
     <aside style={{ width: 300, borderLeft: `1px solid ${T.border}`, background: T.surface, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
       <div style={{ padding: '12px 16px', borderBottom: `1px solid ${T.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <strong style={{ fontSize: 14, color: T.text }}>{def?.label ?? 'Node'}</strong>
-        <button onClick={() => selectNode(null)} style={{ display: 'flex', border: 'none', background: 'transparent', cursor: 'pointer', color: T.textMuted }}><X size={16} /></button>
+        <button onClick={() => selectNode(null)} aria-label="Close inspector" style={{ display: 'flex', border: 'none', background: 'transparent', cursor: 'pointer', color: T.textMuted }}><X size={16} /></button>
       </div>
 
       <div style={{ padding: 16, overflowY: 'auto', flex: 1 }}>

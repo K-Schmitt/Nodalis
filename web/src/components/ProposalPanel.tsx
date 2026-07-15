@@ -310,6 +310,7 @@ export function ProposalPanel() {
             </div>
             <button
               onClick={() => setOpen(false)}
+              aria-label="Close proposals drawer"
               style={{
                 background: 'rgba(255,255,255,0.1)', border: 'none', color: '#94a3b8',
                 borderRadius: 6, padding: '4px 8px', cursor: 'pointer', fontSize: 14,

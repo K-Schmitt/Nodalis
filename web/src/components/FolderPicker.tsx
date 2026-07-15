@@ -51,7 +51,7 @@ export function FolderPicker({ onClose }: { onClose: () => void }) {
       <div style={modal} onClick={(e) => e.stopPropagation()}>
         <div style={{ padding: '16px 20px', borderBottom: `1px solid ${T.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <strong style={{ fontSize: 16, display: 'flex', alignItems: 'center', gap: 8, color: T.text }}><FolderOpen size={17} /> Open or create a workspace</strong>
-          <button style={{ ...btn, display: 'flex' }} onClick={onClose}><X size={14} /></button>
+          <button style={{ ...btn, display: 'flex' }} onClick={onClose} aria-label="Close"><X size={14} /></button>
         </div>
 
         {/* Path bar */}

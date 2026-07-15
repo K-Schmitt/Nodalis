@@ -1,3 +1,4 @@
+import { Home } from 'lucide-react';
 import { useGraphStore } from '../stores/useGraphStore';
 import { useWorkspaceStore } from '../stores/useWorkspaceStore';
 
@@ -20,7 +21,7 @@ export function Breadcrumb() {
         style={crumbBtn(trail.length === 0)}
         title="Root graph"
       >
-        🏠 {active?.name ?? 'Root'}
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Home size={13} /> {active?.name ?? 'Root'}</span>
       </button>
 
       {trail.map((entry, i) => (

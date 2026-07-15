@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useGraphStore } from '../stores/useGraphStore';
 import { useWorkspaceStore } from '../stores/useWorkspaceStore';
 import type { Definition, DataSchemaField } from '../types';
+import { X, ArrowDownCircle, Plus } from 'lucide-react';
+import { T } from '../lib/theme';
 
 interface XYNodeData {
   id: string;
@@ -12,9 +14,10 @@ interface XYNodeData {
 }
 
 const field: React.CSSProperties = {
-  width: '100%', padding: '6px 8px', borderRadius: 6, border: '1px solid #d1d5db', fontSize: 13, boxSizing: 'border-box',
+  width: '100%', padding: '6px 8px', borderRadius: 6, border: `1px solid ${T.border}`, fontSize: 13, boxSizing: 'border-box',
+  background: T.surface, color: T.text,
 };
-const label: React.CSSProperties = { fontSize: 11, fontWeight: 600, color: '#6b7280', textTransform: 'uppercase', letterSpacing: 0.4, marginBottom: 4, display: 'block' };
+const label: React.CSSProperties = { fontSize: 11, fontWeight: 600, color: T.textMuted, textTransform: 'uppercase', letterSpacing: 0.4, marginBottom: 4, display: 'block' };
 
 export function NodeInspector() {
   const { nodes, definitions, selectedNodeId, selectNode, applyOperations, createSubgraph, enterSubgraph } = useGraphStore();
@@ -68,10 +71,10 @@ export function NodeInspector() {
           {items.map((it, i) => (
             <div key={i} style={{ display: 'flex', gap: 4 }}>
               <input style={{ ...field, flex: 1 }} value={asText(it)} onChange={(e) => setItem(i, e.target.value)} placeholder="name : type" />
-              <button onClick={() => removeItem(i)} style={{ border: '1px solid #fecaca', background: '#fef2f2', color: '#dc2626', borderRadius: 6, cursor: 'pointer', padding: '0 8px' }}>✕</button>
+              <button onClick={() => removeItem(i)} style={{ display: 'flex', border: '1px solid #fecaca', background: '#fef2f2', color: '#dc2626', borderRadius: 6, cursor: 'pointer', padding: '0 8px' }}><X size={13} /></button>
             </div>
           ))}
-          <button onClick={() => setField(key, [...items, ''])} style={{ border: '1px dashed #cbd5e1', background: 'transparent', color: '#64748b', borderRadius: 6, cursor: 'pointer', padding: '4px', fontSize: 12 }}>＋ add item</button>
+          <button onClick={() => setField(key, [...items, ''])} style={{ display: 'flex', alignItems: 'center', gap: 4, justifyContent: 'center', border: `1px dashed ${T.borderStrong}`, background: 'transparent', color: T.textMuted, borderRadius: 6, cursor: 'pointer', padding: '4px', fontSize: 12 }}><Plus size={12} /> add item</button>
         </div>
       );
     }
@@ -95,14 +98,14 @@ export function NodeInspector() {
   const required = new Set(def?.constraints?.requiredFields ?? []);
 
   return (
-    <aside style={{ width: 300, borderLeft: '1px solid #e5e7eb', background: 'white', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <strong style={{ fontSize: 14 }}>{def?.label ?? 'Node'}</strong>
-        <button onClick={() => selectNode(null)} style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: '#9ca3af', fontSize: 16 }}>✕</button>
+    <aside style={{ width: 300, borderLeft: `1px solid ${T.border}`, background: T.surface, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+      <div style={{ padding: '12px 16px', borderBottom: `1px solid ${T.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <strong style={{ fontSize: 14, color: T.text }}>{def?.label ?? 'Node'}</strong>
+        <button onClick={() => selectNode(null)} style={{ display: 'flex', border: 'none', background: 'transparent', cursor: 'pointer', color: T.textMuted }}><X size={16} /></button>
       </div>
 
       <div style={{ padding: 16, overflowY: 'auto', flex: 1 }}>
-        <div style={{ fontSize: 11, color: '#9ca3af', marginBottom: 12 }}>{nodeData.typeId}</div>
+        <div style={{ fontSize: 11, color: T.textMuted, marginBottom: 12 }}>{nodeData.typeId}</div>
 
         <label style={label}>Label</label>
         <input style={{ ...field, marginBottom: 16 }} value={labelValue} onChange={(e) => setLabelValue(e.target.value)} />
@@ -111,29 +114,29 @@ export function NodeInspector() {
           <div key={key} style={{ marginBottom: 14 }}>
             <label style={label}>{key}{required.has(key) ? ' *' : ''}</label>
             {renderInput(key, spec)}
-            {spec.description && <div style={{ fontSize: 11, color: '#9ca3af', marginTop: 2 }}>{spec.description}</div>}
+            {spec.description && <div style={{ fontSize: 11, color: T.textMuted, marginTop: 2 }}>{spec.description}</div>}
           </div>
         ))}
-        {Object.keys(schema).length === 0 && <div style={{ fontSize: 13, color: '#9ca3af' }}>This node type has no configurable fields.</div>}
+        {Object.keys(schema).length === 0 && <div style={{ fontSize: 13, color: T.textMuted }}>This node type has no configurable fields.</div>}
 
         {/* Sub-graph (drill-down) */}
-        <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px dashed #e5e7eb' }}>
+        <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px dashed ${T.border}` }}>
           <label style={label}>Sub-graph</label>
           {nodeData.subgraph ? (
             <div>
-              <div style={{ fontSize: 12, color: '#6b7280', margin: '4px 0 8px' }}>
+              <div style={{ fontSize: 12, color: T.textMuted, margin: '4px 0 8px' }}>
                 This node has a nested <strong>{nodeData.subgraph.presetId}</strong> graph.
               </div>
               <button
                 onClick={() => enterSubgraph(nodeData.id, nodeData.label)}
-                style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #6366f1', background: '#eef2ff', color: '#4338ca', cursor: 'pointer', fontWeight: 600 }}
+                style={{ width: '100%', padding: '8px', borderRadius: 6, border: `1px solid ${T.accent}`, background: T.surfaceAlt, color: T.accent, cursor: 'pointer', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
               >
-                ↓ Open sub-graph
+                <ArrowDownCircle size={14} /> Open sub-graph
               </button>
             </div>
           ) : (
             <div>
-              <div style={{ fontSize: 12, color: '#9ca3af', margin: '4px 0 8px' }}>
+              <div style={{ fontSize: 12, color: T.textMuted, margin: '4px 0 8px' }}>
                 Give this node its own nested graph (with its own paradigm) — e.g. an ERD for a database.
               </div>
               <select style={{ ...field, marginBottom: 8 }} value={subPreset} onChange={(e) => setSubPreset(e.target.value)}>
@@ -141,17 +144,17 @@ export function NodeInspector() {
               </select>
               <button
                 onClick={async () => { if (await createSubgraph(nodeData.id, subPreset)) await enterSubgraph(nodeData.id, nodeData.label); }}
-                style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #d1d5db', background: 'white', cursor: 'pointer', fontWeight: 600, color: '#374151' }}
+                style={{ width: '100%', padding: '8px', borderRadius: 6, border: `1px solid ${T.border}`, background: T.surface, cursor: 'pointer', fontWeight: 600, color: T.text, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
               >
-                + Create sub-graph
+                <Plus size={14} /> Create sub-graph
               </button>
             </div>
           )}
         </div>
       </div>
 
-      <div style={{ padding: 16, borderTop: '1px solid #f1f5f9', display: 'flex', gap: 8 }}>
-        <button onClick={save} style={{ flex: 1, padding: '8px', borderRadius: 6, border: '1px solid #2563eb', background: '#2563eb', color: 'white', cursor: 'pointer', fontWeight: 600 }}>Save</button>
+      <div style={{ padding: 16, borderTop: `1px solid ${T.border}`, display: 'flex', gap: 8 }}>
+        <button onClick={save} style={{ flex: 1, padding: '8px', borderRadius: 6, border: `1px solid ${T.accent}`, background: T.accent, color: 'white', cursor: 'pointer', fontWeight: 600 }}>Save</button>
         <button onClick={remove} style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #fecaca', background: '#fef2f2', color: '#dc2626', cursor: 'pointer' }}>Delete</button>
       </div>
     </aside>

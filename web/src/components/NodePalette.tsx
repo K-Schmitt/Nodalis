@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { useGraphStore } from '../stores/useGraphStore';
+import { useUiStore } from '../stores/useUiStore';
 import { newId, type Definition } from '../types';
 import { T } from '../lib/theme';
 
@@ -21,6 +23,7 @@ function buildDefaultData(def: Definition): Record<string, unknown> {
 
 export function NodePalette() {
   const { definitions, applyOperations } = useGraphStore();
+  const { paletteOpen, togglePalette } = useUiStore();
 
   const byCategory = useMemo(() => {
     const map = new Map<string, Definition[]>();
@@ -46,13 +49,36 @@ export function NodePalette() {
     }]);
   };
 
+  if (!paletteOpen) {
+    return (
+      <aside style={{ width: 32, borderRight: `1px solid ${T.border}`, background: T.surface, flexShrink: 0, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 10 }}>
+        <button
+          onClick={togglePalette}
+          title="Show node palette"
+          aria-label="Show node palette"
+          style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: T.textMuted, padding: 4, display: 'flex' }}
+        >
+          <PanelLeftOpen size={16} />
+        </button>
+      </aside>
+    );
+  }
+
   return (
     <aside style={{
       width: 230, borderRight: `1px solid ${T.border}`, background: T.surface,
       overflowY: 'auto', flexShrink: 0,
     }}>
-      <div style={{ padding: '12px 14px', borderBottom: `1px solid ${T.border}`, fontSize: 12, fontWeight: 700, color: T.text, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-        Node palette
+      <div style={{ padding: '12px 14px', borderBottom: `1px solid ${T.border}`, fontSize: 12, fontWeight: 700, color: T.text, textTransform: 'uppercase', letterSpacing: 0.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span>Node palette</span>
+        <button
+          onClick={togglePalette}
+          title="Hide node palette"
+          aria-label="Hide node palette"
+          style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: T.textMuted, padding: 0, display: 'flex' }}
+        >
+          <PanelLeftClose size={15} />
+        </button>
       </div>
       {definitions.length === 0 && (
         <div style={{ padding: 14, fontSize: 13, color: T.textMuted }}>Open a workspace to see its node types.</div>

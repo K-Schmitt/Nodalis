@@ -13,9 +13,19 @@ const applyTheme = (mode: ThemeMode) => {
   if (typeof document !== 'undefined') document.documentElement.dataset.theme = mode;
 };
 
+const readInitialPaletteOpen = (): boolean => {
+  if (typeof window === 'undefined') return true;
+  const saved = window.localStorage.getItem('archi-palette-open');
+  return saved === null ? true : saved === 'true';
+};
+
 interface UiState {
   theme: ThemeMode;
   toggleTheme: () => void;
+
+  /** Left-hand node-type palette open/collapsed. */
+  paletteOpen: boolean;
+  togglePalette: () => void;
 
   /** Command palette (Cmd/Ctrl-K) open state. */
   cmdkOpen: boolean;
@@ -36,6 +46,7 @@ interface UiState {
 export const useUiStore = create<UiState>((set) => {
   const initial = readInitialTheme();
   applyTheme(initial);
+  const initialPaletteOpen = readInitialPaletteOpen();
   return {
     theme: initial,
     toggleTheme: () =>
@@ -44,6 +55,14 @@ export const useUiStore = create<UiState>((set) => {
         applyTheme(next);
         try { window.localStorage.setItem('archi-theme', next); } catch { /* ignore */ }
         return { theme: next };
+      }),
+
+    paletteOpen: initialPaletteOpen,
+    togglePalette: () =>
+      set((s) => {
+        const next = !s.paletteOpen;
+        try { window.localStorage.setItem('archi-palette-open', String(next)); } catch { /* ignore */ }
+        return { paletteOpen: next };
       }),
 
     cmdkOpen: false,

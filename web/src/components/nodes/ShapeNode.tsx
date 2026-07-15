@@ -1,5 +1,6 @@
 import { getIcon, NodeFrame, type ArchiNodeData } from './shared';
 import { T } from '../../lib/theme';
+import { Mail, Timer, Zap, ArrowUp, ListChecks, User, Settings, ScrollText, Hand, Inbox } from 'lucide-react';
 
 /**
  * `shape` archetype: pure BPMN/flowchart geometry.
@@ -7,16 +8,16 @@ import { T } from '../../lib/theme';
  *                 trigger glyph (message/timer/error/signal) from `data.type`.
  *   - gateway-* : diamond with a routing glyph (× exclusive, + parallel, ○ inclusive)
  *   - task/*    : rounded rectangle with a corner icon reflecting the task `type`
- *                 (user 👤, service ⚙️, script 📜, manual ✋).
+ *                 (user, service, script, manual).
  *   - data-object: rectangle with a folded corner.
  * A sub-process (node owning a sub-graph) gets a [+] expand marker.
  */
 
-const EVENT_TRIGGER: Record<string, string> = {
-  message: '✉', timer: '⏱', error: '⚡', signal: '▲', escalation: '↑', conditional: '▤',
+const EVENT_TRIGGER: Record<string, typeof Mail> = {
+  message: Mail, timer: Timer, error: Zap, signal: ArrowUp, escalation: ArrowUp, conditional: ListChecks,
 };
-const TASK_TYPE_GLYPH: Record<string, string> = {
-  user: '👤', service: '⚙️', script: '📜', manual: '✋', send: '✉', receive: '📥', businessRule: '▤',
+const TASK_TYPE_GLYPH: Record<string, typeof User> = {
+  user: User, service: Settings, script: ScrollText, manual: Hand, send: Mail, receive: Inbox, businessRule: ListChecks,
 };
 
 export function ShapeNode({ data }: { data: ArchiNodeData }) {
@@ -29,7 +30,7 @@ export function ShapeNode({ data }: { data: ArchiNodeData }) {
   if (shape.startsWith('event')) {
     const isEnd = shape.includes('end');
     const isIntermediate = shape.includes('intermediate');
-    const glyph = EVENT_TRIGGER[kind];
+    const Glyph = EVENT_TRIGGER[kind];
     return (
       <NodeFrame data={data}>
         <div style={{ position: 'relative', width: 56, height: 56 }}>
@@ -39,8 +40,8 @@ export function ShapeNode({ data }: { data: ArchiNodeData }) {
             display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: T.shadow,
           }}>
             {isIntermediate && <div style={{ position: 'absolute', inset: 5, borderRadius: '50%', border: `2px solid ${color}` }} />}
-            {glyph
-              ? <span style={{ fontSize: 20, color, lineHeight: 1 }}>{glyph}</span>
+            {Glyph
+              ? <Glyph size={20} color={color} strokeWidth={2} />
               : render.icon ? (() => { const I = getIcon(render.icon); return <I size={20} color={color} strokeWidth={2} />; })() : null}
           </div>
           <div style={labelBelow}>{label}</div>
@@ -82,7 +83,7 @@ export function ShapeNode({ data }: { data: ArchiNodeData }) {
 
   // task (default): rounded rectangle with a type marker in the corner.
   const Icon = getIcon(render.icon ?? data.style?.icon);
-  const taskGlyph = TASK_TYPE_GLYPH[kind];
+  const TaskGlyph = TASK_TYPE_GLYPH[kind];
   const isSubprocess = shape === 'subprocess' || !!data.subgraph;
   return (
     <NodeFrame data={data}>
@@ -92,8 +93,8 @@ export function ShapeNode({ data }: { data: ArchiNodeData }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
         fontWeight: 600, fontSize: 12, boxShadow: T.shadow,
       }}>
-        <span style={{ position: 'absolute', top: 5, left: 6, fontSize: 13, lineHeight: 1 }}>
-          {taskGlyph ?? <Icon size={13} color={color} strokeWidth={2} />}
+        <span style={{ position: 'absolute', top: 5, left: 6, fontSize: 13, lineHeight: 1, display: 'flex' }}>
+          {TaskGlyph ? <TaskGlyph size={13} color={color} strokeWidth={2} /> : <Icon size={13} color={color} strokeWidth={2} />}
         </span>
         {label}
         {isSubprocess && (

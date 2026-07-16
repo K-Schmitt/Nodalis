@@ -139,9 +139,7 @@ class Graph {
 - `Proposal` : Proposition de changements au graphe
 
 #### `rule-engine.ts`
-**Rôle** : Moteur de règles pour valider les opérations sur le graphe (futur).
-
-**Status** : Prévu pour les phases futures, pas encore utilisé.
+**Rôle** : Moteur de règles qui valide les opérations sur le graphe — connexions interdites, détection de cycles, `dataSchema`, et règles de preset (`maxNodesPerType`, `maxDepth`, `requiredTypes`, `requiredConnections`, …).
 
 ---
 
@@ -182,10 +180,7 @@ class Graph {
 
 **Communication** : Via stdio (stdin/stdout)
 
-**Tools exposés** :
-1. **`list_types`** : Liste tous les types de nodes disponibles
-2. **`get_graph`** : Retourne l'état actuel du graphe
-3. **`propose_changes`** : Propose et applique des changements au graphe
+**Tools exposés** : `get_active_workspace`, `list_workspaces`, `create_workspace`, `open_workspace`, `get_workspace_notes`, `append_workspace_note`, `list_presets`, `create_subgraph`, `open_graph`, `list_types`, `get_graph`, `validate_graph`, `propose_changes`, `clear_graph`, `check_proposal_status`, `list_versions`, `create_snapshot`, `restore_version`.
 
 **Format des proposals** :
 ```typescript
@@ -208,6 +203,7 @@ class Graph {
 - Validation automatique des proposals via `ValidateProposalUseCase`
 - Application automatique via `ApplyProposalUseCase`
 - Sauvegarde automatique après chaque changement via `GraphStorage`
+- Erreurs self-correcting : les rejets embarquent les valeurs valides (ex. liste complète des `typeId` du preset actif, ou les ids de nodes/edges existants) pour qu'un agent puisse retenter avec un appel correct au lieu de deviner
 
 #### `api/http-server.ts`
 **Rôle** : Serveur HTTP REST pour le frontend web.

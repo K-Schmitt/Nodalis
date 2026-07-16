@@ -41,6 +41,7 @@ coverage/
 .nodalis/pending/
 .nodalis/cli/
 .nodalis/cli.json
+.nodalis/proposals.json
 architecture.json.backup
 *.def.json.backup
 
@@ -68,3 +69,4 @@ copilote-instructions.md
 .cursor/
 TestManuels.txt
 .superpowers/
+docs/superpowers/

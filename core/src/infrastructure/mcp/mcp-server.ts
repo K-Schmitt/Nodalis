@@ -101,7 +101,7 @@ export class MCPServer {
         },
         {
           name: 'create_workspace',
-          description: 'Create a NEW workspace at an absolute folder path and make it active. Use when the user wants to start a new architecture in a new folder. Pick presetId by the architecture type (e.g. "web", "game", "full") — call list_presets to see options. Initializes a .nodalis/ memory folder so the work persists across sessions.',
+          description: 'Create a NEW workspace at an absolute folder path and make it active. Use when the user wants to start a new architecture in a new folder. MANDATORY: call list_presets FIRST and pass one of its returned preset ids verbatim as presetId — do not guess (e.g. "full" only works if list_presets actually returned it). After creating, call list_types before adding any node — presets do not all share the same node typeIds. Initializes a .nodalis/ memory folder so the work persists across sessions.',
           inputSchema: {
             type: 'object',
             required: ['path', 'name', 'presetId'],
@@ -164,7 +164,7 @@ export class MCPServer {
         },
         {
           name: 'list_types',
-          description: 'List the node types available in the active graph (scoped to its architecture preset), with their constraints and required data fields.',
+          description: 'List the NODE TYPES (typeId values, e.g. "component", "database") available in the active graph, scoped to its architecture preset, with their constraints and required data fields. This is NOT graph snapshots/history — for those use list_versions. MANDATORY: call this and use one of the returned typeId values verbatim before every add_node in propose_changes. Never invent a typeId (e.g. "service", "module", "file") without checking here first — propose_changes will reject it.',
           inputSchema: { type: 'object', properties: {} },
         },
         {
@@ -181,7 +181,10 @@ export class MCPServer {
           name: 'propose_changes',
           description: `Submit a batch of graph changes for user review and approval.
 
-BEFORE CALLING: call list_types to know which typeIds exist in the active preset.
+REQUIRED WORKFLOW (in order, every time you build a graph):
+1. get_active_workspace (or create_workspace / open_workspace if none active)
+2. list_types — get the EXACT typeId strings valid for this preset. Do NOT skip this and do NOT guess typeIds like "service", "module", "file", "component" from general knowledge — every preset defines its own set and guessed values WILL be rejected.
+3. propose_changes using only typeId values copied verbatim from step 2's output.
 
 CRITICAL — ID FORMAT: Every "id", "sourceId", "targetId" MUST be a valid UUID v4.
 Generate them with crypto.randomUUID() or use the format xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx.
@@ -241,7 +244,7 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
         },
         {
           name: 'list_versions',
-          description: 'List all saved graph snapshots.',
+          description: 'List all saved graph SNAPSHOTS (history/backups you can restore_version to). This is NOT the list of node typeIds — for those (needed before add_node), use list_types instead.',
           inputSchema: { type: 'object', properties: {} },
         },
         {
@@ -539,10 +542,11 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
       if (op.op !== 'add_node') continue;
 
       if (!this.registry.has(op.payload.typeId)) {
+        const validTypeIds = this.registry.getAllTypeIds();
         errors.push({
           code: 'ERR_TYPE_NOT_FOUND',
-          message: `Type "${op.payload.typeId}" not in registry`,
-          context: { typeId: op.payload.typeId },
+          message: `Type "${op.payload.typeId}" not in registry. Valid typeIds for the active preset are: ${validTypeIds.join(', ')}. Retry with one of these — do not guess another string.`,
+          context: { typeId: op.payload.typeId, validTypeIds },
         });
         continue;
       }
@@ -561,7 +565,7 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
         } else if (this.ruleEngine.detectCycle(op.payload, prospectiveEdges)) {
           errors.push({
             code: 'ERR_CYCLE_DETECTED',
-            message: 'This edge would create a cycle',
+            message: `Edge "${op.payload.id}" (${op.payload.sourceId} → ${op.payload.targetId}) would create a cycle. Call get_graph to see the current edges and pick a non-cyclic direction, or drop this edge.`,
             context: { edgeId: op.payload.id },
           });
         } else {
@@ -571,15 +575,15 @@ The call BLOCKS until the user accepts or rejects in the UI. Do NOT call again b
       if (op.op === 'delete_node' && !this.graph.hasNode(op.payload.id)) {
         errors.push({
           code: 'ERR_NODE_NOT_FOUND',
-          message: `Node not found: ${op.payload.id}`,
-          context: { nodeId: op.payload.id },
+          message: `Node "${op.payload.id}" not found in the current graph. Call get_graph to see existing node ids before deleting — do not guess an id.`,
+          context: { nodeId: op.payload.id, existingNodeIds: this.graph.getAllNodes().map((n) => n.id) },
         });
       }
       if (op.op === 'delete_edge' && !this.graph.hasEdge(op.payload.id)) {
         errors.push({
           code: 'ERR_EDGE_NOT_FOUND',
-          message: `Edge not found: ${op.payload.id}`,
-          context: { edgeId: op.payload.id },
+          message: `Edge "${op.payload.id}" not found in the current graph. Call get_graph to see existing edge ids before deleting — do not guess an id.`,
+          context: { edgeId: op.payload.id, existingEdgeIds: this.graph.getAllEdges().map((e) => e.id) },
         });
       }
     }

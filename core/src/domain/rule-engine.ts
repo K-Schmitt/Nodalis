@@ -60,10 +60,11 @@ export class RuleEngine {
       definition = this.registry.get(node.typeId);
     } catch (e) {
       if (e instanceof DefinitionNotFoundError) {
+        const validTypeIds = this.registry.getAllTypeIds();
         errors.push({
           code: 'ERR_TYPE_NOT_FOUND',
-          message: `Unknown node type: "${node.typeId}" — is the correct preset loaded?`,
-          context: { typeId: node.typeId },
+          message: `Unknown node type: "${node.typeId}". Valid typeIds for the active preset: ${validTypeIds.join(', ')}. Use one of these verbatim (call list_types if unsure).`,
+          context: { typeId: node.typeId, validTypeIds },
         });
         return { valid: false, errors };
       }

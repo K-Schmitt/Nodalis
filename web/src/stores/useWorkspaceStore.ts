@@ -11,7 +11,7 @@ interface WorkspaceState {
   error: string | null;
 
   init: () => Promise<void>;
-  fetchWorkspaces: () => Promise<void>;
+  fetchWorkspaces: () => Promise<boolean>;
   fetchPresets: () => Promise<void>;
   openWorkspace: (path: string) => Promise<boolean>;
   createWorkspace: (path: string, name: string, presetId: string) => Promise<boolean>;
@@ -38,7 +38,21 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
 
   init: async () => {
     set({ loading: true });
-    await Promise.all([get().fetchWorkspaces(), get().fetchPresets()]);
+    // Core may still be booting when the panel opens (race with `nodalis.start`).
+    // Retry with backoff until it answers instead of giving up after one try.
+    let delay = 500;
+    let attempts = 0;
+    const maxAttempts = 10; // ~30s total with the backoff below
+    while (!(await get().fetchWorkspaces())) {
+      attempts += 1;
+      if (attempts >= maxAttempts) {
+        set({ loading: false, error: 'Could not reach Nodalis core. Is it running?' });
+        return;
+      }
+      await new Promise((r) => setTimeout(r, delay));
+      delay = Math.min(delay * 2, 5_000);
+    }
+    await get().fetchPresets();
     set({ loading: false });
   },
 
@@ -47,8 +61,10 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
       const res = await fetch(`${API_BASE_URL}/api/workspaces`);
       const data = await res.json() as { active: WorkspaceInfo | null; recent: RecentWorkspace[] };
       set({ active: data.active, recent: data.recent });
+      return true;
     } catch (err) {
       console.error('[WorkspaceStore] fetchWorkspaces failed:', err);
+      return false;
     }
   },
 

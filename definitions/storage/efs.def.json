@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:storage:efs",
+  "label": "Amazon EFS",
+  "description": "Elastic NFS file system shared across multiple compute instances simultaneously, unlike block storage",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FF9900",
+    "icon": "folder-tree"
+  },
+  "dataSchema": {
+    "throughputMode": {
+      "type": "string",
+      "enum": ["bursting", "provisioned", "elastic"],
+      "default": "bursting"
+    },
+    "storageClass": {
+      "type": "string",
+      "enum": ["standard", "one-zone", "infrequent-access"],
+      "default": "standard"
+    }
+  }
+}

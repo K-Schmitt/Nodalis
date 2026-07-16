@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:auth:firebase-auth",
+  "label": "Firebase Authentication",
+  "description": "Managed auth backend with social/email providers and client SDKs",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FFA000",
+    "icon": "flame"
+  },
+  "dataSchema": {
+    "providers": {
+      "type": "array",
+      "description": "Enabled sign-in providers, e.g. google, email, phone, apple"
+    },
+    "sessionPersistence": {
+      "type": "string",
+      "enum": ["local", "session", "none"],
+      "default": "local"
+    },
+    "emailVerificationRequired": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

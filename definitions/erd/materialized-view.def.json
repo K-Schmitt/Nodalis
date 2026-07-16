@@ -1,0 +1,30 @@
+{
+  "typeId": "erd:type:materialized-view",
+  "label": "Materialized View",
+  "description": "Query result physically stored and refreshed on a schedule or trigger, unlike a plain view",
+  "category": "type",
+  "style": {
+    "shape": "cylinder",
+    "color": "#7C3AED",
+    "icon": "table-2"
+  },
+  "dataSchema": {
+    "refreshStrategy": {
+      "type": "string",
+      "enum": ["manual", "scheduled", "on-commit"],
+      "default": "manual"
+    },
+    "query": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "titleFrom": "label",
+    "compartments": [
+      {
+        "from": "columns"
+      }
+    ]
+  }
+}

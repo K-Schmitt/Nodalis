@@ -1,0 +1,28 @@
+{
+  "typeId": "ddd:tactical:domain-service",
+  "label": "Domain Service",
+  "description": "Stateless operation that doesn't naturally belong to a single entity or value object",
+  "category": "tactical",
+  "style": {
+    "shape": "rectangle",
+    "color": "#5B21B6",
+    "icon": "settings-2"
+  },
+  "dataSchema": {
+    "operations": {
+      "type": "array"
+    },
+    "boundedContext": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Operations",
+        "from": "operations"
+      }
+    ]
+  }
+}

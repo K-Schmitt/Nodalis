@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:vpc",
+  "label": "VPC",
+  "description": "Isolated virtual network within a cloud account, containing subnets and route tables",
+  "category": "cloud",
+  "style": {
+    "shape": "hexagon",
+    "color": "#FF9900",
+    "icon": "network"
+  },
+  "dataSchema": {
+    "cidrBlock": {
+      "type": "string",
+      "description": "e.g. 10.0.0.0/16"
+    },
+    "subnetTiers": {
+      "type": "array",
+      "description": "e.g. public, private, isolated"
+    },
+    "natGateway": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

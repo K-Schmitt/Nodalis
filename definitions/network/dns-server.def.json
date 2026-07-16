@@ -1,0 +1,26 @@
+{
+  "typeId": "net:device:dns-server",
+  "label": "DNS Server",
+  "description": "Resolves domain names to IP addresses via authoritative or recursive lookups",
+  "category": "device",
+  "style": {
+    "shape": "rectangle",
+    "color": "#1E40AF",
+    "icon": "compass"
+  },
+  "dataSchema": {
+    "role": {
+      "type": "string",
+      "enum": ["authoritative", "recursive-resolver", "caching"],
+      "default": "authoritative"
+    },
+    "recordTypes": {
+      "type": "array",
+      "description": "e.g. A, AAAA, CNAME, MX, TXT"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "compass"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:storage:ceph",
+  "label": "Ceph",
+  "description": "Self-hosted distributed storage cluster unifying object (RGW), block (RBD) and file (CephFS) access on one backend",
+  "category": "storage",
+  "style": {
+    "shape": "hexagon",
+    "color": "#EF5C55",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "interface": {
+      "type": "string",
+      "enum": ["rgw-object", "rbd-block", "cephfs"],
+      "default": "rgw-object"
+    },
+    "replicationSize": {
+      "type": "number",
+      "default": 3
+    }
+  }
+}

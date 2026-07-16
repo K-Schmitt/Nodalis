@@ -1,0 +1,25 @@
+{
+  "typeId": "game:system:inventory",
+  "label": "Inventory System",
+  "description": "Manages item storage, stacking, equipping and crafting for a player or entity",
+  "category": "system",
+  "style": {
+    "shape": "rectangle",
+    "color": "#B45309",
+    "icon": "backpack"
+  },
+  "dataSchema": {
+    "slotCount": {
+      "type": "number",
+      "default": 20
+    },
+    "stackable": {
+      "type": "boolean",
+      "default": true
+    },
+    "craftingEnabled": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

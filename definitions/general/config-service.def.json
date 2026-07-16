@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:general:config-service",
+  "label": "Config Service",
+  "description": "Centralized runtime configuration store, decoupling settings from deployed code",
+  "category": "general",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0F766E",
+    "icon": "settings"
+  },
+  "dataSchema": {
+    "backend": {
+      "type": "string",
+      "enum": ["consul", "etcd", "spring-cloud-config", "env-vars", "database"],
+      "default": "database"
+    },
+    "hotReload": {
+      "type": "boolean",
+      "description": "Config changes apply without a restart",
+      "default": false
+    }
+  }
+}

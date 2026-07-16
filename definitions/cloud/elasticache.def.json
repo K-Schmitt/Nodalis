@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:cloud:elasticache",
+  "label": "Amazon ElastiCache",
+  "description": "Managed in-memory Redis or Memcached cluster",
+  "category": "cloud",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FF9900",
+    "icon": "zap"
+  },
+  "dataSchema": {
+    "engine": {
+      "type": "string",
+      "enum": ["redis", "memcached"],
+      "default": "redis"
+    },
+    "nodeType": {
+      "type": "string",
+      "description": "e.g. cache.r6g.large"
+    },
+    "clusterMode": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

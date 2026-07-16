@@ -1,0 +1,21 @@
+{
+  "typeId": "uml:type:actor",
+  "label": "Actor",
+  "description": "An external user or system role that interacts with use cases, drawn as a stick figure",
+  "category": "type",
+  "style": {
+    "shape": "circle",
+    "color": "#EA580C",
+    "icon": "user"
+  },
+  "constraints": {
+    "maxInputs": 0
+  },
+  "dataSchema": {
+    "actorType": {
+      "type": "string",
+      "enum": ["human", "external-system"],
+      "default": "human"
+    }
+  }
+}

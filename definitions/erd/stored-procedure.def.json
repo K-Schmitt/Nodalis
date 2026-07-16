@@ -1,0 +1,34 @@
+{
+  "typeId": "erd:type:stored-procedure",
+  "label": "Stored Procedure",
+  "description": "Precompiled SQL routine invoked by name, optionally returning a result set",
+  "category": "type",
+  "style": {
+    "shape": "hexagon",
+    "color": "#1D4ED8",
+    "icon": "square-function"
+  },
+  "dataSchema": {
+    "parameters": {
+      "type": "array"
+    },
+    "returns": {
+      "type": "string",
+      "description": "e.g. void, table, scalar"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["sql", "plpgsql", "tsql"],
+      "default": "sql"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Parameters",
+        "from": "parameters"
+      }
+    ]
+  }
+}

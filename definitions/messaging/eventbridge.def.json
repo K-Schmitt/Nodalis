@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:messaging:eventbridge",
+  "label": "Amazon EventBridge",
+  "description": "Serverless event bus routing events between AWS services, SaaS apps and custom sources via rules",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "route"
+  },
+  "dataSchema": {
+    "eventBusName": {
+      "type": "string",
+      "default": "default"
+    },
+    "rulePattern": {
+      "type": "string",
+      "description": "JSON event pattern matched against incoming events"
+    },
+    "archiveEnabled": {
+      "type": "boolean",
+      "description": "Retain matched events for replay",
+      "default": false
+    }
+  }
+}

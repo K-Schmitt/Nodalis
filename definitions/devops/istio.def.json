@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:devops:istio",
+  "label": "Istio",
+  "description": "Service mesh providing traffic management, mTLS and observability via sidecar proxies",
+  "category": "devops",
+  "style": {
+    "shape": "hexagon",
+    "color": "#466BB0",
+    "icon": "waypoints"
+  },
+  "dataSchema": {
+    "mtlsMode": {
+      "type": "string",
+      "enum": ["strict", "permissive", "disabled"],
+      "default": "strict"
+    },
+    "trafficPolicy": {
+      "type": "string",
+      "enum": ["round-robin", "least-conn", "random"],
+      "default": "round-robin"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "typeId": "erd:entity:composite-key",
+  "label": "Composite Key",
+  "description": "Primary key spanning multiple columns, marking their combined uniqueness",
+  "category": "constraint",
+  "style": {
+    "shape": "diamond",
+    "color": "#B91C1C",
+    "icon": "key-square"
+  },
+  "dataSchema": {
+    "columns": {
+      "type": "array",
+      "description": "Ordered list of columns forming the key"
+    }
+  }
+}

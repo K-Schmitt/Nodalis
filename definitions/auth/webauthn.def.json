@@ -1,0 +1,28 @@
+{
+  "typeId": "tech:auth:webauthn",
+  "label": "WebAuthn / Passkeys",
+  "description": "Public-key credential authentication via platform or roaming authenticators (FIDO2)",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#4A4A4A",
+    "icon": "scan-face"
+  },
+  "dataSchema": {
+    "attestation": {
+      "type": "string",
+      "enum": ["none", "indirect", "direct"],
+      "default": "none"
+    },
+    "authenticatorAttachment": {
+      "type": "string",
+      "enum": ["platform", "cross-platform", "any"],
+      "default": "any"
+    },
+    "userVerification": {
+      "type": "string",
+      "enum": ["required", "preferred", "discouraged"],
+      "default": "preferred"
+    }
+  }
+}

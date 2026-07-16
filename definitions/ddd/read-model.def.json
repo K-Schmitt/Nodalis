@@ -1,0 +1,30 @@
+{
+  "typeId": "ddd:read:read-model",
+  "label": "Read Model",
+  "description": "Denormalized, query-optimized view built from events or the write model (CQRS read side)",
+  "category": "read",
+  "style": {
+    "shape": "cylinder",
+    "color": "#0891B2",
+    "icon": "eye"
+  },
+  "dataSchema": {
+    "fields": {
+      "type": "array"
+    },
+    "rebuildStrategy": {
+      "type": "string",
+      "enum": ["event-driven", "on-demand", "scheduled"],
+      "default": "event-driven"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Fields",
+        "from": "fields"
+      }
+    ]
+  }
+}

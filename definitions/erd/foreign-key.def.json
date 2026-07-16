@@ -1,0 +1,30 @@
+{
+  "typeId": "erd:constraint:foreign-key",
+  "label": "Foreign Key Constraint",
+  "description": "References a column (or set of columns) in another table, enforcing referential integrity",
+  "category": "constraint",
+  "style": {
+    "shape": "diamond",
+    "color": "#B45309",
+    "icon": "link"
+  },
+  "constraints": {
+    "maxInputs": 1,
+    "maxOutputs": 1
+  },
+  "dataSchema": {
+    "column": {
+      "type": "string"
+    },
+    "onDelete": {
+      "type": "string",
+      "enum": ["cascade", "restrict", "set-null", "no-action"],
+      "default": "restrict"
+    },
+    "onUpdate": {
+      "type": "string",
+      "enum": ["cascade", "restrict", "set-null", "no-action"],
+      "default": "cascade"
+    }
+  }
+}

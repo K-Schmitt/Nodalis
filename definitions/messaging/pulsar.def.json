@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:messaging:pulsar",
+  "label": "Apache Pulsar",
+  "description": "Multi-tenant streaming platform separating serving (brokers) from storage (BookKeeper) for independent scaling",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#188FFF",
+    "icon": "layers"
+  },
+  "dataSchema": {
+    "subscriptionType": {
+      "type": "string",
+      "enum": ["exclusive", "shared", "failover", "key-shared"],
+      "default": "shared"
+    },
+    "tenant": {
+      "type": "string"
+    },
+    "tieredStorageEnabled": {
+      "type": "boolean",
+      "description": "Offload old segments to S3/GCS",
+      "default": false
+    }
+  }
+}

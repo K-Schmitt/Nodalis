@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:cloud:fargate",
+  "label": "AWS Fargate",
+  "description": "Serverless compute engine for containers, used with ECS or EKS without managing servers",
+  "category": "cloud",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "container"
+  },
+  "dataSchema": {
+    "cpu": {
+      "type": "number",
+      "description": "vCPU units (256, 512, 1024, ...)",
+      "default": 256
+    },
+    "memoryMb": {
+      "type": "number",
+      "default": 512
+    },
+    "launchedBy": {
+      "type": "string",
+      "enum": ["ecs", "eks"],
+      "default": "ecs"
+    }
+  }
+}

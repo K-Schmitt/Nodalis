@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:game:analytics",
+  "label": "Game Analytics",
+  "description": "Captures gameplay telemetry (sessions, funnels, economy events) for retention and monetization analysis",
+  "category": "game",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0EA5E9",
+    "icon": "bar-chart-2"
+  },
+  "dataSchema": {
+    "provider": {
+      "type": "string",
+      "enum": ["gameanalytics", "unity-analytics", "amplitude", "custom"],
+      "default": "custom"
+    },
+    "eventsTracked": {
+      "type": "array",
+      "description": "e.g. session_start, level_complete, purchase"
+    },
+    "samplingRate": {
+      "type": "number",
+      "description": "0-1, fraction of sessions sampled",
+      "default": 1
+    }
+  }
+}

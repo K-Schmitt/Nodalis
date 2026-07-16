@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:messaging:zeromq",
+  "label": "ZeroMQ",
+  "description": "Brokerless messaging library embedding socket patterns (pub-sub, push-pull, req-rep) directly in the app",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#DF0000",
+    "icon": "share-2"
+  },
+  "constraints": {
+    "requiredFields": ["pattern"]
+  },
+  "dataSchema": {
+    "pattern": {
+      "type": "string",
+      "enum": ["pub-sub", "push-pull", "req-rep", "router-dealer"],
+      "default": "pub-sub"
+    },
+    "transport": {
+      "type": "string",
+      "enum": ["tcp", "ipc", "inproc"],
+      "default": "tcp"
+    }
+  }
+}

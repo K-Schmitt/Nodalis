@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:storage:backblaze-b2",
+  "label": "Backblaze B2",
+  "description": "S3-compatible object storage priced well below the big three clouds, popular as a backup target",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#E21E29",
+    "icon": "database"
+  },
+  "dataSchema": {
+    "bucketType": {
+      "type": "string",
+      "enum": ["public", "private"],
+      "default": "private"
+    },
+    "lifecycleDays": {
+      "type": "number",
+      "description": "Days before old file versions are auto-deleted, 0 = keep forever"
+    }
+  }
+}

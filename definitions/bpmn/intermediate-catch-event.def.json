@@ -1,0 +1,23 @@
+{
+  "typeId": "bpmn:event:intermediate-catch",
+  "label": "Intermediate Catch Event",
+  "description": "Waits for a trigger (message, timer, signal) mid-process before continuing",
+  "category": "event",
+  "style": {
+    "shape": "circle",
+    "color": "#0891B2",
+    "icon": "circle-dot"
+  },
+  "dataSchema": {
+    "trigger": {
+      "type": "string",
+      "enum": ["message", "timer", "signal", "conditional"],
+      "default": "message"
+    }
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "event-intermediate-catch",
+    "icon": "circle-dot"
+  }
+}

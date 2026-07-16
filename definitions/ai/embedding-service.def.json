@@ -1,0 +1,29 @@
+{
+  "typeId": "tech:ai:embedding-service",
+  "label": "Embedding Service",
+  "description": "Converts text/media into dense vectors for search or retrieval",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6366F1",
+    "icon": "sigma"
+  },
+  "dataSchema": {
+    "model": {
+      "type": "string",
+      "description": "e.g. text-embedding-3-large, voyage-3"
+    },
+    "dimension": {
+      "type": "number",
+      "default": 1536
+    },
+    "batchSize": {
+      "type": "number",
+      "default": 100
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

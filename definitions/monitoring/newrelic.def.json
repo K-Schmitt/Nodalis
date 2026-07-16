@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:monitoring:newrelic",
+  "label": "New Relic",
+  "description": "Full-stack observability SaaS: APM, infrastructure, logs and dashboards in one platform",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#008C99",
+    "icon": "activity"
+  },
+  "dataSchema": {
+    "accountId": {
+      "type": "string"
+    },
+    "instrumentation": {
+      "type": "string",
+      "enum": ["agent", "otel-integration"],
+      "default": "agent"
+    }
+  }
+}

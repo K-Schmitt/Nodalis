@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloud:cloudtrail",
+  "label": "AWS CloudTrail",
+  "description": "Records API calls and account activity for audit and compliance",
+  "category": "cloud",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "scroll-text"
+  },
+  "dataSchema": {
+    "multiRegion": {
+      "type": "boolean",
+      "default": true
+    },
+    "logRetentionDays": {
+      "type": "number",
+      "default": 90
+    },
+    "s3BucketTarget": {
+      "type": "string",
+      "description": "Destination bucket for trail logs"
+    }
+  }
+}

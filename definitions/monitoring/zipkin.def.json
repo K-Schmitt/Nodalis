@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:monitoring:zipkin",
+  "label": "Zipkin",
+  "description": "Lightweight distributed tracing system that collects timing data via instrumented spans",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF6E42",
+    "icon": "git-commit-horizontal"
+  },
+  "dataSchema": {
+    "reporter": {
+      "type": "string",
+      "enum": ["http", "kafka", "activemq"],
+      "default": "http"
+    },
+    "storage": {
+      "type": "string",
+      "enum": ["in-memory", "mysql", "elasticsearch", "cassandra"],
+      "default": "in-memory"
+    }
+  }
+}

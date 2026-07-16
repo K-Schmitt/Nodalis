@@ -1,0 +1,32 @@
+{
+  "typeId": "tech:ai:huggingface",
+  "label": "Hugging Face Model",
+  "description": "Pretrained model served from the Hugging Face Hub (transformers/inference endpoint)",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FFD21E",
+    "icon": "brain-circuit"
+  },
+  "dataSchema": {
+    "modelId": {
+      "type": "string",
+      "description": "e.g. meta-llama/Llama-3-8B-Instruct"
+    },
+    "task": {
+      "type": "string",
+      "enum": ["text-generation", "text-classification", "embeddings", "image-classification", "summarization", "translation"],
+      "default": "text-generation"
+    },
+    "hosting": {
+      "type": "string",
+      "enum": ["inference-api", "inference-endpoint", "local", "tgi"],
+      "default": "inference-api"
+    },
+    "quantization": {
+      "type": "string",
+      "enum": ["none", "int8", "int4", "gguf"],
+      "default": "none"
+    }
+  }
+}

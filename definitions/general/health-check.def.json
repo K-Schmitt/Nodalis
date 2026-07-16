@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:general:health-check",
+  "label": "Health Check Endpoint",
+  "description": "Liveness/readiness probe a service exposes for orchestrators and load balancers",
+  "category": "general",
+  "style": {
+    "shape": "circle",
+    "color": "#16A34A",
+    "icon": "heart-pulse"
+  },
+  "constraints": {
+    "maxOutputs": 0
+  },
+  "dataSchema": {
+    "probeType": {
+      "type": "string",
+      "enum": ["liveness", "readiness", "startup"],
+      "default": "readiness"
+    },
+    "intervalSec": {
+      "type": "number",
+      "default": 10
+    },
+    "checksDependencies": {
+      "type": "boolean",
+      "description": "Readiness also checks downstream deps (DB, cache, ...) rather than just process health",
+      "default": false
+    }
+  }
+}

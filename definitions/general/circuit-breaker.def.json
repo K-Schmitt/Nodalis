@@ -1,0 +1,31 @@
+{
+  "typeId": "tech:general:circuit-breaker",
+  "label": "Circuit Breaker",
+  "description": "Trips open after repeated downstream failures, failing fast instead of piling up timeouts",
+  "category": "general",
+  "style": {
+    "shape": "diamond",
+    "color": "#DC2626",
+    "icon": "zap-off"
+  },
+  "constraints": {
+    "maxInputs": 1,
+    "maxOutputs": 1
+  },
+  "dataSchema": {
+    "failureThreshold": {
+      "type": "number",
+      "description": "Consecutive failures before opening",
+      "default": 5
+    },
+    "resetTimeoutMs": {
+      "type": "number",
+      "description": "Time before moving to half-open to test recovery",
+      "default": 30000
+    },
+    "fallback": {
+      "type": "string",
+      "description": "Behavior while open, e.g. cached-response, default-value, error"
+    }
+  }
+}

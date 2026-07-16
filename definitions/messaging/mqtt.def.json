@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:messaging:mqtt",
+  "label": "MQTT Broker",
+  "description": "Lightweight pub/sub protocol for IoT and constrained devices over unreliable networks",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#660066",
+    "icon": "wifi"
+  },
+  "dataSchema": {
+    "qos": {
+      "type": "number",
+      "description": "Quality of Service level: 0 (at-most-once), 1 (at-least-once), 2 (exactly-once)",
+      "enum": [0, 1, 2],
+      "default": 1
+    },
+    "retainMessages": {
+      "type": "boolean",
+      "default": false
+    },
+    "keepAliveSec": {
+      "type": "number",
+      "default": 60
+    }
+  }
+}

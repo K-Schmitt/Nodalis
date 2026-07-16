@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:cloud:step-functions",
+  "label": "AWS Step Functions",
+  "description": "Serverless state machine orchestrating Lambda and service calls as a workflow",
+  "category": "cloud",
+  "style": {
+    "shape": "hexagon",
+    "color": "#FF9900",
+    "icon": "workflow"
+  },
+  "dataSchema": {
+    "stateMachineType": {
+      "type": "string",
+      "enum": ["standard", "express"],
+      "default": "standard"
+    },
+    "loggingLevel": {
+      "type": "string",
+      "enum": ["off", "error", "all"],
+      "default": "error"
+    }
+  }
+}

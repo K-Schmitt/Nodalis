@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:cloudflare:stream",
+  "label": "Cloudflare Stream",
+  "description": "Video hosting, encoding and adaptive-bitrate delivery",
+  "category": "cloudflare",
+  "style": {
+    "shape": "cylinder",
+    "color": "#F6821F",
+    "icon": "clapperboard"
+  },
+  "dataSchema": {
+    "liveEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "requireSignedUrls": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

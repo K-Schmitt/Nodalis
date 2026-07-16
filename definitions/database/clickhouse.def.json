@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:database:clickhouse",
+  "label": "ClickHouse",
+  "description": "Columnar OLAP database for fast analytical queries over large datasets",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FFCC01",
+    "icon": "bar-chart-3"
+  },
+  "dataSchema": {
+    "engine": {
+      "type": "string",
+      "enum": ["mergetree", "replacingmergetree", "summingmergetree", "distributed"],
+      "default": "mergetree"
+    },
+    "shardCount": {
+      "type": "number",
+      "default": 1
+    }
+  }
+}

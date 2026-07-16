@@ -1,0 +1,32 @@
+{
+  "typeId": "uml:type:component",
+  "label": "Component",
+  "description": "A modular, replaceable part of a system exposing provided and required interfaces",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#059669",
+    "icon": "component"
+  },
+  "dataSchema": {
+    "providedInterfaces": {
+      "type": "array"
+    },
+    "requiredInterfaces": {
+      "type": "array"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Provided",
+        "from": "providedInterfaces"
+      },
+      {
+        "label": "Required",
+        "from": "requiredInterfaces"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "typeId": "uml:type:usecase",
+  "label": "Use Case",
+  "description": "A discrete unit of functionality an actor obtains from the system, drawn as an oval in use-case diagrams",
+  "category": "type",
+  "style": {
+    "shape": "circle",
+    "color": "#2563EB",
+    "icon": "target"
+  },
+  "dataSchema": {
+    "preconditions": {
+      "type": "array"
+    },
+    "postconditions": {
+      "type": "array"
+    }
+  }
+}

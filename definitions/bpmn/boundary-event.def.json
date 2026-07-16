@@ -1,0 +1,31 @@
+{
+  "typeId": "bpmn:event:boundary",
+  "label": "Boundary Event",
+  "description": "Attached to an activity's edge; interrupts or forks flow on timeout, error or message",
+  "category": "event",
+  "style": {
+    "shape": "circle",
+    "color": "#B45309",
+    "icon": "alarm-clock"
+  },
+  "constraints": {
+    "maxInputs": 0
+  },
+  "dataSchema": {
+    "trigger": {
+      "type": "string",
+      "enum": ["timer", "error", "message", "signal", "escalation"],
+      "default": "timer"
+    },
+    "interrupting": {
+      "type": "boolean",
+      "description": "false = non-interrupting, spawns a parallel path instead of canceling the activity",
+      "default": true
+    }
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "event-boundary",
+    "icon": "alarm-clock"
+  }
+}

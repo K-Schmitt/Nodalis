@@ -1,0 +1,26 @@
+{
+  "typeId": "net:edge:cdn-edge",
+  "label": "CDN Edge Node",
+  "description": "Geographically distributed cache node serving content close to users, falling back to origin on miss",
+  "category": "edge",
+  "style": {
+    "shape": "hexagon",
+    "color": "#0D9488",
+    "icon": "globe"
+  },
+  "dataSchema": {
+    "cacheTtlSec": {
+      "type": "number",
+      "default": 3600
+    },
+    "originShield": {
+      "type": "boolean",
+      "description": "Extra caching layer between edge nodes and origin to reduce origin load",
+      "default": false
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "globe"
+  }
+}

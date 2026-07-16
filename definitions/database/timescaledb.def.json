@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:database:timescaledb",
+  "label": "TimescaleDB",
+  "description": "Postgres extension optimized for time-series data via automatic hypertable partitioning",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FDB515",
+    "icon": "line-chart"
+  },
+  "dataSchema": {
+    "chunkTimeInterval": {
+      "type": "string",
+      "description": "Hypertable chunk interval, e.g. 7 days"
+    },
+    "compressionEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "continuousAggregates": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:cloudflare:images",
+  "label": "Cloudflare Images",
+  "description": "Image storage, resizing and optimized delivery at the edge",
+  "category": "cloudflare",
+  "style": {
+    "shape": "cylinder",
+    "color": "#F6821F",
+    "icon": "image"
+  },
+  "dataSchema": {
+    "variants": {
+      "type": "array",
+      "description": "Named resize variants, e.g. thumbnail, public"
+    },
+    "signedUrls": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "typeId": "uml:container:subsystem",
+  "label": "Subsystem",
+  "description": "A large-grained grouping of packages/components representing a coherent part of the system",
+  "category": "container",
+  "style": {
+    "shape": "rectangle",
+    "color": "#9333EA",
+    "icon": "layout-panel-left"
+  },
+  "render": {
+    "archetype": "container"
+  }
+}

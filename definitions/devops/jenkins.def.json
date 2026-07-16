@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:devops:jenkins",
+  "label": "Jenkins",
+  "description": "Self-hosted automation server running CI/CD pipelines via plugins and Groovy DSL",
+  "category": "devops",
+  "style": {
+    "shape": "rectangle",
+    "color": "#D33833",
+    "icon": "wrench"
+  },
+  "dataSchema": {
+    "pipelineType": {
+      "type": "string",
+      "enum": ["declarative", "scripted", "freestyle"],
+      "default": "declarative"
+    },
+    "agentLabel": {
+      "type": "string",
+      "description": "Node/agent label the pipeline runs on"
+    }
+  }
+}

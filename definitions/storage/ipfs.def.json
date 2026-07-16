@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:storage:ipfs",
+  "label": "IPFS",
+  "description": "Content-addressed peer-to-peer storage: files are fetched by hash, not location, and pinned to stay available",
+  "category": "storage",
+  "style": {
+    "shape": "hexagon",
+    "color": "#65C2CB",
+    "icon": "share-2"
+  },
+  "dataSchema": {
+    "pinningService": {
+      "type": "string",
+      "enum": ["self-hosted", "pinata", "web3-storage", "none"],
+      "default": "pinata"
+    },
+    "gatewayUrl": {
+      "type": "string",
+      "description": "HTTP gateway used to resolve CIDs, e.g. https://ipfs.io/ipfs/"
+    }
+  }
+}

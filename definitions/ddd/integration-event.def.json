@@ -1,0 +1,33 @@
+{
+  "typeId": "ddd:messaging:integration-event",
+  "label": "Integration Event",
+  "description": "Event published across bounded-context boundaries to notify other contexts of a change",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#DB2777",
+    "icon": "send-horizontal"
+  },
+  "dataSchema": {
+    "payload": {
+      "type": "array"
+    },
+    "publishedFrom": {
+      "type": "string",
+      "description": "Source bounded context"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "default": "1.0"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Payload",
+        "from": "payload"
+      }
+    ]
+  }
+}

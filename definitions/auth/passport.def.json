@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:auth:passport",
+  "label": "Passport.js",
+  "description": "Node.js middleware authenticating requests via pluggable strategies",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#34E27A",
+    "icon": "key-round"
+  },
+  "dataSchema": {
+    "strategies": {
+      "type": "array",
+      "description": "Configured strategy names, e.g. local, google-oauth20, jwt"
+    },
+    "sessionEnabled": {
+      "type": "boolean",
+      "description": "false when used purely stateless (e.g. JWT strategy)",
+      "default": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "typeId": "uml:type:datatype",
+  "label": "Data Type",
+  "description": "A primitive or value type (e.g. String, Money) with no identity, distinct from a Class",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0891B2",
+    "icon": "type"
+  },
+  "dataSchema": {
+    "baseType": {
+      "type": "string",
+      "description": "Underlying primitive, e.g. string, decimal, date"
+    }
+  }
+}

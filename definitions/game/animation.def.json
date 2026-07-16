@@ -1,0 +1,21 @@
+{
+  "typeId": "game:system:animation",
+  "label": "Animation System",
+  "description": "Drives skeletal/sprite animation playback, blending and state transitions",
+  "category": "system",
+  "style": {
+    "shape": "hexagon",
+    "color": "#DB2777",
+    "icon": "person-standing"
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": ["skeletal", "sprite", "blend-tree"],
+      "default": "skeletal"
+    },
+    "boneCount": {
+      "type": "number"
+    }
+  }
+}

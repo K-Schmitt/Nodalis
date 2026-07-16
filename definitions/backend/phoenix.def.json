@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:backend:phoenix",
+  "label": "Phoenix",
+  "description": "Elixir web framework built on the BEAM, known for LiveView and channel-based realtime",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FD4F00",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "liveViewEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "channelsEnabled": {
+      "type": "boolean",
+      "description": "WebSocket channels for realtime features",
+      "default": true
+    },
+    "ectoAdapter": {
+      "type": "string",
+      "enum": ["postgres", "mysql", "sqlite3"],
+      "default": "postgres"
+    }
+  }
+}

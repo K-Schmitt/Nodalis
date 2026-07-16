@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:general:api-key-store",
+  "label": "API Key Store",
+  "description": "Issues and validates API keys for machine-to-machine access, separate from user-facing auth",
+  "category": "general",
+  "style": {
+    "shape": "cylinder",
+    "color": "#78350F",
+    "icon": "key"
+  },
+  "dataSchema": {
+    "hashAlgorithm": {
+      "type": "string",
+      "enum": ["sha256", "bcrypt", "argon2"],
+      "default": "sha256"
+    },
+    "scoped": {
+      "type": "boolean",
+      "description": "Keys carry permission scopes rather than full account access",
+      "default": true
+    },
+    "rotationDays": {
+      "type": "number",
+      "description": "Recommended/forced rotation period, 0 = no rotation policy"
+    }
+  }
+}

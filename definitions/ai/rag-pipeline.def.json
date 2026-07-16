@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:ai:rag-pipeline",
+  "label": "RAG Pipeline",
+  "description": "Retrieval-augmented generation flow: retrieve context, then feed it to an LLM prompt",
+  "category": "ai",
+  "style": {
+    "shape": "hexagon",
+    "color": "#4338CA",
+    "icon": "search-code"
+  },
+  "dataSchema": {
+    "retrievalStrategy": {
+      "type": "string",
+      "enum": ["dense", "sparse", "hybrid", "rerank"],
+      "default": "dense"
+    },
+    "topK": {
+      "type": "number",
+      "default": 5
+    },
+    "chunkSize": {
+      "type": "number",
+      "default": 512
+    },
+    "chunkOverlap": {
+      "type": "number",
+      "default": 50
+    }
+  }
+}

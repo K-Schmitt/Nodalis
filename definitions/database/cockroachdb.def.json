@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:database:cockroachdb",
+  "label": "CockroachDB",
+  "description": "Distributed SQL database with automatic sharding and multi-region survivability",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#6933FF",
+    "icon": "database"
+  },
+  "dataSchema": {
+    "replicationFactor": {
+      "type": "number",
+      "default": 3
+    },
+    "consistency": {
+      "type": "string",
+      "enum": ["serializable"],
+      "default": "serializable"
+    },
+    "multiRegion": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "typeId": "bpmn:artifact:text-annotation",
+  "label": "Text Annotation",
+  "description": "Free-text note attached to an element for extra documentation, not part of the flow logic",
+  "category": "artifact",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6B7280",
+    "icon": "sticky-note"
+  },
+  "constraints": {
+    "maxInputs": 0,
+    "maxOutputs": 0
+  },
+  "dataSchema": {
+    "text": {
+      "type": "string"
+    }
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "annotation",
+    "icon": "sticky-note"
+  }
+}

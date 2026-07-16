@@ -1,5 +1,6 @@
 import { useEffect, Suspense, lazy } from 'react';
-import { Waypoints, Sun, Moon, Wifi, WifiOff, FolderOpen, Folder } from 'lucide-react';
+import { Sun, Moon, Wifi, WifiOff, FolderOpen, Folder } from 'lucide-react';
+import logo from './assets/logo.png';
 import { ProposalPanel } from './components/ProposalPanel';
 import { NodePalette } from './components/NodePalette';
 import { NodeInspector } from './components/NodeInspector';
@@ -49,7 +50,7 @@ function App() {
         boxShadow: T.shadow, position: 'relative', zIndex: 20,
       }}>
         <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: T.text, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Waypoints size={22} />
+          <img src={logo} alt="" width={24} height={24} style={{ borderRadius: 5 }} />
           Nodalis
         </h1>
         <WorkspaceSwitcher />

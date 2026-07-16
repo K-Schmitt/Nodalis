@@ -13,6 +13,8 @@ export const T = {
   borderStrong: 'var(--border-strong)',
   shadow: 'var(--shadow)',
   shadowLg: 'var(--shadow-lg)',
+  accent: 'var(--accent)',
+  accentHover: 'var(--accent-hover)',
   radiusSm: 6,
   radius: 8,
   radiusLg: 12,

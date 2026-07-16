@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useProposalStore, type PendingProposal } from '../stores/useProposalStore';
 import { HEADER_HEIGHT_PX } from '../config';
+import { User, Clock, Loader2, Check, X, ChevronUp, ChevronDown } from 'lucide-react';
 
 // ─── Colors ──────────────────────────────────────────────────────────────────
 
@@ -94,8 +95,8 @@ function ProposalCard({ proposal }: { proposal: PendingProposal }) {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
       }}>
         <div style={{ minWidth: 0 }}>
-          <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            📋 {proposal.author}
+          <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <User size={13} /> {proposal.author}
           </div>
           <div style={{ color: '#64748b', fontSize: 11, marginTop: 2 }}>
             {new Date(proposal.createdAt).toLocaleTimeString()} · {proposal.operations.length} op.
@@ -134,7 +135,7 @@ function ProposalCard({ proposal }: { proposal: PendingProposal }) {
           }}
         >
           <span>OPÉRATIONS</span>
-          <span>{opsExpanded ? '▲' : '▼'}</span>
+          <span style={{ display: 'flex' }}>{opsExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}</span>
         </button>
 
         {opsExpanded && (
@@ -177,9 +178,10 @@ function ProposalCard({ proposal }: { proposal: PendingProposal }) {
                 cursor: loading ? 'not-allowed' : 'pointer',
                 background: loading === 'reject' ? '#fca5a5' : '#ef4444',
                 color: '#fff', fontWeight: 700, fontSize: 12,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
               }}
             >
-              {loading === 'reject' ? '⏳ En cours…' : '✕ Confirmer le refus'}
+              {loading === 'reject' ? <><Loader2 size={13} className="archi-spin" /> En cours…</> : <><X size={13} /> Confirmer le refus</>}
             </button>
             <button
               disabled={loading !== null}
@@ -208,9 +210,10 @@ function ProposalCard({ proposal }: { proposal: PendingProposal }) {
             color: '#fff', fontWeight: 700, fontSize: 13,
             transition: 'background 0.15s, opacity 0.15s',
             opacity: loading === 'reject' ? 0.5 : 1,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
           }}
         >
-          {loading === 'accept' ? '⏳ En cours…' : '✓ Accepter'}
+          {loading === 'accept' ? <><Loader2 size={13} className="archi-spin" /> En cours…</> : <><Check size={13} /> Accepter</>}
         </button>
         <button
           disabled={loading !== null}
@@ -222,9 +225,10 @@ function ProposalCard({ proposal }: { proposal: PendingProposal }) {
             color: '#fff', fontWeight: 700, fontSize: 13,
             transition: 'background 0.15s, opacity 0.15s',
             opacity: loading === 'accept' ? 0.5 : 1,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
           }}
         >
-          {rejectOpen ? '✕ Rejeter ↑' : '✕ Rejeter'}
+          <X size={13} /> {rejectOpen ? 'Rejeter ↑' : 'Rejeter'}
         </button>
       </div>
     </div>
@@ -267,7 +271,7 @@ export function ProposalPanel() {
             boxShadow: '-2px 2px 8px rgba(0,0,0,0.2)',
           }}
         >
-          ⏳ {pending.length}
+          <Clock size={13} /> {pending.length}
         </button>
       )}
 
@@ -294,7 +298,7 @@ export function ProposalPanel() {
             flexShrink: 0,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: 18 }}>⏳</span>
+              <Clock size={18} />
               <div>
                 <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 14 }}>
                   {pending.length} proposition{pending.length > 1 ? 's' : ''} en attente
@@ -306,13 +310,14 @@ export function ProposalPanel() {
             </div>
             <button
               onClick={() => setOpen(false)}
+              aria-label="Close proposals drawer"
               style={{
                 background: 'rgba(255,255,255,0.1)', border: 'none', color: '#94a3b8',
                 borderRadius: 6, padding: '4px 8px', cursor: 'pointer', fontSize: 14,
-                fontWeight: 700,
+                fontWeight: 700, display: 'flex',
               }}
             >
-              ✕
+              <X size={14} />
             </button>
           </div>
 

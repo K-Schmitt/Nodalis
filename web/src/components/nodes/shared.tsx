@@ -1,5 +1,6 @@
 import { Handle, Position } from '@xyflow/react';
 import * as Icons from 'lucide-react';
+import { KeyRound, Link, Star, Zap, Circle } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { NodeStyle, RenderSpec } from '../../types';
 
@@ -100,10 +101,16 @@ export function toRows(
   });
 }
 
-const BADGE_GLYPH: Record<string, string> = {
-  pk: '🔑', fk: '🔗', unique: '★', index: '⚡', nullable: '∅', required: '＊',
+const BADGE_ICON: Record<string, typeof KeyRound> = {
+  pk: KeyRound, fk: Link, unique: Star, index: Zap,
 };
-export const badgeGlyph = (b: string) => BADGE_GLYPH[b] ?? '•';
+/** Small icon for a record-row badge (PK/FK/unique/index); nullable/required stay as text marks. */
+export function BadgeIcon({ badge }: { badge: string }) {
+  if (badge === 'nullable') return <span>∅</span>;
+  if (badge === 'required') return <span>＊</span>;
+  const Icon = BADGE_ICON[badge];
+  return Icon ? <Icon size={11} /> : <Circle size={6} fill="currentColor" />;
+}
 export const badgeTitle = (b: string) =>
   ({ pk: 'Primary key', fk: 'Foreign key', unique: 'Unique', index: 'Indexed', nullable: 'Nullable', required: 'Required' }[b] ?? b);
 

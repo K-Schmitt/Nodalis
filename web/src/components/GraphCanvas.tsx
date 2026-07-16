@@ -13,6 +13,7 @@ import {
   type NodeMouseHandler,
 } from '@xyflow/react';
 import ELK from 'elkjs/lib/elk.bundled.js';
+import { Sparkles, Maximize2, Trash2, Link2, Puzzle } from 'lucide-react';
 import { useGraphStore } from '../stores/useGraphStore';
 import { useProposalStore, type ProposalPreview } from '../stores/useProposalStore';
 import { useUiStore } from '../stores/useUiStore';
@@ -384,8 +385,8 @@ export function GraphCanvas() {
   return (
     <div ref={wrapRef} style={{ width: '100%', height: '100%', position: 'relative' }} onClick={() => edgeMenu && setEdgeMenu(null)}>
       <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 5, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-        <button onClick={autoLayout} style={toolBtn} title="Re-arrange (Shift+L)">✨ Auto-layout</button>
-        <button onClick={() => rfRef.current?.fitView({ padding: 0.2, duration: 400 })} style={toolBtn} title="Fit to view (F)">⤢ Fit</button>
+        <button onClick={autoLayout} style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6 }} title="Re-arrange (Shift+L)"><Sparkles size={14} /> Auto-layout</button>
+        <button onClick={() => rfRef.current?.fitView({ padding: 0.2, duration: 400 })} style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6 }} title="Fit to view (F)"><Maximize2 size={14} /> Fit</button>
         {/* Flow direction toggle */}
         <div style={{ ...toolBtn, display: 'flex', gap: 2, padding: 4 }} title="Flow direction">
           {(['DOWN', 'RIGHT'] as FlowDirection[]).map((d) => (
@@ -403,10 +404,10 @@ export function GraphCanvas() {
         >
           {LAYOUT_ALGORITHMS.map((a) => <option key={a} value={a}>{a}</option>)}
         </select>
-        <button onClick={clearGraph} style={{ ...toolBtn, color: '#dc2626', borderColor: '#fecaca' }}>🗑️ Clear</button>
+        <button onClick={clearGraph} style={{ ...toolBtn, color: '#dc2626', borderColor: '#fecaca', display: 'flex', alignItems: 'center', gap: 6 }}><Trash2 size={14} /> Clear</button>
         {edgeRelations.length > 0 && (
           <label style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6, cursor: 'default' }} title="Relation type used for new connections">
-            <span style={{ fontSize: 12, color: T.textMuted }}>🔗</span>
+            <span style={{ display: 'flex', color: T.textMuted }}><Link2 size={13} /></span>
             <select
               value={activeRelation ?? ''}
               onChange={(e) => setActiveRelation(e.target.value || null)}
@@ -480,7 +481,7 @@ export function GraphCanvas() {
       {/* Empty state */}
       {isEmpty && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, pointerEvents: 'none', color: T.textMuted }}>
-          <div style={{ fontSize: 40 }}>🧩</div>
+          <Puzzle size={40} />
           <div style={{ fontSize: 15, fontWeight: 600, color: T.text }}>Empty canvas</div>
           <div style={{ fontSize: 13 }}>Drag a type from the palette, or press <kbd>⌘K</kbd> to add one.</div>
         </div>
@@ -495,5 +496,5 @@ const toolBtn: React.CSSProperties = {
 };
 const miniBtn = (active: boolean): React.CSSProperties => ({
   padding: '2px 8px', borderRadius: 5, border: 'none', cursor: 'pointer', fontSize: 13,
-  background: active ? '#6366f1' : 'transparent', color: active ? '#fff' : T.textMuted,
+  background: active ? T.accent : 'transparent', color: active ? '#fff' : T.textMuted,
 });

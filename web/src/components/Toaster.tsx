@@ -1,10 +1,11 @@
 import { useToastStore, type ToastKind } from '../stores/useToastStore';
 import { T } from '../lib/theme';
+import { AlertTriangle, CheckCircle2, Info } from 'lucide-react';
 
-const STYLE: Record<ToastKind, { bg: string; border: string; fg: string; icon: string }> = {
-  error:   { bg: '#fef2f2', border: '#fecaca', fg: '#b91c1c', icon: '⚠️' },
-  success: { bg: '#f0fdf4', border: '#bbf7d0', fg: '#15803d', icon: '✅' },
-  info:    { bg: '#eff6ff', border: '#bfdbfe', fg: '#1d4ed8', icon: 'ℹ️' },
+const STYLE: Record<ToastKind, { bg: string; border: string; fg: string; icon: typeof AlertTriangle }> = {
+  error:   { bg: '#fef2f2', border: '#fecaca', fg: '#b91c1c', icon: AlertTriangle },
+  success: { bg: '#f0fdf4', border: '#bbf7d0', fg: '#15803d', icon: CheckCircle2 },
+  info:    { bg: '#eff6ff', border: '#bfdbfe', fg: '#1d4ed8', icon: Info },
 };
 
 /** Stacked, auto-dismissing toasts (wired to Core ApiError codes). */
@@ -15,6 +16,7 @@ export function Toaster() {
     <div style={{ position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)', zIndex: 2000, display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
       {toasts.map((t) => {
         const s = STYLE[t.kind];
+        const Icon = s.icon;
         return (
           <div
             key={t.id}
@@ -27,7 +29,7 @@ export function Toaster() {
             }}
             title="Click to dismiss"
           >
-            <span>{s.icon}</span>
+            <Icon size={16} />
             <span>{t.message}</span>
             {t.code && <code style={{ fontSize: 11, opacity: 0.7 }}>{t.code}</code>}
           </div>

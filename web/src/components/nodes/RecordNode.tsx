@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { getIcon, toRows, badgeGlyph, badgeTitle, NodeFrame, MIN_W, type ArchiNodeData } from './shared';
+import { getIcon, toRows, BadgeIcon, badgeTitle, NodeFrame, MIN_W, type ArchiNodeData } from './shared';
 import { setRow, newRow, withArray } from './recordEdit';
 import { T, typeColor } from '../../lib/theme';
 import { useGraphStore } from '../../stores/useGraphStore';
@@ -115,7 +115,7 @@ export function RecordNode({ data }: { data: ArchiNodeData }) {
                       style={{ padding: '3px 10px', display: 'flex', alignItems: 'center', gap: 6, borderTop: ri > 0 ? `1px solid ${T.border}` : undefined }}
                     >
                       <span style={{ minWidth: 16, textAlign: 'center', flexShrink: 0, fontSize: 11 }}>
-                        {r.badges.map((b) => <span key={b} title={badgeTitle(b)}>{badgeGlyph(b)}</span>)}
+                        {r.badges.map((b) => <span key={b} title={badgeTitle(b)} style={{ display: 'inline-flex' }}><BadgeIcon badge={b} /></span>)}
                       </span>
                       {editing === editKey
                         ? editInput(editKey, r.type ? `${r.text} : ${r.type}` : r.text, (v) => commitRow(c.from, ri, v))

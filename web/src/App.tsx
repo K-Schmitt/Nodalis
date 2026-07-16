@@ -1,4 +1,6 @@
 import { useEffect, Suspense, lazy } from 'react';
+import { Sun, Moon, Wifi, WifiOff, FolderOpen, Folder } from 'lucide-react';
+import logo from './assets/logo.png';
 import { ProposalPanel } from './components/ProposalPanel';
 import { NodePalette } from './components/NodePalette';
 import { NodeInspector } from './components/NodeInspector';
@@ -47,7 +49,10 @@ function App() {
         display: 'flex', alignItems: 'center', gap: 16, padding: '0 24px',
         boxShadow: T.shadow, position: 'relative', zIndex: 20,
       }}>
-        <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: T.text }}>🏗️ Nodalis</h1>
+        <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: T.text, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <img src={logo} alt="" width={24} height={24} style={{ borderRadius: 5 }} />
+          Nodalis
+        </h1>
         <WorkspaceSwitcher />
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12, fontSize: 13 }}>
@@ -61,8 +66,8 @@ function App() {
             title="Toggle theme"
             aria-label="Toggle light/dark theme"
             style={{ border: `1px solid ${T.border}`, background: T.surface, borderRadius: 6, padding: '4px 8px', cursor: 'pointer', fontSize: 15 }}
-          >{theme === 'dark' ? '☀️' : '🌙'}</button>
-          <span>{isLive ? '🟢' : '🔴'}</span>
+          >{theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}</button>
+          <span style={{ display: 'flex', color: isLive ? '#10b981' : '#ef4444' }}>{isLive ? <Wifi size={14} /> : <WifiOff size={14} />}</span>
           <span style={{ fontWeight: 600, color: isLive ? '#10b981' : '#ef4444' }}>{isLive ? 'Live' : 'Disconnected'}</span>
           {lastUpdate && <span style={{ fontSize: 12, color: T.textMuted }}>{lastUpdate.toLocaleTimeString()}</span>}
         </div>
@@ -91,10 +96,10 @@ function App() {
           </>
         ) : (
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, color: T.textMuted }}>
-            <div style={{ fontSize: 48 }}>📂</div>
+            <FolderOpen size={48} />
             <h2 style={{ color: T.text }}>No workspace open</h2>
-            <p style={{ maxWidth: 420, textAlign: 'center' }}>
-              Open or create a workspace folder from the <strong>📁 selector</strong> in the header.
+            <p style={{ maxWidth: 420, textAlign: 'center', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+              Open or create a workspace folder from the <strong style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><Folder size={14} /> selector</strong> in the header.
               Nodalis will store the architecture, its type and notes inside that folder’s <code>.nodalis/</code> directory.
             </p>
           </div>

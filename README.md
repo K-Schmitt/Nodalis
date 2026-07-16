@@ -7,6 +7,7 @@ extension VSCode **Nodalis**, comme CLI `@nodalis/cli`, ou lancé depuis les sou
 
 > Dépôt : [K-Schmitt/Nodalis](https://github.com/K-Schmitt/Nodalis). Pour la
 > référence technique fichier-par-fichier, voir [ARCHITECTURE.md](ARCHITECTURE.md).
+> 🇬🇧 [Read in English](README.en.md).
 
 ---
 
@@ -267,8 +268,10 @@ nodalis/
 ├── definitions/       # Fiches *.def.json (par catégorie) + presets/
 ├── .nodalis/            # Données persistées du workspace (graph.json, snapshots, …)
 ├── docker-compose.yml # + Dockerfile.core / Dockerfile.web
-├── ARCHITECTURE.md    # Référence technique détaillée
-└── README.md
+├── ARCHITECTURE.md    # Référence technique détaillée (français)
+├── ARCHITECTURE.en.md # Référence technique détaillée (anglais)
+├── README.md          # Ce fichier, en français
+└── README.en.md       # Version anglaise
 ```
 
 ---

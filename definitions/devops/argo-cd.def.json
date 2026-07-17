@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:devops:argo-cd",
+  "label": "Argo CD",
+  "description": "GitOps continuous delivery tool that syncs Kubernetes cluster state to a Git repo",
+  "category": "devops",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EF7B4D",
+    "icon": "git-branch"
+  },
+  "dataSchema": {
+    "syncPolicy": {
+      "type": "string",
+      "enum": ["manual", "automated"],
+      "default": "automated"
+    },
+    "selfHeal": {
+      "type": "boolean",
+      "default": true
+    },
+    "targetRepo": {
+      "type": "string",
+      "description": "Git repo tracked as the source of truth"
+    }
+  }
+}

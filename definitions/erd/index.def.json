@@ -1,0 +1,25 @@
+{
+  "typeId": "erd:constraint:index",
+  "label": "Index",
+  "description": "Speeds up lookups on one or more columns of a table",
+  "category": "constraint",
+  "style": {
+    "shape": "diamond",
+    "color": "#0D9488",
+    "icon": "list-tree"
+  },
+  "dataSchema": {
+    "columns": {
+      "type": "array"
+    },
+    "unique": {
+      "type": "boolean",
+      "default": false
+    },
+    "method": {
+      "type": "string",
+      "enum": ["btree", "hash", "gin", "gist"],
+      "default": "btree"
+    }
+  }
+}

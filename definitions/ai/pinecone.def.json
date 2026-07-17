@@ -1,0 +1,30 @@
+{
+  "typeId": "tech:ai:pinecone",
+  "label": "Pinecone",
+  "description": "Managed vector database for similarity search at scale",
+  "category": "ai",
+  "style": {
+    "shape": "cylinder",
+    "color": "#1C1C3B",
+    "icon": "database"
+  },
+  "dataSchema": {
+    "indexName": {
+      "type": "string",
+      "description": "Pinecone index name"
+    },
+    "dimension": {
+      "type": "number",
+      "description": "Embedding vector dimension"
+    },
+    "metric": {
+      "type": "string",
+      "enum": ["cosine", "euclidean", "dotproduct"],
+      "default": "cosine"
+    },
+    "podType": {
+      "type": "string",
+      "description": "Pod/serverless tier, e.g. s1.x1 or serverless"
+    }
+  }
+}

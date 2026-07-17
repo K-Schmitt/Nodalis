@@ -1,0 +1,24 @@
+{
+  "typeId": "tech:monitoring:pagerduty",
+  "label": "PagerDuty",
+  "description": "Incident response and on-call alerting/escalation platform, triggered by monitoring events",
+  "category": "monitoring",
+  "style": {
+    "shape": "hexagon",
+    "color": "#06AC38",
+    "icon": "bell-ring"
+  },
+  "constraints": {
+    "maxOutputs": 0
+  },
+  "dataSchema": {
+    "escalationPolicy": {
+      "type": "string"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": ["high", "low"],
+      "default": "high"
+    }
+  }
+}

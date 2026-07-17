@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:web:webassembly",
+  "label": "WebAssembly Module",
+  "description": "Compiled, near-native-speed binary module run in the browser or server sandbox, language-agnostic (Rust, C++, Go, ...)",
+  "category": "web",
+  "style": {
+    "shape": "hexagon",
+    "color": "#654FF0",
+    "icon": "cpu"
+  },
+  "dataSchema": {
+    "sourceLanguage": {
+      "type": "string",
+      "enum": ["rust", "cpp", "go", "assemblyscript", "c"],
+      "default": "rust"
+    },
+    "host": {
+      "type": "string",
+      "enum": ["browser", "wasi-server", "edge-runtime"],
+      "default": "browser"
+    }
+  }
+}

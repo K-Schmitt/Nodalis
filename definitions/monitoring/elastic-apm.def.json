@@ -1,0 +1,20 @@
+{
+  "typeId": "tech:monitoring:elastic-apm",
+  "label": "Elastic APM",
+  "description": "Application performance monitoring built on the Elastic Stack, correlating traces with logs and metrics",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FEC514",
+    "icon": "gauge"
+  },
+  "dataSchema": {
+    "serviceName": {
+      "type": "string"
+    },
+    "transactionSampleRate": {
+      "type": "number",
+      "default": 1
+    }
+  }
+}

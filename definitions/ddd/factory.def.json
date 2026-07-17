@@ -1,0 +1,20 @@
+{
+  "typeId": "ddd:tactical:factory",
+  "label": "Factory",
+  "description": "Encapsulates complex creation logic for an aggregate or entity, ensuring invariants hold from birth",
+  "category": "tactical",
+  "style": {
+    "shape": "rectangle",
+    "color": "#7E22CE",
+    "icon": "hammer"
+  },
+  "dataSchema": {
+    "produces": {
+      "type": "string",
+      "description": "Aggregate/entity typeId this factory constructs"
+    },
+    "validationRules": {
+      "type": "array"
+    }
+  }
+}

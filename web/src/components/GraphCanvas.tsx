@@ -13,7 +13,7 @@ import {
   type NodeMouseHandler,
 } from '@xyflow/react';
 import ELK from 'elkjs/lib/elk.bundled.js';
-import { Sparkles, Maximize2, Trash2, Link2, Puzzle } from 'lucide-react';
+import { Sparkles, Maximize2, Trash2, Link2, Puzzle, Download, ChevronDown } from 'lucide-react';
 import { useGraphStore } from '../stores/useGraphStore';
 import { useProposalStore, type ProposalPreview } from '../stores/useProposalStore';
 import { useUiStore } from '../stores/useUiStore';
@@ -21,6 +21,10 @@ import { UniversalNode } from './UniversalNode';
 import { type ArchiNodeData, estimateNodeSize } from './nodes/shared';
 import { layoutProfileFor, applyOverride, LAYOUT_ALGORITHMS, type FlowDirection, type LayoutProfile } from '../lib/layout';
 import { layoutNested, containerSizeFromChildren } from '../lib/elk';
+import {
+  mergeSubgraphs, collectGraphs, capturePng, waitForMeasuredNodes, waitForEdgesRendered, downloadPng,
+  DEFAULT_EXPORT_SETTINGS, type ExportSettings, type ExportBackground, type ExportEdgeWeight,
+} from '../lib/exportPng';
 import { T } from '../lib/theme';
 import { type Definition } from '../types';
 
@@ -111,6 +115,12 @@ export function GraphCanvas() {
   const rfRef = useRef<ReactFlowInstance | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [edgeMenu, setEdgeMenu] = useState<{ id: string; x: number; y: number } | null>(null);
+  // PNG export: while true the overlay effect is suspended and polling paused so
+  // the handler can drive the merged graph into the canvas for a clean capture.
+  const [isExporting, setIsExporting] = useState(false);
+  const isExportingRef = useRef(false);
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const [exportSettings, setExportSettings] = useState<ExportSettings>(DEFAULT_EXPORT_SETTINGS);
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
@@ -221,7 +231,10 @@ export function GraphCanvas() {
   }, [activeProposal]);
 
   // Overlay: delete-highlight + proposal ghosts + impacted-path, on top of the base graph.
+  // Suspended while exporting — the export handler drives nodes/edges directly
+  // (merged sub-graphs, no animation/ghosts) so the capture is clean.
   useEffect(() => {
+    if (isExportingRef.current) return;
     const displayNodes: Node[] = [
       ...baseNodes.map((n) => {
         const withAnim = { ...n, className: 'archi-animate' };
@@ -243,7 +256,7 @@ export function GraphCanvas() {
     ];
     setNodes(displayNodes);
     setEdges(displayEdges);
-  }, [baseNodes, baseEdges, deleteNodeIds, deleteEdgeIds, activeProposal, ghostAddIds, impactedNodeIds, setNodes, setEdges]);
+  }, [baseNodes, baseEdges, deleteNodeIds, deleteEdgeIds, activeProposal, ghostAddIds, impactedNodeIds, isExporting, setNodes, setEdges]);
 
   useEffect(() => {
     startPolling();
@@ -314,6 +327,108 @@ export function GraphCanvas() {
   }, [baseNodes, baseEdges, updateNodePosition]);
 
   const autoLayout = useCallback(() => runLayout(layoutProfile), [runLayout, layoutProfile]);
+
+  // Export the graph as PNG(s), configured by the settings popover. Drives each
+  // graph into the LIVE canvas — polling paused, overlay/animation suspended —
+  // then captures and restores. Sub-graphs are either merged into one image, or
+  // exported one image per graph, per the chosen scope/mode.
+  const exportGraphPng = useCallback(async (settings: ExportSettings) => {
+    if (baseNodes.length === 0 || isExportingRef.current || !wrapRef.current) return;
+    isExportingRef.current = true;
+    setIsExporting(true);
+    stopPolling(); // freeze the 2s reconcile so it can't clobber the swapped graph
+    const captureOpts = { scale: settings.scale, background: settings.background, edgeWeight: settings.edgeWeight };
+
+    // Lay out one graph (or keep its current positions), drive it into the
+    // canvas, wait for render, capture. `forceLayout` overrides the setting for
+    // merged exports, which combine separate coordinate spaces and always need
+    // a fresh nested layout.
+    const relayout = settings.layout === 'auto';
+    const renderOne = async (gNodes: Node[], gEdges: Edge[], forceLayout = false): Promise<string> => {
+      let positioned: Node[];
+      if (relayout || forceLayout) {
+        const laid = await layoutNested(elk, gNodes, gEdges as Array<{ id: string; source: string; target: string }>, layoutProfile.options);
+        positioned = gNodes.map((n) => {
+          const c = laid.get(n.id);
+          const pos = c ? { x: c.x, y: c.y } : n.position;
+          const style = c && isContainerNode(n) ? { ...n.style, width: c.width, height: c.height } : n.style;
+          return { ...n, position: pos, style };
+        });
+      } else {
+        // Keep on-screen / stored positions untouched — export as-is.
+        positioned = gNodes.map((n) => ({ ...n }));
+      }
+      setNodes(positioned);
+      setEdges(gEdges);
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      await waitForMeasuredNodes(() => rfRef.current?.getNodes() ?? [], positioned.length);
+      await waitForEdgesRendered(wrapRef.current!, gEdges.length);
+      await new Promise((r) => setTimeout(r, 250));
+      const bounds = rfRef.current!.getNodesBounds(rfRef.current!.getNodes());
+      return capturePng(wrapRef.current!, bounds, captureOpts);
+    };
+
+    const slug = (s: string) => s.replace(/[^\w-]+/g, '_').slice(0, 40) || 'graphe';
+    const stamp = Date.now();
+    try {
+      if (settings.scope === 'subgraphs' && settings.mode === 'per-graph') {
+        // One image per graph (current graph + each sub-graph, flat).
+        const graphs = await collectGraphs(baseNodes, baseEdges);
+        for (let i = 0; i < graphs.length; i++) {
+          const g = graphs[i];
+          const url = await renderOne(g.nodes, g.edges);
+          downloadPng(url, `graph-${String(i + 1).padStart(2, '0')}-${slug(g.label)}-${stamp}.png`);
+          await new Promise((r) => setTimeout(r, 300)); // stagger downloads
+        }
+      } else if (settings.scope === 'subgraphs') {
+        // Merged: all sub-graphs in a single image.
+        const merged = await mergeSubgraphs(baseNodes, baseEdges, { linkParent: settings.linkParent });
+        if (relayout) {
+          const url = await renderOne(merged.nodes, merged.edges, true);
+          downloadPng(url, `graph-export-${stamp}.png`);
+        } else {
+          // Current layout: keep the on-screen root nodes exactly where they are;
+          // lay out only the sub-graph boxes and append them to the right so the
+          // visible graph isn't distorted.
+          const rootIds = new Set(baseNodes.map((n) => n.id));
+          const subNodes = merged.nodes.filter((n) => !rootIds.has(n.id));
+          const subEdges = merged.edges.filter((e) => !rootIds.has(e.source) && !rootIds.has(e.target));
+          const laid = await layoutNested(elk, subNodes, subEdges as Array<{ id: string; source: string; target: string }>, layoutProfile.options);
+          let rootMaxX = 0, rootMinY = Infinity;
+          for (const n of baseNodes) {
+            const s = estimateNodeSize(n.data as ArchiNodeData);
+            rootMaxX = Math.max(rootMaxX, n.position.x + s.width);
+            rootMinY = Math.min(rootMinY, n.position.y);
+          }
+          if (!isFinite(rootMinY)) rootMinY = 0;
+          const offsetX = rootMaxX + 160;
+          const positioned: Node[] = [
+            ...baseNodes.map((n) => ({ ...n })), // roots at their current screen positions
+            ...subNodes.map((n) => {
+              const c = laid.get(n.id);
+              const isTop = !(n.data as ArchiNodeData).parentId; // container (children keep relative pos)
+              const pos = c ? { x: c.x + (isTop ? offsetX : 0), y: c.y + (isTop ? rootMinY : 0) } : n.position;
+              const style = c && isContainerNode(n) ? { ...n.style, width: c.width, height: c.height } : n.style;
+              return { ...n, position: pos, style };
+            }),
+          ];
+          const url = await renderOne(positioned, merged.edges); // relayout=false → keeps these positions
+          downloadPng(url, `graph-export-${stamp}.png`);
+        }
+      } else {
+        // Visible graph only.
+        const url = await renderOne(baseNodes, baseEdges);
+        downloadPng(url, `graph-export-${stamp}.png`);
+      }
+    } catch (err) {
+      console.error('[GraphCanvas] PNG export failed:', err);
+      window.alert('PNG export failed. See console for details.');
+    } finally {
+      isExportingRef.current = false;
+      setIsExporting(false); // re-runs the overlay effect → restores the normal view
+      startPolling();
+    }
+  }, [baseNodes, baseEdges, layoutProfile, setNodes, setEdges, stopPolling, startPolling]);
 
   // Canvas keyboard shortcuts (ignored while typing in a field).
   useEffect(() => {
@@ -387,6 +502,24 @@ export function GraphCanvas() {
       <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 5, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
         <button onClick={autoLayout} style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6 }} title="Re-arrange (Shift+L)"><Sparkles size={14} /> Auto-layout</button>
         <button onClick={() => rfRef.current?.fitView({ padding: 0.2, duration: 400 })} style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6 }} title="Fit to view (F)"><Maximize2 size={14} /> Fit</button>
+        <div style={{ position: 'relative' }}>
+          <button
+            onClick={() => setExportMenuOpen((o) => !o)}
+            disabled={isExporting || isEmpty}
+            style={{ ...toolBtn, display: 'flex', alignItems: 'center', gap: 6, opacity: isExporting || isEmpty ? 0.5 : 1, cursor: isExporting || isEmpty ? 'default' : 'pointer' }}
+            title="Export graph as PNG"
+          >
+            <Download size={14} /> {isExporting ? 'Export…' : 'Export PNG'} <ChevronDown size={13} />
+          </button>
+          {exportMenuOpen && !isExporting && (
+            <ExportMenu
+              settings={exportSettings}
+              onChange={setExportSettings}
+              onExport={() => { setExportMenuOpen(false); void exportGraphPng(exportSettings); }}
+              onClose={() => setExportMenuOpen(false)}
+            />
+          )}
+        </div>
         {/* Flow direction toggle */}
         <div style={{ ...toolBtn, display: 'flex', gap: 2, padding: 4 }} title="Flow direction">
           {(['DOWN', 'RIGHT'] as FlowDirection[]).map((d) => (
@@ -478,6 +611,16 @@ export function GraphCanvas() {
         </div>
       )}
 
+      {/* Export-in-progress overlay */}
+      {isExporting && (
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 40, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'rgba(0,0,0,0.15)', color: T.text, fontSize: 14, fontWeight: 600, pointerEvents: 'none',
+        }}>
+          Exporting PNG…
+        </div>
+      )}
+
       {/* Empty state */}
       {isEmpty && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, pointerEvents: 'none', color: T.textMuted }}>
@@ -498,3 +641,122 @@ const miniBtn = (active: boolean): React.CSSProperties => ({
   padding: '2px 8px', borderRadius: 5, border: 'none', cursor: 'pointer', fontSize: 13,
   background: active ? T.accent : 'transparent', color: active ? '#fff' : T.textMuted,
 });
+
+// ─── Export settings popover ────────────────────────────────────────────────
+
+const segBtn = (active: boolean): React.CSSProperties => ({
+  flex: 1, padding: '4px 8px', borderRadius: 6, border: `1px solid ${active ? T.accent : T.border}`,
+  background: active ? T.accent : 'transparent', color: active ? '#fff' : T.text,
+  cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap',
+});
+
+function Segmented<T extends string>({ value, options, onChange }: {
+  value: T; options: Array<{ v: T; label: string }>; onChange: (v: T) => void;
+}) {
+  return (
+    <div style={{ display: 'flex', gap: 4 }}>
+      {options.map((o) => (
+        <button key={o.v} style={segBtn(value === o.v)} onClick={() => onChange(o.v)}>{o.label}</button>
+      ))}
+    </div>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <span style={{ fontSize: 11, fontWeight: 700, color: T.textMuted, textTransform: 'uppercase', letterSpacing: 0.3 }}>{label}</span>
+      {children}
+    </div>
+  );
+}
+
+function ExportMenu({ settings, onChange, onExport, onClose }: {
+  settings: ExportSettings;
+  onChange: (s: ExportSettings) => void;
+  onExport: () => void;
+  onClose: () => void;
+}) {
+  const set = <K extends keyof ExportSettings>(k: K, v: ExportSettings[K]) => onChange({ ...settings, [k]: v });
+  return (
+    <>
+      {/* click-away catcher */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 19 }} onClick={onClose} />
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'absolute', top: 'calc(100% + 6px)', left: 0, zIndex: 20, width: 280,
+          background: T.surface, color: T.text, border: `1px solid ${T.border}`, borderRadius: 10,
+          boxShadow: T.shadowLg, padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
+        }}
+      >
+        <div style={{ fontSize: 13, fontWeight: 700 }}>Paramètres d'export</div>
+
+        <Field label="Résolution">
+          <Segmented
+            value={String(settings.scale)}
+            options={[{ v: '1', label: '1x' }, { v: '2', label: '2x' }, { v: '3', label: '3x' }]}
+            onChange={(v) => set('scale', Number(v) as ExportSettings['scale'])}
+          />
+        </Field>
+
+        <Field label="Fond">
+          <Segmented<ExportBackground>
+            value={settings.background}
+            options={[{ v: 'transparent', label: 'Transparent' }, { v: 'white', label: 'Blanc' }, { v: 'black', label: 'Noir' }]}
+            onChange={(v) => set('background', v)}
+          />
+        </Field>
+
+        <Field label="Épaisseur des liens">
+          <Segmented<ExportEdgeWeight>
+            value={settings.edgeWeight}
+            options={[{ v: 'thin', label: 'Fin' }, { v: 'normal', label: 'Normal' }, { v: 'thick', label: 'Épais' }]}
+            onChange={(v) => set('edgeWeight', v)}
+          />
+        </Field>
+
+        <Field label="Disposition">
+          <Segmented
+            value={settings.layout}
+            options={[{ v: 'current', label: 'Écran actuel' }, { v: 'auto', label: 'Auto (ELK)' }]}
+            onChange={(v) => set('layout', v as ExportSettings['layout'])}
+          />
+        </Field>
+
+        <Field label="Portée">
+          <Segmented
+            value={settings.scope}
+            options={[{ v: 'visible', label: 'Graphe visible' }, { v: 'subgraphs', label: '+ sous-graphes' }]}
+            onChange={(v) => set('scope', v as ExportSettings['scope'])}
+          />
+        </Field>
+
+        {settings.scope === 'subgraphs' && (
+          <>
+            <Field label="Sortie">
+              <Segmented
+                value={settings.mode}
+                options={[{ v: 'merged', label: '1 image' }, { v: 'per-graph', label: '1 / graphe' }]}
+                onChange={(v) => set('mode', v as ExportSettings['mode'])}
+              />
+            </Field>
+            {settings.mode === 'merged' && (
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, cursor: 'pointer' }}>
+                <input type="checkbox" checked={settings.linkParent} onChange={(e) => set('linkParent', e.target.checked)} />
+                Relier parent ↔ sous-graphe (peut déformer)
+              </label>
+            )}
+          </>
+        )}
+
+        <button
+          onClick={onExport}
+          style={{ marginTop: 2, padding: '8px 12px', borderRadius: 8, border: 'none', background: T.accent, color: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+        >
+          <Download size={14} /> Exporter
+        </button>
+      </div>
+    </>
+  );
+}

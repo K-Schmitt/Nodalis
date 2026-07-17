@@ -1,0 +1,22 @@
+{
+  "typeId": "game:system:ai-behavior",
+  "label": "AI Behavior",
+  "description": "NPC decision-making system (behavior tree, FSM, or utility AI) driving in-game agents",
+  "category": "system",
+  "style": {
+    "shape": "hexagon",
+    "color": "#9333EA",
+    "icon": "brain"
+  },
+  "dataSchema": {
+    "model": {
+      "type": "string",
+      "enum": ["finite-state-machine", "behavior-tree", "utility-ai", "goap"],
+      "default": "behavior-tree"
+    },
+    "tickRateHz": {
+      "type": "number",
+      "default": 10
+    }
+  }
+}

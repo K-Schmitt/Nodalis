@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:general:webhook-dispatcher",
+  "label": "Webhook Dispatcher",
+  "description": "Delivers outbound HTTP callbacks to subscriber URLs on domain events, with retry/backoff",
+  "category": "general",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EA580C",
+    "icon": "webhook"
+  },
+  "dataSchema": {
+    "retryPolicy": {
+      "type": "string",
+      "enum": ["none", "fixed", "exponential-backoff"],
+      "default": "exponential-backoff"
+    },
+    "maxAttempts": {
+      "type": "number",
+      "default": 5
+    },
+    "signPayloads": {
+      "type": "boolean",
+      "description": "Sign requests (e.g. HMAC) so subscribers can verify authenticity",
+      "default": true
+    }
+  }
+}

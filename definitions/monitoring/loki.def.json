@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:monitoring:loki",
+  "label": "Grafana Loki",
+  "description": "Log aggregation system indexing only metadata labels, not full text, for cheap high-volume log storage",
+  "category": "monitoring",
+  "style": {
+    "shape": "cylinder",
+    "color": "#F5A623",
+    "icon": "file-text"
+  },
+  "dataSchema": {
+    "retentionDays": {
+      "type": "number",
+      "default": 30
+    },
+    "labels": {
+      "type": "array",
+      "description": "Indexed label set, e.g. app, namespace, level"
+    }
+  }
+}

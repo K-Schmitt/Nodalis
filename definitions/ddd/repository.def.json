@@ -1,0 +1,30 @@
+{
+  "typeId": "ddd:tactical:repository",
+  "label": "Repository",
+  "description": "Provides collection-like access to aggregates, abstracting persistence",
+  "category": "tactical",
+  "style": {
+    "shape": "rectangle",
+    "color": "#6D28D9",
+    "icon": "archive"
+  },
+  "dataSchema": {
+    "aggregate": {
+      "type": "string",
+      "description": "Aggregate root this repository manages"
+    },
+    "methods": {
+      "type": "array",
+      "description": "e.g. findById, save, delete"
+    }
+  },
+  "render": {
+    "archetype": "record",
+    "compartments": [
+      {
+        "label": "Methods",
+        "from": "methods"
+      }
+    ]
+  }
+}

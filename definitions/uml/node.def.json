@@ -1,0 +1,25 @@
+{
+  "typeId": "uml:type:node",
+  "label": "Deployment Node",
+  "description": "A physical or virtual execution environment (server, container, device) hosting artifacts",
+  "category": "type",
+  "style": {
+    "shape": "rectangle",
+    "color": "#475569",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "nodeKind": {
+      "type": "string",
+      "enum": ["device", "execution-environment"],
+      "default": "execution-environment"
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Deployed artifacts, e.g. jar, container image"
+    }
+  },
+  "render": {
+    "archetype": "container"
+  }
+}

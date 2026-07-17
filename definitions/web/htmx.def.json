@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:frontend:htmx",
+  "label": "htmx",
+  "description": "Hypermedia-driven UI: server returns HTML fragments swapped into the page via attributes, no client-side framework or build step",
+  "category": "web",
+  "style": {
+    "shape": "rectangle",
+    "color": "#3D72D7",
+    "icon": "code-2"
+  },
+  "dataSchema": {
+    "swapStrategy": {
+      "type": "string",
+      "enum": ["innerHTML", "outerHTML", "beforeend", "afterend"],
+      "default": "innerHTML"
+    },
+    "triggerEvents": {
+      "type": "array",
+      "description": "e.g. click, submit, load, revealed"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:messaging:activemq",
+  "label": "ActiveMQ",
+  "description": "JMS-compliant message broker supporting queues, topics and multiple wire protocols",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#B71C1C",
+    "icon": "mail"
+  },
+  "dataSchema": {
+    "protocol": {
+      "type": "string",
+      "enum": ["openwire", "amqp", "stomp", "mqtt"],
+      "default": "openwire"
+    },
+    "persistenceAdapter": {
+      "type": "string",
+      "enum": ["kahadb", "jdbc", "memory"],
+      "default": "kahadb"
+    }
+  }
+}

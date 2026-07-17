@@ -1,0 +1,26 @@
+{
+  "typeId": "net:device:proxy",
+  "label": "Reverse/Forward Proxy",
+  "description": "Intermediary forwarding requests on behalf of clients (forward) or servers (reverse), can cache and terminate TLS",
+  "category": "device",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0E7490",
+    "icon": "shuffle"
+  },
+  "dataSchema": {
+    "direction": {
+      "type": "string",
+      "enum": ["forward", "reverse"],
+      "default": "reverse"
+    },
+    "tlsTermination": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "shuffle"
+  }
+}

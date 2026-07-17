@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:auth:saml-idp",
+  "label": "SAML Identity Provider",
+  "description": "Enterprise SSO endpoint issuing SAML assertions to service providers",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#005A9C",
+    "icon": "badge-check"
+  },
+  "dataSchema": {
+    "entityId": {
+      "type": "string",
+      "description": "IdP entity ID / issuer URI"
+    },
+    "binding": {
+      "type": "string",
+      "enum": ["http-post", "http-redirect"],
+      "default": "http-post"
+    },
+    "signAssertions": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

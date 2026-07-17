@@ -1,0 +1,33 @@
+{
+  "typeId": "tech:database:mariadb",
+  "label": "MariaDB",
+  "description": "MySQL-compatible relational database with additional storage engines and features",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#003545",
+    "icon": "database"
+  },
+  "constraints": {
+    "maxInputs": 10
+  },
+  "dataSchema": {
+    "host": {
+      "type": "string"
+    },
+    "port": {
+      "type": "number",
+      "default": 3306
+    },
+    "storageEngine": {
+      "type": "string",
+      "enum": ["innodb", "aria", "columnstore"],
+      "default": "innodb"
+    },
+    "galeraCluster": {
+      "type": "boolean",
+      "description": "Multi-master synchronous replication",
+      "default": false
+    }
+  }
+}

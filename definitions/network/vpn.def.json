@@ -1,0 +1,27 @@
+{
+  "typeId": "net:security:vpn",
+  "label": "VPN Gateway",
+  "description": "Encrypted tunnel endpoint connecting remote sites or users into a private network",
+  "category": "security",
+  "style": {
+    "shape": "diamond",
+    "color": "#4338CA",
+    "icon": "lock"
+  },
+  "dataSchema": {
+    "protocol": {
+      "type": "string",
+      "enum": ["ipsec", "wireguard", "openvpn", "l2tp"],
+      "default": "wireguard"
+    },
+    "topology": {
+      "type": "string",
+      "enum": ["site-to-site", "point-to-site"],
+      "default": "site-to-site"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "lock"
+  }
+}

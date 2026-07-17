@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:frontend:solidjs",
+  "label": "SolidJS",
+  "description": "Fine-grained reactive UI library that compiles away the virtual DOM, updating only the DOM nodes that change",
+  "category": "web",
+  "style": {
+    "shape": "rectangle",
+    "color": "#2C4F7C",
+    "icon": "layout"
+  },
+  "dataSchema": {
+    "rendering": {
+      "type": "string",
+      "enum": ["csr", "ssr", "streaming-ssr"],
+      "default": "csr"
+    },
+    "signalsBased": {
+      "type": "boolean",
+      "description": "Always true for Solid's reactivity model, kept explicit for diagram clarity",
+      "default": true
+    }
+  }
+}

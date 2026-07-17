@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:backend:actix",
+  "label": "Actix Web",
+  "description": "High-performance Rust web framework built on the actor model and Tokio runtime",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#000000",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "workers": {
+      "type": "number",
+      "description": "Number of worker threads",
+      "default": 4
+    },
+    "tlsEnabled": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

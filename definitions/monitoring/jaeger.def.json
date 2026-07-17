@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:monitoring:jaeger",
+  "label": "Jaeger",
+  "description": "Distributed tracing backend for storing and visualizing spans across microservices",
+  "category": "monitoring",
+  "style": {
+    "shape": "rectangle",
+    "color": "#60D0E4",
+    "icon": "git-commit-horizontal"
+  },
+  "dataSchema": {
+    "samplingStrategy": {
+      "type": "string",
+      "enum": ["const", "probabilistic", "rate-limiting", "adaptive"],
+      "default": "probabilistic"
+    },
+    "storageBackend": {
+      "type": "string",
+      "enum": ["elasticsearch", "cassandra", "memory", "badger"],
+      "default": "elasticsearch"
+    }
+  }
+}

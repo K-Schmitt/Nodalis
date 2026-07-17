@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:devops:ansible",
+  "label": "Ansible",
+  "description": "Agentless configuration management and provisioning via SSH and YAML playbooks",
+  "category": "devops",
+  "style": {
+    "shape": "rectangle",
+    "color": "#EE0000",
+    "icon": "terminal"
+  },
+  "dataSchema": {
+    "inventoryType": {
+      "type": "string",
+      "enum": ["static", "dynamic"],
+      "default": "static"
+    },
+    "playbooks": {
+      "type": "array"
+    }
+  }
+}

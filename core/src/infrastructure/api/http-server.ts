@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import Fastify from 'fastify';
 import type { InjectOptions } from 'fastify';
 import cors from '@fastify/cors';
@@ -10,7 +11,7 @@ import { PresetRegistry } from '../registry/preset-registry.js';
 import { ApplyProposalUseCase } from '../../application/apply-proposal.use-case.js';
 import { ValidateProposalUseCase } from '../../application/validate-proposal.use-case.js';
 import { RuleEngine } from '../../domain/rule-engine.js';
-import { ProposalSchema } from '../../domain/types.js';
+import { ProposalSchema, type Node as DomainNode, type Edge as DomainEdge } from '../../domain/types.js';
 import { ArchiOSError } from '../../errors/base-error.js';
 import { PresetNotFoundError } from '../../errors/preset-not-found-error.js';
 
@@ -237,6 +238,61 @@ export class HTTPServer {
           return reply.code(500).send({ success: false, error: 'Failed to persist sub-graph' });
         }
         return { success: true, nodeId: node.id, presetId: effectivePreset };
+      }
+    );
+
+    /**
+     * Read-only fetch of a node's sub-graph content, without switching the
+     * active breadcrumb/context. Used by the frontend to merge nested
+     * sub-graphs into a single PNG export.
+     */
+    this.app.get<{ Params: { id: string } }>(
+      '/api/graph/nodes/:id/subgraph',
+      async (request, reply) => {
+        const active = this.workspaces.getActive();
+        if (!active) return reply.code(409).send({ error: 'No active workspace' });
+
+        let subPath: string;
+        try {
+          subPath = this.workspaces.resolveSubgraphPath(active.path, request.params.id);
+        } catch (err) {
+          return reply.code(400).send({ error: (err as Error).message });
+        }
+        if (!fs.existsSync(subPath)) return reply.code(404).send({ error: 'Node has no sub-graph' });
+
+        try {
+          const raw = fs.readFileSync(subPath, 'utf-8');
+          const data = JSON.parse(raw) as { nodes?: DomainNode[]; edges?: DomainEdge[]; presetId?: string };
+          const resolved = data.presetId ? this.presetRegistry.resolvePreset(data.presetId) : null;
+          const defMap = new Map((resolved?.definitions ?? []).map((d) => [d.typeId, d]));
+          const edgeTypes = resolved?.edgeTypes ?? [];
+
+          const nodes = (data.nodes ?? []).map((node) => {
+            const definition = defMap.get(node.typeId) ?? null;
+            return {
+              id: node.id,
+              type: 'universal',
+              position: node.position ?? { x: 0, y: 0 },
+              data: { ...node, style: definition?.style ?? { shape: 'rectangle', color: '#666666' }, render: definition?.render },
+            };
+          });
+          const edges = (data.edges ?? []).map((edge) => {
+            const relation = edge.type ? edgeTypes.find((t) => t.id === edge.type) : undefined;
+            return {
+              id: edge.id,
+              source: edge.sourceId,
+              target: edge.targetId,
+              label: edge.label ?? relation?.label,
+              type: edge.type ? 'relation' : undefined,
+              data: { relation: edge.type, style: relation?.style },
+            };
+          });
+
+          return { nodes, edges, presetId: data.presetId ?? null };
+        } catch (err) {
+          request.log.error(err, 'Failed to read sub-graph file');
+          return reply.code(500).send({ error: 'Failed to read sub-graph' });
+        }
       }
     );
 

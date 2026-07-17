@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:auth:supertokens",
+  "label": "SuperTokens",
+  "description": "Open-source auth with self-hosted core, session management and recipes for social/passwordless/email login",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9933",
+    "icon": "fingerprint"
+  },
+  "dataSchema": {
+    "recipe": {
+      "type": "string",
+      "enum": ["emailpassword", "thirdparty", "passwordless", "session"],
+      "default": "emailpassword"
+    },
+    "selfHosted": {
+      "type": "boolean",
+      "default": true
+    },
+    "refreshTokenRotation": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

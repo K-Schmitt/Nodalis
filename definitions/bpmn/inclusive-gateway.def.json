@@ -1,0 +1,15 @@
+{
+  "typeId": "bpmn:gateway:inclusive",
+  "label": "Inclusive Gateway (OR)",
+  "description": "Routes flow down one or more branches whose conditions evaluate true",
+  "category": "gateway",
+  "style": {
+    "shape": "diamond",
+    "color": "#CA8A04",
+    "icon": "git-fork"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "gateway-or"
+  }
+}

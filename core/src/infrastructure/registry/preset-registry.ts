@@ -1,6 +1,6 @@
 import { Registry } from '../../domain/registry.js';
 import { RuleEngine } from '../../domain/rule-engine.js';
-import type { Preset } from '../../domain/types.js';
+import type { Definition, Preset } from '../../domain/types.js';
 import { DefinitionLoader } from '../file-system/definition-loader.js';
 import { PresetLoader } from '../file-system/preset-loader.js';
 import { WorkspaceManager } from '../workspace/workspace-manager.js';
@@ -81,5 +81,19 @@ export class PresetRegistry {
     this.ruleEngine.setPresetRules(preset.rules);
     this.ruleEngine.setEdgeTypes(preset.edgeTypes);
     console.error(`📦 Preset "${preset.id}" active — ${this.registry.size()} types`);
+  }
+
+  /**
+   * Resolve a preset's definitions + edge types WITHOUT touching the active
+   * registry/rule-engine state. Used to render a sub-graph (which may carry a
+   * different preset than the one currently active) read-only, e.g. for PNG
+   * export merging.
+   */
+  resolvePreset(presetId: string): { definitions: Definition[]; edgeTypes: Preset['edgeTypes'] } | null {
+    const preset = this.presetLoader.get(presetId);
+    if (!preset) return null;
+    const tempRegistry = new Registry();
+    this.definitionLoader.loadIncludeSync(tempRegistry, preset.include);
+    return { definitions: tempRegistry.getAll(), edgeTypes: preset.edgeTypes };
   }
 }

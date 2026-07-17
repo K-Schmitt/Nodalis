@@ -1,0 +1,21 @@
+{
+  "typeId": "tech:frontend:gatsby",
+  "label": "Gatsby",
+  "description": "React-based static site generator pulling data from multiple sources into a unified GraphQL layer at build time",
+  "category": "web",
+  "style": {
+    "shape": "rectangle",
+    "color": "#663399",
+    "icon": "layout"
+  },
+  "dataSchema": {
+    "dataSources": {
+      "type": "array",
+      "description": "Configured source plugins, e.g. filesystem, contentful, wordpress"
+    },
+    "incrementalBuilds": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

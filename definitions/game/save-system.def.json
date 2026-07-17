@@ -1,0 +1,26 @@
+{
+  "typeId": "game:core:save-system",
+  "label": "Save System",
+  "description": "Persists and restores player/world state across sessions",
+  "category": "core",
+  "style": {
+    "shape": "cylinder",
+    "color": "#0369A1",
+    "icon": "save"
+  },
+  "dataSchema": {
+    "storage": {
+      "type": "string",
+      "enum": ["local-file", "cloud-save", "browser-storage"],
+      "default": "local-file"
+    },
+    "slotCount": {
+      "type": "number",
+      "default": 3
+    },
+    "autosaveIntervalSec": {
+      "type": "number",
+      "default": 300
+    }
+  }
+}

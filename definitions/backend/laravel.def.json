@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:backend:laravel",
+  "label": "Laravel",
+  "description": "PHP web framework with expressive syntax, Eloquent ORM and queues",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF2D20",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "version": {
+      "type": "string",
+      "default": "11"
+    },
+    "queueDriver": {
+      "type": "string",
+      "enum": ["sync", "database", "redis", "sqs"],
+      "default": "database"
+    },
+    "octaneEnabled": {
+      "type": "boolean",
+      "description": "Laravel Octane for high-performance app server",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:storage:glacier",
+  "label": "Amazon S3 Glacier",
+  "description": "Cold archival storage tier trading retrieval latency (minutes to hours) for very low storage cost",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#527FFF",
+    "icon": "archive"
+  },
+  "constraints": {
+    "maxOutputs": 0
+  },
+  "dataSchema": {
+    "retrievalTier": {
+      "type": "string",
+      "enum": ["expedited", "standard", "bulk"],
+      "default": "standard"
+    },
+    "vaultLock": {
+      "type": "boolean",
+      "description": "WORM compliance lock preventing deletion before retention expires",
+      "default": false
+    }
+  }
+}

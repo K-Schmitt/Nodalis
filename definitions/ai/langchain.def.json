@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:ai:langchain",
+  "label": "LangChain Agent",
+  "description": "Orchestration layer chaining prompts, tools, memory and retrieval into an agent",
+  "category": "ai",
+  "style": {
+    "shape": "hexagon",
+    "color": "#1C3C3C",
+    "icon": "workflow"
+  },
+  "dataSchema": {
+    "agentType": {
+      "type": "string",
+      "enum": ["react", "tool-calling", "plan-and-execute", "sql-agent"],
+      "default": "tool-calling"
+    },
+    "memoryType": {
+      "type": "string",
+      "enum": ["none", "buffer", "summary", "vector-store"],
+      "default": "buffer"
+    },
+    "maxIterations": {
+      "type": "number",
+      "default": 10
+    }
+  }
+}

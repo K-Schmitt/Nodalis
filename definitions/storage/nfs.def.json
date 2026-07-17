@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:storage:nfs",
+  "label": "NFS Share",
+  "description": "On-prem/self-hosted network file share mounted over the NFS protocol",
+  "category": "storage",
+  "style": {
+    "shape": "cylinder",
+    "color": "#57534E",
+    "icon": "folder-tree"
+  },
+  "dataSchema": {
+    "nfsVersion": {
+      "type": "string",
+      "enum": ["nfsv3", "nfsv4", "nfsv4.1"],
+      "default": "nfsv4.1"
+    },
+    "exportPath": {
+      "type": "string"
+    },
+    "accessMode": {
+      "type": "string",
+      "enum": ["read-write", "read-only"],
+      "default": "read-write"
+    }
+  }
+}

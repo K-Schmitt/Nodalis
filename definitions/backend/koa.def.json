@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:backend:koa",
+  "label": "Koa",
+  "description": "Minimalist Node.js framework using async middleware and context objects",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#33333D",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "middlewareStack": {
+      "type": "array",
+      "description": "Ordered middleware names"
+    },
+    "bodyParser": {
+      "type": "string",
+      "enum": ["koa-bodyparser", "koa-body", "none"],
+      "default": "koa-bodyparser"
+    }
+  }
+}

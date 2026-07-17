@@ -1,0 +1,21 @@
+{
+  "typeId": "game:world:tilemap",
+  "label": "Tilemap",
+  "description": "Grid-based level layout built from reusable tile layers",
+  "category": "world",
+  "style": {
+    "shape": "rectangle",
+    "color": "#65A30D",
+    "icon": "grid-3x3"
+  },
+  "dataSchema": {
+    "tileSize": {
+      "type": "number",
+      "default": 32
+    },
+    "layers": {
+      "type": "array",
+      "description": "e.g. ground, collision, decoration"
+    }
+  }
+}

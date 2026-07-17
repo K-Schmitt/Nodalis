@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:database:couchdb",
+  "label": "CouchDB",
+  "description": "Document database with HTTP/JSON API and multi-master replication",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#E42528",
+    "icon": "database"
+  },
+  "dataSchema": {
+    "replicationMode": {
+      "type": "string",
+      "enum": ["continuous", "one-shot", "none"],
+      "default": "continuous"
+    },
+    "views": {
+      "type": "array",
+      "description": "MapReduce design-doc views"
+    }
+  }
+}

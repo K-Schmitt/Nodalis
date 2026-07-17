@@ -1,0 +1,18 @@
+{
+  "typeId": "tech:cloudflare:turnstile",
+  "label": "Turnstile",
+  "description": "Privacy-preserving CAPTCHA alternative for verifying human traffic",
+  "category": "cloudflare",
+  "style": {
+    "shape": "hexagon",
+    "color": "#F6821F",
+    "icon": "shield-check"
+  },
+  "dataSchema": {
+    "widgetMode": {
+      "type": "string",
+      "enum": ["managed", "non-interactive", "invisible"],
+      "default": "managed"
+    }
+  }
+}

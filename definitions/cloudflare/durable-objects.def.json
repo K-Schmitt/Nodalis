@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:cloudflare:durable-objects",
+  "label": "Durable Objects",
+  "description": "Strongly-consistent stateful coordination primitive with per-object single-threaded execution",
+  "category": "cloudflare",
+  "style": {
+    "shape": "cylinder",
+    "color": "#F6821F",
+    "icon": "box"
+  },
+  "dataSchema": {
+    "className": {
+      "type": "string",
+      "description": "Durable Object class binding name"
+    },
+    "storageBackend": {
+      "type": "string",
+      "enum": ["sqlite", "kv"],
+      "default": "sqlite"
+    }
+  }
+}

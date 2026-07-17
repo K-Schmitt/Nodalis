@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:cloud:kinesis",
+  "label": "Amazon Kinesis",
+  "description": "Real-time streaming data ingestion and processing at scale",
+  "category": "cloud",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF9900",
+    "icon": "waves"
+  },
+  "dataSchema": {
+    "shardCount": {
+      "type": "number",
+      "default": 2
+    },
+    "retentionHours": {
+      "type": "number",
+      "default": 24
+    },
+    "capacityMode": {
+      "type": "string",
+      "enum": ["provisioned", "on-demand"],
+      "default": "on-demand"
+    }
+  }
+}

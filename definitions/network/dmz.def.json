@@ -1,0 +1,21 @@
+{
+  "typeId": "net:zone:dmz",
+  "label": "DMZ",
+  "description": "Perimeter network zone exposing public-facing services while isolating them from the internal network",
+  "category": "zone",
+  "style": {
+    "shape": "hexagon",
+    "color": "#92400E",
+    "icon": "shield-half"
+  },
+  "dataSchema": {
+    "exposedServices": {
+      "type": "array",
+      "description": "Services allowed to sit in this zone, e.g. reverse-proxy, mail-relay"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "shield-half"
+  }
+}

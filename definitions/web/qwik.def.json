@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:frontend:qwik",
+  "label": "Qwik",
+  "description": "Resumable framework that serializes app state into HTML, skipping hydration and loading JS lazily per interaction",
+  "category": "web",
+  "style": {
+    "shape": "rectangle",
+    "color": "#AC7EF4",
+    "icon": "zap"
+  },
+  "dataSchema": {
+    "resumability": {
+      "type": "boolean",
+      "description": "No hydration cost on load, distinguishing Qwik from other SSR frameworks",
+      "default": true
+    },
+    "metaFramework": {
+      "type": "string",
+      "enum": ["qwik-city", "none"],
+      "default": "qwik-city"
+    }
+  }
+}

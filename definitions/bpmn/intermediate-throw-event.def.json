@@ -1,0 +1,23 @@
+{
+  "typeId": "bpmn:event:intermediate-throw",
+  "label": "Intermediate Throw Event",
+  "description": "Sends a trigger (message, signal) mid-process without ending the flow",
+  "category": "event",
+  "style": {
+    "shape": "circle",
+    "color": "#0E7490",
+    "icon": "send"
+  },
+  "dataSchema": {
+    "trigger": {
+      "type": "string",
+      "enum": ["message", "signal", "escalation", "compensation"],
+      "default": "message"
+    }
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "event-intermediate-throw",
+    "icon": "send"
+  }
+}

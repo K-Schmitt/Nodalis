@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:frontend:sveltekit",
+  "label": "SvelteKit",
+  "description": "Full application meta-framework built on Svelte, adding routing, SSR and adapters on top of the compiler",
+  "category": "web",
+  "style": {
+    "shape": "rectangle",
+    "color": "#FF3E00",
+    "icon": "layout"
+  },
+  "dataSchema": {
+    "adapter": {
+      "type": "string",
+      "enum": ["node", "static", "vercel", "cloudflare", "netlify"],
+      "default": "node"
+    },
+    "renderMode": {
+      "type": "string",
+      "enum": ["ssr", "ssg", "spa"],
+      "default": "ssr"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "typeId": "tech:cloudflare:queues",
+  "label": "Cloudflare Queues",
+  "description": "Managed message queue for async processing between Workers",
+  "category": "cloudflare",
+  "style": {
+    "shape": "rectangle",
+    "color": "#F6821F",
+    "icon": "list-ordered"
+  },
+  "dataSchema": {
+    "maxBatchSize": {
+      "type": "number",
+      "default": 10
+    },
+    "maxRetries": {
+      "type": "number",
+      "default": 3
+    },
+    "deadLetterQueue": {
+      "type": "string",
+      "description": "Name of the DLQ to route exhausted messages to"
+    }
+  }
+}

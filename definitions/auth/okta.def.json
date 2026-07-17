@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:auth:okta",
+  "label": "Okta",
+  "description": "Enterprise identity provider with SSO, MFA and lifecycle management",
+  "category": "auth",
+  "style": {
+    "shape": "rectangle",
+    "color": "#007DC1",
+    "icon": "shield-check"
+  },
+  "dataSchema": {
+    "orgUrl": {
+      "type": "string",
+      "description": "e.g. https://your-org.okta.com"
+    },
+    "flow": {
+      "type": "string",
+      "enum": ["authorization-code", "implicit", "saml", "pkce"],
+      "default": "pkce"
+    },
+    "mfaRequired": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

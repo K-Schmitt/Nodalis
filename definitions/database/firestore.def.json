@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:database:firestore",
+  "label": "Firestore",
+  "description": "Google Cloud's serverless document database with realtime listeners and offline sync",
+  "category": "database",
+  "style": {
+    "shape": "cylinder",
+    "color": "#FFA000",
+    "icon": "database"
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": ["native", "datastore-compat"],
+      "default": "native"
+    },
+    "realtimeListeners": {
+      "type": "boolean",
+      "default": true
+    },
+    "offlinePersistence": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

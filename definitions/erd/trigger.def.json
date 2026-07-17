@@ -1,0 +1,23 @@
+{
+  "typeId": "erd:type:trigger",
+  "label": "Trigger",
+  "description": "Procedure automatically fired on insert/update/delete against a table",
+  "category": "type",
+  "style": {
+    "shape": "hexagon",
+    "color": "#DC2626",
+    "icon": "zap"
+  },
+  "dataSchema": {
+    "event": {
+      "type": "string",
+      "enum": ["before-insert", "after-insert", "before-update", "after-update", "before-delete", "after-delete"],
+      "default": "after-insert"
+    },
+    "level": {
+      "type": "string",
+      "enum": ["row", "statement"],
+      "default": "row"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:backend:aspnet",
+  "label": "ASP.NET Core",
+  "description": "Cross-platform .NET web framework for APIs and MVC apps",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#512BD4",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "dotnetVersion": {
+      "type": "string",
+      "default": "8.0"
+    },
+    "hostingModel": {
+      "type": "string",
+      "enum": ["kestrel", "iis-inprocess", "iis-outofprocess"],
+      "default": "kestrel"
+    },
+    "minimalApis": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

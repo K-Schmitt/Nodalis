@@ -1,0 +1,26 @@
+{
+  "typeId": "tech:general:audit-log",
+  "label": "Audit Log",
+  "description": "Append-only record of who did what and when, for compliance and forensic review",
+  "category": "general",
+  "style": {
+    "shape": "cylinder",
+    "color": "#334155",
+    "icon": "file-clock"
+  },
+  "dataSchema": {
+    "immutable": {
+      "type": "boolean",
+      "description": "Storage enforces write-once (no update/delete)",
+      "default": true
+    },
+    "retentionYears": {
+      "type": "number",
+      "default": 7
+    },
+    "fieldsLogged": {
+      "type": "array",
+      "description": "e.g. actor, action, resource, timestamp, ip"
+    }
+  }
+}

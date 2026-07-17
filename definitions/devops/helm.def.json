@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:devops:helm",
+  "label": "Helm",
+  "description": "Package manager for Kubernetes, templating manifests into versioned charts and releases",
+  "category": "devops",
+  "style": {
+    "shape": "rectangle",
+    "color": "#0F1689",
+    "icon": "package"
+  },
+  "dataSchema": {
+    "chartName": {
+      "type": "string"
+    },
+    "chartVersion": {
+      "type": "string"
+    },
+    "valuesOverride": {
+      "type": "array",
+      "description": "Environment-specific values files layered on top of defaults"
+    }
+  }
+}

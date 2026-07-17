@@ -1,0 +1,18 @@
+{
+  "typeId": "ddd:strategic:context-map",
+  "label": "Context Map Relation",
+  "description": "Documents how two bounded contexts relate (partnership, customer-supplier, conformist, anti-corruption layer, ...)",
+  "category": "strategic",
+  "style": {
+    "shape": "hexagon",
+    "color": "#4C1D95",
+    "icon": "map"
+  },
+  "dataSchema": {
+    "relationType": {
+      "type": "string",
+      "enum": ["partnership", "shared-kernel", "customer-supplier", "conformist", "anti-corruption-layer", "open-host-service", "separate-ways"],
+      "default": "customer-supplier"
+    }
+  }
+}

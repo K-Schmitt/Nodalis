@@ -1,0 +1,15 @@
+{
+  "typeId": "bpmn:gateway:event-based",
+  "label": "Event-Based Gateway",
+  "description": "Branches based on which of several awaited events occurs first",
+  "category": "gateway",
+  "style": {
+    "shape": "diamond",
+    "color": "#9333EA",
+    "icon": "split"
+  },
+  "render": {
+    "archetype": "shape",
+    "shape": "gateway-event"
+  }
+}

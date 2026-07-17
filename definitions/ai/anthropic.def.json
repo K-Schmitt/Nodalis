@@ -1,0 +1,35 @@
+{
+  "typeId": "tech:ai:anthropic",
+  "label": "Anthropic Claude API",
+  "description": "Claude model access via Anthropic's Messages API (chat, tool use, agents)",
+  "category": "ai",
+  "style": {
+    "shape": "rectangle",
+    "color": "#D97757",
+    "icon": "sparkles"
+  },
+  "dataSchema": {
+    "model": {
+      "type": "string",
+      "description": "e.g. claude-sonnet-5, claude-opus-4-8, claude-haiku-4-5"
+    },
+    "maxTokens": {
+      "type": "number",
+      "default": 4096
+    },
+    "toolUse": {
+      "type": "boolean",
+      "description": "Whether tool/function calling is enabled",
+      "default": false
+    },
+    "promptCaching": {
+      "type": "boolean",
+      "default": false
+    },
+    "extendedThinking": {
+      "type": "boolean",
+      "description": "Enable extended/reasoning mode",
+      "default": false
+    }
+  }
+}

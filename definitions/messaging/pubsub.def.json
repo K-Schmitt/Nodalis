@@ -1,0 +1,27 @@
+{
+  "typeId": "tech:messaging:pubsub",
+  "label": "Google Cloud Pub/Sub",
+  "description": "Managed publish-subscribe messaging with topics and pull/push subscriptions",
+  "category": "messaging",
+  "style": {
+    "shape": "rectangle",
+    "color": "#4285F4",
+    "icon": "radio"
+  },
+  "dataSchema": {
+    "deliveryMode": {
+      "type": "string",
+      "enum": ["pull", "push"],
+      "default": "pull"
+    },
+    "orderingEnabled": {
+      "type": "boolean",
+      "description": "Requires an ordering key on messages",
+      "default": false
+    },
+    "ackDeadlineSec": {
+      "type": "number",
+      "default": 10
+    }
+  }
+}

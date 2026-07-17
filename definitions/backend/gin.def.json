@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:backend:gin",
+  "label": "Gin",
+  "description": "Fast Go HTTP web framework with a martini-like API and radix-tree routing",
+  "category": "backend",
+  "style": {
+    "shape": "rectangle",
+    "color": "#00ACD7",
+    "icon": "server"
+  },
+  "dataSchema": {
+    "ginMode": {
+      "type": "string",
+      "enum": ["debug", "release", "test"],
+      "default": "release"
+    },
+    "middleware": {
+      "type": "array",
+      "description": "e.g. cors, logger, recovery, jwt"
+    }
+  }
+}

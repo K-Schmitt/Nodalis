@@ -1,0 +1,26 @@
+{
+  "typeId": "net:security:waf",
+  "label": "Web Application Firewall",
+  "description": "Filters HTTP(S) traffic against layer-7 attack signatures (SQLi, XSS, bot traffic), unlike a generic packet firewall",
+  "category": "security",
+  "style": {
+    "shape": "diamond",
+    "color": "#991B1B",
+    "icon": "shield-alert"
+  },
+  "dataSchema": {
+    "mode": {
+      "type": "string",
+      "enum": ["block", "detect-only"],
+      "default": "block"
+    },
+    "rulesets": {
+      "type": "array",
+      "description": "e.g. owasp-crs, bot-control, rate-limiting"
+    }
+  },
+  "render": {
+    "archetype": "device",
+    "icon": "shield-alert"
+  }
+}

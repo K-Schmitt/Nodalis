@@ -1,0 +1,22 @@
+{
+  "typeId": "tech:cloudflare:zero-trust",
+  "label": "Cloudflare Zero Trust",
+  "description": "Identity-aware access proxy gating applications and networks (formerly Access/Argo Tunnel)",
+  "category": "cloudflare",
+  "style": {
+    "shape": "hexagon",
+    "color": "#F6821F",
+    "icon": "shield"
+  },
+  "dataSchema": {
+    "policyType": {
+      "type": "string",
+      "enum": ["allow", "deny", "bypass", "service-auth"],
+      "default": "allow"
+    },
+    "identityProviders": {
+      "type": "array",
+      "description": "e.g. google, okta, github"
+    }
+  }
+}

@@ -13,12 +13,15 @@ export function ContainerNode({ data }: { data: ArchiNodeData }) {
   const accent = data.render?.accent ?? data.style?.color ?? '#64748b';
   const fg = readableText(accent);
   const Icon = getIcon(data.render?.icon ?? data.style?.icon);
+  // When this container is a node that owns a sub-graph (e.g. rendered by the
+  // merged PNG export), mark it explicitly as that sub-graph's parent.
+  const ownsSubgraph = data.subgraph?.presetId;
 
   return (
     <div style={{
       width: '100%', height: '100%', minWidth: 260, minHeight: 160,
-      border: `2px dashed ${accent}`, borderRadius: T.radiusLg,
-      background: `${accent}10`, position: 'relative', boxSizing: 'border-box',
+      border: `2px ${ownsSubgraph ? 'solid' : 'dashed'} ${accent}`, borderRadius: T.radiusLg,
+      background: `${accent}1f`, position: 'relative', boxSizing: 'border-box',
     }}>
       <Handle type="target" position={data.hTarget ?? Position.Top} />
       {/* Header tab */}
@@ -30,6 +33,16 @@ export function ContainerNode({ data }: { data: ArchiNodeData }) {
         <Icon size={13} color={fg} strokeWidth={2.5} />
         {data.label}
       </div>
+      {/* Sub-graph parent marker */}
+      {ownsSubgraph && (
+        <div style={{
+          position: 'absolute', top: -11, right: 8, display: 'inline-flex', alignItems: 'center', gap: 4,
+          background: '#4338ca', color: '#fff', padding: '2px 9px', borderRadius: 999,
+          fontSize: 10, fontWeight: 700, border: '2px solid #fff', whiteSpace: 'nowrap',
+        }}>
+          ⤵ sous-graphe : {ownsSubgraph}
+        </div>
+      )}
       <Handle type="source" position={data.hSource ?? Position.Bottom} />
     </div>
   );

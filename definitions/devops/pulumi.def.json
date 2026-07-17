@@ -1,0 +1,23 @@
+{
+  "typeId": "tech:devops:pulumi",
+  "label": "Pulumi",
+  "description": "Infrastructure-as-code using general-purpose languages instead of a DSL",
+  "category": "devops",
+  "style": {
+    "shape": "rectangle",
+    "color": "#8A3391",
+    "icon": "code"
+  },
+  "dataSchema": {
+    "language": {
+      "type": "string",
+      "enum": ["typescript", "python", "go", "csharp"],
+      "default": "typescript"
+    },
+    "stateBackend": {
+      "type": "string",
+      "enum": ["pulumi-cloud", "s3", "azure-blob", "local"],
+      "default": "pulumi-cloud"
+    }
+  }
+}
